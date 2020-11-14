@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=guy11_repeat
+#SBATCH --job-name=RM_pipeline
 #SBATCH --account=fc_kvkallow
 #SBATCH --partition=savio2
 #SBATCH --qos=savio_normal
@@ -19,7 +19,9 @@ while read genome; do
     RepeatMasker -lib References/fngrep.fasta -dir . -gff -cutoff 250 -no_is -pa 24 References/$genome.fasta
     echo "ran RepeatMasker"
     
-    python2 KVKLab/miniproject4/RM_columns.py $genome.fasta.out | awk -v OFS='\t' '{ if ((100.0 - $2 >= $PIDENT) && ($17 >= $LENGTH)) { print } }' > RM_filtered_$genome.txt
+    python KVKLab/miniproject4/RM_columns.py $genome.fasta.out > RM_columns_$genome.txt
+    
+    awk -v OFS='\t' '{ if ((100.0 - $2 >= $PIDENT) && ($17 >= $LENGTH)) { print } }' RM_columns_$genome.txt > RM_filtered_$genome.txt
     echo "ran python script and filtered with awk"
 
     # use awk to convert to bed file -> filtered output bed file
