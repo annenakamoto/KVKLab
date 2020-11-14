@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+while [ "$1" != "" ];
+do
+    echo "creating db for $1"
+    makeblastdb -in $1.fasta -out $1 -dbtype nucl -title $1 -parse_seqids
+    echo "blasting maggy against $1 db and filterning output"
+    blastn -db $1 -query mystery_sequence.fasta -outfmt 6 | awk -v OFS='\t' '{ if (($3 >= 95) && ($4 >= 5538)) { print $2, $9, $10, $1} }' > filtered_maggy_$1.bed
+    echo "filtered_maggy_$1.bed created"
+    shift
+done
