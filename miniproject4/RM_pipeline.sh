@@ -27,11 +27,13 @@ while read genome; do
     # use awk to get data from filtered RM output
     awk -v genome=$genome 'BEGIN { count=0; len=0; LTR=0; NLTR=0; DNAT=0; } 
         { count++; len+=$1; }
+        { a[$12]++ }
         / LTR Retrotransposon/ { LTR++ }
         /Non-LTR Retrotransposon/ { NLTR++ }
         /DNA transposon, T/ { DNAT++ }
-        END { print genome, '\n', "hits:", count, '\t', "total transposon length:", length, '\n',
-            "LTR Retrotransposons:", LTR, '\n', "Non-LTR Retrotransposons:", NLTR, '\n', "DNA Transposons:", DNAT; }' RM_filtered_$genome.txt > RM_data_$genome.txt
+        END { print genome, "\nhits:", count, "\ttotal transposon length:", len,
+            "\nLTR Retrotransposons:", LTR, "\nNon-LTR Retrotransposons:", NLTR, "\nDNA Transposons:", DNAT;
+            for (i in a) { print i, a[i] } }' RM_filtered_$genome.txt > RM_data_$genome.txt
 
 done < RM_pipe_in.txt
 
