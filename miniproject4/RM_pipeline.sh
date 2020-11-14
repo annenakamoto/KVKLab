@@ -16,9 +16,7 @@ LENGTH=$2
 while read genome; do
 
     # run RepeatMasker -> python script to add columns -> awk filtering -> filtered output file
-    RepeatMasker -lib References/fngrep.fasta -dir . -gff -cutoff 250 
--no_is -pa 24 References/$genome.fasta | python KVKLab/miniproject4/RM_columns.py | awk -v 
-OFS='\t' '{ if ((100.0 - $2 >= $PIDENT) && ($17 >= $LENGTH)) { print } }' > RM_filtered_$genome.txt
+    RepeatMasker -lib References/fngrep.fasta -dir . -gff -cutoff 250 -no_is -pa 24 References/$genome.fasta | python2 KVKLab/miniproject4/RM_columns.py | awk -v OFS='\t' '{ if ((100.0 - $2 >= $PIDENT) && ($17 >= $LENGTH)) { print } }' > RM_filtered_$genome.txt
 
     # use awk to convert to bed file -> filtered output bed file
     awk -v OFS='\t' '{ print $5, $6, $7, $10 }' RM_filtered_$genome.txt > RM_filtered_$genome.bed
