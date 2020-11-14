@@ -21,7 +21,7 @@ while read genome; do
     
     python KVKLab/miniproject4/RM_columns.py $genome.fasta.out > RM_columns_$genome.txt
     
-    awk -v OFS='\t' '{ if ((100.0 - $2 >= $PIDENT) && ($17 >= $LENGTH)) { print } }' RM_columns_$genome.txt > RM_filtered_$genome.txt
+    awk -v PIDENT=$PIDENT -v LENGTH=$LENGTH -v OFS='\t' '{ if ((100.0 - $2 >= PIDENT) && ($17 >= LENGTH)) { print } }' RM_columns_$genome.txt > RM_filtered_$genome.txt
     echo "ran python script and filtered with awk"
 
     # use awk to convert to bed file -> filtered output bed file
