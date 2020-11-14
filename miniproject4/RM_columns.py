@@ -8,7 +8,7 @@ with open("References/fngrep.embl", "r") as library:
         KW[record.name] = [len(record.seq), record.annotations.get('keywords')]
 
 with open(sys.argv[1], "r") as annotations:
-    count = 0
+    hits = 0
     for line in annotations:
         lst = line.split()
         if len(lst) >= 15:
@@ -16,5 +16,5 @@ with open(sys.argv[1], "r") as annotations:
             length = abs(int(lst[6]) - int(lst[5]))
             if key is not None and ("LTR" not in lst[9]):
                 print line[:-1], length, '\t', round(((float(length) / key[0]) * 100.0), 1), '\t', ', '.join(key[1])
-                count += 1
-    print count
+                hits += 1
+    print hits
