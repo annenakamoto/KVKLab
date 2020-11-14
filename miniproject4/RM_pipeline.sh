@@ -17,18 +17,16 @@ while read genome; do
 
     # run RepeatMasker
     RepeatMasker -lib References/fngrep.fasta -dir RepeatMaskerOutput -gff -cutoff 250 -no_is -pa 24 References/$genome.fasta
-    echo "ran RepeatMasker"
     
-    # fun python script on RM output, pipe to awk for filtering
+    # run python script on RM output, pipe to awk for filtering
     python KVKLab/miniproject4/RM_columns.py RepeatMaskerOutput/$genome.fasta.out | awk -v PIDENT=$PIDENT -v LENGTH=$LENGTH -v OFS='\t' '{ if (((100.0 - $4) >= PIDENT) && ($2 >= LENGTH)) { print } }' > RM_filtered_$genome.txt
-    echo "ran python script and filtered with awk"
 
     # use awk to convert the filtered RM output to bed file
     awk -v OFS='\t' '{ print $7, $8, $9, $12 }' RM_filtered_$genome.txt > RM_filtered_$genome.bed
 
     # use awk to get data from filtered RM output
-    awk -v genome=$genome 'BEGIN { count=0; length=0; LTR=0; NLTR=0; DNAT=0; } 
-        { count++; length += $1; }
+    awk -v genome=$genome 'BEGIN { count=0; len=0; LTR=0; NLTR=0; DNAT=0; } 
+        { count++; len+=$1; }
         / LTR Retrotransposon/ { LTR++ }
         /Non-LTR Retrotransposon/ { NLTR++ }
         /DNA transposon, T/ { DNAT++ }
