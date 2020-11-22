@@ -35,5 +35,5 @@ while read genome; do
             "\nLTR Retrotransposons:", LTR, "\nNon-LTR Retrotransposons:", NLTR, "\nDNA Transposons:", DNAT;
             for (i in a) { print i, a[i] } }' RM_filtered_$genome.txt > RM_data_$genome.txt
 
-done < RM_pipe_in.txt
+done < KVKLab/miniproject4/RM_pipe_in.txt
 
