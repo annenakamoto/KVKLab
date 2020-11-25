@@ -3,7 +3,7 @@ import sys
 
 KW = {}
 
-with open("References/fngrep.embl", "r") as library:
+with open("References/fngrep_guy11denovo.embl", "r") as library:
     for record in SeqIO.parse(library, "embl"):
         KW[record.name] = [len(record.seq), record.annotations.get('keywords')]
 

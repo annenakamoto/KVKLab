@@ -16,7 +16,9 @@ LENGTH=$2
 while read genome; do
 
     # run RepeatMasker
-    RepeatMasker -lib References/fngrep.fasta -dir RepeatMaskerOutput -gff -cutoff 250 -no_is -pa 24 References/$genome.fasta
+    RepeatMasker -lib References/fngrep_guy11denovo.fasta -dir 
+RepeatMaskerOutput 
+-gff -cutoff 250 -no_is -pa 24 References/$genome.fasta
     
     # run python script on RM output, pipe to awk for filtering
     python KVKLab/miniproject4/RM_columns.py RepeatMaskerOutput/$genome.fasta.out | awk -v PIDENT=$PIDENT -v LENGTH=$LENGTH -v OFS='\t' '{ if (((100.0 - $4) >= PIDENT) && ($2 >= LENGTH)) { print } }' > RM_filtered_$genome.txt
