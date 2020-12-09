@@ -33,7 +33,7 @@ while read genome; do
         /DNA transposon, T/ { DNAT++ }
         /, Unknown,/ { UNKN++ }
         END { print genome, "\nhits:", count, "\ttotal transposon length:", len,
-            "\nLTR Retrotransposons:", LTR, "\nNon-LTR Retrotransposons:", NLTR, "\nDNA Transposons:", DNAT;
+            "\nLTR Retrotransposons:", LTR, "\nNon-LTR Retrotransposons:", NLTR, "\nDNA Transposons:", DNAT, "\nUnknown:", UNKN;
             for (i in a) { print i, a[i] } }' RM_fd_filtered_$genome.txt > RM_fd_data_$genome.txt
 
 done < KVKLab/miniproject4/RM_pipe_in.txt
