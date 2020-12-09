@@ -14,7 +14,7 @@ with open(sys.argv[1], "r") as annotations:
         if len(lst) >= 15:
             key = KW.get(lst[9])
             length = abs(int(lst[6]) - int(lst[5]))
-            if key is not None and ("LTR" not in lst[9]):
+            if key is not None and ("_LTR" not in lst[9]):
                 print length, '\t', round(((float(length) / key[0]) * 100.0), 1), '\t', line[:-1], '\t', ', '.join(key[1])
                 hits += 1
     print hits
