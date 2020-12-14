@@ -25,7 +25,7 @@ while read genome; do
     awk -v OFS='\t' '{ print $7, $8, $9, $12 }' RM_fd_filtered_$genome.txt > RM_fd_filtered_$genome.bed
 
     # use awk to get data from filtered RM output
-    awk -v genome=$genome 'BEGIN { count=0; len=0; LTR=0; NLTR=0; DNAT=0; UNKN=0; } 
+    awk -v genome=$genome 'BEGIN { count=0; LTR=0; NLTR=0; DNAT=0; UNKN=0; } 
         { count++; len+=$1; }
         { a[$12]++ }
         { b[$1]++ }
@@ -33,8 +33,8 @@ while read genome; do
         /Non-LTR Retrotransposon/ { NLTR++ }
         /DNA transposon, T/ { DNAT++ }
         /, Unknown,/ { UNKN++ }
-        END { print genome, "\nhits:", count, "\ttotal transposon length:", len,
-            "\nLTR Retrotransposons:", LTR, "\nNon-LTR Retrotransposons:", NLTR, "\nDNA Transposons:", DNAT, "\nUnknown:", UNKN;
+        END { print genome, "\nhits", "\t", count,
+            "\nLTR Retrotransposons", "\t", LTR, "\nNon-LTR Retrotransposons", "\t", NLTR, "\nDNA Transposons", "\t", DNAT, "\nUnknown", "\t", UNKN;
             for (j in b) { print j, "\t", b[j] }
             for (i in a) { print i, "\t", a[i] } }' RM_fd_filtered_$genome.txt > RM_fd_data_$genome.txt
 
