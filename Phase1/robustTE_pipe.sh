@@ -14,7 +14,7 @@ source activate RepeatModeler
 GENOME=$1
 
 # run RepeatModeler on GENOME
-BuildDatabase -name GENOME_rmdb -engine ncbi GENOME.fasta
+BuildDatabase -name GENOME_rmdb -engine ncbi hq_genomes/GENOME.fasta
 RepeatModeler -engine ncbi -pa 24 -database GENOME_rmdb
 
 # run IRF on GENOME
