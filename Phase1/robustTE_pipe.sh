@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=Robust_TE_pipeline
 #SBATCH --account=fc_kvkallow
-#SBATCH --partition=savio2_htc
+#SBATCH --partition=savio2
 #SBATCH --qos=savio_normal
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
