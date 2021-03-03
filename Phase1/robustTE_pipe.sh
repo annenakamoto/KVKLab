@@ -14,8 +14,8 @@ source activate RepeatModeler
 GENOME=$1
 
 # run RepeatModeler on GENOME
-BuildDatabase -name GENOME_rmdb -engine ncbi hq_genomes/GENOME.fasta
-RepeatModeler -engine ncbi -pa 24 -database GENOME_rmdb
+BuildDatabase -name rmdb_$GENOME -engine ncbi hq_genomes/$GENOME.fasta
+RepeatModeler -engine ncbi -pa 24 -database rmdb_$GENOME
 
 # run IRF on GENOME
 
@@ -23,7 +23,7 @@ RepeatModeler -engine ncbi -pa 24 -database GENOME_rmdb
 # run CD-HIT to remove repeats, obtain high quality TE library for GENOME
 
 # run RepeatMasker on GENOME using high quality TE library
-# RepeatMasker -lib <high quality TE library> -dir robustTE_RepeatMaskerOut -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/GENOME.fasta
+# RepeatMasker -lib <high quality TE library> -dir robustTE_RepeatMaskerOut -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
 
 # scan output for HMM PFAM profile domains using pfam_scan.pl
 # scan output for CDD profile domains using RPS-BLAST
