@@ -5,7 +5,7 @@
 #SBATCH --qos=savio_normal
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
-#SBATCH --time=24:00:00
+#SBATCH --time=5:00:00
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 cd /global/scratch/users/annen/
@@ -19,7 +19,7 @@ RepeatModeler -engine ncbi -pa 24 -database GENOME_rmdb
 
 # run IRF on GENOME
 
-# combine RepeatModleler, IRF, and RepBase libraries
+# combine RepeatModleler, IRF, and RepBase (References/fngrep.fasta) libraries
 # run CD-HIT to remove repeats, obtain high quality TE library for GENOME
 
 # run RepeatMasker on GENOME using high quality TE library
