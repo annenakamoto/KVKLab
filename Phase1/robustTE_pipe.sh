@@ -15,7 +15,7 @@ GENOME=$1
 
 # run RepeatModeler on GENOME
 BuildDatabase -name rmdb_$GENOME -engine ncbi hq_genomes/$GENOME.fasta
-RepeatModeler -engine ncbi -pa 24 -database rmdb_$GENOME
+RepeatModeler -engine ncbi -pa 24 -database rmdb_$GENOME -LTRStruct
 
 # run IRF on GENOME
 
