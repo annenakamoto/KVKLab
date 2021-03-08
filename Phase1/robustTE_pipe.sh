@@ -15,8 +15,7 @@ GENOME=$1
 
 # run RepeatModeler on GENOME
 BuildDatabase -name rmdb_$GENOME -engine ncbi hq_genomes/$GENOME.fasta
-RepeatModeler -engine ncbi -pa 24 -database rmdb_$GENOME 
-# -LTRStruct -ninja_dir /global/home/users/annen/.conda/envs/RepeatModeler/bin/NINJA-0.95-cluster_only/NINJA
+RepeatModeler -engine ncbi -pa 24 -database rmdb_$GENOME -LTRStruct -ninja_dir /global/home/users/annen/NINJA-0.95-cluster_only/NINJA
 
 # run IRF on GENOME
 
