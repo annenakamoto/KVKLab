@@ -9,7 +9,7 @@
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 cd /global/scratch/users/annen/
-source activate RepeatModeler
+conda activate RepeatModeler
 
 GENOME=$1
 
@@ -31,4 +31,4 @@ RepeatModeler -engine ncbi -pa 24 -database rmdb_$GENOME -LTRStruct -ninja_dir /
 
 # plot results in R
 
-source deactivate
+conda deactivate
