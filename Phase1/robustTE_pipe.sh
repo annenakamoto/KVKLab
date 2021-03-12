@@ -18,7 +18,7 @@ GENOME=$1
 #RepeatModeler -engine ncbi -pa 24 -database rmdb_$GENOME -LTRStruct -ninja_dir /global/scratch/users/annen/NINJA-0.95-cluster_only/NINJA
 
 # run IRF on GENOME
-./irf307.exe hq_genomes/$GENOME.fasta 2 3 5 80 10 20 500000 10000 -a3 -t4 1000 -t5 5000 -h -d -m | irf_$GENOME.dat
+./irf307.exe hq_genomes/$GENOME.fasta 2 3 5 80 10 20 500000 10000 -a3 -t4 1000 -t5 5000 -h -d -ngs > irf_$GENOME.dat
 
 # combine RepeatModleler, IRF, and RepBase (References/fngrep.fasta) libraries
 # run CD-HIT to remove repeats, obtain high quality TE library for GENOME
