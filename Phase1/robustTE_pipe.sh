@@ -25,7 +25,8 @@ GENOME=$1
 
 # combine RepeatModleler, IRF, and RepBase (References/fngrep.fasta) libraries
 # run CD-HIT to remove repeats, obtain high quality TE library for GENOME
-cat rmdb_$GENOME-families.fa irf_$GENOME.fasta References/fngrep.fasta | cd-hit -o clustlib_$GENOME.fasta -c 1.0 -g 1 -aS 0.99
+cat rmdb_$GENOME-families.fa irf_$GENOME.fasta References/fngrep.fasta > unclib_$GENOME.fasta
+cd-hit -i unclib_$GENOME.fasta -o clustlib_$GENOME.fasta -c 1.0 -g 1 -aS 0.99
 
 # run RepeatMasker on GENOME using high quality TE library
 #RepeatMasker -lib clustlib_$GENOME.fasta -dir robustTE_RepeatMaskerOut -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
