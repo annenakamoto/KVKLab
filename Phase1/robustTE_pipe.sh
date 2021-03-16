@@ -20,15 +20,15 @@ GENOME=$1
 # run IRF on GENOME
 #./irf307.exe hq_genomes/$GENOME.fasta 2 3 5 80 10 20 500000 10000 -a3 -t4 1000 -t5 5000 -h -d -ngs > irf_$GENOME.dat
 
-# parse irf output into fasta format >irf-1_left#DNA/IRF
-awk 'BEGIN { count=0; } 
-{ if ($18 != "") { count++; print ">irf-" count "_left#DNA/IRF" "\n" $18 "\n" ">irf-" count "_right#DNA/IRF" "\n" $19 } }' irf_$GENOME.dat > irf_$GENOME.fasta
+# parse irf output into fasta format
+#awk 'BEGIN { count=0; } { if ($18 != "") { count++; print ">irf-" count "_left#DNA/IRF" "\n" $18 "\n" ">irf-" count "_right#DNA/IRF" "\n" $19 } }' irf_$GENOME.dat > irf_$GENOME.fasta
 
 # combine RepeatModleler, IRF, and RepBase (References/fngrep.fasta) libraries
 # run CD-HIT to remove repeats, obtain high quality TE library for GENOME
+cat rmdb_$GENOME-families.fa irf_$GENOME.fasta References/fngrep.fasta | cd-hit -o clustlib_$GENOME.fasta -c 1.0 -g 1 -aS 0.99
 
 # run RepeatMasker on GENOME using high quality TE library
-# RepeatMasker -lib <high quality TE library> -dir robustTE_RepeatMaskerOut -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
+#RepeatMasker -lib clustlib_$GENOME.fasta -dir robustTE_RepeatMaskerOut -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
 
 # scan output for HMM PFAM profile domains using pfam_scan.pl
 # scan output for CDD profile domains using RPS-BLAST
