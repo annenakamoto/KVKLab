@@ -33,7 +33,7 @@ awk 'BEGIN { max=0; clust=0; }
     />Cluster/ { max=0; clust=$2 }
     !/>irf-|>Cluster/ { if(substr($2, 1, length($2)-3)+0>max) { max=substr($2, 1, length($2)-3)+0; a[clust]=substr($3, 1, length($3)-3) } }
     />irf-/ && /\*/ { if(max==0) {  max=substr($2, 1, length($2)-3)+0; a[clust]=substr($3, 1, length($3)-3) } }
-    END { for(i in a) { print a[i]; } }' clustlib_$GENOME.fasta.clstr | python KVKLab/Phase1/robustTE_prioritize.py unclib_$GENOME.fasta > LIB_$GENOME.fasta
+    END { for(i in a) { print a[i]; } }' clustlib_$GENOME.fasta.clstr > LIB_list.txt # | python KVKLab/Phase1/robustTE_prioritize.py unclib_$GENOME.fasta > LIB_$GENOME.fasta
 
 # run RepeatMasker on GENOME using high quality TE library
 #RepeatMasker -lib clustlib_$GENOME.fasta -dir robustTE_RepeatMaskerOut -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
