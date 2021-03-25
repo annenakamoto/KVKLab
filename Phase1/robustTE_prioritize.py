@@ -7,14 +7,13 @@ for elem in sys.stdin:
 with open(sys.argv[1], "r") as library:
     printing = False
     for line in library:
-        words = line.partition(' ')
+        words = str(line).split()
         first_word = words[0]
         if first_word[0] == ">":
             if first_word in elements:
-                elements.remove(first_word)
                 printing = True
             else:
                 printing = False
         if printing:
-            print(line)
+            print(line[:-1])
         
