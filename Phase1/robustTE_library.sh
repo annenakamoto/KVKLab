@@ -22,7 +22,7 @@ while read GENOME; do
 done < KVKLab/Phase1/robustTE_pipe_in.txt
 
 # run CD-HIT to remove repeats, obtain high quality comprehensive TE library
-cd-hit-est -i unclib.fasta -o clustlib.fasta -c 1.0 -aS 0.99 -g 1 -d 0 -T 24
+cd-hit-est -i unclib.fasta -o clustlib.fasta -c 1.0 -aS 0.99 -g 1 -d 0 -T 24 -M 0
 
 # parse the clustered library to prioritize RepBase, RepeatModeler, then IRF to be the representative element
 awk 'BEGIN { max=0; clust=0; rb=0; }
