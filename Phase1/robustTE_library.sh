@@ -30,7 +30,9 @@ awk 'BEGIN { max=0; clust=0; rb=0; }
     !/>irf-|>ltr-|>rnd-|>Cluster/ { if(substr($2, 1, length($2)-3)+0>max) { max=substr($2, 1, length($2)-3)+0; a[clust]=substr($3, 1, length($3)-3); rb=1 } }
     />ltr-/ || />rnd-/ { if(max==0 || rb==0 && substr($2, 1, length($2)-3)+0>max) { max=substr($2, 1, length($2)-3)+0; a[clust]=substr($3, 1, length($3)-3) } }
     />irf-/ && /\*/ { if(max==0) { max=substr($2, 1, length($2)-3)+0; a[clust]=substr($3, 1, length($3)-3) } }
-    END { for(i in a) { print a[i]; } }' clustlib.fasta.clstr > LIB_list.txt # | python KVKLab/Phase1/robustTE_prioritize.py unclib.fasta > LIB.fasta
+    END { for(i in a) { print a[i]; } }' clustlib.fasta.clstr > LIB_list.txt
+
+cat LIB_list.txt | python KVKLab/Phase1/robustTE_prioritize.py unclib.fasta > LIB.fasta
 
 
 # scan library for HMM PFAM profile domains using pfam_scan.pl
