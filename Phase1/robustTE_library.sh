@@ -14,11 +14,11 @@ source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 # combine RepeatModleler, IRF, and RepBase (References/fngrep.fasta) libraries
 cat References/fngrep.fasta > unclib.fasta
 while read GENOME; do
-    cat unclib.fasta rmdb_$GENOME-families.fasta > unclib.fasta
+    cat rmdb_$GENOME-families.fasta >> unclib.fasta
 done < KVKLab/Phase1/robustTE_pipe_in.txt
 
 while read GENOME; do
-    cat unclib.fasta irf_$GENOME.fasta > unclib.fasta
+    cat irf_$GENOME.fasta >> unclib.fasta
 done < KVKLab/Phase1/robustTE_pipe_in.txt
 
 # run CD-HIT to remove repeats, obtain high quality comprehensive TE library
