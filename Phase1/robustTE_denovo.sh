@@ -14,13 +14,18 @@ source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 GENOME=$1
 
 # run RepeatModeler on GENOME
-BuildDatabase -name rmdb_$GENOME -engine ncbi hq_genomes/$GENOME.fasta
-RepeatModeler -engine ncbi -pa 24 -database rmdb_$GENOME -LTRStruct -ninja_dir /global/scratch/users/annen/NINJA-0.95-cluster_only/NINJA
+#BuildDatabase -name rmdb_$GENOME -engine ncbi hq_genomes/$GENOME.fasta
+#RepeatModeler -engine ncbi -pa 24 -database rmdb_$GENOME -LTRStruct -ninja_dir /global/scratch/users/annen/NINJA-0.95-cluster_only/NINJA
+
+# add genome name to RepeatModeler output
+awk -v GENOME=$GENOME 'BEGIN { FS="#"; } 
+    />/ { print $1 "_" GENOME "#" $2 } 
+    !/>/ { print; }' rmdb_$GENOME-families.fa > rmdb_$GENOME-families.fasta
 
 # run IRF on GENOME
-./irf307.exe hq_genomes/$GENOME.fasta 2 3 5 80 10 20 500000 10000 -a3 -t4 1000 -t5 5000 -h -d -ngs > irf_$GENOME.dat
+#./irf307.exe hq_genomes/$GENOME.fasta 2 3 5 80 10 20 500000 10000 -a3 -t4 1000 -t5 5000 -h -d -ngs > irf_$GENOME.dat
 
 # parse irf output into fasta format
-awk 'BEGIN { count=0; } { if ($18 != "") { count++; print ">irf-" count "_left#DNA/IRF" "\n" $18 "\n" ">irf-" count "_right#DNA/IRF" "\n" $19 } }' irf_$GENOME.dat > irf_$GENOME.fasta
+awk -v GENOME=$GENOME 'BEGIN { count=0; } { if ($18 != "") { count++; print ">irf-" count "_left_" GENOME "#DNA/IRF" "\n" $18 "\n" ">irf-" count "_right_" GENOME "#DNA/IRF" "\n" $19 } }' irf_$GENOME.dat > irf_$GENOME.fasta
 
 source deactivate
