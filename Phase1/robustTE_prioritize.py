@@ -11,10 +11,12 @@ with open(sys.argv[1], "r") as library:
         if len(words) > 0:
             first_word = words[0]
             if first_word[0] == ">":
-                if first_word in elements:
-                    printing = True
-                else:
-                    printing = False
+                printing = False
+                for i in elements:
+                    if elements[i] == first_word:
+                        printing = True
+                        elements.pop(i)
+                        break
             if printing:
                 print(line[:-1])
         
