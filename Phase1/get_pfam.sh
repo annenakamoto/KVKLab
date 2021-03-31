@@ -11,20 +11,20 @@
 cd /global/scratch/users/annen/PFAM_files
 source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 
-echo "" > PFAM_domains_specific.txt
+#echo "" > PFAM_domains_specific.txt
 
 # get the specific accession numbers
-while read acc; do
-grep $acc Pfam-A.hmm | awk '{ print $2 }' >> PFAM_domains_specific.txt
-done < PFAM_domains.txt
+#while read acc; do
+#grep $acc Pfam-A.hmm | awk '{ print $2 }' >> PFAM_domains_specific.txt
+#done < PFAM_domains.txt
 
 # fetch all the domains in PFAM_domains_specific.txt
-hmmfetch -o PFAM_lib/Pfam-A.hmm -f Pfam-A.hmm PFAM_domains_specific.txt
+#hmmfetch -o PFAM_lib/Pfam-A.hmm -f Pfam-A.hmm PFAM_domains_specific.txt
 
 # generate binaries for PFAM_domains.hmm library 
-hmmpress PFAM_lib/Pfam-A.hmm
+#hmmpress PFAM_lib/Pfam-A.hmm
 
 cd /global/scratch/users/annen
-pfam_scan.pl -fasta LIB.fasta -dir PFAM_files/PFAM_lib -e_dom 0.01 -outfile pfam_LIB.out
+pfam_scan.pl -fasta LIB.fasta -dir PFAM_files/PFAM_lib -e_dom 0.01 -e_seq 0.01 -outfile pfam_LIB.out
 
 source deactivate
