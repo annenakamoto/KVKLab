@@ -19,8 +19,7 @@ grep $acc Pfam-A.hmm | awk '{ print $2 }' >> PFAM_domains_specific.txt
 done < PFAM_domains.txt
 
 # fetch all the domains in PFAM_domains_specific.txt
-hmmfetch -o PFAM_domains.hmm -f Pfam-A.hmm PFAM_domains_specific.txt
-mv PFAM_domains.hmm /PFAM_lib
+hmmfetch -o PFAM_lib/PFAM_domains.hmm -f Pfam-A.hmm PFAM_domains_specific.txt
 
 # generate binaries for PFAM_domains.hmm library 
 cd PFAM_lib
