@@ -15,7 +15,7 @@ echo "" > PFAM_domains_specific.txt
 
 # get the specific accession numbers
 while read acc; do
-grep acc Pfam-A.hmm | awk '{ print $2 }' >> PFAM_domains_specific.txt
+grep $acc Pfam-A.hmm | awk '{ print $2 }' >> PFAM_domains_specific.txt
 done < PFAM_domains.txt
 
 # fetch all the domains in PFAM_domains_specific.txt
