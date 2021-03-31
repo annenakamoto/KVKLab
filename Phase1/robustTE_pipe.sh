@@ -23,12 +23,9 @@ cd /global/scratch/users/annen/
 
 #source deactivate
 
-#sbatch KVKLab/Phase1/get_pfam.sh
-source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
-# scan LIB.txt for HMM PFAM profile domains using pfam_scan.pl
-pfam_scan.pl -fasta LIB.fasta -dir PFAM_files/PFAM_lib -e_dom 0.01 -o pfam_LIB.out
+# get pfam domains and scan LIB.txt for HMM PFAM profile domains using pfam_scan.pl
+sbatch KVKLab/Phase1/get_pfam.sh
 
-source deactivate
 #source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 
 # run RepeatMasker on GENOME using high quality TE library that was scanned for domains

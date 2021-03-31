@@ -19,12 +19,13 @@ grep $acc Pfam-A.hmm | awk '{ print $2 }' >> PFAM_domains_specific.txt
 done < PFAM_domains.txt
 
 # fetch all the domains in PFAM_domains_specific.txt
-hmmfetch -o PFAM_lib/PFAM_domains.hmm -f Pfam-A.hmm PFAM_domains_specific.txt
+hmmfetch -o PFAM_lib/Pfam-A.hmm -f Pfam-A.hmm PFAM_domains_specific.txt
 
 # generate binaries for PFAM_domains.hmm library 
 cd PFAM_lib
-hmmpress PFAM_domains.hmm
-
-source deactivate
+hmmpress Pfam-A.hmm
 
 cd /global/scratch/users/annen
+pfam_scan.pl -fasta LIB.fasta -dir PFAM_files/PFAM_lib -e_dom 0.01 -o pfam_LIB.out
+
+source deactivate
