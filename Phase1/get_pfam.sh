@@ -22,7 +22,6 @@ source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 #hmmfetch -o PFAM_lib/Pfam-A.hmm -f Pfam-A.hmm PFAM_domains_specific.txt
 
 # generate binaries for PFAM_domains.hmm library 
-hmmpress Pfam-A.hmm
 #hmmpress PFAM_lib/Pfam-A.hmm
 
 cd /global/scratch/users/annen
