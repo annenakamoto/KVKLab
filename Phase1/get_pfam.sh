@@ -22,9 +22,10 @@ source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 #hmmfetch -o PFAM_lib/Pfam-A.hmm -f Pfam-A.hmm PFAM_domains_specific.txt
 
 # generate binaries for PFAM_domains.hmm library 
+hmmpress Pfam-A.hmm
 #hmmpress PFAM_lib/Pfam-A.hmm
 
 cd /global/scratch/users/annen
-pfam_scan.pl -fasta LIB.fasta -dir PFAM_files/PFAM_lib -e_dom 0.01 -e_seq 1 -outfile pfam_LIB.out
+pfam_scan.pl -fasta LIB.fasta -dir PFAM_files -e_dom 0.01 -e_seq 1 -outfile pfam_LIB.out
 
 source deactivate
