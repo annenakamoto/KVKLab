@@ -25,9 +25,10 @@ source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 #hmmpress PFAM_lib/Pfam-A.hmm
 
 cd /global/scratch/users/annen
-#pfam_scan.pl -fasta LIB.fasta -dir PFAM_files -e_dom 0.01 -e_seq 1 -outfile pfam_LIB.out
+# running pfam_scan.pl on the clustered LIB.fasta, translating it to protein sequences
+pfam_scan.pl -fasta LIB.fasta -dir PFAM_files/PFAM_lib -e_dom 0.01 -e_seq 0.01 -translate all -outfile pfam_LIB.out
 
 ## testing pfam_scan on MAGGY_I (not part of pipeline)
-pfam_scan.pl -fasta References/MAGGY_I.fasta -dir PFAM_files/PFAM_lib -e_dom 0.01 -e_seq 0.01 -translate all -outfile pfam_MAGGY_I.out
+#pfam_scan.pl -fasta References/MAGGY_I.fasta -dir PFAM_files/PFAM_lib -e_dom 0.01 -e_seq 0.01 -translate all -outfile pfam_MAGGY_I.out
 
 source deactivate
