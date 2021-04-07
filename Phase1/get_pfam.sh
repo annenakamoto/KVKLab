@@ -28,6 +28,9 @@ cd /global/scratch/users/annen
 # running pfam_scan.pl on the clustered LIB.fasta, translating it to protein sequences
 pfam_scan.pl -fasta LIB.fasta -dir PFAM_files/PFAM_lib -e_dom 0.01 -e_seq 0.01 -translate all -outfile pfam_LIB.out
 
+cat pfam_LIB.out | python KVKLab/Phase1/parse_pfam.py > pfam_LIB_list.txt #LIB.fasta > LIB_dom.fasta
+
+
 ## testing pfam_scan on MAGGY_I (not part of pipeline)
 #pfam_scan.pl -fasta References/MAGGY_I.fasta -dir PFAM_files/PFAM_lib -e_dom 0.01 -e_seq 0.01 -translate all -outfile pfam_MAGGY_I.out
 
