@@ -3,8 +3,7 @@ import sys
 Elements = {}
 for line in sys.stdin:
     words = str(line).split()
-    first_word = words[0]
-    if first_word != "#" and first_word != "":
+    if len(words) > 0 and words[0] != "#" and words[0] != "":
         first_word = words[0][:-2]
         in_dict = Elements.get(first_word)
         if in_dict:
