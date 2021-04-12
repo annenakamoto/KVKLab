@@ -32,10 +32,36 @@ source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 #    />irf-/ && /\*/ { if(max==0) { max=substr($2, 1, length($2)-3)+0; a[clust]=substr($3, 1, length($3)-3) } }
 #    END { for(i in a) { print a[i]; } }' clustlib.fasta.clstr > LIB_list.txt
 
-cat LIB_list.txt | python KVKLab/Phase1/robustTE_prioritize.py unclib.fasta > LIB.fasta
-
+#cat LIB_list.txt | python KVKLab/Phase1/robustTE_prioritize.py unclib.fasta > LIB.fasta
+#source deactivate
 
 # scan library for HMM PFAM profile domains using pfam_scan.pl
+#cd /global/scratch/users/annen/PFAM_files
+#source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
+
+#echo "" > PFAM_domains_specific.txt
+
+# get the specific accession numbers
+#while read acc; do
+#grep $acc Pfam-A.hmm | awk '{ print $2 }' >> PFAM_domains_specific.txt
+#done < PFAM_domains.txt
+
+# fetch all the domains in PFAM_domains_specific.txt
+#hmmfetch -o PFAM_lib/Pfam-A.hmm -f Pfam-A.hmm PFAM_domains_specific.txt
+
+# generate binaries for PFAM_domains.hmm library 
+#hmmpress PFAM_lib/Pfam-A.hmm
+
+#cd /global/scratch/users/annen
+# running pfam_scan.pl on the clustered LIB.fasta, translating it to protein sequences
+#pfam_scan.pl -fasta LIB.fasta -dir PFAM_files/PFAM_lib -e_dom 0.01 -e_seq 0.01 -translate all -outfile pfam_LIB.out
+
+#cat pfam_LIB.out | python KVKLab/Phase1/parse_pfam.py > pfam_LIB_list.txt
+#source deactivate
+
 # scan library for CDD profile domains using RPS-BLAST
+source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
+
+
 
 source deactivate
