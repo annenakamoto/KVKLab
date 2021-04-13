@@ -23,21 +23,12 @@ cd /global/scratch/users/annen/
 # scan LIB.txt for CDD profile domains using RPS-BLAST
 #sbatch --dependency=afterok:${jid%?} KVKLab/Phase1/robustTE_library.sh
 
-#source deactivate
-
-
-#source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
-
-# run RepeatMasker on GENOME using high quality TE library that was scanned for domains
-#RepeatMasker -lib <domain-scanned lib> -dir robustTE_RepeatMaskerOut -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
-
-# scan output for CDD profile domains using RPS-BLAST
-
-#source deactivate
-#source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
-# scan output for HMM PFAM profile domains using pfam_scan.pl
-
-#source deactivate
+# run RepeatMasker on all genomes using LIB_DOM.fasta and scan the output for domains
+delim=","
+while read GENOME; do
+    jid=$(sbatch KVKLab/Phase1/robustTE_RMask.sh $GENOME | cut -d ' ' -f4)$delim$jid
+done < KVKLab/Phase1/robustTE_pipe_in.txt
+echo $jid
 
 # add length, % length, and keywords columns to output using a python script (robustTE_cols.py)
 
