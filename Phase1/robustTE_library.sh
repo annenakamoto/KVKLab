@@ -60,7 +60,7 @@ cd /global/scratch/users/annen/
 #source deactivate
 
 # scan library for CDD profile domains using RPS-BLAST
-#source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
+source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 #cd /global/scratch/users/annen/CDD_Profiles
 
 # using the list of PSSM id's (CDD_profiles.txt) get a list of the accessions (CDD_profiles_acc.pn)
@@ -78,4 +78,4 @@ cd /global/scratch/users/annen
 
 # parse rpsblast output into a text file list of elements and their domains (cdd_LIB_list.txt)
 cat cdd_LIB.out | python KVKLab/Phase1/parse_cdd.py > cdd_LIB_list.txt
-#source deactivate
+source deactivate
