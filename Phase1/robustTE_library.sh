@@ -77,5 +77,10 @@ cd /global/scratch/users/annen
 #echo "ran rpsblast"
 
 # parse rpsblast output into a text file list of elements and their domains (cdd_LIB_list.txt)
-cat cdd_LIB.out | python KVKLab/Phase1/parse_cdd.py > cdd_LIB_list.txt
+#cat cdd_LIB.out | python KVKLab/Phase1/parse_cdd.py > cdd_LIB_list.txt
+
+# create the comprehensive repeat-with-domain library
+cat pfam_LIB_list.txt cdd_LIB_list.txt | python KVKLab/Phase1/parse_domlib.py LIB.fasta > LIB_DOM.fasta
+
 source deactivate
+
