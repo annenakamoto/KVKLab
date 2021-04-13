@@ -65,7 +65,7 @@ cd /global/scratch/users/annen/CDD_Profiles
 
 # using the list of PSSM id's (CDD_profiles.txt) get a list of the accessions (CDD_profiles_acc.pn)
 while read pssm; do
-grep $pssm cdd.versions | awk '{ print $1 }' >> CDD_profiles_acc.pn
+grep $pssm cdd.versions | awk '{ print $1 ".smp" }' >> CDD_profiles_acc.pn
 done < CDD_profiles.txt
 
 # making rps database of CDD domains and running rpsblast
