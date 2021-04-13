@@ -16,7 +16,7 @@ with open(sys.argv[1], "r") as LIB:
         if len(words) > 0:
             first_word = words[0]
             if first_word[0] == ">":
-                if Elements.get(first_word):
+                if Elements.get(first_word[1:]):
                     printing = True
                 else:
                     printing = False
