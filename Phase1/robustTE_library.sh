@@ -70,10 +70,10 @@ cd /global/scratch/users/annen/CDD_Profiles
 #done < CDD_profiles.txt
 
 # making rps database of CDD domains and running rpsblast
-makeprofiledb -title CDD_lib -in CDD_profiles_acc.pn -out CDD_lib -threshold 9.82 -scale 100.0 -dbtype rps -index true
-echo "made database"
+#makeprofiledb -title CDD_lib -in CDD_profiles_acc.pn -out CDD_lib -threshold 9.82 -scale 100.0 -dbtype rps -index true
+#echo "made database"
 cd /global/scratch/users/annen
-rpsblast -query LIB.fasta -db CDD_Profiles/CDD_lib -out cdd_LIB.out -evalue 0.001
+rpsblast -query LIB.fasta -db CDD_Profiles/CDD_lib -out cdd_LIB.out -evalue 0.001 -outfmt 6
 echo "ran rpsblast"
 
 # parse rpsblast output into a text file list of elements and their domains (cdd_LIB_list.txt)
