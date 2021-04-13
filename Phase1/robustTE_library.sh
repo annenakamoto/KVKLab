@@ -9,7 +9,7 @@
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 cd /global/scratch/users/annen/
-source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
+#source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 
 # combine RepeatModleler, IRF, and RepBase (References/fngrep.fasta) libraries
 #cat References/fngrep.fasta > unclib.fasta
