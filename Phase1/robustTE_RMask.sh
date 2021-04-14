@@ -16,10 +16,10 @@ GENOME=$1
 # run RepeatMasker on GENOME using high quality TE library that was scanned for domains
 RepeatMasker -lib LIB_DOM.fasta -dir robustTE_RepeatMaskerOut -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
 
-# scan output for CDD profile domains using RPS-BLAST
+# scan output (robustTE_RepeatMaskerOut/GENOME.fasta.out) for CDD profile domains using RPS-BLAST
 
 source deactivate
 #source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
-# scan output for HMM PFAM profile domains using pfam_scan.pl
+# scan output (robustTE_RepeatMaskerOut/GENOME.fasta.out) for HMM PFAM profile domains using pfam_scan.pl
 
 #source deactivate
