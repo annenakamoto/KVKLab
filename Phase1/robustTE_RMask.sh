@@ -14,9 +14,12 @@ source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 GENOME=$1
 
 # run RepeatMasker on GENOME using high quality TE library that was scanned for domains
-RepeatMasker -lib LIB_DOM.fasta -dir robustTE_RepeatMaskerOut -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
+#RepeatMasker -lib LIB_DOM.fasta -dir robustTE_RepeatMaskerOut -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
 
-# scan output (robustTE_RepeatMaskerOut/GENOME.fasta.out) for CDD profile domains using RPS-BLAST
+# scan output (robustTE_RepeatMaskerOut/$GENOME.fasta.out) for CDD profile domains using RPS-BLAST
+awk '{ print $5, $6, $7, $10 }' robustTE_RepeatMaskerOut/$GENOME.fasta.out > $GENOME.fasta.bed
+bedtools getfasta -fo $GENOME.RM.fasta -name -fi hq_genomes/$GENOME.fasta -bed $GENOME.fasta.bed
+
 
 source deactivate
 #source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
