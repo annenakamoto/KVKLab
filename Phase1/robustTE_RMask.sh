@@ -17,7 +17,7 @@ GENOME=$1
 #RepeatMasker -lib LIB_DOM.fasta -dir robustTE_RepeatMaskerOut -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
 
 # scan output (robustTE_RepeatMaskerOut/$GENOME.fasta.out) for CDD profile domains using RPS-BLAST
-awk '{ print $5, $6, $7, $10 }' robustTE_RepeatMaskerOut/$GENOME.fasta.out > $GENOME.fasta.bed
+awk -v OFS='\t' '$1 ~ /^[0-9]+$/ { print $5, $6, $7, $10 }' robustTE_RepeatMaskerOut/$GENOME.fasta.out > $GENOME.fasta.bed
 bedtools getfasta -fo $GENOME.RM.fasta -name -fi hq_genomes/$GENOME.fasta -bed $GENOME.fasta.bed
 
 
