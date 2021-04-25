@@ -21,13 +21,17 @@ GENOME=$1
 #bedtools getfasta -fo $GENOME.RM.fasta -name -fi hq_genomes/$GENOME.fasta -bed $GENOME.fasta.bed
 
 # scan RepeatMasker fasta file ($GENOME.RM.fasta) for CDD profile domains using RPS-BLAST
-rpstblastn -query $GENOME.RM.fasta -db CDD_Profiles/CDD_lib -out $GENOME.RM.cdd.out -evalue 0.001 -outfmt 6
+#rpstblastn -query $GENOME.RM.fasta -db CDD_Profiles/CDD_lib -out $GENOME.RM.cdd.out -evalue 0.001 -outfmt 6
 
-# parse rpsblast output into a text file list of elements and their domains (cdd_LIB_list.txt)
-cat $GENOME.RM.cdd.out | python KVKLab/Phase1/parse_cdd.py > $GENOME.RM.cdd_list.txt
+# parse rpsblast output into a text file list of elements and their domains ($GENOME.RM.cdd_list.txt)
+#cat $GENOME.RM.cdd.out | python KVKLab/Phase1/parse_cdd.py > $GENOME.RM.cdd_list.txt
 
 source deactivate
-#source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
-# scan output (robustTE_RepeatMaskerOut/GENOME.fasta.out) for HMM PFAM profile domains using pfam_scan.pl
+source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
+# scan RepeatMasker fasta file ($GENOME.RM.fasta) for PFAM profile domains using pfam_scan.pl
+pfam_scan.pl -fasta $GENOME.RM.fasta -dir PFAM_files/PFAM_lib -e_dom 0.01 -e_seq 0.01 -translate all -outfile $GENOME.RM.pfam.out
 
-#source deactivate
+# parse pfam_scan.pl output into a text file list of elements and their domains (pfam_LIB_list.txt)
+cat $GENOME.RM.pfam.out | python KVKLab/Phase1/parse_pfam.py > $GENOME.RM.pfam_list.txt
+
+source deactivate
