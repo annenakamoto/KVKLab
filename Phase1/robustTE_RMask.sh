@@ -18,7 +18,7 @@ GENOME=$1
 
 # scan output (robustTE_RepeatMaskerOut/$GENOME.fasta.out) for CDD profile domains using RPS-BLAST
 awk -v OFS='\t' '$1 ~ /^[0-9]+$/ { print $5, $6, $7, $10 }' robustTE_RepeatMaskerOut/$GENOME.fasta.out > $GENOME.fasta.bed
-bedtools getfasta -fo $GENOME.RM.fasta -name -fi hq_genomes/$GENOME.fasta -bed $GENOME.fasta.bed
+bedtools getfasta -fo $GENOME.RM.fasta -name+ -fi hq_genomes/$GENOME.fasta -bed $GENOME.fasta.bed
 
 
 source deactivate
