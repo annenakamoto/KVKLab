@@ -3,7 +3,7 @@ import sys
 Elements = {}
 for line in sys.stdin:
     words = str(line).split()
-    if len(words) > 0 and words[0] != "" and words[1] != "unique":
+    if len(words) == 1:
         first_word = words[0]
         name = first_word.split(":")
         in_dict = Elements.get(name[0])
