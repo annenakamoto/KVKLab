@@ -17,14 +17,14 @@ GENOME=$1
 #RepeatMasker -lib LIB_DOM.fasta -dir robustTE_RepeatMaskerOut -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
 
 # create fasta file of the RepeatMasker output, where the name of each entry is >name_of_element:start-end (in the genome)
-#awk -v OFS='\t' '$1 ~ /^[0-9]+$/ { print $5, $6, $7, $10 ":" $6 "-" $7 }' robustTE_RepeatMaskerOut/$GENOME.fasta.out > $GENOME.fasta.bed
-#bedtools getfasta -fo $GENOME.RM.fasta -name -fi hq_genomes/$GENOME.fasta -bed $GENOME.fasta.bed
+awk -v OFS='\t' '$1 ~ /^[0-9]+$/ { print $5, $6, $7, $10 ":" $5 ":" $6 "-" $7 }' robustTE_RepeatMaskerOut/$GENOME.fasta.out > $GENOME.fasta.bed
+bedtools getfasta -fo $GENOME.RM.fasta -name -fi hq_genomes/$GENOME.fasta -bed $GENOME.fasta.bed
 
 # scan RepeatMasker fasta file ($GENOME.RM.fasta) for CDD profile domains using RPS-BLAST
-#rpstblastn -query $GENOME.RM.fasta -db CDD_Profiles/CDD_lib -out $GENOME.RM.cdd.out -evalue 0.001 -outfmt 6
+rpstblastn -query $GENOME.RM.fasta -db CDD_Profiles/CDD_lib -out $GENOME.RM.cdd.out -evalue 0.001 -outfmt 6
 
 # parse rpsblast output into a text file list of elements and their domains ($GENOME.RM.cdd_list.txt)
-#cat $GENOME.RM.cdd.out | python KVKLab/Phase1/parse_cdd.py > $GENOME.RM.cdd_list.txt
+cat $GENOME.RM.cdd.out | python KVKLab/Phase1/parse_cdd.py > $GENOME.RM.cdd_list.txt
 
 source deactivate
 source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
