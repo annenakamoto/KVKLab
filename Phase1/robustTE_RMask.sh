@@ -35,8 +35,9 @@ source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 #cat $GENOME.RM.pfam.out | python KVKLab/Phase1/parse_pfam.py > $GENOME.RM.pfam_list.txt
 
 # merge cdd and pfam lists into one list
-cat $GENOME.RM.cdd_list.txt $GENOME.RM.pfam_list.txt | python KVKLab/Phase1/parse_cddpfam.py > $GENOME.RM.uniq.txt
+#cat $GENOME.RM.cdd_list.txt $GENOME.RM.pfam_list.txt | python KVKLab/Phase1/parse_cddpfam.py > $GENOME.RM.uniq.txt
 
 # count the number of each element
+cat $GENOME.RM.uniq.txt | python KVKLab/Phase1/count_elems.py > $GENOME.data.txt
 
 source deactivate
