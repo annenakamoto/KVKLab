@@ -14,5 +14,9 @@ for line in sys.stdin:
 
 print(len(Elements), " unique elements.\n")
 
+total = 0
 for elem, count in Elements.items():
     print(elem, "\t", count)
+    total += count
+
+print(total, " total elements.\n")
