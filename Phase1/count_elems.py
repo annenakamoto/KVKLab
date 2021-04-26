@@ -8,7 +8,7 @@ for line in sys.stdin:
         name = first_word.split(":")
         in_dict = Elements.get(name[0])
         if in_dict:
-            in_dict += 1
+            Elements[name[0]] += 1
         else:
             Elements[name[0]] = 1
 
