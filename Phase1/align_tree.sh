@@ -14,4 +14,4 @@ cd /global/scratch/users/annen/
 muscle -in LIB_DOM.fasta -out LIB_DOM_align.fasta
 
 # generate tree using RAXML
-
+raxml -s LIB_DOM_align.fasta -n raxml -m GTRCAT -f a -x 1123 -p 2341 -# 100
