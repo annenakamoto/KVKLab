@@ -11,7 +11,7 @@
 cd /global/scratch/users/annen/
 
 # produce alignment of all the elements in LIB_DOM.fasta
-muscle -in LIB_DOM.fasta > LIB_DOM_align.fasta
+muscle -in LIB_DOM.fasta -maxiters 2 > LIB_DOM_align.fasta
 
 # generate tree using RAXML
 raxml -s LIB_DOM_align.fasta -n raxml -m GTRCAT -f a -x 1123 -p 2341 -# 100
