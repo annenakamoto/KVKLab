@@ -8,12 +8,18 @@
 #SBATCH --time=24:00:00
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
-cd /global/scratch/users/annen/DeepTE-master
 
-source activate /global/scratch/users/annen/anaconda3/envs/DeepTE
+#cd /global/scratch/users/annen/DeepTE-master
+#source activate /global/scratch/users/annen/anaconda3/envs/DeepTE
 
-./DeepTE.py -i LIB_DOM.fasta -sp F -m F -prop_thr 0.9
+#./DeepTE.py -i LIB_DOM.fasta -sp F -m F -prop_thr 0.9
 
+#source deactivate
+
+cd /global/scratch/users/annen
+source activate /global/scratch/users/annen/anaconda3/envs/MeShClust
+
+meshclust LIB_DOM.fasta --id 0.80 --output LIB_DOM.clstr
 
 source deactivate
 
