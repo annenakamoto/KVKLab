@@ -19,7 +19,7 @@
 cd /global/scratch/users/annen
 source activate /global/scratch/users/annen/anaconda3/envs/MeShClust
 
-meshclust LIB_DOM.fasta --id 0.80 --output LIB_DOM.clstr
+meshclust LIB_DOM.fasta --id 0.80 --output LIB_DOM.clstr --delta 5 --iterations 20 --sample 3000
 
 source deactivate
 
