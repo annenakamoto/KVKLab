@@ -12,7 +12,7 @@ cd /global/scratch/users/annen/DeepTE-master
 
 source activate /global/scratch/users/annen/anaconda3/envs/DeepTE
 
-./DeepTE.py -i LIB_DOM.fasta -sp F -m F
+./DeepTE.py -i LIB_DOM.fasta -sp F -m F -prop_thr 0.9
 
 
 source deactivate
