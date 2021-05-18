@@ -8,7 +8,7 @@
 #SBATCH --time=24:00:00
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
-cd /global/scratch/users/annen/
+cd /global/scratch/users/annen/DeepTE-master
 
 source activate /global/scratch/users/annen/anaconda3/envs/DeepTE
 
