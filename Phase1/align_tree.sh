@@ -17,11 +17,8 @@
 #source deactivate
 
 cd /global/scratch/users/annen
-source activate /global/scratch/users/annen/anaconda3/envs/MeShClust
 
-meshclust LIB_DOM.fasta --id 0.80 --output LIB_DOM.clstr --delta 5 --iterations 20 --sample 3000
-
-source deactivate
+MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta --id 0.80 --output LIB_DOM.clstr --iterations 20 --sample 3000
 
 # produce alignment of all the elements in LIB_DOM.fasta
 #muscle -in LIB_DOM.fasta -maxiters 2 > LIB_DOM_align.fasta
