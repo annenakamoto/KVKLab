@@ -18,7 +18,7 @@
 
 cd /global/scratch/users/annen
 
-MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta --id 0.80 --output LIB_DOM.clstr --iterations 20 --sample 3000
+MeShClust/MeShClust-1.0.0/bin/meshclust References/fngrep.fasta --id 0.80 --output LIB_DOM.clstr --iterations 20 --sample 3000
 
 # produce alignment of all the elements in LIB_DOM.fasta
 #muscle -in LIB_DOM.fasta -maxiters 2 > LIB_DOM_align.fasta
