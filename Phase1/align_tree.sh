@@ -9,16 +9,16 @@
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
-cd /global/scratch/users/annen/DeepTE-master
-source activate /global/scratch/users/annen/anaconda3/envs/DeepTE
+#cd /global/scratch/users/annen/DeepTE-master
+#source activate /global/scratch/users/annen/anaconda3/envs/DeepTE
 
-./DeepTE.py -i fngrep.fasta -sp F -m F #-prop_thr 0.9
+#./DeepTE.py -i fngrep.fasta -sp F -m F #-prop_thr 0.9
 
-source deactivate
+#source deactivate
 
-#cd /global/scratch/users/annen
+cd /global/scratch/users/annen
 
-#MeShClust/MeShClust-1.0.0/bin/meshclust References/fngrep.fasta --id 0.80 --output fngrep.clstr
+MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta --id 0.90 --output LIB_DOM.clstr
 
 # produce alignment of all the elements in LIB_DOM.fasta
 #muscle -in LIB_DOM.fasta -maxiters 2 > LIB_DOM_align.fasta
