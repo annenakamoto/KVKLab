@@ -9,7 +9,7 @@
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
-cd /global/scratch/users/annen
+cd /global/scratch/users/annen/DeepTE-master
 source activate /global/scratch/users/annen/anaconda3/envs/DeepTE
 
 ./DeepTE.py -i fngrep.fasta -sp F -m F #-prop_thr 0.9
