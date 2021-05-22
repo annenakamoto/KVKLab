@@ -11,10 +11,12 @@
 cd /global/scratch/users/annen/
 source activate /global/scratch/users/annen/anaconda3/envs/BUSCO
 
-while read GENOME; do
+#while read GENOME; do
     
-    busco -i hq_genomes/$GENOME.fasta -l fungi_odb10 -o busco_$GENOME -m genome -c 24 -f --out_path BUSCO_out
+#    busco -i hq_genomes/$GENOME.fasta -l fungi_odb10 -o busco_$GENOME -m genome -c 24 -f --out_path BUSCO_out
 
-done < KVKLab/Phase1/robustTE_pipe_in.txt
+#done < KVKLab/Phase1/robustTE_pipe_in.txt
+
+python3 generate_plot.py -wd BUSCO_sum
 
 source deactivate
