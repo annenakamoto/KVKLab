@@ -17,6 +17,6 @@ source activate /global/scratch/users/annen/anaconda3/envs/BUSCO
 
 #done < KVKLab/Phase1/robustTE_pipe_in.txt
 
-python3 generate_plot.py -wd BUSCO_sum
+python3 anaconda3/envs/BUSCO/bingenerate_plot.py -wd BUSCO_sum
 
 source deactivate
