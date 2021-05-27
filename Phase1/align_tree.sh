@@ -18,7 +18,13 @@
 
 cd /global/scratch/users/annen
 
-MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta --id 0.50 --delta 10 --output LIB_DOM.clstr --threads 24 --align
+#MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta --id 0.50 --delta 10 --output LIB_DOM.clstr --threads 24 --align
+
+source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
+
+RepeatClassifier -consensi LIB_DOM.fasta
+
+source deactivate
 
 # produce alignment of all the elements in LIB_DOM.fasta
 #muscle -in LIB_DOM.fasta -maxiters 2 > LIB_DOM_align.fasta
