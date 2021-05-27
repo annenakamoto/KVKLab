@@ -11,6 +11,6 @@
 cd /global/scratch/users/annen/
 source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 
-cat LIB_DOM.fasta | python KVKLab/Phase1/parse_classifyTEs.py > unique_classifications_RC.txt
+cat LIB_DOM.fasta.classified | python KVKLab/Phase1/parse_classifyTEs.py > unique_classifications_RC.txt
 
 source deactivate
