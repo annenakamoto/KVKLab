@@ -4,7 +4,7 @@ ClassFam = {}
 pound = "#"
 for line in sys.stdin:
     if pound in line:
-        classification = line.split("#")[1]
+        classification = (line.split("#")[1]).split()[0]
         in_dict = ClassFam.get(classification)
         if not in_dict:
             ClassFam[classification] = 1

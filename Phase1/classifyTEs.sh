@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=Robust_TE_library
-#SBATCH --account=fc_kvkallow
+#SBATCH --account=ac_kvkallow
 #SBATCH --partition=savio2
 #SBATCH --qos=savio_normal
 #SBATCH --nodes=1
