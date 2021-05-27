@@ -18,7 +18,7 @@
 
 cd /global/scratch/users/annen
 
-MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta --id 0.45 --delta 10 --output LIB_DOM.clstr --threads 24 --align
+MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta --id 0.47 --delta 10 --output LIB_DOM.clstr --threads 24 --align
 
 #source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 
