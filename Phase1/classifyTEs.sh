@@ -9,5 +9,8 @@
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 cd /global/scratch/users/annen/
+source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 
 cat LIB_DOM.fasta | python KVKLab/Phase1/parse_classifyTEs.py > unique_classifications_RC.txt
+
+source deactivate
