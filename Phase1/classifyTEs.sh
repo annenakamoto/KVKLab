@@ -11,7 +11,7 @@ cd /global/scratch/users/annen/
 source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 
 # find clusters for general classification at 50% identity level
-MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta.classified --id 0.50 --delta 10 --output LIB_DOM_50.clstr --threads 24 --align
+#MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta.classified --id 0.50 --delta 10 --output LIB_DOM_50.clstr --threads 24 --align
 
 # finds the classification for each cluster
 cat LIB_DOM_50.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_50.txt
