@@ -30,7 +30,6 @@ print(conflict, "conflicts out of", lib_len, "elements in library")
 
 # print the cluster number and classifications in number order
 for i in range(0, len(ClustClass)):
-    if ClustClass.get(i):
-        print(i, "\t", ", ".join(ClustClass[i]))
+    print(i, "\t", ", ".join(ClustClass[str(i)]))
 
 # write new library to LIB_CLASS.fasta (adding in classifications for each cluster and with unclassified elements removed)
