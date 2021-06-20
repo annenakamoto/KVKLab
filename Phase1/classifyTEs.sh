@@ -13,15 +13,17 @@ source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 # find clusters for general classification at 50% identity level
 #MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta.classified --id 0.50 --delta 10 --output LIB_DOM_50.clstr --threads 24 --align
 #MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta.classified --id 0.60 --delta 10 --output LIB_DOM_60.clstr --threads 24 --align
-MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta.classified --id 0.68 --delta 10 --output LIB_DOM_68.clstr --threads 24 --align
+#MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta.classified --id 0.68 --delta 10 --output LIB_DOM_68.clstr --threads 24 --align
 #MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta.classified --id 0.70 --delta 10 --output LIB_DOM_70.clstr --threads 24 --align
 #MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta.classified --id 0.80 --delta 10 --output LIB_DOM_80.clstr --threads 24 --align
+MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta.classified --id 0.85 --delta 10 --output LIB_DOM_85.clstr --threads 24 --align
 
 # finds the classification for each cluster
 #cat LIB_DOM_50.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_50.txt
 #cat LIB_DOM_60.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_60.txt
-cat LIB_DOM_68.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_68.txt
+#cat LIB_DOM_68.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_68.txt
 #cat LIB_DOM_70.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_70.txt
 #cat LIB_DOM_80.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_80.txt
+cat LIB_DOM_85.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_85.txt
 
 source deactivate

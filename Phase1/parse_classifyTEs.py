@@ -62,7 +62,7 @@ for clust, classif in ClustClass.items():
         classif.add("REMOVE")
     if len(classif) > 1:
         conflict += 1
-print(conflict, "conflicts out of", lib_len, "elements in library")
+print(conflict, "conflicts out of", lib_len, "clusters in library")
 
 # print the cluster number and classifications in number order
 for i in range(0, len(ClustClass)):
