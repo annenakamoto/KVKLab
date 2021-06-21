@@ -33,23 +33,29 @@ Translate = {
 
 
 # make a dictionary of each cluster and its classification
-ClustClass = {}
-curClust = -1
+ClustClass = {}     # dictionary containing cluster number (key) and set of classifications (value)
+curClust = -1       # the current cluster number
+countRB = [0] * 5000        # list where index is cluster number and value is number of RepBase elements in the cluster
 
 for line in sys.stdin:
     lst = line.split()
     if lst[0] == ">Cluster":
-        curClust = lst[1]
-        ClustClass[lst[1]] = set()
+        curClust = int(lst[1])
+        ClustClass[curClust] = set()
+        countRB[curClust] = 0
     if "#" in line:
         classification = (line.split("#")[1]).split()[0]
-        if lst[3] and Translate.get(lst[3]):
-            if "Unknown" in classification:
-                ClustClass[curClust].add(Translate[lst[3]])   # change later to add the RepeatClassifier class instead of the RepBase class, after looking at output
+        if lst[3] and Translate.get(lst[3]):    # element is from RepBase
+            countRB[curClust] += 1
+            if "Unknown" in classification:     # element is an unclassified RepBase element
+                ClustClass[curClust].add(Translate[lst[3]])
             else:
-                ClustClass[curClust].add(classification)
-                if Translate.get(lst[3]) != classification:   
-                    print("RepeatClassifier was incorrect at: ", line)
+                if Translate.get(lst[3]) != classification:   # handle cases where RepeatClassifier incorrectly classified a RepBase element
+                    ClustClass[curClust].add(Translate[lst[3]])
+                else:
+                    ClustClass[curClust].add(classification)
+        elif "/Unknown" in classification:
+            ClustClass[curClust].add(classification.split("/")[0])
         elif classification != "Simple_repeat" and classification != "Unknown":
             ClustClass[curClust].add(classification)
 
@@ -61,11 +67,18 @@ for clust, classif in ClustClass.items():
     if len(classif) == 0:
         classif.add("REMOVE")
     if len(classif) > 1:
-        conflict += 1
+        if "LTR" in classif or "DNA" in classif or "LINE" in classif:
+            classif.discard("LTR")
+            classif.discard("DNA")
+            classif.discard("LINE")
+        else:
+            conflict += 1
+    if countRB[clust] > 1:
+        print("Cluster", clust, "has", countRB[clust], "RepBase elements")
 print(conflict, "conflicts out of", lib_len, "clusters in library")
 
 # print the cluster number and classifications in number order
 for i in range(0, len(ClustClass)):
-    print(i, "\t", ", ".join(ClustClass[str(i)]))
+    print(i, "\t", ", ".join(ClustClass[i]))
 
 # write new library to LIB_CLASS.fasta (adding in classifications for each cluster and with unclassified elements removed)
