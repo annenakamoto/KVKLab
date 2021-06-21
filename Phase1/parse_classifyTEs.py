@@ -71,6 +71,8 @@ for clust, classif in ClustClass.items():
             classif.discard("LTR")
             classif.discard("DNA")
             classif.discard("LINE")
+            if len(classif) > 1:
+                conflict += 1
         else:
             conflict += 1
     if countRB[clust] > 1:
