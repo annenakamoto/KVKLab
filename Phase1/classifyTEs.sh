@@ -18,14 +18,18 @@ source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 #MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta.classified --id 0.70 --delta 10 --output LIB_DOM_70.clstr --threads 24 --align
 #MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta.classified --id 0.80 --delta 10 --output LIB_DOM_80.clstr --threads 24 --align
 #MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta.classified --id 0.85 --delta 10 --output LIB_DOM_85.clstr --threads 24 --align
+MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta.classified --id 0.90 --delta 10 --output LIB_DOM_90.clstr --threads 24 --align
+#MeShClust/MeShClust-1.0.0/bin/meshclust LIB_DOM.fasta.classified --id 0.95 --delta 10 --output LIB_DOM_95.clstr --threads 24 --align
 
 # finds the classification for each cluster
-cat LIB_DOM_50.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_50.txt
-cat LIB_DOM_60.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_60.txt
-cat LIB_DOM_65.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_65.txt
-cat LIB_DOM_68.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_68.txt
-cat LIB_DOM_70.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_70.txt
-cat LIB_DOM_80.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_80.txt
-cat LIB_DOM_85.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_85.txt
+#cat LIB_DOM_50.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_50.txt
+#cat LIB_DOM_60.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_60.txt
+#cat LIB_DOM_65.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_65.txt
+#cat LIB_DOM_68.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_68.txt
+#cat LIB_DOM_70.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_70.txt
+#cat LIB_DOM_80.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_80.txt
+#cat LIB_DOM_85.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_85.txt
+cat LIB_DOM_90.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_90.txt
+#cat LIB_DOM_95.clstr | python KVKLab/Phase1/parse_classifyTEs.py > clust_class_95.txt
 
 source deactivate
