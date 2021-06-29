@@ -8,20 +8,20 @@
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
-cd /global/scratch/users/annen/CDD_Profiles
+#cd /global/scratch/users/annen/CDD_Profiles
 
-echo "" > cdd_NAMES.txt
-while read acc; do
-acc2=${acc%.smp}
-echo $acc2
-grep -i -m 1 $acc2 cdd.versions | awk '{ print "CDD:" $3, $2 }' >> cdd_NAMES.txt
-done < CDD_profiles_acc.pn
+#echo "" > cdd_NAMES.txt
+#while read acc; do
+#acc2=${acc%.smp}
+#echo $acc2
+#grep -i -m 1 $acc2 cdd.versions | awk '{ print "CDD:" $3, $2 }' >> cdd_NAMES.txt
+#done < CDD_profiles_acc.pn
 
 cd /global/scratch/users/annen/
 
 
 # Translate CDD accession output into domain names
-#cat cdd_LIB_list.txt | python KVKLab/Phase1/cdd_to_name.py > cdd_LIB_list_N.txt
+cat cdd_LIB_list.txt | python KVKLab/Phase1/cdd_to_name.py > cdd_LIB_list_N.txt
 #echo "python finished"
 
 # group TEs by the domains they contain
