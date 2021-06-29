@@ -11,7 +11,8 @@
 cd /global/scratch/users/annen/CDD_Profiles
 while read acc; do
     acc2=${acc%.smp}
-    grep -m 1 acc2 cdd.versions | awk '{ print "CDD:" $3, $2 }' >> cdd_NAMES.txt
+    echo $acc2
+    grep -m 1 $acc2 cdd.versions | awk '{ print "CDD:" $3, $2 }' >> cdd_NAMES.txt
 done < CDD_profiles_acc.pn
 
 cd /global/scratch/users/annen/
