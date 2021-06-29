@@ -7,14 +7,15 @@ all_elems = set()
 
 for line in sys.stdin:
     lst = line.split()
-    all_elems.add(lst[0])
-    for i in range(1, len(lst)):
-        dom = DOMAINS.get(lst[i].replace(",", ""))
-        if dom:
-            dom.add(lst[0])
-        else:
-            DOMAINS[lst[i].replace(",", "")] = set()
-            DOMAINS[lst[i].replace(",", "")].add(lst[0])
+    if len(lst) > 0:
+        all_elems.add(lst[0])
+        for i in range(1, len(lst)):
+            dom = DOMAINS.get(lst[i].replace(",", ""))
+            if dom:
+                dom.add(lst[0])
+            else:
+                DOMAINS[lst[i].replace(",", "")] = set()
+                DOMAINS[lst[i].replace(",", "")].add(lst[0])
 
 for dom in sorted(DOMAINS.keys()):
     print(dom, len(DOMAINS[dom]))
