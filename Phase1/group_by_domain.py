@@ -19,4 +19,4 @@ for line in sys.stdin:
 
 # print the domains in order from present in the most TEs to present in the least
 for dom in sorted(DOMAINS.keys(), key=lambda x: len(DOMAINS[x]), reverse=True):
-    print(dom, len(DOMAINS[dom]))
+    print(dom, "\t", len(DOMAINS[dom]))
