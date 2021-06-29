@@ -207,5 +207,7 @@ for line in sys.stdin:
     if len(lst) > 1 and lst[1] != "unique":
         domains = list()
         for i in range(1, len(lst)):
-            domains.append(CDD_TO_NAME.get(lst[i][:-1]))
+            dom = CDD_TO_NAME.get(lst[i][:-1])
+            if dom:
+                domains.append(dom)
         print(lst[0], ", ".join(domains))
