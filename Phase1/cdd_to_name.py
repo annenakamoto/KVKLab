@@ -204,7 +204,7 @@ CDD_TO_NAME = {
 
 for line in sys.stdin:
     lst = line.split()
-    if lst[1] != "unique" and len(lst) > 1:
+    if len(lst) > 1 and lst[1] != "unique":
         domains = list()
         for i in range(1, len(lst)):
             domains.append(CDD_TO_NAME[lst[i][:-1]])
