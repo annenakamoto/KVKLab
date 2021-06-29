@@ -9,10 +9,12 @@
 #SBATCH --mail-type=ALL
 
 cd /global/scratch/users/annen/CDD_Profiles
+
+echo "" > cdd_NAMES.txt
 while read acc; do
-    acc2=${acc%.smp}
-    echo $acc
-    grep -i -m 1 $acc2 cdd.versions | awk '{ print "CDD:" $3, $2 }' >> cdd_NAMES.txt
+acc2=${acc%.smp}
+echo $acc2
+grep -i -m 1 $acc2 cdd.versions | awk '{ print "CDD:" $3, $2 }' >> cdd_NAMES.txt
 done < CDD_profiles_acc.pn
 
 cd /global/scratch/users/annen/
