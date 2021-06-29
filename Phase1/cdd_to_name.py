@@ -155,4 +155,4 @@ for line in sys.stdin:
                 domains.append(dom)
             else:
                 domains.append("MIA")
-        print(lst[0], ", ".join(domains))
+        print(lst[0], "\t", ", ".join(domains))
