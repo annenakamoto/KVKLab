@@ -210,4 +210,6 @@ for line in sys.stdin:
             dom = CDD_TO_NAME.get(lst[i][:-1])
             if dom:
                 domains.append(dom)
+            else:
+                domains.append("MIA")
         print(lst[0], ", ".join(domains))
