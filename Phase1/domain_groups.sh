@@ -13,5 +13,7 @@ source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 # Translate CDD accession output into domain names
 cat cdd_LIB_list.txt | python KVKLab/Phase1/cdd_to_name.py > cdd_LIB_list_N.txt
 
+# group TEs by the domains they contain
+#cat pfam_LIB_list.txt cdd_LIB_list_N.txt | python KVKLab/Phase1/group_by_domain.py > domain_groups_LIB.txt
 
-
+source deactivate
