@@ -10,6 +10,7 @@
 
 #cd /global/scratch/users/annen/CDD_Profiles
 
+# make library of cdd accessions to domain name
 #echo "" > cdd_NAMES.txt
 #while read acc; do
 #acc2=${acc%.smp}
@@ -19,11 +20,9 @@
 
 cd /global/scratch/users/annen/
 
-
 # Translate CDD accession output into domain names
-cat cdd_LIB_list.txt | python KVKLab/Phase1/cdd_to_name.py > cdd_LIB_list_N.txt
-#echo "python finished"
+#cat cdd_LIB_list.txt | python KVKLab/Phase1/cdd_to_name.py > cdd_LIB_list_N.txt
 
 # group TEs by the domains they contain
-#cat pfam_LIB_list.txt cdd_LIB_list_N.txt | python KVKLab/Phase1/group_by_domain.py > domain_groups_LIB.txt
+cat pfam_LIB_list.txt cdd_LIB_list_N.txt | python KVKLab/Phase1/group_by_domain.py > domain_groups_LIB.txt
 
