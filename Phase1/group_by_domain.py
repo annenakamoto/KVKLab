@@ -17,6 +17,8 @@ for line in sys.stdin:
                 DOMAINS[lst[i].replace(",", "")] = set()
                 DOMAINS[lst[i].replace(",", "")].add(lst[0])
 
+print("There are", len(all_elems), "total elements.")
+
 # print the domains in order from present in the most TEs to present in the least
 for dom in sorted(DOMAINS.keys(), key=lambda x: len(DOMAINS[x]), reverse=True):
     print(dom, "\t", len(DOMAINS[dom]))
