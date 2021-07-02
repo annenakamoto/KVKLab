@@ -37,6 +37,8 @@ for dom in SORTED_D:
             print("Covered all elements.")
             break
 
+print("Intersection between RVT_1 and DDE_1:", DOMAINS["RVT_1"].intersection(DOMAINS["DDE_1"]))
+
 print("Set of domains s.t. every element contains at least one:")
 for dom in sorted(COVER.keys(), key=lambda x: COVER[x]):
     print(dom, "\t", COVER[dom], "%")
