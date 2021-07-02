@@ -22,8 +22,8 @@ print("There are", len(all_elems), "total elements.")
 SORTED_D = sorted(DOMAINS.keys(), key=lambda x: len(DOMAINS[x]), reverse=True)
 
 # print the domains in order from present in the most TEs to present in the least
-for dom in SORTED_D:
-    print(dom, "\t", len(DOMAINS[dom]))
+#for dom in SORTED_D:
+    #print(dom, "\t", len(DOMAINS[dom]))
 
 # find the set of domains s.t. every element contains at least one
 uni = set()
@@ -37,8 +37,16 @@ for dom in SORTED_D:
             print("Covered all elements.")
             break
 
-print("Intersection between RVT_1 and DDE_1:", DOMAINS["RVT_1"].intersection(DOMAINS["DDE_1"]))
+#print("Intersection between RVT_1 and DDE_1:", DOMAINS["RVT_1"].intersection(DOMAINS["DDE_1"]))
 
-print("Set of domains s.t. every element contains at least one:")
-for dom in sorted(COVER.keys(), key=lambda x: COVER[x]):
-    print(dom, "\t", COVER[dom], "%")
+#print("Set of domains s.t. every element contains at least one:")
+#for dom in sorted(COVER.keys(), key=lambda x: COVER[x]):
+    #print(dom, "\t", COVER[dom], "%")
+
+print("\n** LIST OF TEs THAT CONATIN EACH DOMAIN **\n")
+for dom in SORTED_D:
+    print(">", dom, "\t", len(DOMAINS[dom]))
+    n = 1
+    for elem in DOMAINS[dom]:
+        print(n, elem)
+        n += 1
