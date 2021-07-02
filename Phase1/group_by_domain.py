@@ -25,7 +25,7 @@ SORTED_D = sorted(DOMAINS.keys(), key=lambda x: len(DOMAINS[x]), reverse=True)
 for dom in SORTED_D:
     print(dom, "\t", len(DOMAINS[dom]))
 
-# find the set of domains s.t. every element contains at least one (NOT CORRECT YET)
+# find the set of domains s.t. every element contains at least one
 uni = set()
 cover = list()
 for dom in SORTED_D:
@@ -34,5 +34,9 @@ for dom in SORTED_D:
         uni = tmp
         cover.append(dom)
         if uni == all_elems:
+            print("Covered all elements.")
             break
-print("Set of domains s.t. every element contains at least one:", ", ".join(cover))
+
+print("Set of domains s.t. every element contains at least one:")
+for dom in cover:
+    print(dom)
