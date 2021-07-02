@@ -29,8 +29,10 @@ for dom in SORTED_D:
 uni = set()
 cover = list()
 for dom in SORTED_D:
-    uni.union(DOMAINS[dom])
-    cover.append(dom)
-    if uni == all_elems:
-        break
+    if not DOMAINS[dom].issubset(uni):
+        tmp = uni.union(DOMAINS[dom])
+        uni = tmp
+        cover.append(dom)
+        if uni == all_elems:
+            break
 print("Set of domains s.t. every element contains at least one:", ", ".join(cover))
