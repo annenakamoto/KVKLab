@@ -27,16 +27,16 @@ for dom in SORTED_D:
 
 # find the set of domains s.t. every element contains at least one
 uni = set()
-cover = list()
+COVER = {}
 for dom in SORTED_D:
     if not DOMAINS[dom].issubset(uni):
         tmp = uni.union(DOMAINS[dom])
         uni = tmp
-        cover.append(dom)
+        COVER[dom] = (len(uni) / len(all_elems)) * 100.00
         if uni == all_elems:
             print("Covered all elements.")
             break
 
 print("Set of domains s.t. every element contains at least one:")
-for dom in cover:
-    print(dom)
+for dom in sorted(COVER.keys(), key=lambda x: COVER[x]):
+    print(dom, "\t", COVER[dom], "%")
