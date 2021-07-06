@@ -30,6 +30,13 @@ cat pfam_LIB_list.txt cdd_LIB_list_N.txt | python KVKLab/Phase1/group_by_domain.
 cd /global/scratch/users/annen/PFAM_files
 echo "" > PFAM_domains_specific.txt
 
+# get the specific accession numbers
+while read acc; do
+grep $acc Pfam-A.hmm | awk '{ print $2 }' >> PFAM_domains_specific.txt
+done < PFAM_domains.txt
+
+echo "" > PFAM_name_acc.txt
+
 # get the specific accession numbers and the name
 while read acc; do
 grep -B 1 $acc Pfam-A.hmm | awk '{ print $2 }' >> PFAM_name_acc.txt
