@@ -26,3 +26,13 @@ cd /global/scratch/users/annen/
 # group TEs by the domains they contain
 cat pfam_LIB_list.txt cdd_LIB_list_N.txt | python KVKLab/Phase1/group_by_domain.py > domain_groups_LIB.txt
 
+
+cd /global/scratch/users/annen/PFAM_files
+echo "" > PFAM_domains_specific.txt
+
+# get the specific accession numbers and the name
+while read acc; do
+grep -B 1 $acc Pfam-A.hmm | awk '{ print $2 }' >> PFAM_name_acc.txt
+done < PFAM_domains_specific.txt
+
+#hmmfetch -o PFAM_lib/Pfam-A.hmm -f Pfam-A.hmm PFAM_domains_specific.txt
