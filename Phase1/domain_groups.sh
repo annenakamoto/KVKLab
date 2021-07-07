@@ -39,7 +39,7 @@ cd /global/scratch/users/annen/PFAM_files
 # get just RVT_3 to practice
 hmmfetch -o RVT_3.hmm Pfam-A.hmm PF13456.8
 echo "fetched RVT_3.hmm"
-hmmalign -o RVT_3_align.sto RVT_3.hmm /global/scratch/users/annen/LIB_DOM.fasta.classified
+hmmalign --dna --informat fasta -o RVT_3_align.sto RVT_3.hmm /global/scratch/users/annen/LIB_DOM.fasta.classified
 echo "aligned RVT_3.hmm to TEs with this domain"
 
 tr a-z - <RVT_3_align.sto >1.sto                                                         #converts lower case characters (insertions) to gaps
