@@ -44,8 +44,8 @@ hmmfetch -o RVT_1.hmm Pfam-A.hmm PF00078.29
 hmmfetch -o DDE_1.hmm Pfam-A.hmm PF03184.21
 echo "* fetched domains *"
 
-hmmalign --dna --informat fasta -o RVT_1_align.sto RVT_1.hmm /global/scratch/users/annen/LIB_DOM_class_clean.fasta
-hmmalign --dna --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM_class_clean.fasta
+hmmalign -o RVT_1_align.sto RVT_1.hmm /global/scratch/users/annen/LIB_DOM_class_clean.fasta
+hmmalign -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM_class_clean.fasta
 echo "aligned RVT_3.hmm to TEs with this domain"
 
 #tr a-z - <RVT_3_align.sto >1.sto                                                         #converts lower case characters (insertions) to gaps
