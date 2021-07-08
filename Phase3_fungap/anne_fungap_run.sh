@@ -13,7 +13,7 @@ date '+%d/%m/%Y %H:%M:%S' >> /Volumes/KVK_HD026/anne_fungap/run_tracker/${genome
 if [ ! -f ${1}/fungap_out/fungap_out/fungap_out.gff3 ]; then
   python /Users/pierrj/fungap_local/FunGAP/fungap.py \
     --output_dir fungap_out \
-    --trans_read_files /Volumes/KVK_HD026/anne_fungap/SRA/${lineage}_s.fastq
+    --trans_read_files /Volumes/KVK_HD026/anne_fungap/SRA/${lineage}_s.fastq \
     --genome_assembly ${genome}.fasta  \
     --augustus_species magnaporthe_grisea  \
     --sister_proteome /Users/pierrj/fungap_runs/guy11_template_run/prot_db.faa  \
