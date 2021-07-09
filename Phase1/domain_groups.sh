@@ -46,9 +46,9 @@ hmmfetch -o RVT_1.hmm Pfam-A.hmm PF00078.29
 hmmfetch -o DDE_1.hmm Pfam-A.hmm PF03184.21
 echo "* fetched domains *"
 
-hmmalign -m --informat fasta -o RVT_1_align.sto RVT_1.hmm /global/scratch/users/annen/LIB_DOM.fasta.classified
+hmmalign --informat fasta -o RVT_1_align.sto RVT_1.hmm /global/scratch/users/annen/LIB_DOM.fasta.classified
 echo "aligned RVT_1"
-hmmalign -m --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM.fasta.classified
+hmmalign --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM.fasta.classified
 echo "aligned DDE_1"
 
 #tr a-z - <RVT_3_align.sto >1.sto                                                         #converts lower case characters (insertions) to gaps
