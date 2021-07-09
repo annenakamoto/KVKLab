@@ -29,7 +29,7 @@ cd /global/scratch/users/annen/
 # remove text after the TE name from library
 #cat LIB_DOM.fasta.classified | python KVKLab/Phase1/clean_lib.py > LIB_DOM_class_clean.fasta
 source activate pfam_scan.pl
-translate -a -o LIB_DOM_trans.fasta.classified LIB_DOM.fasta.classified
+#translate -a -o LIB_DOM_trans.fasta.classified LIB_DOM.fasta.classified
 
 cd /global/scratch/users/annen/PFAM_files
 
@@ -43,14 +43,12 @@ cd /global/scratch/users/annen/PFAM_files
 
 # fetch top 2 domains: RVT_1 and DDE_1
 hmmfetch -o RVT_1.hmm Pfam-A.hmm PF00078.29
-hmmpress RVT_1.hmm
 hmmfetch -o DDE_1.hmm Pfam-A.hmm PF03184.21
-hmmpress DDE_1.hmm
-echo "* fetched and pressed domains *"
+echo "* fetched domains *"
 
-hmmalign --amino --informat fasta -o RVT_1_align.sto RVT_1.hmm /global/scratch/users/annen/LIB_DOM_trans.fasta.classified
+hmmalign -m --informat fasta -o RVT_1_align.sto RVT_1.hmm /global/scratch/users/annen/LIB_DOM.fasta.classified
 echo "aligned RVT_1"
-hmmalign --amino --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM_trans.fasta.classified
+hmmalign -m --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM.fasta.classified
 echo "aligned DDE_1"
 
 #tr a-z - <RVT_3_align.sto >1.sto                                                         #converts lower case characters (insertions) to gaps
