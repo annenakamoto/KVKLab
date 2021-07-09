@@ -46,12 +46,13 @@ hmmfetch -o RVT_1.hmm Pfam-A.hmm PF00078.29
 hmmfetch -o DDE_1.hmm Pfam-A.hmm PF03184.21
 echo "* fetched domains *"
 
-hmmalign --informat fasta -o RVT_1_align.sto RVT_1.hmm /global/scratch/users/annen/LIB_DOM.fasta.classified
+hmmalign --amino --informat fasta -o RVT_1_align.sto RVT_1.hmm /global/scratch/users/annen/LIB_DOM_trans.fasta.classified
 echo "aligned RVT_1"
-hmmalign --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM.fasta.classified
+hmmalign --amino --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM_trans.fasta.classified
 echo "aligned DDE_1"
 
-#tr a-z - <RVT_3_align.sto >1.sto                                                         #converts lower case characters (insertions) to gaps
+#tr a-z - <RVT_1_align.sto >1.sto                                                         #converts lower case characters (insertions) to gaps
+#tr a-z - <RVT_1_align.sto >1.sto 
 #echo "converted lower case characters (insertions) to gaps"
 #esl-reformat --mingap -o 2.fa afa 1.sto                                                     #removes all-gap columns so that the number of columns matches HMM length
 #echo "removed all-gap columns so that the number of columns matches HMM length"
