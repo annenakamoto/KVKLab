@@ -72,8 +72,8 @@ echo "reformatted to fasta"
 
 #mv 1.fa RVT_3_align.Matches.237min.fa
 
-raxml -T 24 -n Raxml.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_1_align.Matches.70min.fa.  #runs ML with Bailey et al parameters on 8 cores
-raxml -T 24 -n Raxml.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s DDE_1_align.Matches.70min.fa.
+raxml -T 24 -n Raxml.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_1_align.Matches.70min.fa  #runs ML with Bailey et al parameters on 8 cores
+raxml -T 24 -n Raxml.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s DDE_1_align.Matches.70min.fa
 echo "ran RAXML"
 
 conda deactivate
