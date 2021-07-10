@@ -26,5 +26,5 @@ for line in sys.stdin:
         te = lst[1].split(":")[0]
         prt = WITH_DOM.get(te)
     if prt:
-        print(line)
+        print(line[:-1])
         
