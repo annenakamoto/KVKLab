@@ -17,7 +17,7 @@ with open("domain_groups_LIB.txt", 'r') as lib:
         elif len(lst) > 0 and keep:
             WITH_DOM[lst[1]] = lst[0]
 
-assert len(WITH_DOM) == 0, "error: incorrect # TEs in lib"
+assert len(WITH_DOM) == lib_size, "error: incorrect # TEs in lib"
 
 prt = False
 for line in sys.stdin:
