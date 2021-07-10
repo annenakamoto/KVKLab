@@ -67,7 +67,7 @@ cd /global/scratch/users/annen/PFAM_files
 #echo "reformatted to fasta"
 
 raxml -T 24 -n Raxml_RVT_1.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_1_align.Matches.155min.fa  #runs ML with Bailey et al parameters on 8 cores
-echo "ran RAXML for RVT_1"
+echo "ran RAXML for RVT_1."
 #raxml -T 24 -n Raxml_DDE_1.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s DDE_1_align.Matches.122min.fa
 #echo "ran RAXML for DDE_1"
 
