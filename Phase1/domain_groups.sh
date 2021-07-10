@@ -26,7 +26,7 @@ cd /global/scratch/users/annen/
 # group TEs by the domains they contain
 #cat pfam_LIB_list.txt cdd_LIB_list_N.txt | python KVKLab/Phase1/group_by_domain.py > domain_groups_LIB.txt
 
-#source activate pfam_scan.pl
+source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 #translate -a -o LIB_DOM_trans.fasta.classified LIB_DOM.fasta.classified 
 cat LIB_DOM_trans.fasta.classified | python KVKLab/Phase1/dom_spec_lib.py RVT_1 > LIB_DOM_RVT_1.fasta
 cat LIB_DOM_trans.fasta.classified | python KVKLab/Phase1/dom_spec_lib.py DDE_1 > LIB_DOM_DDE_1.fasta
@@ -51,18 +51,26 @@ echo "aligned RVT_1"
 hmmalign --trim --amino --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM_DDE_1.fasta
 echo "aligned DDE_1"
 
-#tr a-z - <RVT_1_align.sto >1.sto                                                         #converts lower case characters (insertions) to gaps
-#tr a-z - <RVT_1_align.sto >1.sto 
-#echo "converted lower case characters (insertions) to gaps"
-#esl-reformat --mingap -o 2.fa afa 1.sto                                                     #removes all-gap columns so that the number of columns matches HMM length
-#echo "removed all-gap columns so that the number of columns matches HMM length"
+tr a-z - <RVT_1_align.sto >1r.sto                                                         #converts lower case characters (insertions) to gaps
+tr a-z - <DDE_1_align.sto >1d.sto 
+echo "converted lower case characters (insertions) to gaps"
+
+esl-reformat --mingap -o 2r.fa afa 1r.sto                                                     #removes all-gap columns so that the number of columns matches HMM length
+esl-reformat --mingap -o 2d.fa afa 1d.sto 
+echo "removed all-gap columns so that the number of columns matches HMM length"
+
 #cut -d '[' -f 1 2.fa| sed 's/>A--------/>Athaliana/g' > RVT_3_align.Matches.fa           #Shortens titles and restores gappy names
+
 #esl-alimanip -o 1.fa --lmin 237 RVT_3_align.Matches.fa                                   #Trims sequences at 237aa/seq minimum ~70% of the model
+
 #mv 1.fa RVT_3_align.Matches.237min.fa
+
 #esl-reformat -o 1.fa afa RVT_3_align.Matches.237min.fa                                   #reformats to fasta
 #echo "reformatted to fasta"
+
 #mv 1.fa RVT_3_align.Matches.237min.fa
+
 #raxml -T 24 -n Raxml.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_3_align.Matches.237min.fa.  #runs ML with Bailey et al parameters on 8 cores
 #echo "ran RAXML"
 
-#conda deactivate
+conda deactivate
