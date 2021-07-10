@@ -39,7 +39,7 @@ source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 # just guy11 library for comparison
 #MeShClust/MeShClust-1.0.0/bin/meshclust guy11_LIB.fasta --id 0.50 --delta 10 --output guy11_LIB_50.clstr --threads 24 --align
 #cat guy11_LIB_50.clstr | python KVKLab/Phase1/parse_classifyTEs.py > guy11_clust_class_50.txt
-MeShClust/MeShClust-1.0.0/bin/meshclust guy11_LIB.fasta --id 0.80 --delta 10 --output guy11_LIB_80.clstr --threads 24 --align
-cat guy11_LIB_80.clstr | python KVKLab/Phase1/parse_classifyTEs.py > guy11_clust_class_80.txt
+#MeShClust/MeShClust-1.0.0/bin/meshclust guy11_LIB.fasta --id 0.80 --delta 10 --output guy11_LIB_80.clstr --threads 24 --align
+#cat guy11_LIB_80.clstr | python KVKLab/Phase1/parse_classifyTEs.py > guy11_clust_class_80.txt
 
 source deactivate
