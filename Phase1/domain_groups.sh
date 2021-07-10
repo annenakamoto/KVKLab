@@ -28,8 +28,8 @@ cd /global/scratch/users/annen/
 
 source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 #translate -a -o LIB_DOM_trans.fasta.classified LIB_DOM.fasta.classified 
-cat LIB_DOM_trans.fasta.classified | python KVKLab/Phase1/dom_spec_lib.py RVT_1 > LIB_DOM_RVT_1.fasta
-cat LIB_DOM_trans.fasta.classified | python KVKLab/Phase1/dom_spec_lib.py DDE_1 > LIB_DOM_DDE_1.fasta
+#cat LIB_DOM_trans.fasta.classified | python KVKLab/Phase1/dom_spec_lib.py RVT_1 > LIB_DOM_RVT_1.fasta
+#cat LIB_DOM_trans.fasta.classified | python KVKLab/Phase1/dom_spec_lib.py DDE_1 > LIB_DOM_DDE_1.fasta
 
 cd /global/scratch/users/annen/PFAM_files
 
@@ -46,10 +46,10 @@ cd /global/scratch/users/annen/PFAM_files
 #hmmfetch -o DDE_1.hmm Pfam-A.hmm PF03184.21
 #echo "* fetched domains *"
 
-hmmalign --trim --amino --informat fasta -o RVT_1_align.sto RVT_1.hmm /global/scratch/users/annen/LIB_DOM_RVT_1.fasta
-echo "aligned RVT_1"
-hmmalign --trim --amino --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM_DDE_1.fasta
-echo "aligned DDE_1"
+#hmmalign --trim --amino --informat fasta -o RVT_1_align.sto RVT_1.hmm /global/scratch/users/annen/LIB_DOM_RVT_1.fasta
+#echo "aligned RVT_1"
+#hmmalign --trim --amino --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM_DDE_1.fasta
+#echo "aligned DDE_1"
 
 tr a-z - <RVT_1_align.sto >1r.sto                                                         #converts lower case characters (insertions) to gaps
 tr a-z - <DDE_1_align.sto >1d.sto 
