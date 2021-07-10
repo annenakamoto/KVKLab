@@ -51,8 +51,8 @@ cd /global/scratch/users/annen/PFAM_files
 #hmmalign --trim --amino --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM_DDE_1.fasta
 #echo "aligned DDE_1"
 
-awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' RVT_1_align.sto > 1r.sto    #converts lower case characters (insertions) to gaps w/o changing names
-awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' DDE_1_align.sto > 1d.sto
+tr \: \# <RVT_1_align.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > 1r.sto    #converts lower case characters (insertions) to gaps w/o changing names, and gets rid of ":" raxml illegal character
+tr \: \# <DDE_1_align.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > 1d.sto
 echo "converted lower case characters (insertions) to gaps"
 
 esl-reformat --mingap -o 2r.fa afa 1r.sto                                                     #removes all-gap columns so that the number of columns matches HMM length
