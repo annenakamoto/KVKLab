@@ -61,19 +61,19 @@ echo "removed all-gap columns so that the number of columns matches HMM length"
 
 #cut -d '[' -f 1 2.fa| sed 's/>A--------/>Athaliana/g' > RVT_3_align.Matches.fa           #Shortens titles and restores gappy names
 
-esl-alimanip -o 1r.fa --rffract 0.7 2r.fa                                   #Trims sequences at 237aa/seq minimum ~70% of the model
-esl-alimanip -o 1d.fa --rffract 0.7 2d.fa 
+esl-alimanip -o 1r.fa --lmin 155 2r.fa                                   #Trims sequences at minimum ~70% of the model
+esl-alimanip -o 1d.fa --lmin 122 2d.fa 
 
 #mv 1.fa RVT_3_align.Matches.237min.fa
 
-esl-reformat -o RVT_1_align.Matches.70min.fa afa 1r.fa                                   #reformats to fasta
-esl-reformat -o DDE_1_align.Matches.70min.fa afa 1d.fa  
+esl-reformat -o RVT_1_align.Matches.155min.fa afa 1r.fa                                   #reformats to fasta
+esl-reformat -o DDE_1_align.Matches.122min.fa afa 1d.fa  
 echo "reformatted to fasta"
 
 #mv 1.fa RVT_3_align.Matches.237min.fa
 
-raxml -T 24 -n Raxml.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_1_align.Matches.70min.fa  #runs ML with Bailey et al parameters on 8 cores
-raxml -T 24 -n Raxml.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s DDE_1_align.Matches.70min.fa
+raxml -T 24 -n Raxml.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_1_align.Matches.155min.fa  #runs ML with Bailey et al parameters on 8 cores
+raxml -T 24 -n Raxml.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s DDE_1_align.Matches.122min.fa
 echo "ran RAXML"
 
 conda deactivate
