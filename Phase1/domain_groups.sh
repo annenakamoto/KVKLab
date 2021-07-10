@@ -51,8 +51,8 @@ cd /global/scratch/users/annen/PFAM_files
 #hmmalign --trim --amino --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM_DDE_1.fasta
 #echo "aligned DDE_1"
 
-tr a-z - <RVT_1_align.sto >1r.sto                                                         #converts lower case characters (insertions) to gaps
-tr a-z - <DDE_1_align.sto >1d.sto 
+awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' RVT_1_align.sto > 1r.sto    #converts lower case characters (insertions) to gaps w/o changing names
+awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' DDE_1_align.sto > 1d.sto
 echo "converted lower case characters (insertions) to gaps"
 
 esl-reformat --mingap -o 2r.fa afa 1r.sto                                                     #removes all-gap columns so that the number of columns matches HMM length
@@ -61,16 +61,19 @@ echo "removed all-gap columns so that the number of columns matches HMM length"
 
 #cut -d '[' -f 1 2.fa| sed 's/>A--------/>Athaliana/g' > RVT_3_align.Matches.fa           #Shortens titles and restores gappy names
 
-#esl-alimanip -o 1.fa --lmin 237 RVT_3_align.Matches.fa                                   #Trims sequences at 237aa/seq minimum ~70% of the model
+esl-alimanip -o 1r.fa --lnfract 0.7 2r.fa                                   #Trims sequences at 237aa/seq minimum ~70% of the model
+esl-alimanip -o 1d.fa --lnfract 0.7 2d.fa 
 
 #mv 1.fa RVT_3_align.Matches.237min.fa
 
-#esl-reformat -o 1.fa afa RVT_3_align.Matches.237min.fa                                   #reformats to fasta
-#echo "reformatted to fasta"
+esl-reformat -o RVT_1_align.Matches.70min.fa afa 1r.fa                                   #reformats to fasta
+esl-reformat -o DDE_1_align.Matches.70min.fa afa 1d.fa  
+echo "reformatted to fasta"
 
 #mv 1.fa RVT_3_align.Matches.237min.fa
 
-#raxml -T 24 -n Raxml.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_3_align.Matches.237min.fa.  #runs ML with Bailey et al parameters on 8 cores
-#echo "ran RAXML"
+raxml -T 24 -n Raxml.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_1_align.Matches.70min.fa.  #runs ML with Bailey et al parameters on 8 cores
+raxml -T 24 -n Raxml.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s DDE_1_align.Matches.70min.fa.
+echo "ran RAXML"
 
 conda deactivate
