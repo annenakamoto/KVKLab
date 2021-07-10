@@ -26,7 +26,7 @@ cd /global/scratch/users/annen/
 # group TEs by the domains they contain
 #cat pfam_LIB_list.txt cdd_LIB_list_N.txt | python KVKLab/Phase1/group_by_domain.py > domain_groups_LIB.txt
 
-source activate pfam_scan.pl
+#source activate pfam_scan.pl
 #translate -a -o LIB_DOM_trans.fasta.classified LIB_DOM.fasta.classified 
 cat LIB_DOM_trans.fasta.classified | python KVKLab/Phase1/dom_spec_lib.py RVT_1 > LIB_DOM_RVT_1.fasta
 cat LIB_DOM_trans.fasta.classified | python KVKLab/Phase1/dom_spec_lib.py DDE_1 > LIB_DOM_DDE_1.fasta
@@ -65,4 +65,4 @@ cd /global/scratch/users/annen/PFAM_files
 #raxml -T 24 -n Raxml.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_3_align.Matches.237min.fa.  #runs ML with Bailey et al parameters on 8 cores
 #echo "ran RAXML"
 
-conda deactivate
+#conda deactivate
