@@ -51,29 +51,24 @@ cd /global/scratch/users/annen/PFAM_files
 #hmmalign --trim --amino --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM_DDE_1.fasta
 #echo "aligned DDE_1"
 
-tr \: \# <RVT_1_align.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > 1r.sto    #converts lower case characters (insertions) to gaps w/o changing names, and gets rid of ":" raxml illegal character
-tr \: \# <DDE_1_align.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > 1d.sto
-echo "converted lower case characters (insertions) to gaps"
+#tr \: \# <RVT_1_align.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > 1r.sto    #converts lower case characters (insertions) to gaps w/o changing names, and gets rid of ":" raxml illegal character
+#tr \: \# <DDE_1_align.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > 1d.sto
+#echo "converted lower case characters (insertions) to gaps"
 
-esl-reformat --mingap -o 2r.fa afa 1r.sto                                                     #removes all-gap columns so that the number of columns matches HMM length
-esl-reformat --mingap -o 2d.fa afa 1d.sto 
-echo "removed all-gap columns so that the number of columns matches HMM length"
+#esl-reformat --mingap -o 2r.fa afa 1r.sto                                                     #removes all-gap columns so that the number of columns matches HMM length
+#esl-reformat --mingap -o 2d.fa afa 1d.sto 
+#echo "removed all-gap columns so that the number of columns matches HMM length"
 
-#cut -d '[' -f 1 2.fa| sed 's/>A--------/>Athaliana/g' > RVT_3_align.Matches.fa           #Shortens titles and restores gappy names
+#esl-alimanip -o 1r.fa --lmin 155 2r.fa                                   #Trims sequences at minimum ~70% of the model
+#esl-alimanip -o 1d.fa --lmin 122 2d.fa 
 
-esl-alimanip -o 1r.fa --lmin 155 2r.fa                                   #Trims sequences at minimum ~70% of the model
-esl-alimanip -o 1d.fa --lmin 122 2d.fa 
+#esl-reformat -o RVT_1_align.Matches.155min.fa afa 1r.fa                                   #reformats to fasta
+#esl-reformat -o DDE_1_align.Matches.122min.fa afa 1d.fa  
+#echo "reformatted to fasta"
 
-#mv 1.fa RVT_3_align.Matches.237min.fa
-
-esl-reformat -o RVT_1_align.Matches.155min.fa afa 1r.fa                                   #reformats to fasta
-esl-reformat -o DDE_1_align.Matches.122min.fa afa 1d.fa  
-echo "reformatted to fasta"
-
-#mv 1.fa RVT_3_align.Matches.237min.fa
-
-raxml -T 24 -n Raxml.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_1_align.Matches.155min.fa  #runs ML with Bailey et al parameters on 8 cores
-raxml -T 24 -n Raxml.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s DDE_1_align.Matches.122min.fa
-echo "ran RAXML"
+raxml -T 24 -n Raxml_RVT_1.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_1_align.Matches.155min.fa  #runs ML with Bailey et al parameters on 8 cores
+echo "ran RAXML for RVT_1"
+#raxml -T 24 -n Raxml_DDE_1.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s DDE_1_align.Matches.122min.fa
+#echo "ran RAXML for DDE_1"
 
 conda deactivate
