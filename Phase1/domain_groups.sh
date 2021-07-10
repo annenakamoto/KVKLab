@@ -26,10 +26,10 @@ cd /global/scratch/users/annen/
 # group TEs by the domains they contain
 #cat pfam_LIB_list.txt cdd_LIB_list_N.txt | python KVKLab/Phase1/group_by_domain.py > domain_groups_LIB.txt
 
-# remove text after the TE name from library
-#cat LIB_DOM.fasta.classified | python KVKLab/Phase1/clean_lib.py > LIB_DOM_class_clean.fasta
 source activate pfam_scan.pl
-#translate -a -o LIB_DOM_trans.fasta.classified LIB_DOM.fasta.classified
+#translate -a -o LIB_DOM_trans.fasta.classified LIB_DOM.fasta.classified 
+cat LIB_DOM_trans.fasta.classified | python KVKLab/Phase1/dom_spec_lib.py RVT_1 > LIB_DOM_RVT_1.fasta
+cat LIB_DOM_trans.fasta.classified | python KVKLab/Phase1/dom_spec_lib.py DDE_1 > LIB_DOM_DDE_1.fasta
 
 cd /global/scratch/users/annen/PFAM_files
 
@@ -42,14 +42,14 @@ cd /global/scratch/users/annen/PFAM_files
 
 
 # fetch top 2 domains: RVT_1 and DDE_1
-hmmfetch -o RVT_1.hmm Pfam-A.hmm PF00078.29
-hmmfetch -o DDE_1.hmm Pfam-A.hmm PF03184.21
-echo "* fetched domains *"
+#hmmfetch -o RVT_1.hmm Pfam-A.hmm PF00078.29
+#hmmfetch -o DDE_1.hmm Pfam-A.hmm PF03184.21
+#echo "* fetched domains *"
 
-hmmalign --amino --informat fasta -o RVT_1_align.sto RVT_1.hmm /global/scratch/users/annen/LIB_DOM_trans.fasta.classified
-echo "aligned RVT_1"
-hmmalign --amino --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM_trans.fasta.classified
-echo "aligned DDE_1"
+#hmmalign --trim --amino --informat fasta -o RVT_1_align.sto RVT_1.hmm /global/scratch/users/annen/LIB_DOM_RVT_1.fasta
+#echo "aligned RVT_1"
+#hmmalign --trim --amino --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM_DDE_1.fasta
+#echo "aligned DDE_1"
 
 #tr a-z - <RVT_1_align.sto >1.sto                                                         #converts lower case characters (insertions) to gaps
 #tr a-z - <RVT_1_align.sto >1.sto 
