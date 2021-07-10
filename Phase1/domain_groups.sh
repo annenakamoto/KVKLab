@@ -61,8 +61,8 @@ echo "removed all-gap columns so that the number of columns matches HMM length"
 
 #cut -d '[' -f 1 2.fa| sed 's/>A--------/>Athaliana/g' > RVT_3_align.Matches.fa           #Shortens titles and restores gappy names
 
-esl-alimanip -o 1r.fa --lnfract 0.7 2r.fa                                   #Trims sequences at 237aa/seq minimum ~70% of the model
-esl-alimanip -o 1d.fa --lnfract 0.7 2d.fa 
+esl-alimanip -o 1r.fa --rffract 0.7 2r.fa                                   #Trims sequences at 237aa/seq minimum ~70% of the model
+esl-alimanip -o 1d.fa --rffract 0.7 2d.fa 
 
 #mv 1.fa RVT_3_align.Matches.237min.fa
 
