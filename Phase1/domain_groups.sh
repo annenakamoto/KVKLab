@@ -67,11 +67,15 @@ cd /global/scratch/users/annen/PFAM_files
 #echo "reformatted to fasta"
 
 cd /global/scratch/users/annen/
+
+cat LIB_DOM_RVT_1.fasta | python KVKLab/Phase1/unique_classes.py > RVT_1_unique_classes.txt
+cat LIB_DOM_DDE_1.fasta | python KVKLab/Phase1/unique_classes.py > DDE_1_unique_classes.txt
+
 # use ModelGenerator to find the best substitution model, with 4 gamma categories (this is the # that RAXML uses too)
-java -jar modelgenerator_v_851/modelgenerator.jar PFAM_files/RVT_1_align.Matches.155min.fa 4
-echo "ran ModelGenerator for RVT_1"
-java -jar modelgenerator_v_851/modelgenerator.jar PFAM_files/DDE_1_align.Matches.122min.fa 4
-echo "ran ModelGenerator for DDE_1"
+#java -jar modelgenerator_v_851/modelgenerator.jar PFAM_files/RVT_1_align.Matches.155min.fa 4
+#echo "ran ModelGenerator for RVT_1"
+#java -jar modelgenerator_v_851/modelgenerator.jar PFAM_files/DDE_1_align.Matches.122min.fa 4
+#echo "ran ModelGenerator for DDE_1"
 cd /global/scratch/users/annen/PFAM_files
 
 #raxml -T 24 -n Raxml_RVT_1.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_1_align.Matches.155min.fa  #runs ML with Bailey et al parameters on 8 cores
