@@ -1,12 +1,15 @@
 import sys
 
-classifications = set()
+CLASSES = {}
 
 for line in sys.stdin:
     lst = line.split()
     if len(lst) > 0 and lst[0] == ">":
         c = lst[1].split("#")[1].split(":")[0]
-        classifications.add(c)
+        if CLASSES.get(c):
+            CLASSES[c] += 1
+        else:
+            CLASSES[c] = 1
 
-for c in classifications:
-    print(c)
+for key, value in CLASSES:
+    print(key, '\t', value)
