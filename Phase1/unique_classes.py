@@ -11,5 +11,5 @@ for line in sys.stdin:
         else:
             CLASSES[c] = 1
 
-for key, value in CLASSES:
+for key, value in CLASSES.items():
     print(key, '\t', value)
