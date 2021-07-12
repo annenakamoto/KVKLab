@@ -66,9 +66,17 @@ cd /global/scratch/users/annen/PFAM_files
 #esl-reformat -o DDE_1_align.Matches.122min.fa afa 1d.fa  
 #echo "reformatted to fasta"
 
+cd /global/scratch/users/annen/
+# use ModelGenerator to find the best substitution model, with 4 gamma categories (this is the # that RAXML uses too)
+java -jar modelgenerator_v_851/modelgenerator.jar PFAM_files/RVT_1_align.Matches.155min.fa 4
+echo "ran ModelGenerator for RVT_1"
+java -jar modelgenerator_v_851/modelgenerator.jar PFAM_files/DDE_1_align.Matches.122min.fa 4
+echo "ran ModelGenerator for DDE_1"
+cd /global/scratch/users/annen/PFAM_files
+
 #raxml -T 24 -n Raxml_RVT_1.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_1_align.Matches.155min.fa  #runs ML with Bailey et al parameters on 8 cores
 #echo "ran RAXML for RVT_1."
-raxml -T 24 -n Raxml_DDE_1.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s DDE_1_align.Matches.122min.fa
-echo "ran RAXML for DDE_1"
+#raxml -T 24 -n Raxml_DDE_1.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s DDE_1_align.Matches.122min.fa
+#echo "ran RAXML for DDE_1"
 
 #conda deactivate
