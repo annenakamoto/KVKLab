@@ -26,10 +26,11 @@ cd /global/scratch/users/annen/
 # group TEs by the domains they contain
 #cat pfam_LIB_list.txt cdd_LIB_list_N.txt | python KVKLab/Phase1/group_by_domain.py > domain_groups_LIB.txt
 
-#source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
+source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 #translate -a -o LIB_DOM_trans.fasta.classified LIB_DOM.fasta.classified 
 #cat LIB_DOM_trans.fasta.classified | python KVKLab/Phase1/dom_spec_lib.py RVT_1 > LIB_DOM_RVT_1.fasta
 #cat LIB_DOM_trans.fasta.classified | python KVKLab/Phase1/dom_spec_lib.py DDE_1 > LIB_DOM_DDE_1.fasta
+cat LIB_DOM_trans.fasta.classified | python KVKLab/Phase1/dom_spec_lib.py rve > LIB_DOM_rve.fasta
 
 cd /global/scratch/users/annen/PFAM_files
 
@@ -44,43 +45,59 @@ cd /global/scratch/users/annen/PFAM_files
 # fetch top 2 domains: RVT_1 and DDE_1
 #hmmfetch -o RVT_1.hmm Pfam-A.hmm PF00078.29
 #hmmfetch -o DDE_1.hmm Pfam-A.hmm PF03184.21
-#echo "* fetched domains *"
+hmmfetch -o rve.hmm Pfam-A.hmm PF00665.28
+echo "* fetched domains *"
 
 #hmmalign --trim --amino --informat fasta -o RVT_1_align.sto RVT_1.hmm /global/scratch/users/annen/LIB_DOM_RVT_1.fasta
 #echo "aligned RVT_1"
 #hmmalign --trim --amino --informat fasta -o DDE_1_align.sto DDE_1.hmm /global/scratch/users/annen/LIB_DOM_DDE_1.fasta
 #echo "aligned DDE_1"
+hmmalign --trim --amino --informat fasta -o rve_align.sto rve.hmm /global/scratch/users/annen/LIB_DOM_rve.fasta
+echo "aligned rve"
 
 #tr \: \# <RVT_1_align.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > 1r.sto    #converts lower case characters (insertions) to gaps w/o changing names, and gets rid of ":" raxml illegal character
 #tr \: \# <DDE_1_align.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > 1d.sto
-#echo "converted lower case characters (insertions) to gaps"
+tr \: \# <rve_align.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > 1rve.sto
+echo "converted lower case characters (insertions) to gaps"
 
 #esl-reformat --mingap -o 2r.fa afa 1r.sto                                                     #removes all-gap columns so that the number of columns matches HMM length
 #esl-reformat --mingap -o 2d.fa afa 1d.sto 
-#echo "removed all-gap columns so that the number of columns matches HMM length"
+esl-reformat --mingap -o 2rve.fa afa 1rve.sto 
+echo "removed all-gap columns so that the number of columns matches HMM length"
 
 #esl-alimanip -o 1r.fa --lmin 155 2r.fa                                   #Trims sequences at minimum ~70% of the model
 #esl-alimanip -o 1d.fa --lmin 122 2d.fa 
+esl-alimanip -o 1rve.fa --lmin 71 2rve.fa 
 
 #esl-reformat -o RVT_1_align.Matches.155min.fa afa 1r.fa                                   #reformats to fasta
 #esl-reformat -o DDE_1_align.Matches.122min.fa afa 1d.fa  
-#echo "reformatted to fasta"
+esl-reformat -o rve_align.Matches.71min.fa afa 1rve.fa  
+echo "reformatted to fasta"
 
 cd /global/scratch/users/annen/
 
-cat LIB_DOM_RVT_1.fasta | python KVKLab/Phase1/unique_classes.py > RVT_1_unique_classes.txt
-cat LIB_DOM_DDE_1.fasta | python KVKLab/Phase1/unique_classes.py > DDE_1_unique_classes.txt
+#cat LIB_DOM_RVT_1.fasta | python KVKLab/Phase1/unique_classes.py > RVT_1_unique_classes.txt
+#cat LIB_DOM_DDE_1.fasta | python KVKLab/Phase1/unique_classes.py > DDE_1_unique_classes.txt
+cat LIB_DOM_rve.fasta | python KVKLab/Phase1/unique_classes.py > rve_unique_classes.txt
 
 # use ModelGenerator to find the best substitution model, with 4 gamma categories (this is the # that RAXML uses too)
 #java -jar modelgenerator_v_851/modelgenerator.jar PFAM_files/RVT_1_align.Matches.155min.fa 4
 #echo "ran ModelGenerator for RVT_1"
 #java -jar modelgenerator_v_851/modelgenerator.jar PFAM_files/DDE_1_align.Matches.122min.fa 4
 #echo "ran ModelGenerator for DDE_1"
+#java -jar modelgenerator_v_851/modelgenerator.jar PFAM_files/rve_align.Matches.71min.fa 4
+#echo "ran ModelGenerator for rve"
 cd /global/scratch/users/annen/PFAM_files
+
+#####cat RVT_1_align.Matches.155min.fa.reduced | python KVKLab/Phase1/ITOL_lineage_colors.py > ITOL_lin_RVT_1
+#####cat DDE_1_align.Matches.122min.fa.reduced | python KVKLab/Phase1/ITOL_lineage_colors.py > ITOL_lin_DDE_1
+#####cat rve_align.Matches.71min.fa.reduced | python KVKLab/Phase1/ITOL_lineage_colors.py > ITOL_lin_rve
 
 #raxml -T 24 -n Raxml_RVT_1.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_1_align.Matches.155min.fa  #runs ML with Bailey et al parameters on 8 cores
 #echo "ran RAXML for RVT_1."
 #raxml -T 24 -n Raxml_DDE_1.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s DDE_1_align.Matches.122min.fa
 #echo "ran RAXML for DDE_1"
+raxml -T 24 -n Raxml_rve.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s rve_align.Matches.71min.fa
+echo "ran RAXML for rve"
 
-#conda deactivate
+conda deactivate
