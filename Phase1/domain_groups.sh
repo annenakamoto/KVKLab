@@ -24,7 +24,7 @@ cd /global/scratch/users/annen/
 #cat cdd_LIB_list.txt | python KVKLab/Phase1/cdd_to_name.py > cdd_LIB_list_N.txt
 
 # group TEs by the domains they contain
-#cat pfam_LIB_list.txt cdd_LIB_list_N.txt | python KVKLab/Phase1/group_by_domain.py > domain_groups_LIB.txt
+cat pfam_LIB_list.txt cdd_LIB_list_N.txt | python KVKLab/Phase1/group_by_domain.py > domain_groups_LIB.txt
 
 #source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 #translate -a -o LIB_DOM_trans.fasta.classified LIB_DOM.fasta.classified 
@@ -83,8 +83,8 @@ cd /global/scratch/users/annen/
 # use ModelGenerator to find the best substitution model, with 4 gamma categories (this is the # that RAXML uses too)
 #java -jar modelgenerator_v_851/modelgenerator.jar PFAM_files/RVT_1_align.Matches.155min.fa 4
 #echo "ran ModelGenerator for RVT_1"
-java -jar modelgenerator_v_851/modelgenerator.jar PFAM_files/DDE_1_align.Matches.122min.fa 4
-echo "ran ModelGenerator for DDE_1"
+#java -jar modelgenerator_v_851/modelgenerator.jar PFAM_files/DDE_1_align.Matches.122min.fa 4
+#echo "ran ModelGenerator for DDE_1"
 #java -jar modelgenerator_v_851/modelgenerator.jar PFAM_files/rve_align.Matches.71min.fa 4
 #echo "ran ModelGenerator for rve"
 cd /global/scratch/users/annen/PFAM_files
