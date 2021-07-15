@@ -43,7 +43,7 @@ for dom in SORTED_D:
 #for dom in sorted(COVER.keys(), key=lambda x: COVER[x]):
     #print(dom, "\t", COVER[dom], "%")
 
-RVT_1_rve = DOMAINS["RVT_1"].union(DOMAINS["rve"])
+RVT_1_rve = DOMAINS["RVT_1"].intersection(DOMAINS["rve"])
 per = (len(RVT_1_rve) / len(all_elems)) * 100.00
 print("There are", len(RVT_1_rve), "elements that have both RVT_1 and rve, covering", per, "percent of the library:")
 for elem in RVT_1_rve:
