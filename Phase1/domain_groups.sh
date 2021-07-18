@@ -24,7 +24,7 @@ cd /global/scratch/users/annen/
 #cat cdd_LIB_list.txt | python KVKLab/Phase1/cdd_to_name.py > cdd_LIB_list_N.txt
 
 # group TEs by the domains they contain
-cat pfam_LIB_list.txt cdd_LIB_list_N.txt | python /global/home/users/annen/KVKLab/Phase1/group_by_domain.py > domain_groups_LIB.txt
+#cat pfam_LIB_list.txt cdd_LIB_list_N.txt | python KVKLab/Phase1/group_by_domain.py > domain_groups_LIB.txt
 
 #source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 #translate -a -o LIB_DOM_trans.fasta.classified LIB_DOM.fasta.classified 
@@ -89,11 +89,15 @@ cd /global/scratch/users/annen/
 #echo "ran ModelGenerator for rve"
 cd /global/scratch/users/annen/PFAM_files
 
+cat RVT_1_align.Matches.155min.fa rve_align.Matches.71min.fa | python KVKLab/Phase1/multi_domain.py > RVT_1_rve_align.Matches.fa
+
 #raxml -T 24 -n Raxml_RVT_1.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_1_align.Matches.155min.fa  #runs ML with Bailey et al parameters on 8 cores
 #echo "ran RAXML for RVT_1."
 #raxml -T 24 -n Raxml_DDE_1.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s DDE_1_align.Matches.122min.fa
 #echo "ran RAXML for DDE_1"
 #raxml -T 24 -n Raxml_rve.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s rve_align.Matches.71min.fa
 #echo "ran RAXML for rve"
+raxml -T 24 -n Raxml_RVT_1_rve.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_1_rve_align.Matches.fa
+echo "ran RAXML for RVT_1 + rve"
 
 #conda deactivate
