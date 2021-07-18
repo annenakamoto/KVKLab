@@ -89,7 +89,7 @@ cd /global/scratch/users/annen/
 #echo "ran ModelGenerator for rve"
 cd /global/scratch/users/annen/PFAM_files
 
-cat RVT_1_align.Matches.155min.fa rve_align.Matches.71min.fa | python KVKLab/Phase1/multi_domain.py > RVT_1_rve_align.Matches.fa
+cat RVT_1_align.Matches.155min.fa rve_align.Matches.71min.fa | python /global/scratch/users/annen/KVKLab/Phase1/multi_domain.py > RVT_1_rve_align.Matches.fa
 
 #raxml -T 24 -n Raxml_RVT_1.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_1_align.Matches.155min.fa  #runs ML with Bailey et al parameters on 8 cores
 #echo "ran RAXML for RVT_1."
