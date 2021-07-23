@@ -39,7 +39,8 @@ cd /global/scratch/users/annen/
 echo "" > PFAM_files/ALL_unique_classes.txt
 while read dom; do
     #cat LIB_DOM_trans.fasta.classified | python KVKLab/Phase1/dom_spec_lib.py $dom > LIB_DOM_${dom}.fasta
-    echo \n${dom} >> PFAM_files/ALL_unique_classes.txt
+    echo "" >> PFAM_files/ALL_unique_classes.txt
+    echo \> ${dom} >> PFAM_files/ALL_unique_classes.txt
     cat LIB_DOM_${dom}.fasta | python KVKLab/Phase1/unique_classes.py >> PFAM_files/ALL_unique_classes.txt
 done < pfam_doms.txt
 
