@@ -26,7 +26,7 @@ SORTED_D = sorted(DOMAINS.keys(), key=lambda x: len(DOMAINS[x]), reverse=True)
     #print(dom, "\t", len(DOMAINS[dom]))
 
 pfam = ["RVT_1", "DDE_1", "rve", "Chromo", "DDE_3", "RNase_H", "RVT_2", "gag_pre-integrs", "gag-asp_proteas", "Retrotran_gag_2", "Asp_protease_2", 
-            "Exo_endo_phos_2", "RVP_2", "Exo_endo_phos", "RVT_3"]
+            "Exo_endo_phos_2", "RVP_2", "Exo_endo_phos", "RVT_3", "rve_3"]
 # find the set of domains s.t. every element contains at least one
 uni = set()
 COVER = {}
@@ -52,7 +52,10 @@ for dom in pfam:
     #print(elem)
 
 for dom in pfam:
-    print(dom, "\t", COVER[dom], "%")
+    if COVER.get(dom):
+        print(dom, "\t", COVER[dom], "%")
+    else:
+        print(dom, "\t", "same^", "%")
 
 print("\n** LIST OF TEs THAT CONATIN EACH DOMAIN **\n")
 for dom in SORTED_D:
