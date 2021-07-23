@@ -25,10 +25,12 @@ SORTED_D = sorted(DOMAINS.keys(), key=lambda x: len(DOMAINS[x]), reverse=True)
 #for dom in SORTED_D:
     #print(dom, "\t", len(DOMAINS[dom]))
 
+pfam = ["RVT_1", "DDE_1", "rve", "Chromo", "DDE_3", "RNase_H", "RVT_2", "gag_pre-integrs", "gag-asp_proteas", "Retrotran_gag_2", "Asp_protease_2", 
+            "Exo_endo_phos_2", "RVP_2", "Exo_endo_phos", "RVT_3", "rve_3"]
 # find the set of domains s.t. every element contains at least one
 uni = set()
 COVER = {}
-for dom in SORTED_D:
+for dom in pfam:
     if not DOMAINS[dom].issubset(uni):
         tmp = uni.union(DOMAINS[dom])
         uni = tmp
@@ -43,11 +45,14 @@ for dom in SORTED_D:
 #for dom in sorted(COVER.keys(), key=lambda x: COVER[x]):
     #print(dom, "\t", COVER[dom], "%")
 
-RVT_1_rve = DOMAINS["RVT_1"].intersection(DOMAINS["rve"])
-per = (len(RVT_1_rve) / len(all_elems)) * 100.00
-print("There are", len(RVT_1_rve), "elements that have both RVT_1 and rve, covering", per, "percent of the library:")
-for elem in RVT_1_rve:
-    print(elem)
+#RVT_1_rve = DOMAINS["RVT_1"].intersection(DOMAINS["rve"])
+#per = (len(RVT_1_rve) / len(all_elems)) * 100.00
+#print("There are", len(RVT_1_rve), "elements that have both RVT_1 and rve, covering", per, "percent of the library:")
+#for elem in RVT_1_rve:
+    #print(elem)
+
+for dom in pfam:
+    print(dom, "\t", COVER[dom], "%")
 
 print("\n** LIST OF TEs THAT CONATIN EACH DOMAIN **\n")
 for dom in SORTED_D:
