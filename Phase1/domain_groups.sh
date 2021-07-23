@@ -24,7 +24,7 @@ cd /global/scratch/users/annen/
 #cat cdd_LIB_list.txt | python KVKLab/Phase1/cdd_to_name.py > cdd_LIB_list_N.txt
 
 # group TEs by the domains they contain
-#cat pfam_LIB_list.txt cdd_LIB_list_N.txt | python KVKLab/Phase1/group_by_domain.py > domain_groups_LIB.txt
+cat pfam_LIB_list.txt cdd_LIB_list_N.txt | python KVKLab/Phase1/group_by_domain.py > domain_groups_LIB.txt
 
 #source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 #translate -a -o LIB_DOM_trans.fasta.classified LIB_DOM.fasta.classified 
@@ -36,13 +36,13 @@ cd /global/scratch/users/annen/
 #cat LIB_DOM_DDE_1.fasta | python KVKLab/Phase1/unique_classes.py > PFAM_files/DDE_1_unique_classes.txt
 #cat LIB_DOM_rve.fasta | python KVKLab/Phase1/unique_classes.py > PFAM_files/rve_unique_classes.txt
 
-echo "" > PFAM_files/ALL_unique_classes.txt
-while read dom; do
+#echo "" > PFAM_files/ALL_unique_classes.txt
+#while read dom; do
     #cat LIB_DOM_trans.fasta.classified | python KVKLab/Phase1/dom_spec_lib.py $dom > LIB_DOM_${dom}.fasta
-    echo "" >> PFAM_files/ALL_unique_classes.txt
-    echo \> ${dom} >> PFAM_files/ALL_unique_classes.txt
-    cat LIB_DOM_${dom}.fasta | python KVKLab/Phase1/unique_classes.py >> PFAM_files/ALL_unique_classes.txt
-done < pfam_doms.txt
+    #echo "" >> PFAM_files/ALL_unique_classes.txt
+    #echo \> ${dom} >> PFAM_files/ALL_unique_classes.txt
+    #cat LIB_DOM_${dom}.fasta | python KVKLab/Phase1/unique_classes.py >> PFAM_files/ALL_unique_classes.txt
+#done < pfam_doms.txt
 
 
 cd /global/scratch/users/annen/PFAM_files

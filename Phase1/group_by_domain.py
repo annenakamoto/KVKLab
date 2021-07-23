@@ -4,11 +4,16 @@ import sys
 DOMAINS = {}
 # Set containing all TEs for comparison with the subsets in DOMAINS
 all_elems = set()
+denovo_elems = set()
+num_denovo = 0
 
 for line in sys.stdin:
     lst = line.split()
     if len(lst) > 0:
         all_elems.add(lst[0])
+        if "ltr-" in lst[0] or "rnd-" in lst[0] or "irf-" in lst[0]:
+            denovo_elems.add(lst[0])
+            num_denovo += 1
         for i in range(1, len(lst)):
             dom = DOMAINS.get(lst[i].replace(",", ""))
             if dom:
@@ -34,7 +39,10 @@ for dom in pfam:
     if not DOMAINS[dom].issubset(uni):
         tmp = uni.union(DOMAINS[dom])
         uni = tmp
-        COVER[dom] = (len(uni) / len(all_elems)) * 100.00
+        #COVER[dom] = (len(uni) / len(all_elems)) * 100.00
+        tmp2 = uni.difference(denovo_elems)
+        denovo_elems = tmp2
+        COVER[dom] = len(denovo_elems) / num_denovo * 100.00
         if uni == all_elems:
             print("Covered all elements.")
             break
