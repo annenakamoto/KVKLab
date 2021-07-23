@@ -41,8 +41,7 @@ for dom in pfam:
         uni = tmp
         #COVER[dom] = (len(uni) / len(all_elems)) * 100.00
         tmp2 = uni.difference(denovo_elems)
-        denovo_elems = tmp2
-        COVER[dom] = len(denovo_elems) / num_denovo * 100.00
+        COVER[dom] = len(tmp2) / num_denovo * 100.00
         if uni == all_elems:
             print("Covered all elements.")
             break
