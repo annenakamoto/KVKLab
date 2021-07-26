@@ -89,7 +89,7 @@ echo "removed all-gap columns so that the number of columns matches HMM length"
 #esl-alimanip -o 1r.fa --lmin 155 2r.fa                                   #Trims sequences at minimum ~70% of the model
 #esl-alimanip -o 1d.fa --lmin 122 2d.fa 
 #esl-alimanip -o 1rve.fa --lmin 71 2rve.fa
-leng=$(grep LENG ${1}.hmm | awk '{ print $2}')
+leng=$(grep LENG ${1}.hmm | awk '{ print int($2*0.7) }')
 esl-alimanip -o 1${1}.fa --lmin $leng 2${1}.fa 
 
 #esl-reformat -o RVT_1_align.Matches.155min.fa afa 1r.fa                                   #reformats to fasta
