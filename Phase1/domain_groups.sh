@@ -54,12 +54,16 @@ cd /global/scratch/users/annen/PFAM_files
 #grep -B 1 $acc Pfam-A.hmm | awk '{ print $2 }' >> PFAM_name_acc.txt
 #done < PFAM_domains_specific.txt
 
+#RNase_H PF00075.26 #LINE/Tad1
+#RVT_2 PF07727.16 #LTR/Copia
+#DEAD PF00270.31 #DNA/Kolobok-H
 
 # fetch top 2 domains: RVT_1 and DDE_1
 #hmmfetch -o RVT_1.hmm Pfam-A.hmm PF00078.29
 #hmmfetch -o DDE_1.hmm Pfam-A.hmm PF03184.21
 #hmmfetch -o rve.hmm Pfam-A.hmm PF00665.28
-#echo "* fetched domains *"
+hmmfetch -o ${1}.hmm Pfam-A.hmm $2   #LINE/Tad1
+echo "* fetched domains *"
 
 #hmmalign --trim --amino --informat fasta -o RVT_1_align.sto RVT_1.hmm /global/scratch/users/annen/LIB_DOM_RVT_1.fasta
 #echo "aligned RVT_1"
@@ -67,25 +71,32 @@ cd /global/scratch/users/annen/PFAM_files
 #echo "aligned DDE_1"
 #hmmalign --trim --amino --informat fasta -o rve_align.sto rve.hmm /global/scratch/users/annen/LIB_DOM_rve.fasta
 #echo "aligned rve"
+hmmalign --trim --amino --informat fasta -o ${1}_align.sto ${1}.hmm /global/scratch/users/annen/LIB_DOM_${1}.fasta
+echo "aligned ${1}"
 
 #tr \: \# <RVT_1_align.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > 1r.sto    #converts lower case characters (insertions) to gaps w/o changing names, and gets rid of ":" raxml illegal character
 #tr \: \# <DDE_1_align.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > 1d.sto
 #tr \: \# <rve_align.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > 1rve.sto
-#echo "converted lower case characters (insertions) to gaps"
+tr \: \# <${1}_align.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > 1${1}.sto
+echo "converted lower case characters (insertions) to gaps"
 
 #esl-reformat --mingap -o 2r.fa afa 1r.sto                                                     #removes all-gap columns so that the number of columns matches HMM length
 #esl-reformat --mingap -o 2d.fa afa 1d.sto 
 #esl-reformat --mingap -o 2rve.fa afa 1rve.sto 
-#echo "removed all-gap columns so that the number of columns matches HMM length"
+esl-reformat --mingap -o 2${1}.fa afa 1${1}.sto 
+echo "removed all-gap columns so that the number of columns matches HMM length"
 
 #esl-alimanip -o 1r.fa --lmin 155 2r.fa                                   #Trims sequences at minimum ~70% of the model
 #esl-alimanip -o 1d.fa --lmin 122 2d.fa 
-#esl-alimanip -o 1rve.fa --lmin 71 2rve.fa 
+#esl-alimanip -o 1rve.fa --lmin 71 2rve.fa
+leng=$(grep LENG ${1}.hmm | awk '{ print $2}')
+esl-alimanip -o 1${1}.fa --lmin $leng 2${1}.fa 
 
 #esl-reformat -o RVT_1_align.Matches.155min.fa afa 1r.fa                                   #reformats to fasta
 #esl-reformat -o DDE_1_align.Matches.122min.fa afa 1d.fa  
-#esl-reformat -o rve_align.Matches.71min.fa afa 1rve.fa  
-#echo "reformatted to fasta"
+#esl-reformat -o rve_align.Matches.71min.fa afa 1rve.fa 
+esl-reformat -o ${1}_align.Matches.${leng}min.fa afa 1${1}.fa  
+echo "reformatted to fasta"
 
 cd /global/scratch/users/annen/
 
@@ -108,5 +119,7 @@ cd /global/scratch/users/annen/PFAM_files
 #echo "ran RAXML for rve"
 #raxml -T 24 -n Raxml_RVT_1_rve.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s RVT_1_rve_align.Matches.fa
 #echo "ran RAXML for RVT_1 + rve"
+raxml -T 24 -n Raxml_${1}.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s ${1}_align.Matches.${leng}min.fa
+echo "ran RAXML for ${1}"
 
 #conda deactivate
