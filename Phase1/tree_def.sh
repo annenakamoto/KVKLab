@@ -11,11 +11,20 @@
 cd /global/scratch/users/annen/
 
 TE=$1   # RepBase element (ex. MAGGY)
+mode=$2 # nucleotide or protein library
 
 # create represenative RepBase element-specific library (ex. MAGGY library)
-# te_spec_lib.py reads from LIB_DOM_trans.fasta.classified
-cat MUSCLE_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } { gsub(/ /, "_"); print $1 "#" $2 ":" $3 ; }' | python KVKLab/Phase1/te_spec_lib.py > MUSCLE_out/LIB_DOM_${TE}.fasta
-echo "created library for ${TE}"
+# te_spec_lib.py reads from LIB_DOM_trans.fasta.classified or LIB_DOM.fasta.classified
+if [ $mode = "protein" ]; then
+cat MUSCLE_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } { gsub(/ /, "_"); print $1 "#" $2 ":" $3 ; }' | python KVKLab/Phase1/te_spec_lib.py ${mode} > MUSCLE_out/LIB_DOM_${TE}_${mode}.fasta
+fi
+if [ $mode = "nucleotide" ]; then
+cat MUSCLE_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } { gsub(/ /, "_"); print $1 "#" $2 ; }' | python KVKLab/Phase1/te_spec_lib.py ${mode} > MUSCLE_out/LIB_DOM_${TE}_${mode}.fasta
+fi
+echo "created ${mode} seq library for ${TE}"
 
-muscle -in MUSCLE_out/LIB_DOM_${TE}.fasta -out MUSCLE_out/${TE}_aligned.afa
-echo "completed MSA for ${TE}"
+muscle -in MUSCLE_out/LIB_DOM_${TE}_${mode}.fasta -out MUSCLE_out/${TE}_aligned_${mode}.afa
+echo "completed ${mode} MSA for ${TE}"
+
+raxml -T 24 -n MUSCLE_out/Raxml_${TE}_${mode}.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s MUSCLE_out/${TE}_aligned_${mode}.afa
+echo "ran RAXML for ${mode} ${1}"
