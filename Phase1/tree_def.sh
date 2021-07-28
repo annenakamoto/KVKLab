@@ -19,7 +19,7 @@ if [ $mode = "protein" ]; then
 cat MUSCLE_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } { gsub(/ /, "_"); print $1 "#" $2 ":" $3 ; }' | python KVKLab/Phase1/te_spec_lib.py ${mode} > MUSCLE_out/LIB_DOM_${TE}_${mode}.fasta
 fi
 if [ $mode = "nucleotide" ]; then
-cat MUSCLE_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } { gsub(/ /, "_"); print $1 "#" $2 ; }' | python KVKLab/Phase1/te_spec_lib.py ${mode} > MUSCLE_out/LIB_DOM_${TE}_${mode}.fasta
+cat MUSCLE_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } { gsub(/ /, "_"); print $1 "#" $2 ; }' | python KVKLab/Phase1/te_spec_lib.py ${mode} | tr \: \# > MUSCLE_out/LIB_DOM_${TE}_${mode}.fasta
 fi
 echo "created ${mode} seq library for ${TE}"
 
