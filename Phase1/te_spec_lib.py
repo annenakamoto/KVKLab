@@ -32,7 +32,7 @@ elif mode == "nucleotide":
             lst = line.split()
             if len(lst) > 0:
                 if ">" in lst[0]:
-                    if ELEMS.get(lst[1:]):
+                    if ELEMS.get(lst[1][1:]):
                         printing = True
                         print(line[:-1])
                     else:
