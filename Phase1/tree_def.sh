@@ -28,5 +28,10 @@ echo "completed ${mode} MSA for ${TE}"
 
 cd /global/scratch/users/annen/MUSCLE_out
 
+if [ $mode = "protein" ]; then
 raxml -T 24 -n Raxml_${TE}_${mode}.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s ${TE}_aligned_${mode}.afa
+fi
+if [ $mode = "nucleotide" ]; then
+raxml -T 24 -n Raxml_${TE}_${mode}.out -f a -x 12345 -p 12345 -# 100 -m GTRCAT -s ${TE}_aligned_${mode}.afa
+fi
 echo "ran RAXML for ${mode} ${1}"
