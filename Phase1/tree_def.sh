@@ -26,5 +26,7 @@ echo "created ${mode} seq library for ${TE}"
 muscle -in MUSCLE_out/LIB_DOM_${TE}_${mode}.fasta -out MUSCLE_out/${TE}_aligned_${mode}.afa
 echo "completed ${mode} MSA for ${TE}"
 
-raxml -T 24 -n MUSCLE_out/Raxml_${TE}_${mode}.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s MUSCLE_out/${TE}_aligned_${mode}.afa
+cd /global/scratch/users/annen/MUSCLE_out
+
+raxml -T 24 -n Raxml_${TE}_${mode}.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s ${TE}_aligned_${mode}.afa
 echo "ran RAXML for ${mode} ${1}"
