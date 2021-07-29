@@ -7,7 +7,7 @@ for line in sys.stdin:
         if curr:
             print(curr, "\t", leng)
         leng = 0
-        curr = line[0]
+        curr = line[1]
     else:
         leng += len(line[:-1])
     
