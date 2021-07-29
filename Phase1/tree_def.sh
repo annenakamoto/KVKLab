@@ -33,6 +33,6 @@ raxml -T 24 -n Raxml_${TE}_${mode}.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJ
 fi
 if [ $mode = "nucleotide" ]; then
 #raxml -T 24 -n Raxml_${TE}_${mode}.out -f a -x 12345 -p 12345 -# 100 -m GTRCAT -s ${TE}_aligned_${mode}.afa
-raxml -T 24 -n Raxml_${TE}_${mode}.out -f a -x 12345 -p 12345 -# 100 -m GTRGAMMA -s ${TE}_aligned_${mode}_gamma.afa
+raxml -T 24 -n Raxml_${TE}_${mode}_gamma.out -f a -x 12345 -p 12345 -# 100 -m GTRGAMMA -s ${TE}_aligned_${mode}.afa
 fi
 echo "ran RAXML for ${mode} ${1}"
