@@ -28,7 +28,7 @@ if [ $mode == "normal" ]; then
 fi
 ### REPRESENTATIVE
 if [ $mode == "representative" ]; then
-    cat MAFFT_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } /MAGGY/||/GYMAG1/||/GYMAG2/||/GYPSY1/||/MGRL3/||/PYRET/||/MGR583/||/POT2/||/guy11/||/US71/||/B71/||/MZ5-1-6/||/LpKY97/||/Lh88405/ { gsub(/ /, "_"); print $1 "#" $2 ; }' | awk python KVKLab/Phase1/te_spec_lib.py > MAFFT_out/LIB_DOM_${TE}_rep.fasta
+    cat MAFFT_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } /MAGGY/||/GYMAG1/||/GYMAG2/||/GYPSY1/||/MGRL3/||/PYRET/||/MGR583/||/POT2/||/guy11/||/US71/||/B71/||/MZ5-1-6/||/LpKY97/||/Lh88405/ { gsub(/ /, "_"); print $1 "#" $2 ; }' | python KVKLab/Phase1/te_spec_lib.py > MAFFT_out/LIB_DOM_${TE}_rep.fasta
     echo "created seq library for ${TE}"
     cd /global/scratch/users/annen/MAFFT_out
     mafft LIB_DOM_${TE}_rep.fasta > ${TE}_aligned_rep.afa
