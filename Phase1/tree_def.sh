@@ -11,16 +11,28 @@
 cd /global/scratch/users/annen/
 
 TE=$1   # RepBase element (ex. MAGGY)
+mode=$2 # normal or representative
 
 # create represenative RepBase element-specific library (ex. MAGGY library)
 # te_spec_lib.py reads from LIB_DOM.fasta.classified (nucleotide)
-cat MAFFT_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } { gsub(/ /, "_"); print $1 "#" $2 ; }' | python KVKLab/Phase1/te_spec_lib.py > MAFFT_out/LIB_DOM_${TE}.fasta
-echo "created seq library for ${TE}"
 
-cd /global/scratch/users/annen/MAFFT_out
-
-mafft LIB_DOM_${TE}.fasta > ${TE}_aligned.afa
-echo "completed MSA for ${TE}"
-
-raxml -T 24 -n Raxml_${TE}.out -f a -x 12345 -p 12345 -# 100 -m GTRCAT -s ${TE}_aligned.afa
-echo "ran RAXML for ${TE}"
+### NORMAL
+if [ $mode = "normal"]; then
+    cat MAFFT_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } { gsub(/ /, "_"); print $1 "#" $2 ; }' | python KVKLab/Phase1/te_spec_lib.py > MAFFT_out/LIB_DOM_${TE}.fasta
+    echo "created seq library for ${TE}"
+    cd /global/scratch/users/annen/MAFFT_out
+    mafft LIB_DOM_${TE}.fasta > ${TE}_aligned.afa
+    echo "completed MSA for ${TE}"
+    raxml -T 24 -n Raxml_${TE}.out -f a -x 12345 -p 12345 -# 100 -m GTRCAT -s ${TE}_aligned.afa
+    echo "ran RAXML for ${TE}"
+fi
+### REPRESENTATIVE
+if [ $mode = "representative"]; then
+    cat MAFFT_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } /MAGGY/||/GYMAG1/||/GYMAG2/||/GYPSY1/||/MGRL3/||/PYRET/||/MGR583/||/POT2/||/guy11/||/US71/||/B71/||/MZ5-1-6/||/LpKY97/||/Lh88405/ { gsub(/ /, "_"); print $1 "#" $2 ; }' | awk python KVKLab/Phase1/te_spec_lib.py > MAFFT_out/LIB_DOM_${TE}_rep.fasta
+    echo "created seq library for ${TE}"
+    cd /global/scratch/users/annen/MAFFT_out
+    mafft LIB_DOM_${TE}_rep.fasta > ${TE}_aligned_rep.afa
+    echo "completed MSA for ${TE}"
+    raxml -T 24 -n Raxml_${TE}_rep.out -f a -x 12345 -p 12345 -# 100 -m GTRCAT -s ${TE}_aligned_rep.afa
+    echo "ran RAXML for ${TE}"
+fi
