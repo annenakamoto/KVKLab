@@ -19,10 +19,10 @@ total_minus_other = 0
 for line in sys.stdin:
     lst = line.split()
     if len(lst) == 2 and TE_COUNT.get(lst[0]):
-        TE_COUNT[lst[0]] = lst[1]
-        total_minus_other += lst[1]
+        TE_COUNT[lst[0]] = int(lst[1])
+        total_minus_other += int(lst[1])
     if len(lst) > 2 and lst[1] == "total":
-        total = lst[0]
+        total = int(lst[0])
 
 TE_COUNT["other"] = total - total_minus_other
 
