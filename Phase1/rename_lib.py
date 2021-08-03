@@ -1,4 +1,3 @@
-from Phase1.rename_TE import NAMES
 import sys
 
 # key is original name, value is new name

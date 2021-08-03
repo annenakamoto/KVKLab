@@ -22,7 +22,7 @@ for line in sys.stdin:
     source = ""
     for genome in COUNT.keys():
         if genome in line:
-            source = genome + "." + COUNT[genome]
+            source = genome + "." + str(COUNT[genome])
             COUNT[genome] += 1
             break
     print(line[:-1] + "\t" + te_name + "#" + source + "#" + te_class)
