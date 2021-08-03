@@ -11,10 +11,8 @@ for line in sys.stdin:
 with open("LIB_DOM.fasta.classified", 'r') as lib:
     for line in lib:
         lst = line.split()
-        if len(lst) > 0 and ">" in lst[0]:
-            if NAME_MAP.get(lst[0][1:]):
-                print(">" + NAME_MAP[lst[0][1:]])
+        if len(lst) > 0:
+            if ">" in lst[0] and NAME_MAP.get(lst[0][1:]):
+                    print(">" + NAME_MAP[lst[0][1:]])
             else: 
                 print(lst[0])
-        else:
-            print(lst[0])
