@@ -26,9 +26,6 @@ for line in sys.stdin:
 
 TE_COUNT["other"] = total - total_minus_other
 
-for value in TE_COUNT.values():
-    value = str(value)
-
 ### GENOME\tGYMAG1_I\tGYMAG2_I\tGYPSY1_MG\tMAGGY_I\tMGRL3_I\tPYRET_I\tMGR583\tPOT2\tcopia_fam\tother
-print(genome+"\t"+TE_COUNT["GYMAG1_I"]+"\t"+TE_COUNT["GYMAG2_I"]+"\t"+TE_COUNT["GYPSY1_MG"]+"\t"+TE_COUNT["MAGGY_I"]+"\t"+TE_COUNT["MGRL3_I"]+
-        "\t"+TE_COUNT["PYRET_I"]+"\t"+TE_COUNT["MGR583"]+"\t"+TE_COUNT["POT2"]+"\t"+TE_COUNT["copia_fam"]+"\t"+TE_COUNT["other"])
+print(genome+"\t"+str(TE_COUNT["GYMAG1_I"])+"\t"+str(TE_COUNT["GYMAG2_I"])+"\t"+str(TE_COUNT["GYPSY1_MG"])+"\t"+str(TE_COUNT["MAGGY_I"])+"\t"+str(TE_COUNT["MGRL3_I"])+
+        "\t"+str(TE_COUNT["PYRET_I"])+"\t"+str(TE_COUNT["MGR583"])+"\t"+str(TE_COUNT["POT2"])+"\t"+str(TE_COUNT["copia_fam"])+"\t"+str(TE_COUNT["other"]))
