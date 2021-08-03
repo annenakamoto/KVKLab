@@ -21,7 +21,7 @@ for line in sys.stdin:
     if len(lst) == 2 and TE_COUNT.get(lst[0]):
         TE_COUNT[lst[0]] = lst[1]
         total_minus_other += lst[1]
-    if lst[1] == "total":
+    if len(lst) > 2 and lst[1] == "total":
         total = lst[0]
 
 TE_COUNT["other"] = total - total_minus_other
