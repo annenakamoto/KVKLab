@@ -10,3 +10,10 @@
 
 cd /global/scratch/users/annen/
 
+> TE_name_map.txt
+while read TE; do
+    cat MAFFT_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } { gsub(/ /, "_"); print $1 "#" $2 ; }' | python KVKLab/Phase1/rename_TE.py ${TE} >> TE_name_map.txt
+done < TEs_of_intrest.txt
+
+# reads from LIB_DOM.fasta.classified
+cat TE_name_map.txt | python KVKLab/Phase1/rename_lib.py > LIB_DOM_part_class.fasta
