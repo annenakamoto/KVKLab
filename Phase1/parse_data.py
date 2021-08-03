@@ -18,6 +18,7 @@ total = 0
 total_minus_other = 0
 for line in sys.stdin:
     lst = line.split()
+    print(lst)
     if len(lst) > 0 and TE_COUNT.get(str(lst[0])):
         TE_COUNT[str(lst[0])] = int(lst[1])
         total_minus_other += int(lst[1])
