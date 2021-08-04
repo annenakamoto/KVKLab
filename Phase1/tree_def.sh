@@ -4,7 +4,7 @@
 #SBATCH --qos=savio_normal
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
-#SBATCH --time=72:00:00
+#SBATCH --time=96:00:00
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
@@ -18,11 +18,11 @@ mode=$2 # normal or representative or rep-root
 
 ### NORMAL
 if [ $mode == "normal" ]; then
-    cat MAFFT_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } { gsub(/ /, "_"); print $1 "#" $2 ; }' | python KVKLab/Phase1/te_spec_lib.py > MAFFT_out/LIB_DOM_${TE}.fasta
-    echo "created seq library for ${TE}"
+    #cat MAFFT_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } { gsub(/ /, "_"); print $1 "#" $2 ; }' | python KVKLab/Phase1/te_spec_lib.py > MAFFT_out/LIB_DOM_${TE}.fasta
+    #echo "created seq library for ${TE}"
     cd /global/scratch/users/annen/MAFFT_out
-    mafft LIB_DOM_${TE}.fasta > ${TE}_aligned.afa
-    echo "completed MSA for ${TE}"
+    #mafft LIB_DOM_${TE}.fasta > ${TE}_aligned.afa
+    #echo "completed MSA for ${TE}"
     raxml -T 24 -n Raxml_${TE}.out -f a -x 12345 -p 12345 -# 100 -m GTRCAT -s ${TE}_aligned.afa
     echo "ran RAXML for ${TE}"
 fi
