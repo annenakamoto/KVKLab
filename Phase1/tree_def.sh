@@ -12,6 +12,7 @@ cd /global/scratch/users/annen/
 
 TE=$1   # RepBase element (ex. MAGGY)
 mode=$2 # normal or representative or rep-root
+bootstraps=$3 # number of RAxML bootstraps to perform (normall 100)
 
 # create represenative RepBase element-specific library (ex. MAGGY library)
 # te_spec_lib.py reads from LIB_DOM.fasta.classified (nucleotide)
@@ -23,7 +24,7 @@ if [ $mode == "normal" ]; then
     cd /global/scratch/users/annen/MAFFT_out
     #mafft LIB_DOM_${TE}.fasta > ${TE}_aligned.afa
     #echo "completed MSA for ${TE}"
-    raxml -T 24 -n Raxml_${TE}.out -f a -x 12345 -p 12345 -# 100 -m GTRCAT -s ${TE}_aligned.afa
+    raxml -T 24 -n Raxml_${TE}.out -f a -x 12345 -p 12345 -# $bootstraps -m GTRCAT -s ${TE}_aligned.afa
     echo "ran RAXML for ${TE}"
 fi
 ### REPRESENTATIVE
