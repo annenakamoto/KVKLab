@@ -19,11 +19,11 @@ bootstraps=$3 # number of RAxML bootstraps to perform (normall 100)
 
 ### NORMAL
 if [ $mode == "normal" ]; then
-    #cat MAFFT_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } { gsub(/ /, "_"); print $1 "#" $2 ; }' | python KVKLab/Phase1/te_spec_lib.py > MAFFT_out/LIB_DOM_${TE}.fasta
-    #echo "created seq library for ${TE}"
+    cat MAFFT_out/tree_${TE}.txt | awk ' BEGIN { FS="#" } { gsub(/ /, "_"); print $1 "#" $2 ; }' | python KVKLab/Phase1/te_spec_lib.py > MAFFT_out/LIB_DOM_${TE}.fasta
+    echo "created seq library for ${TE}"
     cd /global/scratch/users/annen/MAFFT_out
-    #mafft LIB_DOM_${TE}.fasta > ${TE}_aligned.afa
-    #echo "completed MSA for ${TE}"
+    mafft LIB_DOM_${TE}.fasta > ${TE}_aligned.afa
+    echo "completed MSA for ${TE}"
     raxml -T 24 -n Raxml_${TE}.out -f a -x 12345 -p 12345 -# $bootstraps -m GTRCAT -s ${TE}_aligned.afa
     echo "ran RAXML for ${TE}"
 fi
