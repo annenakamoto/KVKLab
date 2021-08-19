@@ -17,4 +17,4 @@ busco -i ALL_GENOMES/$genome -l fungi_odb10 -o busco_$genome -m genome -c 24 -f 
 
 #python3 anaconda3/envs/BUSCO/bin/generate_plot.py -wd BUSCO_sum
 
-source deactivate
+conda deactivate
