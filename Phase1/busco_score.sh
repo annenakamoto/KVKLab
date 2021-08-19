@@ -1,6 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=Robust_TE_library
-#SBATCH --account=fc_kvkallow
+#SBATCH --job-name=busco
 #SBATCH --partition=savio2
 #SBATCH --qos=savio_normal
 #SBATCH --nodes=1
@@ -8,15 +7,14 @@
 #SBATCH --time=48:00:00
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
+
+genome=$1
+
 cd /global/scratch/users/annen/
 source activate /global/scratch/users/annen/anaconda3/envs/BUSCO
-
-#while read GENOME; do
     
-#    busco -i hq_genomes/$GENOME.fasta -l fungi_odb10 -o busco_$GENOME -m genome -c 24 -f --out_path BUSCO_out
+busco -i ALL_GENOMES/$genome -l fungi_odb10 -o busco_$genome -m genome -c 24 -f --out_path BUSCO_all_genomes
 
-#done < KVKLab/Phase1/robustTE_pipe_in.txt
-
-python3 anaconda3/envs/BUSCO/bin/generate_plot.py -wd BUSCO_sum
+#python3 anaconda3/envs/BUSCO/bin/generate_plot.py -wd BUSCO_sum
 
 source deactivate
