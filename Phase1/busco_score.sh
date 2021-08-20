@@ -12,8 +12,9 @@ genome=$1
 
 cd /global/scratch/users/annen/BUSCO_all_genomes
 source activate /global/scratch/users/annen/anaconda3/envs/BUSCO
-    
-busco -i /global/scratch/users/annen/ALL_GENOMES/$genome -l fungi_odb10 -o busco_$genome -m genome -c 24 -f --out_path BUSCO_out
+
+# fungi_odb10 -> sordariomycetes_odb10    
+busco -i /global/scratch/users/annen/ALL_GENOMES/$genome -l sordariomycetes_odb10 -o busco_$genome -m genome -c 24 -f --out_path BUSCO_out
 
 #python3 anaconda3/envs/BUSCO/bin/generate_plot.py -wd BUSCO_sum
 
