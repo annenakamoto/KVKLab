@@ -8,13 +8,11 @@
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
-genome=$1
-
 cd /global/scratch/users/annen/BUSCO_all_genomes
 source activate /global/scratch/users/annen/anaconda3/envs/BUSCO
 
 # fungi_odb10 -> sordariomycetes_odb10    
-busco -i /global/scratch/users/annen/ALL_GENOMES/$genome -l sordariomycetes_odb10 -o busco_$genome -m genome -c 24 -f --out_path BUSCO_out
+busco -i /global/scratch/users/annen/ALL_GENOMES -l sordariomycetes_odb10 -o busco_all_out -m genome -c 24 -f
 
 #python3 anaconda3/envs/BUSCO/bin/generate_plot.py -wd BUSCO_sum
 
