@@ -15,7 +15,7 @@ source activate /global/scratch/users/annen/anaconda3/envs/BUSCO
 #busco -i /global/scratch/users/annen/ALL_GENOMES -l sordariomycetes_odb10 -o busco_all_out -m genome -c 24 -f
 
 # generate a plot for all BUSCO runs
-cd /global/scratch-old/users/annen/anaconda3/envs/BUSCO/bin
-python3 generate_plot.py -wd /global/scratch/users/annen/BUSCO_all_genomes/busco_all_out/summaries
+cd /global/scratch/users/annen/anaconda3/envs/BUSCO/bin
+python3 generate_plot_old.py -wd /global/scratch/users/annen/BUSCO_all_genomes/busco_all_out/summaries
 
 conda deactivate
