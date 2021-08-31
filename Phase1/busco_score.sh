@@ -9,7 +9,7 @@
 #SBATCH --mail-type=ALL
 
 cd /global/scratch/users/annen/BUSCO_all_genomes
-source activate /global/scratch/users/annen/anaconda3/envs/BUSCO
+conda activate /global/scratch/users/annen/anaconda3/envs/BUSCO
 
 # fungi_odb10 -> sordariomycetes_odb10    
 #busco -i /global/scratch/users/annen/ALL_GENOMES -l sordariomycetes_odb10 -o busco_all_out -m genome -c 24 -f
