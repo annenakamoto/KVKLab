@@ -44,10 +44,10 @@ cd /global/scratch/users/annen/Rep_TE_Lib
 #cat REPLIB_list.txt | python /global/scratch/users/annen/KVKLab/Phase1/robustTE_prioritize.py REPLIB_uncl.fasta > REPLIB_clust.fasta
 
 ### running pfam_scan.pl on the clustered REPLIB_clust.fasta, translating it to protein sequences
-source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
-pfam_scan.pl -fasta REPLIB_clust.fasta -dir PFAM_lib -e_dom 0.01 -e_seq 0.01 -translate all -outfile pfam_REPLIB.out
-cat pfam_REPLIB.out | python /global/scratch/users/annen/KVKLab/Phase1/parse_pfam.py > pfam_REPLIB_list.txt
-conda deactivate
+#source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
+#pfam_scan.pl -fasta REPLIB_clust.fasta -dir PFAM_lib -e_dom 0.01 -e_seq 0.01 -translate all -outfile pfam_REPLIB.out
+#cat pfam_REPLIB.out | python /global/scratch/users/annen/KVKLab/Phase1/parse_pfam.py > pfam_REPLIB_list.txt
+#conda deactivate
 
 ### running rpsblast on the clustered REPLIB_clust.fasta
 rpstblastn -query REPLIB_clust.fasta -db CDD_lib/CDD_lib -out cdd_REPLIB.out -evalue 0.001 -outfmt 6
