@@ -31,4 +31,4 @@ while read GENOME; do
 done < rep_genome_list.txt
 
 ### run the library through CD-HIT
-
+cd-hit-est -i REPLIB_uncl.fasta -o REPLIB_clust -c 1.0 -aS 0.99 -g 1 -d 0 -T 24 -M 0
