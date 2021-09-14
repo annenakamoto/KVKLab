@@ -20,15 +20,27 @@
 cd /global/scratch/users/annen/Rep_TE_Lib
 
 ### concatenate RepBase and de novo annotated TE libraries
-cat fngrep.fasta > REPLIB_uncl.fasta
+#cat fngrep.fasta > REPLIB_uncl.fasta
 
-while read GENOME; do
-    cat denovo_annot/rmdb_$GENOME-families.fasta >> REPLIB_uncl.fasta
-done < rep_genome_list.txt
+#while read GENOME; do
+#    cat denovo_annot/rmdb_$GENOME-families.fasta >> REPLIB_uncl.fasta
+#done < rep_genome_list.txt
 
-while read GENOME; do
-    cat denovo_annot/irf_$GENOME.fasta >> REPLIB_uncl.fasta
-done < rep_genome_list.txt
+#while read GENOME; do
+#    cat denovo_annot/irf_$GENOME.fasta >> REPLIB_uncl.fasta
+#done < rep_genome_list.txt
 
 ### run the library through CD-HIT
-cd-hit-est -i REPLIB_uncl.fasta -o REPLIB_clust -c 1.0 -aS 0.99 -g 1 -d 0 -T 24 -M 0
+#cd-hit-est -i REPLIB_uncl.fasta -o REPLIB_clust -c 1.0 -aS 0.99 -g 1 -d 0 -T 24 -M 0
+
+### parse the clustered library to prioritize RepBase, RepeatModeler, then IRF to be the representative element
+awk 'BEGIN { max=0; clust=0; rb=0; }
+    />Cluster/ { max=0; rb=0; clust=$2 }
+    !/>irf-|>ltr-|>rnd-|>Cluster/ { if(substr($2, 1, length($2)-3)+0>max) { max=substr($2, 1, length($2)-3)+0; a[clust]=substr($3, 1, length($3)-3); rb=1 } }
+    />ltr-/ || />rnd-/ { if(max==0 || rb==0 && substr($2, 1, length($2)-3)+0>max) { max=substr($2, 1, length($2)-3)+0; a[clust]=substr($3, 1, length($3)-3) } }
+    />irf-/ && /\*/ { if(max==0) { max=substr($2, 1, length($2)-3)+0; a[clust]=substr($3, 1, length($3)-3) } }
+    END { for(i in a) { print a[i]; } }' REPLIB_clust.clstr > REPLIB_list.txt
+
+cat REPLIB_list.txt | python /global/scratch/users/annen/KVKLab/Phase1/robustTE_prioritize.py REPLIB_uncl.fasta > REPLIB_clust.fasta
+
+
