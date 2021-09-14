@@ -10,6 +10,8 @@
 
 ### following method in Phase1/domain_groups.sh
 
+cd /global/scratch/users/annen/Rep_TE_Lib
+
 name=$1     # ex: RVT_1
 accn=$2     # ex: PF00078.29
 
