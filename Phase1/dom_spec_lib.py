@@ -6,7 +6,7 @@ WITH_DOM = {}
 # construct library of TE names to keep
 keep = False
 lib_size = 0
-with open("domain_groups_LIB.txt", 'r') as lib:
+with open("domain_groups_REPLIB.txt", 'r') as lib:
     for line in lib:
         lst = line.split()
         if len(lst) > 0 and lst[0] == ">":
