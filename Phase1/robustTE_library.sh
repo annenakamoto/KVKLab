@@ -56,7 +56,7 @@ cd /global/scratch/users/annen
 # running pfam_scan.pl on the clustered LIB.fasta, translating it to protein sequences
 pfam_scan.pl -fasta LIB.fasta -dir PFAM_files/PFAM_lib -e_dom 0.01 -e_seq 0.01 -translate all -outfile pfam_LIB.out
 
-#cat pfam_LIB.out | python KVKLab/Phase1/parse_pfam.py > pfam_LIB_list.txt
+cat pfam_LIB.out | python KVKLab/Phase1/parse_pfam.py > pfam_LIB_list.txt
 source deactivate
 
 # scan library for CDD profile domains using RPS-BLAST
