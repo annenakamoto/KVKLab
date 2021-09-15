@@ -30,9 +30,13 @@ accn=$2     # ex: PF00078.29
 ### group TEs by the domains they contain
 #cat pfam_REPLIB_list.txt cdd_REPLIB_list_N.txt | python /global/scratch/users/annen/KVKLab/Phase1/group_by_domain.py > domain_groups_REPLIB.txt
 
-source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
-### Translate library (REPLIB_DOM.fasta) into protein sequence
+### Run RepeatClassifier on library
+source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 RepeatClassifier -consensi REPLIB_DOM.fasta -pa 24
+conda deactivate
+
+### Translate library (REPLIB_DOM.fasta) into protein sequence
+source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 translate -a -o REPLIB_DOM_trans.fasta REPLIB_DOM.fasta.classified
 
 ### make the domain-specific TE library
