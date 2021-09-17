@@ -8,7 +8,7 @@ for line in sys.stdin:
     if len(lst) > 0:
         NAME_MAP[lst[0]] = lst[1]
 
-with open("LIB_DOM.fasta.classified", 'r') as lib:
+with open("REPLIB_DOM.fasta.classified", 'r') as lib:
     for line in lib:
         lst = line.split()
         if len(lst) > 0:

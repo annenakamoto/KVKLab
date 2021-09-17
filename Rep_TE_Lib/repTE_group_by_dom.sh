@@ -10,12 +10,13 @@
 
 ###     Grouping TEs by the domains they contain, aligning the domains, and prodocing a phylogeny for the domain
 ###     Domains used:    
-###         RVT_1	PF00078.29
-###         DDE_1	PF03184.21
-###         rve	    PF00665.28
-###         Chromo	PF00385.26
-###         RNase_H	PF00075.26
-###         RVT_2	PF07727.16
+###         RVT_1	            PF00078.29
+###         DDE_1	            PF03184.21
+###         rve	                PF00665.28
+###         Chromo	            PF00385.26
+###         RNase_H	            PF00075.26
+###         RVT_2	            PF07727.16
+###         Exo_endo_phos_2     PF14529.8
 ###     following method in Phase1/domain_groups.sh
 ###     Usage: sbatch KVKLab/Rep_TE_Lib/repTE_group_by_dom.sh <domain_name> <domain_accession>
 
