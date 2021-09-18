@@ -25,20 +25,8 @@ cd /global/scratch/users/annen/Rep_TE_Lib
 name=$1     # ex: RVT_1
 accn=$2     # ex: PF00078.29
 
-### Translate CDD accession output into domain names
-#cat cdd_REPLIB_list.txt | python /global/scratch/users/annen/KVKLab/Phase1/cdd_to_name.py > cdd_REPLIB_list_N.txt
 
-### group TEs by the domains they contain
-#cat pfam_REPLIB_list.txt cdd_REPLIB_list_N.txt | python /global/scratch/users/annen/KVKLab/Phase1/group_by_domain.py > domain_groups_REPLIB.txt
-
-### Run RepeatClassifier on library
-#source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
-#RepeatClassifier -consensi REPLIB_DOM.fasta -pa 24
-#conda deactivate
-
-### Translate library (REPLIB_DOM.fasta) into protein sequence
 source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
-#translate -a -o REPLIB_DOM_trans.fasta REPLIB_DOM.fasta.classified
 
 ### make the domain-specific TE library
 cat REPLIB_DOM_trans.fasta | python /global/scratch/users/annen/KVKLab/Phase1/dom_spec_lib.py $1 > DOMspecTE_LIBs/LIB_DOM_${1}.fasta
