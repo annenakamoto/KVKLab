@@ -3,15 +3,17 @@ import sys
 genome = sys.argv[1]
 
 TE_COUNT = {
-    "GYMAG1_I": 0,
-    "GYMAG2_I": 0,
+    "GYMAG1_I": 0, 
+    "GYMAG2_I": 0, 
     "GYPSY1_MG": 0,
-    "MAGGY_I": 0,
-    "MGRL3_I": 0,
+    "MAGGY_I": 0, 
+    "MGRL3_I": 0, 
     "PYRET_I": 0,
+    "Copia_elem": 0,
     "MGR583": 0,
-    "POT2": 0,
-    "copia_fam": 0
+    "MoTeR1": 0, 
+    "POT2": 0, 
+    "TcMar_elem": 0
 }
 
 total = 0
@@ -26,6 +28,5 @@ for line in sys.stdin:
 
 TE_COUNT["other"] = total - total_minus_other
 
-### GENOME\tGYMAG1_I\tGYMAG2_I\tGYPSY1_MG\tMAGGY_I\tMGRL3_I\tPYRET_I\tMGR583\tPOT2\tcopia_fam\tother
 print(genome+"\t"+str(TE_COUNT["GYMAG1_I"])+"\t"+str(TE_COUNT["GYMAG2_I"])+"\t"+str(TE_COUNT["GYPSY1_MG"])+"\t"+str(TE_COUNT["MAGGY_I"])+"\t"+str(TE_COUNT["MGRL3_I"])+
-        "\t"+str(TE_COUNT["PYRET_I"])+"\t"+str(TE_COUNT["MGR583"])+"\t"+str(TE_COUNT["POT2"])+"\t"+str(TE_COUNT["copia_fam"])+"\t"+str(TE_COUNT["other"]))
+        "\t"+str(TE_COUNT["PYRET_I"])+str(TE_COUNT["Copia_elem"])+"\t"+str(TE_COUNT["MGR583"])+str(TE_COUNT["MoTeR1"])+"\t"+str(TE_COUNT["POT2"])+"\t"+"\t"+str(TE_COUNT["TcMar_elem"])+str(TE_COUNT["other"]))
