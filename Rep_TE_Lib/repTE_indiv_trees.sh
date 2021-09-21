@@ -27,6 +27,8 @@ cd /global/scratch/users/annen/MAFFT_out
 mafft Align_TEs/REPHITS_${TE}.fasta > Align_TEs/aligned_${TE}.afa
 echo "completed MSA for ${TE}"
 
+cat Align_TEs/aligned_${TE}.afa | tr \: \# > Align_TEs/Aligned_${TE}.afa
+
 cd Align_TEs
-raxml -T 24 -n Raxml_${TE}.out -f a -x 12345 -p 12345 -# $bootstraps -m GTRCAT -s aligned_${TE}.afa
+raxml -T 24 -n Raxml_${TE}.out -f a -x 12345 -p 12345 -# $bootstraps -m GTRCAT -s Aligned_${TE}.afa
 echo "ran RAXML for ${TE}"
