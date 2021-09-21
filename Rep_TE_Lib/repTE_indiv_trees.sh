@@ -23,10 +23,10 @@ while read genome; do
 done < rep_genome_list.txt 
 echo "created RepeatMasker hits library for ${TE}"
 
-# cd /global/scratch/users/annen/MAFFT_out
-# mafft Align_TEs/REPHITS_${TE}.fasta > Align_TEs/aligned_${TE}.afa
-# echo "completed MSA for ${TE}"
+cd /global/scratch/users/annen/MAFFT_out
+mafft Align_TEs/REPHITS_${TE}.fasta > Align_TEs/aligned_${TE}.afa
+echo "completed MSA for ${TE}"
 
-# cd Align_TEs
-# raxml -T 24 -n Raxml_${TE}.out -f a -x 12345 -p 12345 -# $bootstraps -m GTRCAT -s aligned_${TE}.afa
-# echo "ran RAXML for ${TE}"
+cd Align_TEs
+raxml -T 24 -n Raxml_${TE}.out -f a -x 12345 -p 12345 -# $bootstraps -m GTRCAT -s aligned_${TE}.afa
+echo "ran RAXML for ${TE}"
