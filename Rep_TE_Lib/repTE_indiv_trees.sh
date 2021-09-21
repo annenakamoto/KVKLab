@@ -4,7 +4,7 @@
 #SBATCH --qos=savio_normal
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
-#SBATCH --time=12:00:00
+#SBATCH --time=72:00:00
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
@@ -18,7 +18,8 @@ cd /global/scratch/users/annen/Rep_TE_Lib
 
 > Align_TEs/REPHITS_${TE}.fasta
 while read genome; do
-    cat RMask_out/${genome}.RM.fasta | python /global/scratch/users/annen/KVKLab/Rep_TE_Lib/spec_te_hits.py $TE $genome >> Align_TEs/REPHITS_${TE}.fasta
+    cat RMask_out/${genome}.RM.fasta | python /global/scratch/users/annen/KVKLab/Rep_TE_Lib/filt_te_hits.py RMask_out/${genome}.RM.uniq.txt > RMask_out/${genome}.RM.filt.fasta
+    cat RMask_out/${genome}.RM.filt.fasta | python /global/scratch/users/annen/KVKLab/Rep_TE_Lib/spec_te_hits.py $TE $genome >> Align_TEs/REPHITS_${TE}.fasta
 done < rep_genome_list.txt 
 echo "created RepeatMasker hits library for ${TE}"
 
