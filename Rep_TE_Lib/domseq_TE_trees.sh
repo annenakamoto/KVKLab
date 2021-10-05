@@ -33,6 +33,10 @@ echo "reformatted to fasta"
 
 conda deactivate
 
+cp 1${TE}.${DOM}.fa_align.Matches.${leng}min.fa /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs
+
+cd /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs
+
 echo "********* STARTING TO MAKE TREE *********"
 raxml -T 24 -n Raxml_${TE}.${DOM}.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s 1${TE}.${DOM}.fa_align.Matches.${leng}min.fa
 echo "ran RAXML for ${TE}.${DOM}"
