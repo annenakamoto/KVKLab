@@ -24,7 +24,7 @@ echo "scanned ${TE} TEs for ${DOM} domain"
 conda deactivate
 
 ### make a bed file of the pfam_scan.pl output
-awk -v OFS='\t' '$18 ~ !/\#/ { print $1, $2, $3, $7, "0", $16 }' ${TE}.pfam.out > ${TE}.pfam.bed
+awk -v OFS='\t' '$18 ~ !/\#/ { print substr($1,1,length($1)-2), $2, $3, $7, "0", $16 }' ${TE}.pfam.out > ${TE}.pfam.bed
 
 ### extract the domain sequences using bedtools getfasta
 bedtools getfasta -fo ${TE}.${DOM}.fasta -name -s -fi /global/scratch/users/annen/Rep_TE_Lib/Align_TEs/REPHITS_${TE}.fasta -bed ${TE}.pfam.bed
