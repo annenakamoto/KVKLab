@@ -34,7 +34,9 @@ echo "got the ${DOM} domain sequences from each ${TE} TE"
 mafft ${TE}.${DOM}.fasta > Alignments/${TE}.${DOM}.afa
 echo "aligned the ${DOM} domain sequences"
 
+cat Alignments/${TE}.${DOM}.afa | tr \: \# | tr \( \{ | tr \) \} > Alignments/${TE}.${DOM}.Aligned.afa
+
 cd Alignments
 ### make the tree using RAxML
-raxml -T 24 -n Raxml_${TE}.${DOM}.out -f a -x 12345 -p 12345 -# 100 -m GTRGAMMA -s ${TE}.${DOM}.afa
+raxml -T 24 -n Raxml_${TE}.${DOM}.out -f a -x 12345 -p 12345 -# 100 -m GTRGAMMA -s ${TE}.${DOM}.Aligned.afa
 echo "made a tree for ${TE} using ${DOM} domain"
