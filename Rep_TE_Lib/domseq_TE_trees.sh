@@ -19,10 +19,9 @@ cd /global/scratch/users/annen/Rep_TE_Lib/PFAM_lib
 
 translate -a -o REPHITS_${TE}_trans.fasta /global/scratch/users/annen/Rep_TE_Lib/Align_TEs/REPHITS_${TE}.fasta
 
-### Align domains using hmmalign
+### Align domains using hmmalign and format output
 hmmalign --trim --amino --informat fasta -o ${TE}.${DOM}_align.sto ${DOM}.hmm REPHITS_${TE}_trans.fasta
 echo "aligned ${DOM} in ${TE} TEs"
-
 tr \: \# < ${TE}.${DOM}_align.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > 1${TE}.${DOM}.sto
 echo "converted lower case characters (insertions) to gaps"
 esl-reformat --mingap -o 2${TE}.${DOM}.fa afa 1${TE}.${DOM}.sto
@@ -33,12 +32,14 @@ echo "trimmed sequences at minimum ~70% of the model"
 esl-reformat -o 1${TE}.${DOM}.fa_align.Matches.${leng}min.fa afa 1${TE}.${DOM}.fa
 echo "reformatted to fasta"
 
-conda deactivate
+### get rid of illegal characters
+cat 1${TE}.${DOM}.fa_align.Matches.${leng}min.fa | tr \: \# | tr \( \{ | tr \) \} > ${TE}.${DOM}.fa_align.Matches.${leng}min.fa
 
-cp 1${TE}.${DOM}.fa_align.Matches.${leng}min.fa /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs
+conda deactivate
+cp ${TE}.${DOM}.fa_align.Matches.${leng}min.fa /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs
 
 cd /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs
 
 echo "********* STARTING TO MAKE TREE *********"
-raxml -T 24 -n Raxml_${TE}.${DOM}.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s 1${TE}.${DOM}.fa_align.Matches.${leng}min.fa
+raxml -T 24 -n Raxml_${TE}.${DOM}.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s ${TE}.${DOM}.fa_align.Matches.${leng}min.fa
 echo "ran RAXML for ${TE}.${DOM}"
