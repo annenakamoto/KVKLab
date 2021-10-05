@@ -25,7 +25,7 @@ tr \: \# < ${TE}.${DOM}_align.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' 
 echo "converted lower case characters (insertions) to gaps"
 esl-reformat --mingap -o 2${TE}.${DOM}.fa afa 1${TE}.${DOM}.sto
 echo "removed all-gap columns so that the number of columns matches HMM length"
-leng=$(grep LENG ${1}.hmm | awk '{ print int($2*0.7) }')
+leng=$(grep LENG ${DOM}.hmm | awk '{ print int($2*0.7) }')
 esl-alimanip -o 1${TE}.${DOM}.fa --lmin $leng 2${TE}.${DOM}.fa
 echo "trimmed sequences at minimum ~70% of the model"
 esl-reformat -o 1${TE}.${DOM}.fa_align.Matches.${leng}min.fa afa 1${TE}.${DOM}.fa
