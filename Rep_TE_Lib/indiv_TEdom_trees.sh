@@ -10,6 +10,8 @@
 
 ###     Create a TE tree based on one domain
 ###     Usage: sbatch KVKLab/Rep_TE_Lib/indiv_TEdom_trees.sh <TE> <PFAM domain>
+###     Before running this, set up the Pfam dir for DOM
+###     
 
 TE=$1   # RepBase element (ex. MAGGY)
 DOM=$2  # pfam domain (ex. RVT_1)
@@ -24,7 +26,7 @@ echo "scanned ${TE} TEs for ${DOM} domain"
 conda deactivate
 
 ### make a bed file of the pfam_scan.pl output
-awk -v OFS='\t' '$18 ~ !/\#/ { print substr($1,1,length($1)-2), $2, $3, $7, "0", $16 }' ${TE}.pfam.out > ${TE}.pfam.bed
+awk -v OFS='\t' '$18 ~ !/\#/ { print substr($1,1,length($1)-2), $2, $3, $7 "#" substr($1,1,length($1)-2), "0", $16 }' ${TE}.pfam.out > ${TE}.pfam.bed
 
 ### extract the domain sequences using bedtools getfasta
 bedtools getfasta -fo ${TE}.${DOM}.fasta -name -s -fi /global/scratch/users/annen/Rep_TE_Lib/Align_TEs/REPHITS_${TE}.fasta -bed ${TE}.pfam.bed
