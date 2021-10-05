@@ -11,7 +11,8 @@
 ###     Create a TE tree based on one domain
 ###     Usage: sbatch KVKLab/Rep_TE_Lib/indiv_TEdom_trees.sh <TE> <PFAM domain>
 ###     Before running this, set up the Pfam dir for DOM
-###         hmmfetch -o Pfam-A.hmm 
+###         hmmfetch -o Pfam-A.hmm <dir>/Pfam-A.hmm <acc>
+###         hmmpress Pfam-A.hmm 
 
 TE=$1   # RepBase element (ex. MAGGY)
 DOM=$2  # pfam domain (ex. RVT_1)
