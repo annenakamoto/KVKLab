@@ -10,7 +10,7 @@
 
 ### find Jukes-Cantor distances
 
-NUM = $1    ### first argument is the number of sequences in fasta file
-FASTA = $2  ### second argument is the path to fasta file
+NUM=$1    ### first argument is the number of sequences in fasta file
+FASTA=$2  ### second argument is the path to fasta file
 
-python jc_dist_BOYAN.py $NUM $FASTA
+python KVKLab/Jukes-Cantor/jc_dist_BOYAN.py $NUM $FASTA
