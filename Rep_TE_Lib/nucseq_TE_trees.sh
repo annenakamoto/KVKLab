@@ -17,5 +17,11 @@ source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 
 cd /global/scratch/users/annen/Rep_TE_Lib/PFAM_lib
 
-hmmalign --trim --amino --informat fasta -o ${TE}.${DOM}_align.psiblast --outformat PSIBLAST ${DOM}.hmm REPHITS_${TE}_trans.fasta
-echo "aligned ${DOM} in ${TE} TEs, output in PSIBLAST format"
+# Stockholm, Pfam, A2M, PSIBLAST
+hmmalign --trim --amino --informat fasta -o ${TE}.${DOM}_align.a2m --outformat A2M ${DOM}.hmm REPHITS_${TE}_trans.fasta
+echo "aligned ${DOM} in ${TE} TEs, output in A2M format"
+
+hmmalign --trim --amino --informat fasta -o ${TE}.${DOM}_align.pfam --outformat Pfam ${DOM}.hmm REPHITS_${TE}_trans.fasta
+echo "aligned ${DOM} in ${TE} TEs, output in Pfam format"
+
+conda deactivate
