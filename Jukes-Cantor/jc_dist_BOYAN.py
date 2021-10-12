@@ -71,7 +71,7 @@ def make_path(*argv):
 # usage: python jc_dist_BOYAN.py <num_seq> <fasta_path>
 
 N = sys.argv[1]             ### Arg1 is the total number of sequences in fasta file
-frags_path = sys.argv[1]    ### Arg2 is the path to fasta file
+frags_path = sys.argv[2]    ### Arg2 is the path to fasta file
 
 def main():
     #N is the total number of sequences in your file
