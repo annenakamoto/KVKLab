@@ -87,6 +87,20 @@ def main():
     
     print(X)
 
+def main_dict():
+    #N is the total number of sequences in your file
+    #frags_path is the path to a fasta file containing your sequences
+    #X is an array whose ith row and jth column represent the jukes cantor distance between sequence i and sequence j
+    DIST = {}
+
+    for (ii, record1), (jj, record2)  in tqdm(combinations(enumerate(SeqIO.parse(frags_path, 'fasta')), r = 2)):                                  
+        alignment = aligner.align(record1.seq, record2.seq)[0]
+        d = jc_dist(repr(str(alignment)).split('\\n')[1])
+        DIST[(ii, jj)] = d
+    
+    for key, value in DIST:
+        print(key + '\t' + value)
+
 
 ### RUN
-main()
+main_dict()
