@@ -38,7 +38,7 @@ def jc_dist(aln_str):
 
 aligner = Align.PairwiseAligner()
 
-aligner.mode = 'global'     # should it be 'local' for TEs ?
+aligner.mode = 'local'     # should it be 'local' for TEs ? ('global')
 aligner.match_score = 0
 aligner.mismatch_score = -1
 aligner.open_gap_score = -1
