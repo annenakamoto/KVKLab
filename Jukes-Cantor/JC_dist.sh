@@ -13,7 +13,9 @@
 NUM=$1    ### first argument is the number of sequences in fasta file
 FASTA=$2  ### second argument is the path to fasta file
 
-source activate /global/scratch/users/annen/anaconda3/envs/biopython
+# TEST RUN: sbatch KVKLab/Jukes-Cantor/JC_dist.sh 9 /global/scratch/users/annen/JC_Dist/RepBase_TEs_interest.fasta.txt
+
+source activate /global/scratch/users/annen/anaconda3/envs/Biopython
 
 python KVKLab/Jukes-Cantor/jc_dist_BOYAN.py $NUM $FASTA
 
