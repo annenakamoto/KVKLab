@@ -98,8 +98,8 @@ def main_dict():
         d = jc_dist(repr(str(alignment)).split('\\n')[1])
         DIST[(record1.name, record2.name)] = d
     
-    for (key1, key2), value in DIST:
-        print((key1, key2), '\t' + value)
+    for key, value in DIST.items():
+        print(key, '\t' + value)
 
 
 ### RUN
