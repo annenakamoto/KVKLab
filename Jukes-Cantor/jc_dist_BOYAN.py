@@ -77,7 +77,7 @@ def main():
     #N is the total number of sequences in your file
     #frags_path is the path to a fasta file containing your sequences
     #X is an array whose ith row and jth column represent the jukes cantor distance between sequence i and sequence j
-    X = np.zeros((N,N))
+    X = np.zeros((int(N),int(N)))
 
     for (ii, record1), (jj, record2)  in tqdm(combinations(enumerate(SeqIO.parse(frags_path, 'fasta')), r = 2)):                                  
         alignment = aligner.align(record1.seq, record2.seq)[0]
