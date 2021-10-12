@@ -99,7 +99,7 @@ def main_dict():
         DIST[(record1.name, record2.name)] = d
     
     for key, value in DIST.items():
-        print(key, '\t' + value)
+        print(key, '\t', value)
 
 
 ### RUN
