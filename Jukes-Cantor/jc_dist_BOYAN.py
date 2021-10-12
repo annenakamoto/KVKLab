@@ -86,3 +86,7 @@ def main():
         X[jj, ii] = d
     
     print(X)
+
+
+### RUN
+main()
