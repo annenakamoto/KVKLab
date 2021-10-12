@@ -96,7 +96,7 @@ def main_dict():
     for (ii, record1), (jj, record2)  in tqdm(combinations(enumerate(SeqIO.parse(frags_path, 'fasta')), r = 2)):                                  
         alignment = aligner.align(record1.seq, record2.seq)[0]
         d = jc_dist(repr(str(alignment)).split('\\n')[1])
-        DIST[(record1, record2)] = d
+        DIST[(record1.name, record2.name)] = d
     
     for key, value in DIST:
         print(key + '\t' + value)
