@@ -68,39 +68,22 @@ def make_path(*argv):
     return mypath
 
 
-# usage: python jc_dist_BOYAN.py <num_seq> <fasta_path>
+###     Usage: python JC_dist_ref.py <lib_fasta_path> <ref_fasta_path>
+###     lib_fasta_path: path to fasta file containing many sequences
+###     ref_fasta_path: path to fasta file containing one reference sequence
 
-N = sys.argv[1]             ### Arg1 is the total number of sequences in fasta file
-frags_path = sys.argv[2]    ### Arg2 is the path to fasta file
+frags_path = sys.argv[1]    ### Arg1 is the path to the library fasta file
+ref_path = sys.argv[2]      ### Arg2 is the path to the reference fasta file
 
 def main():
-    #N is the total number of sequences in your file
-    #frags_path is the path to a fasta file containing your sequences
-    #X is an array whose ith row and jth column represent the jukes cantor distance between sequence i and sequence j
-    X = np.zeros((int(N),int(N)))
-
-    for (ii, record1), (jj, record2)  in tqdm(combinations(enumerate(SeqIO.parse(frags_path, 'fasta')), r = 2)):                                  
-        alignment = aligner.align(record1.seq, record2.seq)[0]
-        d = jc_dist(repr(str(alignment)).split('\\n')[1])
-        X[ii, jj] = d
-        X[jj, ii] = d
-    
-    print(X)
-
-def main_dict():
-    #N is the total number of sequences in your file
-    #frags_path is the path to a fasta file containing your sequences
-    #X is an array whose ith row and jth column represent the jukes cantor distance between sequence i and sequence j
     DIST = {}
-
-    for (ii, record1), (jj, record2)  in tqdm(combinations(enumerate(SeqIO.parse(frags_path, 'fasta')), r = 2)):                                  
-        alignment = aligner.align(record1.seq, record2.seq)[0]
+    reference = SeqIO.parse(ref_path, 'fasta')[0]
+    for record in SeqIO.parse(frags_path, 'fasta'):                                  
+        alignment = aligner.align(record.seq, reference.seq)[0]
         d = jc_dist(repr(str(alignment)).split('\\n')[1])
-        DIST[(record1.name, record2.name)] = d
-    
+        DIST[record.name] = d
     for key, value in DIST.items():
-        print(key, '\t', value)
-
+        print(key + '\t' + str(value))
 
 ### RUN
-main_dict()
+main()
