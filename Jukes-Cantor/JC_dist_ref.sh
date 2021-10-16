@@ -29,7 +29,7 @@ cons -sequence ${NAME}.aligned -outseq ${NAME}.cons.fasta
 module unload python
 source activate /global/scratch/users/annen/anaconda3/envs/Biopython
 
-python KVKLab/Jukes-Cantor/JC_dist_ref.py ${LIB_PATH} ${NAME}.cons.fasta > ${NAME}_jc.out
+python /global/scratch/users/annen/KVKLab/Jukes-Cantor/JC_dist_ref.py ${LIB_PATH} ${NAME}.cons.fasta > ${NAME}_jc.out
 
 conda deactivate
 module load python
