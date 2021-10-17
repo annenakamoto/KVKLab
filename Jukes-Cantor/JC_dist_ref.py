@@ -77,11 +77,13 @@ ref_path = sys.argv[2]      ### Arg2 is the path to the reference fasta file
 
 def main():
     DIST = {}
-    reference = SeqIO.parse(ref_path, 'fasta')[0]
+    ref_iter = SeqIO.parse(ref_path, 'fasta')
+    reference = ref_iter.next()
     for record in SeqIO.parse(frags_path, 'fasta'):                                  
         alignment = aligner.align(record.seq, reference.seq)[0]
         d = jc_dist(repr(str(alignment)).split('\\n')[1])
         DIST[record.name] = d
+    print(reference.name)
     for key, value in DIST.items():
         print(key + '\t' + str(value))
 
