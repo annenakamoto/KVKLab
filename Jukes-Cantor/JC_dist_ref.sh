@@ -28,7 +28,7 @@ cat /global/scratch/users/annen/Rep_TE_Lib/PFAM_lib/1${NAME}.${DOM}.fa_align.Mat
 echo "*** created filtered ${NAME} library ***"
 
 ### generate MSA and remove all-gap columns
-mafft ${NAME}.filt_lib.fasta > ${NAME}.filt_lib.aligned
+mafft --localpair ${NAME}.filt_lib.fasta > ${NAME}.filt_lib.aligned
 source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 esl-reformat --mingap -o ${NAME}.filt_al.nogap afa ${NAME}.filt_lib.aligned
 source deactivate
