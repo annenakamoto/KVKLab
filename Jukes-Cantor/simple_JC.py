@@ -10,5 +10,5 @@ for line in sys.stdin:
     p = (length-identity)/length
     if p < 3/4:
         jc_dist = -(3/4)*math.log(1-((4/3)*p))
-        if jc_dist < 0:
+        if jc_dist < 1:
             print(te + '\t' + str(jc_dist) + '\t' + line)
