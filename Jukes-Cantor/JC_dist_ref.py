@@ -36,7 +36,7 @@ def jc_dist(aln_str):
     T = G+I+fU
     dist = -3/4*np.log(1-4/3*(fU/(I+fU)))*(1 - G/T)+G/T
     if np.isnan(dist):
-        print("G=" + G, "I=" + I, "fU=" + fU, "T=" + T)
+        print("G=" + str(G), "I=" + str(I), "fU=" + str(fU), "T=" + str(T))
         return 1
     return dist                            
 
