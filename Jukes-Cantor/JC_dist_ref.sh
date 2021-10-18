@@ -23,18 +23,18 @@ lib=$(basename $1)
 cd /global/scratch/users/annen/JC_Dist
 
 ### generate MSA and remove all-gap columns
-mafft ${LIB_PATH} > ${NAME}.aligned
-source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
-esl-reformat --mingap -o ${NAME}.al.nogap afa ${NAME}.aligned
-source deactivate
+#mafft ${LIB_PATH} > ${NAME}.aligned
+#source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
+#esl-reformat --mingap -o ${NAME}.al.nogap afa ${NAME}.aligned
+#source deactivate
 
 ### generate consensus sequence
-cons -sequence ${NAME}.al.nogap -outseq ${NAME}.cons.fasta -name ${NAME}_cons
+#cons -sequence ${NAME}.al.nogap -outseq ${NAME}.cons.fasta -name ${NAME}_cons
 
-# need to unload cluster python module for Biopython conda env to work
-source activate /global/scratch/users/annen/anaconda3/envs/Biopython
+### use needle to align each TE to the consensus and find the percent identity
+needle -asequence ${NAME}.cons.fasta -bsequence ${LIB_PATH} -outfile ${NAME}.needle
 
-### compute jukes-cantor distances
-python /global/scratch/users/annen/KVKLab/Jukes-Cantor/JC_dist_ref.py ${LIB_PATH} ${NAME}.cons.fasta > ${NAME}_jc.txt
-
-conda deactivate
+### compute jukes-cantor distances using Boyan's modified python script
+#source activate /global/scratch/users/annen/anaconda3/envs/Biopython
+#python /global/scratch/users/annen/KVKLab/Jukes-Cantor/JC_dist_ref.py ${LIB_PATH} ${NAME}.cons.fasta > ${NAME}_jc.txt
+#conda deactivate
