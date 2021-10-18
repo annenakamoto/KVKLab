@@ -9,7 +9,7 @@ for line in sys.stdin:
     length = int(lst[1])
     p = (length-identity)/length
     if p >= 3/4:
-        print(te + '\t' + "1")
+        print(te + '\t' + "1" + '\t' + line)
     else:
         jc_dist = -(3/4)*math.log(1-((4/3)*p))
-        print(te + '\t' + str(jc_dist))
+        print(te + '\t' + str(jc_dist) + '\t' + line)
