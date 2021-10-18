@@ -24,7 +24,7 @@ cd /global/scratch/users/annen/JC_Dist
 
 mafft ${LIB_PATH} > ${NAME}.aligned
 source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
-esl-reformat --nogap -o ${NAME}.al.nogap afa ${NAME}.aligned
+esl-reformat --mingap -o ${NAME}.al.nogap afa ${NAME}.aligned
 source deactivate
 cons -sequence ${NAME}.al.nogap -outseq ${NAME}.cons.fasta -name ${NAME}_cons
 
