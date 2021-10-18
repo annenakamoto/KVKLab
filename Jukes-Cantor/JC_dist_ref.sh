@@ -23,7 +23,7 @@ lib=$(basename $1)
 cd /global/scratch/users/annen/JC_Dist
 
 mafft ${LIB_PATH} > ${NAME}.aligned
-trimal -in ${NAME}.aligned -out ${NAME}.al.nogap -noallgaps
+trimal -in ${NAME}.aligned -out ${NAME}.al.nogap -nogaps
 cons -sequence ${NAME}.al.nogap -outseq ${NAME}.cons.fasta -name ${NAME}_cons
 
 
