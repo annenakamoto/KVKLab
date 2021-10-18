@@ -12,7 +12,7 @@
 ###     following method in Phase1/tree_def.sh
 
 TE=$1   # RepBase element (ex. MAGGY)
-bootstraps=$2 # number of RAxML bootstraps to perform (normall 100)
+bootstraps=100 # number of RAxML bootstraps to perform (normall 100)
 
 cd /global/scratch/users/annen/Rep_TE_Lib
 
