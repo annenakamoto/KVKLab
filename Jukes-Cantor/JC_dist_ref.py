@@ -34,7 +34,11 @@ def jc_dist(aln_str):
     I = aln_str.count('|')
     fU = aln_str.count('.')
     T = G+I+fU
-    return -3/4*np.log(1-4/3*(fU/(I+fU)))*(1 - G/T)+G/T                                      
+    dist = -3/4*np.log(1-4/3*(fU/(I+fU)))*(1 - G/T)+G/T
+    if np.isnan(dist):
+        print("G=" + G, "I=" + I, "fU=" + fU, "T=" + T)
+        return 1
+    return dist                            
 
 aligner = Align.PairwiseAligner()
 
