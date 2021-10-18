@@ -23,7 +23,8 @@ lib=$(basename $1)
 cd /global/scratch/users/annen/JC_Dist
 
 mafft ${LIB_PATH} > ${NAME}.aligned
-cons -sequence ${NAME}.aligned -outseq ${NAME}.cons.fasta -name ${NAME}_cons -identity 2
+trimal -in ${NAME}.aligned -out ${NAME}.al.nogap -noallgaps
+cons -sequence ${NAME}.al.nogap -outseq ${NAME}.cons.fasta -name ${NAME}_cons
 
 
 module unload python
