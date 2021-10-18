@@ -23,7 +23,9 @@ lib=$(basename $1)
 cd /global/scratch/users/annen/JC_Dist
 
 mafft ${LIB_PATH} > ${NAME}.aligned
-trimal -in ${NAME}.aligned -out ${NAME}.al.nogap -nogaps
+source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
+esl-reformat --mingap -o ${NAME}.al.nogap afa ${NAME}.aligned
+source deactivate
 cons -sequence ${NAME}.al.nogap -outseq ${NAME}.cons.fasta -name ${NAME}_cons
 
 
