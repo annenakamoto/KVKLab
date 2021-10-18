@@ -32,7 +32,7 @@ cd /global/scratch/users/annen/JC_Dist
 #cons -sequence ${NAME}.al.nogap -outseq ${NAME}.cons.fasta -name ${NAME}_cons
 
 ### use needle to align each TE to the consensus and find the percent identity
-needle -asequence ${NAME}.cons.fasta -bsequence ${LIB_PATH} -outfile ${NAME}.needle
+needle -asequence ${NAME}.cons.fasta -bsequence ${LIB_PATH} -outfile ${NAME}.needle -gapopen 10.0 -gapextend 0.5
 
 ### compute jukes-cantor distances using Boyan's modified python script
 #source activate /global/scratch/users/annen/anaconda3/envs/Biopython
