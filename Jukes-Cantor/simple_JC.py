@@ -11,4 +11,4 @@ for line in sys.stdin:
     if p < 3/4:
         jc_dist = -(3/4)*math.log(1-((4/3)*p))
         if jc_dist < 1:
-            print(te + '\t' + str(jc_dist) + '\t' + line)
+            print(te + '\t' + str(jc_dist) + '\t' + line[:-1])
