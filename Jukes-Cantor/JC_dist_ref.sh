@@ -21,7 +21,7 @@ LIB_PATH=/global/scratch/users/annen/Rep_TE_Lib/Align_TEs/REPHITS_${NAME}.fasta 
 lib=$(basename $1)
 
 # TEST RUN: sbatch KVKLab/Jukes-Cantor/JC_dist_ref.sh 
-cd /global/scratch/users/annen/JC_Dist_filt
+cd /global/scratch/users/annen/JC_dist_filt
 
 ### filter TE library (filtered library in ${NAME}.filt_lib.fasta)
 cat /global/scratch/users/annen/Rep_TE_Lib/PFAM_lib/1${NAME}.${DOM}.fa_align.Matches.* | awk '/>/ { print substr($1, 1, length($1)-2) }' | tr \# \: | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/filter_te_lib.py ${LIB_PATH} ${NAME} > ${NAME}.filt_lib.fasta
