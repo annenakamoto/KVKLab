@@ -15,10 +15,10 @@ G=$1 # "2" or "A" (all)
 
 cd /global/scratch/users/annen/Rep_TE_Lib
 
-> Align_local/REPHITS_POT2_${G}.fasta
+> Align_TEs/REPHITS_POT2_${G}.fasta
 while read genome; do
     cat RMask_out/${genome}.RM.fasta | python /global/scratch/users/annen/KVKLab/Rep_TE_Lib/filt_te_hits.py RMask_out/${genome}.RM.uniq.txt > RMask_out/${genome}.RM.filt.fasta
-    cat RMask_out/${genome}.RM.filt.fasta | python /global/scratch/users/annen/KVKLab/Rep_TE_Lib/spec_te_hits.py POT2 $genome >> Align_local/REPHITS_POT2_${G}.fasta
+    cat RMask_out/${genome}.RM.filt.fasta | python /global/scratch/users/annen/KVKLab/Rep_TE_Lib/spec_te_hits.py POT2 $genome >> Align_TEs/REPHITS_POT2_${G}.fasta
 done < pot2_${G}_genome_list.txt 
 echo "created RepeatMasker hits library for POT2, with 2 genomes from each lineage"
 
