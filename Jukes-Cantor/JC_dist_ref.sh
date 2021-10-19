@@ -37,9 +37,11 @@ echo "*** finished ${NAME} MSA ***"
 ### generate consensus sequence
 cons -sequence ${NAME}.filt_al.nogap -outseq ${NAME}.filt.cons.fasta -name ${NAME}
 echo "*** generated ${NAME} consensus sequence ***"
+cat ${NAME}.filt.cons.fasta | awk '{ gsub("n", ""); print; }' > ${NAME}.CONS.fasta 
+echo "*** removed unknown (n) characters from consensus ***"
 
 ### use needle to align each TE to the consensus and find the percent identity, then compute JC dist in python
-needle -asequence ${NAME}.filt.cons.fasta -bsequence ${NAME}.filt_lib.fasta -outfile ${NAME}.filt.needle -gapopen 10.0 -gapextend 0.5
+needle -asequence ${NAME}.CONS.fasta  -bsequence ${NAME}.filt_lib.fasta -outfile ${NAME}.filt.needle -gapopen 10.0 -gapextend 0.5
 echo "*** finished needle for ${NAME} ***"
 cat ${NAME}.filt.needle | awk '/# Identity:/ { print $3 }' | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/simple_JC.py ${NAME} > ${NAME}.filt.JC.out.txt
 echo "*** finished computing JC discances ***"
