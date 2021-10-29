@@ -20,8 +20,8 @@ LIB_PATH=/global/scratch/users/annen/Rep_TE_Lib/Align_TEs/REPHITS_${TE}.fasta   
 cd /global/scratch/users/annen/JC_dist_indiv_TEs/${TE}
 
 ### filter TE library by domain (filtered library in ${TE}.${GEN}.filt_lib.fasta.filt_lib.fasta)
-#cat /global/scratch/users/annen/Rep_TE_Lib/PFAM_lib/1${TE}.${DOM}.fa_align.Matches.* | awk -v gen=${GEN} '$0 ~ gen { print substr($1, 1, length($1)-2) }' | tr \# \: | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/filter_te_lib.py ${LIB_PATH} ${TE} > ${TE}.${GEN}.filt_lib.fasta
-#echo "*** created filtered ${TE} ${GEN} library ***"
+cat /global/scratch/users/annen/Rep_TE_Lib/PFAM_lib/1${TE}.${DOM}.fa_align.Matches.* | awk -v gen=${GEN} '$0 ~ gen { print substr($1, 1, length($1)-2) }' | tr \# \: | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/filter_te_lib.py ${LIB_PATH} ${TE} > ${TE}.${GEN}.filt_lib.fasta
+echo "*** created filtered ${TE} ${GEN} library ***"
 
 ### generate MSA and remove all-gap columns
 #mafft --localpair ${TE}.${GEN}.filt_lib.fasta > ${TE}.${GEN}.filt_lib.aligned
