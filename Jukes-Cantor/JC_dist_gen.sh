@@ -42,20 +42,22 @@ cat MZ5-1-6.cds.fasta | awk '/>/ { print "'\''" substr($1, 2, length($1)), $2 "'
 
 ### make reference fasta (guy11)
 while read gene; do
-    OG=$(grep "${gene}" SCOs.txt | awk 'BEGIN { FS=":" } { print $1 }')
+    GENE=$(echo $gene | sed 's/.$//')
+    OG=$(grep "${GENE}" SCOs.txt | awk 'BEGIN { FS=":" } { print $1 }')
     echo "$OG for guy11"
     if [ -n "${OG}"]; then
-        cat guy11.cds.fasta | awk -v gen="${gene}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' > SCOs/${OG}_ref.fasta
+        cat guy11.cds.fasta | awk -v gen="${GENE}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' > SCOs/${OG}_ref.fasta
     fi
 done < guy11.cds.list.txt
 
 ### make representative genome fasta (5 others)
 while read genome; do
     while read gene; do
-        OG=$(grep "${gene}" SCOs.txt | awk 'BEGIN { FS=":" } { print $1 }')
+        GENE=$(echo $gene | sed 's/.$//')
+        OG=$(grep "${GENE}" SCOs.txt | awk 'BEGIN { FS=":" } { print $1 }')
         echo "$OG for $genome"
         if [ -n "${OG}"]; then
-            cat ${genome}.cds.fasta | awk -v gen="${gene}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' >> SCOs/${OG}_ref.fasta
+            cat ${genome}.cds.fasta | awk -v gen="${GENE}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' >> SCOs/${OG}_ref.fasta
         fi
     done < ${genome}.cds.list.txt
 done < ref_genomes.list.txt
