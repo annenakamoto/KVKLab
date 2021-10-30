@@ -33,12 +33,12 @@ cd /global/scratch/users/annen/JC_gist_genomes
 #     > SCOs/${orthogroup}_rep.fasta   # the other representative genomes
 # done < SingleCopyOrthogroups.txt
 
-cat guy11.cds.fasta | awk '/>/ { print substr($1, 2, length($1)), $2; }' > guy11.cds.list.txt
-cat FJ98099.cds.fasta | awk '/>/ { print substr($1, 2, length($1)), $2; }' > FJ98099.cds.list.txt
-cat US71.cds.fasta | awk '/>/ { print substr($1, 2, length($1)), $2; }' > US71.cds.list.txt
-cat B71.cds.fasta | awk '/>/ { print substr($1, 2, length($1)), $2; }' > B71.cds.list.txt
-cat LpKY97.cds.fasta | awk '/>/ { print substr($1, 2, length($1)), $2; }' > LpKY97.cds.list.txt
-cat MZ5-1-6.cds.fasta | awk '/>/ { print substr($1, 2, length($1)), $2; }' > MZ5-1-6.cds.list.txt
+# cat guy11.cds.fasta | awk '/>/ { print substr($1, 2, length($1)), $2; }' > guy11.cds.list.txt
+# cat FJ98099.cds.fasta | awk '/>/ { print substr($1, 2, length($1)), $2; }' > FJ98099.cds.list.txt
+# cat US71.cds.fasta | awk '/>/ { print substr($1, 2, length($1)), $2; }' > US71.cds.list.txt
+# cat B71.cds.fasta | awk '/>/ { print substr($1, 2, length($1)), $2; }' > B71.cds.list.txt
+# cat LpKY97.cds.fasta | awk '/>/ { print substr($1, 2, length($1)), $2; }' > LpKY97.cds.list.txt
+# cat MZ5-1-6.cds.fasta | awk '/>/ { print substr($1, 2, length($1)), $2; }' > MZ5-1-6.cds.list.txt
 
 ### make reference fasta (guy11)
 while read gene; do
@@ -57,7 +57,7 @@ while read genome; do
         OG=$(grep "${GENE}" SCOs.txt | awk 'BEGIN { FS=":" } { print $1 }')
         if [ -n "${OG}" ]; then
             echo "$OG for $genome"
-            cat ${genome}.cds.fasta | awk -v gen="${gene}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' >> SCOs/${OG}_ref.fasta
+            cat ${genome}.cds.fasta | awk -v gen="${gene}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' >> SCOs/${OG}_rep.fasta
         fi
     done < ${genome}.cds.list.txt
 done < ref_genomes.list.txt
