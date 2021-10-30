@@ -41,31 +41,34 @@ cd /global/scratch/users/annen/JC_gist_genomes
 # cat MZ5-1-6.cds.fasta | awk '/>/ { print substr($1, 2, length($1)), $2; }' > MZ5-1-6.cds.list.txt
 
 ### make reference fasta (guy11)
-while read gene; do
-    GENE=$(echo ${gene} | awk 'BEGIN { FS=":" } { print $1 "_" $2 }')
-    OG=$(grep "${GENE}" SCOs.txt | awk 'BEGIN { FS=":" } { print $1 }')
-    if [ -n "${OG}" ]; then
-        echo "$OG for guy11"
-        cat guy11.cds.fasta | awk -v gen="${gene}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' > SCOs/${OG}_ref.fasta
-    fi
-done < guy11.cds.list.txt
+# while read gene; do
+#     GENE=$(echo ${gene} | awk 'BEGIN { FS=":" } { print $1 "_" $2 }')
+#     OG=$(grep "${GENE}" SCOs.txt | awk 'BEGIN { FS=":" } { print $1 }')
+#     if [ -n "${OG}" ]; then
+#         echo "$OG for guy11"
+#         cat guy11.cds.fasta | awk -v gen="${gene}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' > SCOs/${OG}_ref.fasta
+#     fi
+# done < guy11.cds.list.txt
 
 ### make representative genome fasta (5 others)
-while read genome; do
-    while read gene; do
-        GENE=$(echo ${gene} | awk 'BEGIN { FS=":" } { print $1 "_" $2 }')
-        OG=$(grep "${GENE}" SCOs.txt | awk 'BEGIN { FS=":" } { print $1 }')
-        if [ -n "${OG}" ]; then
-            echo "$OG for $genome"
-            cat ${genome}.cds.fasta | awk -v gen="${gene}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' >> SCOs/${OG}_rep.fasta
-        fi
-    done < ${genome}.cds.list.txt
-done < ref_genomes.list.txt
+# while read genome; do
+#     while read gene; do
+#         GENE=$(echo ${gene} | awk 'BEGIN { FS=":" } { print $1 "_" $2 }')
+#         OG=$(grep "${GENE}" SCOs.txt | awk 'BEGIN { FS=":" } { print $1 }')
+#         if [ -n "${OG}" ]; then
+#             echo "$OG for $genome"
+#             cat ${genome}.cds.fasta | awk -v gen="${gene}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' >> SCOs/${OG}_rep.fasta
+#         fi
+#     done < ${genome}.cds.list.txt
+# done < ref_genomes.list.txt
 
 ### COMPUTE DISTANCES
 
 ### use needle to align each SCO to the reference gene and find the percent identity, then compute JC dist in python
-#needle -asequence ${TE}.${GEN}.CONS.fasta  -bsequence ${TE}.${GEN}.filt_lib.fasta -outfile ${TE}.${GEN}.filt.needle -gapopen 10.0 -gapextend 0.5
-#echo "*** finished needle for ${TE} ${GEN} ***"
-#cat ${TE}.${GEN}.filt.needle | awk '/# Identity:/ { print $3 }' | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/simple_JC.py ${TE}.${GEN} > ${TE}.${GEN}.filt.JC.out.txt
-#echo "*** finished computing JC discances ***"
+
+while read orthogroup; do
+    needle -asequence SCOs/${orthogroup}_ref.fasta -bsequence SCOs/${orthogroup}_rep.fasta -outfile Needle/${orthogroup}.needle -gapopen 10.0 -gapextend 0.5
+    echo "*** finished needle for ${orthogroup} ***"
+    cat Needle/${orthogroup}.needle | awk '/# Identity:/ { print $3 }' | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/genome_JC.py > JC_out/${orthogroup}.JC.out
+    echo "*** finished computing JC discances for ${orthogroup} ***"
+done < SingleCopyOrthogroups.txt
