@@ -26,12 +26,12 @@ cd /global/scratch/users/annen/JC_gist_genomes
 # gets one fasta entry
 #awk 'BEGIN { RS=">"} /gene_00002.t1 prediction_source=maker_oryza:maker-MQOP01000001.1-augustus-gene-0.99-mRNA-1/ { print ">" substr($0, 1, length($0) - 1) }'
 
-# > SCOs.txt
-# while read orthogroup; do
-#     grep ${orthogroup} Orthogroups.txt > SCOs.txt
-#     > SCOs/${orthogroup}_ref.fasta   # guy11 is reference
-#     > SCOs/${orthogroup}_rep.fasta   # the other representative genomes
-# done < SingleCopyOrthogroups.txt
+> SCOs.txt
+while read orthogroup; do
+    grep ${orthogroup} Orthogroups.txt >> SCOs.txt
+    > SCOs/${orthogroup}_ref.fasta   # guy11 is reference
+    > SCOs/${orthogroup}_rep.fasta   # the other representative genomes
+done < SingleCopyOrthogroups.txt
 
 # cat guy11.cds.fasta | awk '/>/ { print substr($1, 2, length($1)), $2; }' > guy11.cds.list.txt
 # cat FJ98099.cds.fasta | awk '/>/ { print substr($1, 2, length($1)), $2; }' > FJ98099.cds.list.txt
@@ -43,8 +43,9 @@ cd /global/scratch/users/annen/JC_gist_genomes
 ### make reference fasta (guy11)
 while read gene; do
     OG=$(grep -q "${gene}" SCOs.txt | awk 'BEGIN { FS=":" } { print $1 }')
+    echo "$OG for guy11"
     if [ -n "${OG}"]; then
-        awk -v gen="${gene}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' > SCOs/${OG}_ref.fasta
+        cat guy11.cds.fasta | awk -v gen="${gene}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' > SCOs/${OG}_ref.fasta
     fi
 done < guy11.cds.list.txt
 
@@ -52,8 +53,9 @@ done < guy11.cds.list.txt
 while read genome; do
     while read gene; do
         OG=$(grep -q "${gene}" SCOs.txt | awk 'BEGIN { FS=":" } { print $1 }')
+        echo "$OG for $genome"
         if [ -n "${OG}"]; then
-            awk -v gen="${gene}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' > SCOs/${OG}_ref.fasta
+            cat ${genome}.cds.fasta | awk -v gen="${gene}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' >> SCOs/${OG}_ref.fasta
         fi
     done < ${genome}.cds.list.txt
 done < ref_genomes.list.txt
