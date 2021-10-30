@@ -42,7 +42,7 @@ done < SingleCopyOrthogroups.txt
 
 ### make reference fasta (guy11)
 while read gene; do
-    OG=$(grep -q "${gene}" SCOs.txt | awk 'BEGIN { FS=":" } { print $1 }')
+    OG=$(grep "${gene}" SCOs.txt | awk 'BEGIN { FS=":" } { print $1 }')
     echo "$OG for guy11"
     if [ -n "${OG}"]; then
         cat guy11.cds.fasta | awk -v gen="${gene}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' > SCOs/${OG}_ref.fasta
@@ -52,7 +52,7 @@ done < guy11.cds.list.txt
 ### make representative genome fasta (5 others)
 while read genome; do
     while read gene; do
-        OG=$(grep -q "${gene}" SCOs.txt | awk 'BEGIN { FS=":" } { print $1 }')
+        OG=$(grep "${gene}" SCOs.txt | awk 'BEGIN { FS=":" } { print $1 }')
         echo "$OG for $genome"
         if [ -n "${OG}"]; then
             cat ${genome}.cds.fasta | awk -v gen="${gene}" 'BEGIN { RS=">"} $0 ~ gen { print ">" substr($0, 1, length($0) - 1) }' >> SCOs/${OG}_ref.fasta
