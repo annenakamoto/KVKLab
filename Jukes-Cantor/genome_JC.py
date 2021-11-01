@@ -1,7 +1,7 @@
 import sys
 import math
 
-genome = ["FJ98099", "US71", "B71", "LpKY97", "MZ5-1-6"]
+genome = ["guy11", "US71", "B71", "LpKY97", "MZ5-1-6"]
 count = 0
 
 for line in sys.stdin:
