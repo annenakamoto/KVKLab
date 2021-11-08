@@ -15,14 +15,15 @@ RGB = { "guy11":    blue,
 for line in sys.stdin:
     if line and ">" in line:
         lst = line.split(":")
-        ss = lst[2].split("-")
+        ss = lst[2].split("(")
+        s = ss[0].split("-")
         
         chrom = lst[1]
-        start = ss[0]
-        stop = ss[1][:-3]
+        start = s[0]
+        stop = s[1]
         name = lst[0][1:]
         score = "0"
-        strand = "."
+        strand = ss[1][:-1]
         ts = start
         te = stop
         rgb = RGB[lst[3][:-1]]
