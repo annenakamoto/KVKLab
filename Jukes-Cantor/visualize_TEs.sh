@@ -13,5 +13,5 @@
 cd /global/scratch/users/annen/visualize_TEs
 
 while read TE; do
-    cat ${TE} | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/visualize.py ${TE}.filt.JC.out.txt > ${TE}.bed
+    cat ${TE}.filt_lib.fasta | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/visualize.py ${TE}.filt.JC.out.txt > ${TE}.bed
 done < TE_list.txt
