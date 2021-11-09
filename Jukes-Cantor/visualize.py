@@ -33,11 +33,11 @@ for line in sys.stdin:
         start = str(s[0])
         stop = str(s[1])
         name = lst[0][1:] + "(" + str(round(float(JC[c]), 6)) + ")"
-        # 0 JC = 999 ; .4 JC = 
+        # 0 JC = 999 ;
         if float(JC[c]) > .4:
             score = 100
         else:
-            score = (float(JC[c])/.4) * 832 + 167
+            score = (1 - float(JC[c])/.4) * 832 + 167
         strand = ss[1][:-1]
         ts = start
         te = stop
