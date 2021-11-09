@@ -45,4 +45,4 @@ for line in sys.stdin:
         rgb = RGB[lst[3][:-1]]
         
         print(chrom + '\t' + start + '\t' + stop + '\t' + name + '\t' + str(score) + '\t' + strand + '\t' + ts + '\t' + te + '\t' + rgb)
-        
+        c += 1
