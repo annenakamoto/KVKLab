@@ -1,10 +1,10 @@
 import sys
 
-blue = "0,60,255"
-green = "30,255,0"
-orange = "255,153,0"
-purple = "162,0,255"
-cyan = "0,229,255"
+blue = "0,17,145"
+green = "0,107,2"
+orange = "166,102,0"
+purple = "106,0,163"
+cyan = "0,126,143"
 
 RGB = { "guy11":    blue,
         "US71":     green,
@@ -12,6 +12,17 @@ RGB = { "guy11":    blue,
         "LpKY97":   purple,
         "MZ5-1-6":  cyan }
 
+JC = {}
+c = 0
+with open(sys.argv[1], 'r') as file:
+    for line in file:
+        lst = line.split()
+        if len(lst) == 3:
+            jc_dist = lst[1]
+            JC[c] = jc_dist
+            c += 1
+
+c = 0
 for line in sys.stdin:
     if line and ">" in line:
         lst = line.split(":")
@@ -21,8 +32,12 @@ for line in sys.stdin:
         chrom = lst[1]
         start = s[0]
         stop = s[1]
-        name = lst[0][1:]
-        score = "0"
+        name = lst[0][1:] + "(" + str(round(float(JC[c]), 6)) + ")"
+        # 0 JC = 999 ; .4 JC = 
+        if float(JC[c]) > .4:
+            score = 100
+        else:
+            score = (float(JC[c])/.4) * 832 + 167
         strand = ss[1][:-1]
         ts = start
         te = stop
