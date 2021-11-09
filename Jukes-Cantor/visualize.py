@@ -23,6 +23,7 @@ with open(sys.argv[1], 'r') as file:
             c += 1
 
 c = 0
+print("useScore=1")
 for line in sys.stdin:
     if line and ">" in line:
         lst = line.split(":")
