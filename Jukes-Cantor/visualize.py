@@ -30,8 +30,8 @@ for line in sys.stdin:
         s = ss[0].split("-")
         
         chrom = lst[1]
-        start = s[0]
-        stop = s[1]
+        start = str(s[0])
+        stop = str(s[1])
         name = lst[0][1:] + "(" + str(round(float(JC[c]), 6)) + ")"
         # 0 JC = 999 ; .4 JC = 
         if float(JC[c]) > .4:
@@ -43,5 +43,5 @@ for line in sys.stdin:
         te = stop
         rgb = RGB[lst[3][:-1]]
         
-        print(chrom + '\t' + start + '\t' + stop + '\t' + name + '\t' + score + '\t' + strand + '\t' + ts + '\t' + te + '\t' + rgb)
+        print(chrom + '\t' + start + '\t' + stop + '\t' + name + '\t' + str(score) + '\t' + strand + '\t' + ts + '\t' + te + '\t' + rgb)
         
