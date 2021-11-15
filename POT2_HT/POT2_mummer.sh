@@ -27,7 +27,7 @@ cd /global/scratch/users/annen
 
 ### Run MUMmer
 #MUMmer/mummer-4.0.0rc1/nucmer -t 24 --maxmatch -p POT2_mummer/${GENOME}.guy11.POT2.mummer POT2_mummer/guy11.POT2_flank.fasta POT2_mummer/${GENOME}.POT2_flank.fasta
-MUMmer/mummer-4.0.0rc1/mummerplot --color --postscript -p POT2_mummer/mumPLOT.${GENOME}.guy11.POT2 POT2_mummer/${GENOME}.guy11.POT2.mummer.delta
+MUMmer/mummer-4.0.0rc1/mummerplot -t postscript --color -p POT2_mummer/mumPLOT.${GENOME}.guy11.POT2 POT2_mummer/${GENOME}.guy11.POT2.mummer.delta
 echo "*** MUMmer plot ***"
 module unload gcc
 module load ghostscript
