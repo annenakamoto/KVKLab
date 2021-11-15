@@ -23,7 +23,7 @@ cat JC_dist_indiv_TEs/POT2/POT2.${GENOME}.filt_lib.fasta | python /global/scratc
 
 ### Extract the POT2 + flanking sequences
 bedtools slop -i POT2_mummer/${GENOME}.POT2.bed -g POT2_mummer/${GENOME}.len -b 50000 > POT2_mummer/${GENOME}.POT2_flank.bed
-bedtools getfasta -s -fo POT2_mummer/${GENOME}.POT2_flank.fasta -fi JC_cons_genomes/${GENOME}.fasta -bed POT2_mummer/${GENOME}.POT2_flank.bed
+bedtools getfasta -s -name+ -fo POT2_mummer/${GENOME}.POT2_flank.fasta -fi JC_cons_genomes/${GENOME}.fasta -bed POT2_mummer/${GENOME}.POT2_flank.bed
 
 ### Run MUMmer
 #MUMmer/mummer-4.0.0rc1/nucmer -t 24 --maxmatch -p ${GENOME}.guy11.POT2.mummer POT2_mummer/guy11.POT2_flank.fasta POT2_mummer/${GENOME}.POT2_flank.fasta
