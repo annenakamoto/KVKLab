@@ -26,4 +26,9 @@ cd /global/scratch/users/annen
 #bedtools getfasta -s -name+ -fo POT2_mummer/${GENOME}.POT2_flank.fasta -fi JC_cons_genomes/${GENOME}.fasta -bed POT2_mummer/${GENOME}.POT2_flank.bed
 
 ### Run MUMmer
-MUMmer/mummer-4.0.0rc1/nucmer -t 24 --maxmatch -p POT2_mummer/${GENOME}.guy11.POT2.mummer POT2_mummer/guy11.POT2_flank.fasta POT2_mummer/${GENOME}.POT2_flank.fasta
+#MUMmer/mummer-4.0.0rc1/nucmer -t 24 --maxmatch -p POT2_mummer/${GENOME}.guy11.POT2.mummer POT2_mummer/guy11.POT2_flank.fasta POT2_mummer/${GENOME}.POT2_flank.fasta
+MUMmer/mummer-4.0.0rc1/mummerplot --color -postscript -p POT2_mummer/mumPLOT.${GENOME}.guy11.POT2 POT2_mummer/${GENOME}.guy11.POT2.mummer.delta
+module unload gcc
+module load ghostscript
+ps2pdf POT2_mummer/mumPLOT.${GENOME}.guy11.POT2.ps POT2_mummer/mumPLOT.${GENOME}.guy11.POT2.pdf
+show-coords POT2_mummer/${GENOME}.guy11.POT2.mummer.delta > POT2_mummer/${GENOME}.guy11.POT2.mummer.coords
