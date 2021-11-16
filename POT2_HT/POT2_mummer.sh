@@ -40,7 +40,7 @@ ls guy11_fastas/guy11_POT2* | while read ref; do
         /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/show-coords nucmer_out/${query_b}.${ref_b}.delta > show_coords_out/${query_b}.${ref_b}.coords
         len=$(cat show_coords_out/${query_b}.${ref_b}.coords | awk '/POT2/ { print $7 }')
         pid=$(cat show_coords_out/${query_b}.${ref_b}.coords | awk '/POT2/ { print $10 }')
-        plot=$(awk -v len=${len} -v pid=${pid} 'BEGIN { if (len >= 30000 && pid >= 80.0) { print "true"; } }')
+        plot=$(echo | awk -v len=${len} -v pid=${pid} 'BEGIN { if (len >= 30000 && pid >= 80.0) { print "true"; } }')
         if [ ${plot} == "true" ]; then
             /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/mummerplot --postscript --color -p mummerplot_out/${query_b}.${ref_b} nucmer_out/${query_b}.${ref_b}.delta
             ps2pdf mummerplot_out/${query_b}.${ref_b}.ps pdf_plots/${query_b}.${ref_b}.pdf
