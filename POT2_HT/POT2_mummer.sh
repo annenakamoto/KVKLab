@@ -30,6 +30,8 @@ cd /global/scratch/users/annen
 cd /global/scratch/users/annen/POT2_mummer/
 export GNUPLOT_PS_DIR=/global/scratch/users/annen/MUMmer/gnuplot-5.4.2/share/gnuplot/5.4/PostScript
 
+rm mummerplot_out/*
+rm pdf_plots/*
 ls guy11_fastas/guy11_POT2* | while read ref; do
     ls ${GENOME}_fastas/${GENOME}_POT2* | while read query; do
         /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/nucmer -t 24 --maxmatch -p nucmer_out/${query}.${ref} ${ref} ${query}
@@ -40,6 +42,8 @@ ls guy11_fastas/guy11_POT2* | while read ref; do
             /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/mummerplot --postscript --color -p mummerplot_out/${query}.${ref} nucmer_out/${query}.${ref}.delta
             ps2pdf mummerplot_out/${query}.${ref}.ps pdf_plots/${query}.${ref}.pdf
         fi
+    done
+done
 
 ### Run MUMmer on ALL
 #export GNUPLOT_PS_DIR=/global/scratch/users/annen/MUMmer/gnuplot-5.4.2/share/gnuplot/5.4/PostScript
