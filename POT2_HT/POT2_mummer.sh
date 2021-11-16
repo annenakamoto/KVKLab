@@ -34,13 +34,15 @@ rm mummerplot_out/*
 rm pdf_plots/*
 ls guy11_fastas/guy11_POT2* | while read ref; do
     ls ${GENOME}_fastas/${GENOME}_POT2* | while read query; do
-        /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/nucmer -t 24 --maxmatch -p nucmer_out/${query}.${ref} ${ref} ${query}
-        /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/show-coords nucmer_out/${query}.${ref}.delta > show_coords_out/${query}.${ref}.coords
-        len=$(cat show_coords_out/${query}.${ref}.coords | awk '/POT2/ { print $7 }')
-        pid=$(cat show_coords_out/${query}.${ref}.coords | awk '/POT2/ { print $10 }')
+        ref_b=$(basename ${ref})
+        query_b=$(basename ${query})
+        /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/nucmer -t 24 --maxmatch -p nucmer_out/${query_b}.${ref_b} ${ref} ${query}
+        /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/show-coords nucmer_out/${query_b}.${ref_b}.delta > show_coords_out/${query_b}.${ref_b}.coords
+        len=$(cat show_coords_out/${query_b}.${ref_b}.coords | awk '/POT2/ { print $7 }')
+        pid=$(cat show_coords_out/${query_b}.${ref_b}.coords | awk '/POT2/ { print $10 }')
         if [ ${len} -ge 30000 -a  ${pid} -ge 80.0 ]; then
-            /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/mummerplot --postscript --color -p mummerplot_out/${query}.${ref} nucmer_out/${query}.${ref}.delta
-            ps2pdf mummerplot_out/${query}.${ref}.ps pdf_plots/${query}.${ref}.pdf
+            /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/mummerplot --postscript --color -p mummerplot_out/${query_b}.${ref_b} nucmer_out/${query_b}.${ref_b}.delta
+            ps2pdf mummerplot_out/${query_b}.${ref_b}.ps pdf_plots/${query_b}.${ref_b}.pdf
         fi
     done
 done
