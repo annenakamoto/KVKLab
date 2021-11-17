@@ -12,7 +12,7 @@
 ###     Generate fasta of these sequences for guy11, B71, and MZ5-1-6
 
 GENOME=${1}     ### B71 or MZ5-1-6
-PERCENT_ZEROES_FILTER=50.0
+PERCENT_ZEROES_FILTER=0.50
 PERCENT_ZEROES_FILTER=${2}
 
 cd /global/scratch/users/annen
