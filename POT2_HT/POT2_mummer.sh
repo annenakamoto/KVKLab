@@ -32,6 +32,7 @@ export GNUPLOT_PS_DIR=/global/scratch/users/annen/MUMmer/gnuplot-5.4.2/share/gnu
 
 rm mummerplot_out/*
 rm pdf_plots/*
+rm jpg_plots/*
 ls guy11_fastas/guy11_POT2* | while read ref; do
     ls ${GENOME}_fastas/${GENOME}_POT2* | while read query; do
         ref_b=$(basename ${ref})
@@ -39,14 +40,17 @@ ls guy11_fastas/guy11_POT2* | while read ref; do
         echo "ref & query: $ref_b $query_b"
         /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/nucmer -t 24 --maxmatch -p nucmer_out/${query_b}.${ref_b} ${ref} ${query}
         /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/show-coords nucmer_out/${query_b}.${ref_b}.delta > show_coords_out/${query_b}.${ref_b}.coords
-        len=$(cat show_coords_out/${query_b}.${ref_b}.coords | awk '/POT2/ { print $7 }')
-        echo "length: $len"
-        pid=$(cat show_coords_out/${query_b}.${ref_b}.coords | awk '/POT2/ { print $10 }')
-        echo "% identity: $pid"
-        plot=$(echo | awk -v len=${len} -v pid=${pid} 'BEGIN { if (len >= 30000 && pid >= 80.0) { print "true"; } }')
-        if [[ ${plot} == "true" ]]; then
+        cat show_coords_out/${query_b}.${ref_b}.coords | tail -n +6 | awk -v OFS='\t' '{print $12, $1, $2}' | sort -k1,1 -k2,2n > show_coords_out/${query_b}.${ref_b}.bed
+        
+        bedtools genomecov -d -i show_coords_out/${query_b}.${ref_b}.bed -g ${ref} > genomecov_out/${query_b}.${ref_b}.genomecov
+        total_size=$(wc -l genomecov_out/${query_b}.${ref_b}.genomecov | awk '{print $1}') # total size of alignment
+        size_zeroes=$(awk '$3==0' genomecov_out/${query_b}.${ref_b}.genomecov | wc -l | awk '{print $1}') # calculate number of gaps in alignment
+        percent_zeroes=$(awk -v var1=$size_zeroes -v var2=$total_size 'BEGIN { OFMT="%f";print  ( var1 / var2 ) }') # percentage
+        
+        if (( $(echo "$percent_zeroes < ${PERCENT_ZEROES_FILTER}" |bc -l) )); then
             /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/mummerplot --postscript --color -p mummerplot_out/${query_b}.${ref_b} nucmer_out/${query_b}.${ref_b}.delta
             ps2pdf mummerplot_out/${query_b}.${ref_b}.ps pdf_plots/${query_b}.${ref_b}.pdf
+            convert -density 150 pdf_plots/${query_b}.${ref_b}.pdf -quality 90 jpg_plots/${query_b}.${ref_b}.jpg
         fi
     done
 done
