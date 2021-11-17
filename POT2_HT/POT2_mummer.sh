@@ -50,7 +50,8 @@ ls guy11_fastas/guy11_POT2* | while read ref; do
         size_zeroes=$(awk '$3==0' genomecov_out/${query_b}.${ref_b}.genomecov | wc -l | awk '{print $1}') # calculate number of gaps in alignment
         percent_zeroes=$(awk -v var1=$size_zeroes -v var2=$total_size 'BEGIN { OFMT="%f";print  ( var1 / var2 ) }') # percentage
         plot=$(awk -v p=${percent_zeroes} -v f=${PERCENT_ZEROES_FILTER} 'BEGIN { if (p < f) { print "true"; } }')
-        
+        echo "total size: $total_size; size zeroes: $size_zeroes; percent zeroes: $percent_zeroes; plot: $plot"
+
         echo "filtering..."
         # (( $(echo "$percent_zeroes < ${PERCENT_ZEROES_FILTER}" |bc -l) ))
         if [[ ${plot} == "true" ]]; then
