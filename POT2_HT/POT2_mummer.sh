@@ -12,7 +12,7 @@
 ###     Generate fasta of these sequences for guy11, B71, and MZ5-1-6
 
 GENOME=${1}     ### B71 or MZ5-1-6
-PERCENT_ZEROES_FILTER=50
+PERCENT_ZEROES_FILTER=50.0
 PERCENT_ZEROES_FILTER=${2}
 
 cd /global/scratch/users/annen
@@ -49,9 +49,11 @@ ls guy11_fastas/guy11_POT2* | while read ref; do
         total_size=$(wc -l genomecov_out/${query_b}.${ref_b}.genomecov | awk '{print $1}') # total size of alignment
         size_zeroes=$(awk '$3==0' genomecov_out/${query_b}.${ref_b}.genomecov | wc -l | awk '{print $1}') # calculate number of gaps in alignment
         percent_zeroes=$(awk -v var1=$size_zeroes -v var2=$total_size 'BEGIN { OFMT="%f";print  ( var1 / var2 ) }') # percentage
+        plot=$(awk -v p=${percent_zeroes} -v f=${PERCENT_ZEROES_FILTER} 'BEGIN { if (p < f) { print "true"; } }')
         
         echo "filtering..."
-        if (( $(echo "$percent_zeroes < ${PERCENT_ZEROES_FILTER}" |bc -l) )); then
+        # (( $(echo "$percent_zeroes < ${PERCENT_ZEROES_FILTER}" |bc -l) ))
+        if [[ ${plot} == "true" ]]; then
             /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/mummerplot --postscript --color -p mummerplot_out/${query_b}.${ref_b} nucmer_out/${query_b}.${ref_b}.delta
             ps2pdf mummerplot_out/${query_b}.${ref_b}.ps pdf_plots/${query_b}.${ref_b}.pdf
             convert -density 150 pdf_plots/${query_b}.${ref_b}.pdf -quality 90 jpg_plots/${query_b}.${ref_b}.jpg
