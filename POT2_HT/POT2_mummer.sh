@@ -42,7 +42,8 @@ ls guy11_fastas/guy11_POT2* | while read ref; do
         /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/show-coords nucmer_out/${query_b}.${ref_b}.delta > show_coords_out/${query_b}.${ref_b}.coords
         cat show_coords_out/${query_b}.${ref_b}.coords | tail -n +6 | awk -v OFS='\t' '{print $12, $1, $2}' | sort -k1,1 -k2,2n > show_coords_out/${query_b}.${ref_b}.bed
         
-        bedtools genomecov -d -i show_coords_out/${query_b}.${ref_b}.bed -g ${ref} > genomecov_out/${query_b}.${ref_b}.genomecov
+        cat ${ref} | python /global/scratch/users/annen/KVKLab/POT2_HT/chrom_len.py > chrom_len/${ref_b}.len
+        bedtools genomecov -d -i show_coords_out/${query_b}.${ref_b}.bed -g chrom_len/${ref_b}.len > genomecov_out/${query_b}.${ref_b}.genomecov
         total_size=$(wc -l genomecov_out/${query_b}.${ref_b}.genomecov | awk '{print $1}') # total size of alignment
         size_zeroes=$(awk '$3==0' genomecov_out/${query_b}.${ref_b}.genomecov | wc -l | awk '{print $1}') # calculate number of gaps in alignment
         percent_zeroes=$(awk -v var1=$size_zeroes -v var2=$total_size 'BEGIN { OFMT="%f";print  ( var1 / var2 ) }') # percentage
