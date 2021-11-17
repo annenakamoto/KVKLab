@@ -36,6 +36,7 @@ ls guy11_fastas/guy11_POT2* | while read ref; do
     ls ${GENOME}_fastas/${GENOME}_POT2* | while read query; do
         ref_b=$(basename ${ref})
         query_b=$(basename ${query})
+        echo "ref & query: $ref_b $query_b"
         /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/nucmer -t 24 --maxmatch -p nucmer_out/${query_b}.${ref_b} ${ref} ${query}
         /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/show-coords nucmer_out/${query_b}.${ref_b}.delta > show_coords_out/${query_b}.${ref_b}.coords
         len=$(cat show_coords_out/${query_b}.${ref_b}.coords | awk '/POT2/ { print $7 }')
