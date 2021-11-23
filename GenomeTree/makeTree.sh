@@ -52,11 +52,11 @@ cd /global/scratch/users/annen/GENOME_TREE
 #echo "*** making raxmlHPC  tree ***"
 #raxmlHPC -s ALL_SCOs.trim.afa -n raxmlHPC.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
 
-echo "*** making raxmlHPC-MPI-SSE3 tree ***"
-raxmlHPC-MPI-SSE3 -s ALL_SCOs.trim.afa -n raxmlHPC-MPI-SSE3.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
+#echo "*** making raxmlHPC-MPI-SSE3 tree ***"
+#raxmlHPC-MPI-SSE3 -s ALL_SCOs.trim.afa -n raxmlHPC-MPI-SSE3.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
 
-#echo "*** making raxmlHPC-SSE3 tree ***"
-#raxmlHPC-SSE3 -s ALL_SCOs.trim.afa -n raxmlHPC-SSE3.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
+echo "*** making raxmlHPC-SSE3 tree ***"
+raxmlHPC-SSE3 -s ALL_SCOs.trim.afa -n raxmlHPC-SSE3.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
 
 #echo "*** making raxmlHPC-HYBRID-SSE3 tree ***"
 #raxmlHPC-HYBRID-SSE3 -s ALL_SCOs.trim.afa -n raxmlHPC-HYBRID-SSE3.ALL_SCOs -m PROTGAMMAGTR -T 24 -f a -x 12345 -p 12345 -# 100
