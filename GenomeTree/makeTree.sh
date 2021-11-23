@@ -24,8 +24,10 @@ cd /global/scratch/users/annen/GENOME_TREE
 #conda deactivate
 
 ### Align SCOs
-ls OrthoFinder_out/Results_Nov22/Single_Copy_Orthologue_Sequences/ | awk -v FS="." '{ print $1; }' | while read SCO; do
-    mafft --maxiterate 1000 --globalpair --thread 24 OrthoFinder_out/Results_Nov22/Single_Copy_Orthologue_Sequences/${SCO}.fa > SCO_alignments/${SCO}.afa
-    echo "${SCO} done"
-done
+#ls OrthoFinder_out/Results_Nov22/Single_Copy_Orthologue_Sequences/ | awk -v FS="." '{ print $1; }' | while read SCO; do
+#    mafft --maxiterate 1000 --globalpair --thread 24 OrthoFinder_out/Results_Nov22/Single_Copy_Orthologue_Sequences/${SCO}.fa > SCO_alignments/${SCO}.afa
+#    echo "${SCO} done"
+#done
 
+### 
+cat PROTEOMES/genome_list.txt | python /global/scratch/users/annen/KVKLab/GenomeTree/concat_msa.py
