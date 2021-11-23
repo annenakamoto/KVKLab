@@ -17,7 +17,7 @@ for msa in msa_list:
     msa_path =  "SCO_alignments/" + msa
     for record in SeqIO.parse(msa_path, 'fasta'):
         genome = record.id.split("_")[2]
-        GENOMES[genome] += record.seq
+        GENOMES[genome].seq += record.seq
 
 with open("ALL_SCOs.afa", 'w') as handle:
     for seq in GENOMES.values():

@@ -33,3 +33,5 @@ cd /global/scratch/users/annen/GENOME_TREE
 source activate /global/scratch/users/annen/anaconda3/envs/Biopython
 cat PROTEOMES/genome_list.txt | python /global/scratch/users/annen/KVKLab/GenomeTree/concat_msa.py
 conda deactivate
+
+#trimal -gt 0.8 -in ALL_SCOs.afa -out ALL_SCOs.trim.afa
