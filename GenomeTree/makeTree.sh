@@ -29,9 +29,18 @@ cd /global/scratch/users/annen/GENOME_TREE
 #    echo "${SCO} done"
 #done
 
-### 
-source activate /global/scratch/users/annen/anaconda3/envs/Biopython
-cat PROTEOMES/genome_list.txt | python /global/scratch/users/annen/KVKLab/GenomeTree/concat_msa.py
-conda deactivate
+### Concatenate MSAs
+#source activate /global/scratch/users/annen/anaconda3/envs/Biopython
+#cat PROTEOMES/genome_list.txt | python /global/scratch/users/annen/KVKLab/GenomeTree/concat_msa.py
+#conda deactivate
 
-#trimal -gt 0.8 -in ALL_SCOs.afa -out ALL_SCOs.trim.afa
+### Trim alignment
+trimal -gt 0.8 -in ALL_SCOs.afa -out ALL_SCOs.trim.afa
+
+### Make tree
+echo "*** making fasttree ***"
+fasttree -gamma < ALL_SCOs.trim.afa > ALL_SCOs.tree
+
+echo "*** making RAxML tree ***"
+#raxmlHPC-PTHREADS-SSE3 
+
