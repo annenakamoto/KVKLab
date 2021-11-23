@@ -19,6 +19,13 @@ cd /global/scratch/users/annen/GENOME_TREE
 #conda deactivate
 
 ### Run OrthoFinder
-source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
-orthofinder -oa -f PROTEOMES_filt -t 24 -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree -o OrthoFinder_out
-conda deactivate
+#source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
+#orthofinder -oa -f PROTEOMES_filt -t 24 -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree -o OrthoFinder_out
+#conda deactivate
+
+### Align SCOs
+ls OrthoFinder_out/Results_Nov22/Single_Copy_Orthologue_Sequences/ | awk -v FS="." '{ print $1; }' | while read SCO; do
+    mafft --maxiterate 1000 --globalpair --thread 24 OrthoFinder_out/Results_Nov22/Single_Copy_Orthologue_Sequences/${SCO}.fa > SCO_alignments/${SCO}.afa
+    echo "${SCO} done"
+done
+
