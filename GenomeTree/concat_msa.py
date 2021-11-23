@@ -1,5 +1,6 @@
 from Bio import SeqIO
-from Bio import Seq
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
 import sys
 import os
 
@@ -9,7 +10,7 @@ import os
 GENOMES = {}
 for line in sys.stdin:
     g = line[:-1]
-    GENOMES[g] = Seq.Seq("")
+    GENOMES[g] = SeqRecord(Seq(""))
     GENOMES[g].id = g
 
 msa_list = os.listdir("SCO_alignments")
