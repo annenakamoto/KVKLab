@@ -43,6 +43,26 @@ cd /global/scratch/users/annen/GENOME_TREE
 #fasttree -gamma < ALL_SCOs.trim.afa > ALL_SCOs.tree
 #conda deactivate
 
-echo "*** making RAxML tree ***"
-raxmlHPC-PTHREADS-SSE3 -s ALL_SCOs.trim.afa -n RAxML.ALL_SCOs -m PROTGAMMAGTR -T 24 -f a -x 12345 -p 12345 -# 100
+#echo "*** making raxmlHPC-PTHREADS-SSE3 tree ***"
+#raxmlHPC-PTHREADS-SSE3 -s ALL_SCOs.trim.afa -n RAxML.ALL_SCOs -m PROTGAMMAGTR -T 24 -f a -x 12345 -p 12345 -# 100
+
+
+### Benchmarking other RAxML versions
+
+echo "*** making raxmlHPC  tree ***"
+raxmlHPC -s ALL_SCOs.trim.afa -n RAxML.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
+
+### need to verify/edit the commands of the below and look at the documentation for the version
+
+#echo "*** making raxmlHPC-MPI-SSE3 tree ***"
+#raxmlHPC-MPI-SSE3 -s ALL_SCOs.trim.afa -n RAxML.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
+
+#echo "*** making raxmlHPC-SSE3 tree ***"
+#raxmlHPC-SSE3 -s ALL_SCOs.trim.afa -n RAxML.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
+
+#echo "*** making raxmlHPC-HYBRID-SSE3 tree ***"
+#raxmlHPC-HYBRID-SSE3 -s ALL_SCOs.trim.afa -n RAxML.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
+
+#echo "*** making raxmlHPC-SSE3-QUARTET-MPI tree ***"
+#raxmlHPC-SSE3-QUARTET-MPI -s ALL_SCOs.trim.afa -n RAxML.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
 
