@@ -14,7 +14,7 @@ cd /global/scratch/users/annen/GENOME_TREE
 
 source activate /global/scratch/users/annen/anaconda3/envs/Biopython
 echo "*** Processing proteomes ***"
-cat PROTEOMES/genome_list.txt | /global/scratch/users/annen/KVKLab/GenomeTree/process_faa_for_orthofinder.py
+cat PROTEOMES/genome_list.txt | python /global/scratch/users/annen/KVKLab/GenomeTree/process_faa_for_orthofinder.py
 echo "*** Done ***"
 conda deactivate
 
