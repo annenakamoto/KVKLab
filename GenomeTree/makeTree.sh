@@ -62,5 +62,5 @@ cd /global/scratch/users/annen/GENOME_TREE
 #raxmlHPC-HYBRID-SSE3 -s ALL_SCOs.trim.afa -n raxmlHPC-HYBRID-SSE3.ALL_SCOs -m PROTGAMMAGTR -T 24 -f a -x 12345 -p 12345 -# 100
 
 echo "*** making raxmlHPC-SSE3-QUARTET-MPI tree ***"
-raxmlHPC-SSE3-QUARTET-MPI -s ALL_SCOs.trim.afa -n raxmlHPC-SSE3-QUARTET-MPI.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
+raxmlHPC-SSE3-QUARTET-MPI -s ALL_SCOs.trim.afa -n raxmlHPC-SSE3-QUARTET-MPI.ALL_SCOs -m PROTGAMMAGTR -f q -x 12345 -p 12345 -# 100
 
