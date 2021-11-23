@@ -49,19 +49,17 @@ cd /global/scratch/users/annen/GENOME_TREE
 
 ### Benchmarking other RAxML versions
 
-echo "*** making raxmlHPC  tree ***"
-raxmlHPC -s ALL_SCOs.trim.afa -n raxmlHPC.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
+#echo "*** making raxmlHPC  tree ***"
+#raxmlHPC -s ALL_SCOs.trim.afa -n raxmlHPC.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
 
-### need to verify/edit the commands of the below and look at the documentation for the version
-
-#echo "*** making raxmlHPC-MPI-SSE3 tree ***"
-#raxmlHPC-MPI-SSE3 -s ALL_SCOs.trim.afa -n raxmlHPC-MPI-SSE3.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
+echo "*** making raxmlHPC-MPI-SSE3 tree ***"
+raxmlHPC-MPI-SSE3 -s ALL_SCOs.trim.afa -n raxmlHPC-MPI-SSE3.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
 
 #echo "*** making raxmlHPC-SSE3 tree ***"
 #raxmlHPC-SSE3 -s ALL_SCOs.trim.afa -n raxmlHPC-SSE3.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
 
 #echo "*** making raxmlHPC-HYBRID-SSE3 tree ***"
-#raxmlHPC-HYBRID-SSE3 -s ALL_SCOs.trim.afa -n raxmlHPC-HYBRID-SSE3.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
+#raxmlHPC-HYBRID-SSE3 -s ALL_SCOs.trim.afa -n raxmlHPC-HYBRID-SSE3.ALL_SCOs -m PROTGAMMAGTR -T 24 -f a -x 12345 -p 12345 -# 100
 
 #echo "*** making raxmlHPC-SSE3-QUARTET-MPI tree ***"
 #raxmlHPC-SSE3-QUARTET-MPI -s ALL_SCOs.trim.afa -n raxmlHPC-SSE3-QUARTET-MPI.ALL_SCOs -m PROTGAMMAGTR -f a -x 12345 -p 12345 -# 100
