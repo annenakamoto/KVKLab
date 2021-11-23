@@ -1,4 +1,5 @@
 from Bio import SeqIO
+from Bio import Seq
 import sys
 import os
 
