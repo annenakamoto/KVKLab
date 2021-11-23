@@ -35,11 +35,13 @@ cd /global/scratch/users/annen/GENOME_TREE
 #conda deactivate
 
 ### Trim alignment
-trimal -gt 0.8 -in ALL_SCOs.afa -out ALL_SCOs.trim.afa
+trimal -gt 1 -in ALL_SCOs.afa -out ALL_SCOs.trim.afa
 
 ### Make tree
 echo "*** making fasttree ***"
+source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
 fasttree -gamma < ALL_SCOs.trim.afa > ALL_SCOs.tree
+conda deactivate
 
 echo "*** making RAxML tree ***"
 #raxmlHPC-PTHREADS-SSE3 
