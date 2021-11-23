@@ -10,8 +10,7 @@ import os
 GENOMES = {}
 for line in sys.stdin:
     g = line[:-1]
-    GENOMES[g] = SeqRecord(Seq(""))
-    GENOMES[g].id = g
+    GENOMES[g] = SeqRecord(Seq(""), g, '', '')
 
 msa_list = os.listdir("SCO_alignments")
 for msa in msa_list:
