@@ -44,5 +44,5 @@ cd /global/scratch/users/annen/GENOME_TREE
 #conda deactivate
 
 echo "*** making RAxML tree ***"
-raxmlHPC-PTHREADS-SSE3 -s ALL_SCOs.trim.afa -n RAxML.ALL_SCOs -m GTRGAMMA -T 24 -f a -x 12345 -p 12345 -# 100
+raxmlHPC-PTHREADS-SSE3 -s ALL_SCOs.trim.afa -n RAxML.ALL_SCOs -m PROTGTRGAMMA -T 24 -f a -x 12345 -p 12345 -# 100
 
