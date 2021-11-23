@@ -30,4 +30,6 @@ cd /global/scratch/users/annen/GENOME_TREE
 #done
 
 ### 
+source activate /global/scratch/users/annen/anaconda3/envs/Biopython
 cat PROTEOMES/genome_list.txt | python /global/scratch/users/annen/KVKLab/GenomeTree/concat_msa.py
+conda deactivate
