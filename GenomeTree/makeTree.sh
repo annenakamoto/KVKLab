@@ -43,8 +43,8 @@ cd /global/scratch/users/annen/GENOME_TREE
 #fasttree -gamma < ALL_SCOs.trim.afa > ALL_SCOs.tree
 #conda deactivate
 
-#echo "*** making raxmlHPC-PTHREADS-SSE3 tree ***"
-#raxmlHPC-PTHREADS-SSE3 -s ALL_SCOs.trim.afa -n RAxML.ALL_SCOs -m PROTGAMMAGTR -T 24 -f a -x 12345 -p 12345 -# 100
+echo "*** making raxmlHPC-PTHREADS-SSE3 tree ***"
+raxmlHPC-PTHREADS-SSE3 -s ALL_SCOs.trim.afa -n RAxML.ALL_SCOs -m PROTGAMMAGTR -T 24 -f a -x 12345 -p 12345 -# 100
 
 
 ### Benchmarking other RAxML versions
@@ -61,6 +61,8 @@ cd /global/scratch/users/annen/GENOME_TREE
 #echo "*** making raxmlHPC-HYBRID-SSE3 tree ***"
 #raxmlHPC-HYBRID-SSE3 -s ALL_SCOs.trim.afa -n raxmlHPC-HYBRID-SSE3.ALL_SCOs -m PROTGAMMAGTR -T 24 -f a -x 12345 -p 12345 -# 100
 
-echo "*** making raxmlHPC-SSE3-QUARTET-MPI tree ***"
-raxmlHPC-SSE3-QUARTET-MPI -s ALL_SCOs.trim.afa -n raxmlHPC-SSE3-QUARTET-MPI.ALL_SCOs -m PROTGAMMAGTR -f q -x 12345 -p 12345 -# 100
+
+### for combining trees over taxa and requires a binary file (quartet grouping file) to be provided, so I don't think it's relevant here
+#echo "*** making raxmlHPC-SSE3-QUARTET-MPI tree ***"
+#raxmlHPC-SSE3-QUARTET-MPI -s ALL_SCOs.trim.afa -n raxmlHPC-SSE3-QUARTET-MPI.ALL_SCOs -m PROTGAMMAGTR -f q -x 12345 -p 12345 -# 100
 
