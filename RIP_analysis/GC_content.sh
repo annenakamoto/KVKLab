@@ -13,7 +13,7 @@
 cd  /global/scratch/users/annen
 
 ### GC content for TEs
-while read TE; done
+while read TE; do
     geecee -sequence /global/scratch/users/annen/Rep_TE_Lib/Align_TEs/REPHITS_${TE}.fasta -outfile gc_${TE}.txt
 done < TEs_list.txt
 
