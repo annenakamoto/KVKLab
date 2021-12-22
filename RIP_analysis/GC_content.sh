@@ -20,6 +20,6 @@ done < TEs_list.txt
 ### GC content for genomes
 while read GENOME; do
     geecee -sequence /global/scratch/users/annen/JC_gist_genomes/${GENOME}.cds.fasta -outfile RIP_analysis/gc_${GENOME}.txt
-    avg=$(cat gc_${GENOME}.txt | awk 'BEGIN { n=0; s=0; } { n+=1; s+=$2; } END { print s/n }')
+    avg=$(cat RIP_analysis/gc_${GENOME}.txt | awk 'BEGIN { n=0; s=0; } { n+=1; s+=$2; } END { print s/n }')
     echo "$GENOME: $avg"
 done < rep_genomes_list.txt
