@@ -14,12 +14,12 @@ cd  /global/scratch/users/annen
 
 ### GC content for TEs
 while read TE; do
-    geecee -sequence /global/scratch/users/annen/Rep_TE_Lib/Align_TEs/REPHITS_${TE}.fasta -outfile gc_${TE}.txt
+    geecee -sequence /global/scratch/users/annen/Rep_TE_Lib/Align_TEs/REPHITS_${TE}.fasta -outfile RIP_analysis/gc_${TE}.txt
 done < TEs_list.txt
 
 ### GC content for genomes
 while read GENOME; do
-    geecee -sequence /global/scratch/users/annen/JC_gist_genomes/${GENOME}.cds.fasta -outfile gc_${GENOME}.txt
+    geecee -sequence /global/scratch/users/annen/JC_gist_genomes/${GENOME}.cds.fasta -outfile RIP_analysis/gc_${GENOME}.txt
     avg=$(cat gc_${GENOME}.txt | awk 'BEGIN { n=0; s=0; } { n+=1; s+=$2; } END { print s/n }')
     echo "$GENOME: $avg"
-done < hq_genomes_list.txt
+done < rep_genomes_list.txt
