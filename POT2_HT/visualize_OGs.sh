@@ -19,6 +19,7 @@ GENOME=$1
 ###         etc...
 
 #cat ${GENOME}.gff | awk '$3 ~ /gene/ { print $1 "\t" $4 "\t" $5 "\t" substr($9, 4, 10) }' > ${GENOME}.bed
+cd /global/scratch/users/annen/visualize_OGs
 
 c=0
 > OG_${GENOME}.bed
