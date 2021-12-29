@@ -32,9 +32,9 @@ while read line; do
         ### check if OG is a SCO
         SCO=$(grep ${OG} /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Nov22/Orthogroups/Orthogroups_SingleCopyOrthologues.txt)
         if [ ! -z "${SCO}" ]; then
-            NEW_NAME="SCO_${SCO}_${genome}"
+            NEW_NAME="SCO_${SCO}_${GENOME}"
         else
-            NEW_NAME="${OG}_${genome}"
+            NEW_NAME="${OG}_${GENOME}"
         fi
     else
         NEW_NAME=${name}
