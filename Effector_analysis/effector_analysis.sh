@@ -14,7 +14,7 @@ cd /global/scratch/users/annen/Effector_analysis
 GENOME=$1
 
 ### SignalP
-signalp-5.0b/bin/signalp -fasta ${GENOME}.faa -prefix signalp_${GENOME}
+signalp -fasta ${GENOME}.faa -prefix signalp_${GENOME}
 
 awk '{if ($2 == "SP(Sec/SPI)") {print $1}}' signalp_${GENOME}_summary.signalp5 > signalp_secrete_points_names
 awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' ${GENOME}.faa > ${GENOME}.singleline.faa
