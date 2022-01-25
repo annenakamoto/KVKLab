@@ -16,7 +16,7 @@ cd /global/scratch/users/annen/GENOME_TREE
 echo "*****START*****"
 source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
 
-orthofinder -fg OrthoFinder_out/Results_Nov22/Orthogroups -t 24 -a 5 -S diamond_ultra_sens
+orthofinder -fg OrthoFinder_out -t 24 -a 5 -S diamond_ultra_sens
 
 conda deactivate
 echo "*****DONE*****"
