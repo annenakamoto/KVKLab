@@ -37,5 +37,5 @@ while read gene; do
 done < ${GENOME}_signalp_notmhmm_protein_names
 
 ### EffectorP
-python EffectorP-3.0-main/EffectorP.py -i ${GENOME}_signalp_notmhmm_proteins.faa
-grep "Effector probability" effectorp_output | awk '{print $1}' > ${GENOME}_effector_protein_names
+python EffectorP-3.0-main/EffectorP.py -i ${GENOME}_signalp_notmhmm_proteins.faa -o ${GENOME}_effectorp_output -E ${GENOME}_effectorp.fasta
+awk '{ if ($(NF) == "effector") {print $1}}' ${GENOME}_effectorp_output > ${GENOME}_effector_protein_names
