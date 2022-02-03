@@ -44,7 +44,8 @@ for pot2_g, genes_g in GUY11.items():
 ### print in order of most shared genes to least
 SORTED_G = sorted(SHARED_GENES.keys(), key=lambda x: len(SHARED_GENES[x]), reverse=True)
 for key in SORTED_G:
-    print(key)
-    g, b = re.findall('\d\.\d{6}', key)
-    if abs(float(g) - float(b)) < 0.3:
+    gb = re.findall('\d\.\d{6}', key)
+    if len(gb) > 2:
+        print("ERROR!")
+    if len(gb) == 2 and abs(float(gb[0]) - float(gb[1])) < 0.3:
         print('\t'.join([str(len(SHARED_GENES[key])), key, ';'.join(SHARED_GENES[key])]))
