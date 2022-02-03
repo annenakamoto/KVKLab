@@ -12,10 +12,10 @@ GUY11 = {}
 with open(guy11_intersect, 'r') as guy11:
     for line in guy11:
         lst = line.split()
-        pot2 = '\t'.join(lst[0:4])
+        pot2 = str('\t'.join(lst[0:4]))
         gene = lst[12]
         if not GUY11.get(pot2):
-            GUY11[pot2] = list(gene)
+            GUY11[pot2] = [gene]
         else:
             GUY11[pot2] = GUY11[pot2].append(gene)
         if not GUY11[pot2]:
@@ -25,10 +25,10 @@ B71 = {}
 with open(B71_intersect, 'r') as b71:
     for line in b71:
         lst = line.split()
-        pot2 = '\t'.join(lst[0:4])
+        pot2 = str('\t'.join(lst[0:4]))
         gene = lst[12]
         if not B71.get(pot2):
-            B71[pot2] = list(gene)
+            B71[pot2] = [gene]
         else:
             B71[pot2] = B71[pot2].append(gene)
         if not B71[pot2]:
@@ -39,6 +39,7 @@ SHARED_GENES = {}
 for pot2_g, genes_g in GUY11.items():
     for pot2_b, genes_b in B71.items():
         print(genes_g, genes_b)
+        print(pot2_g, pot2_b)
         overlap = list(set(genes_g) & set(genes_b))
         if overlap:
             SHARED_GENES[list(pot2_g, pot2_b)] = overlap
