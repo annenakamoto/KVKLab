@@ -47,5 +47,5 @@ for key in SORTED_G:
     gb = re.findall('\d\.\d{6}', key)
     if len(gb) > 2:
         print("ERROR!")
-    if len(gb) == 2 and abs(float(gb[0]) - float(gb[1])) < 0.3:
+    if len(gb) == 2 and abs(float(gb[0]) - float(gb[1])) < 0.03:
         print('\t'.join([str(len(SHARED_GENES[key])), key, ';'.join(SHARED_GENES[key])]))
