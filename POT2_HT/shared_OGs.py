@@ -14,7 +14,8 @@ with open(guy11_intersect, 'r') as guy11:
         lst = line.split()
         pot2 = '\t'.join(lst[0:4])
         gene = lst[12]
-        print(gene)
+        if not gene:
+            print("no gene")
         if not GUY11.get(pot2):
             GUY11[pot2] = [gene]
         else:
@@ -26,7 +27,8 @@ with open(B71_intersect, 'r') as b71:
         lst = line.split()
         pot2 = '\t'.join(lst[0:4])
         gene = lst[12]
-        print(gene)
+        if not gene:
+            print("no gene")
         if not B71.get(pot2):
             B71[pot2] = [gene]
         else:
