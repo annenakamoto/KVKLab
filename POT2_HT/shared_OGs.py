@@ -31,7 +31,7 @@ with open(B71_intersect, 'r') as b71:
             B71[pot2] = list(gene)
         else:
             B71[pot2] = B71[pot2].append(gene)
-        if not GUY11[pot2]:
+        if not B71[pot2]:
             print("not set)")
 
 ### Dictionary containing: key = <[pot2 in guy11, pot2 in b71]>, value = <list of genes in common>
