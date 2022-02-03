@@ -1,4 +1,5 @@
 import sys
+import re
 
 ### Parse guy11 intersect file (argv[1]) and B71 intersect file (argv[2])
 ### 
@@ -43,5 +44,6 @@ for pot2_g, genes_g in GUY11.items():
 ### print in order of most shared genes to least
 SORTED_G = sorted(SHARED_GENES.keys(), key=lambda x: len(SHARED_GENES[x]), reverse=True)
 for key in SORTED_G:
-    
-    print('\t'.join([str(len(SHARED_GENES[key])), key, ';'.join(SHARED_GENES[key])]))
+    g, b = re.findall('\d\.\d{6}', key)
+    if abs(float(g) - float(b)) < 0.3:
+        print('\t'.join([str(len(SHARED_GENES[key])), key, ';'.join(SHARED_GENES[key])]))
