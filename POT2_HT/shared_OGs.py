@@ -19,7 +19,7 @@ with open(guy11_intersect, 'r') as guy11:
         else:
             GUY11[pot2] = GUY11[pot2].append(gene)
         if not GUY11[pot2]:
-            print("not set)")
+            print(lst)
 
 B71 = {}
 with open(B71_intersect, 'r') as b71:
@@ -32,7 +32,7 @@ with open(B71_intersect, 'r') as b71:
         else:
             B71[pot2] = B71[pot2].append(gene)
         if not B71[pot2]:
-            print(line)
+            print(lst)
 
 ### Dictionary containing: key = <[pot2 in guy11, pot2 in b71]>, value = <list of genes in common>
 SHARED_GENES = {}
