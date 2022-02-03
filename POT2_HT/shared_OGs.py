@@ -13,7 +13,7 @@ with open(guy11_intersect, 'r') as guy11:
     for line in guy11:
         lst = line.split()
         pot2 = '\t'.join(map(str, lst[0:4]))
-        gene = ''.join(lst[12].split("_")[:-1])
+        gene = '_'.join(lst[12].split("_")[:-1])
         exists = GUY11.get(pot2)
         if not exists:
             GUY11[pot2] = [gene]
@@ -25,7 +25,7 @@ with open(B71_intersect, 'r') as b71:
     for line in b71:
         lst = line.split()
         pot2 = '\t'.join(map(str, lst[0:4]))
-        gene = ''.join(lst[12].split("_")[:-1])
+        gene = '_'.join(lst[12].split("_")[:-1])
         exists = B71.get(pot2)
         if not exists:
             B71[pot2] = [gene]
