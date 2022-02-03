@@ -34,6 +34,7 @@ with open(B71_intersect, 'r') as b71:
 SHARED_GENES = {}
 for pot2_g, genes_g in GUY11.items():
     for pot2_b, genes_b in B71.items():
+        print(genes_g, genes_b)
         overlap = list(set(genes_g) & set(genes_b))
         if overlap:
             SHARED_GENES[list(pot2_g, pot2_b)] = overlap
