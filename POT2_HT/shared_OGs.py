@@ -13,7 +13,7 @@ with open(guy11_intersect, 'r') as guy11:
     for line in guy11:
         lst = line.split()
         pot2 = '\t'.join(map(str, lst[0:4]))
-        gene = lst[12].split("_")[0]
+        gene = ''.join(lst[12].split("_")[:-1])
         exists = GUY11.get(pot2)
         if not exists:
             GUY11[pot2] = [gene]
@@ -25,7 +25,7 @@ with open(B71_intersect, 'r') as b71:
     for line in b71:
         lst = line.split()
         pot2 = '\t'.join(map(str, lst[0:4]))
-        gene = lst[12].split("_")[0]
+        gene = ''.join(lst[12].split("_")[:-1])
         exists = B71.get(pot2)
         if not exists:
             B71[pot2] = [gene]
@@ -43,4 +43,5 @@ for pot2_g, genes_g in GUY11.items():
 ### print in order of most shared genes to least
 SORTED_G = sorted(SHARED_GENES.keys(), key=lambda x: len(SHARED_GENES[x]), reverse=True)
 for key in SORTED_G:
+    
     print('\t'.join([str(len(SHARED_GENES[key])), key, ';'.join(SHARED_GENES[key])]))
