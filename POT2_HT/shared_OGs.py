@@ -47,4 +47,4 @@ print(SHARED_GENES)
 ### print in order of most shared genes to least
 SORTED_G = sorted(SHARED_GENES.keys(), key=lambda x: len(SHARED_GENES[x]), reverse=True)
 for key in SORTED_G:
-    print('\t'.join(str(len(SORTED_G[key])), key[0], key[1], ';'.join(SORTED_G[key])))
+    print('\t'.join(str(len(SORTED_G[key])), key, ';'.join(SORTED_G[key])))
