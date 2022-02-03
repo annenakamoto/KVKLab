@@ -41,7 +41,7 @@ for pot2_g, genes_g in GUY11.items():
     for pot2_b, genes_b in B71.items():
         overlap = list(set(genes_g) & set(genes_b))
         if overlap:
-            SHARED_GENES[[pot2_g, pot2_b]] = overlap
+            SHARED_GENES[pot2_g + " & " + pot2_b] = overlap
 print(SHARED_GENES)
 
 ### print in order of most shared genes to least
