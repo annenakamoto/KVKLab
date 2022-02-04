@@ -6,12 +6,12 @@
 #SBATCH --nodes=1 ## number of nodes used
 #SBATCH --ntasks-per-node=24 ## number of cpus in the node
 #SBATCH --time=72:00:00 ## max time for job
-#SBATCH --mail-user=${USER}@berkeley.edu ## email job completion
+#SBATCH --mail-user=annen@berkeley.edu ## email job completion
 #SBATCH --mail-type=ALL
-#SBATCH --output=/global/home/users/${USER}/slurm_stderr/slurm-%j.out
-#SBATCH --error=/global/home/users/${USER}/slurm_stdout/slurm-%j.out
+#SBATCH --output=/global/scratch/users/annen/PMB200B_ws2/slurm_stderr/slurm-%j.out
+#SBATCH --error=/global/scratch/users/annen/PMB200B_ws2/slurm_stdout/slurm-%j.out
 
-cd ${WORKING_DIR} ## add the directory where reads and genome are here
+cd /global/scratch/users/annen/PMB200B_ws2 ## add the directory where reads and genome are here
 
 ### argument 1 is the genome accession: B71 (SRR6232156) or MZ5-1-6 (SRR8258942)
 
@@ -36,3 +36,4 @@ bwa mem -R "@RG\tID:${ACCESSION}\tSM:${ACCESSION}" \
     ${ACCESSION}_1.fastq \
     ${ACCESSION}_2.fastq \
     -o ${ACCESSION}.bam
+    
