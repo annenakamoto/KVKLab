@@ -26,7 +26,18 @@ bedtools intersect -a guy11.POT2_flank.bed -b OG_guy11.bed -wa -wb > guy11.POT2_
 bedtools intersect -a B71.POT2_flank.bed -b OG_B71.bed -wa -wb > B71.POT2_genes.bed
 
 ### Find POT2 in guy11 and B71 that have the most genes in common (rank)
-python /global/scratch/users/annen/KVKLab/POT2_HT/shared_OGs.py guy11.POT2_genes.bed B71.POT2_genes.bed > ranked_guy11_B71_POT2.txt
+python /global/scratch/users/annen/KVKLab/POT2_HT/shared_OGs.py guy11.POT2_genes.bed B71.POT2_genes.bed > FILTERED_guy11_B71_POT2.txt
+
+### run mummer on the filtered hits
+while read line; do
+    # bedtools getfasta -s -name+ -fo POT2_mummer/${GENOME}.POT2_flank.fasta -fi JC_cons_genomes/${GENOME}.fasta -bed POT2_mummer/${GENOME}.POT2_flank.bed
+    
+    # /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/nucmer -t 24 --maxmatch -p nucmer_out/${query_b}.${ref_b} ${ref} ${query}
+    # /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/show-coords nucmer_out/${query_b}.${ref_b}.delta > show_coords_out/${query_b}.${ref_b}.coords
+    # /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/mummerplot --postscript --color -p mummerplot_out/${query_b}.${ref_b} nucmer_out/${query_b}.${ref_b}.delta
+    # ps2pdf mummerplot_out/${query_b}.${ref_b}.ps pdf_plots/${query_b}.${ref_b}.pdf
+    # convert -density 150 pdf_plots/${query_b}.${ref_b}.pdf -quality 90 jpg_plots/${query_b}.${ref_b}.jpg
+done < FILTERED_guy11_B71_POT2.txt
 
 
 
