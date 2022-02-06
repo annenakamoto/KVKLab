@@ -36,8 +36,8 @@ mkdir -p guy11_fastas B71_fastas nucmer_out show_coords_out mummerplot_out pdf_p
 while read line; do
     guy11_pot2=$(echo ${line} | awk '{print $5}')
     b71_pot2=$(echo ${line} | awk '{print $10}')
-    echo ${line} | awk -v OFS='\t' '{print $2 $3 $4 $5}' | bedtools getfasta -s -name+ -fo guy11_fastas/${guy11_pot2}.fasta -fi guy11.fna -bed -
-    echo ${line} | awk -v OFS='\t' '{print $7 $8 $9 $10}' | bedtools getfasta -s -name+ -fo B71_fastas/${b71_pot2}.fasta -fi B71.fna -bed -
+    echo ${line} | awk -v OFS='\t' '{print $2 $3 $4 $5}' | bedtools getfasta -s -name+ -fo guy11_fastas/${guy11_pot2}.fasta -fi guy11.fasta -bed -
+    echo ${line} | awk -v OFS='\t' '{print $7 $8 $9 $10}' | bedtools getfasta -s -name+ -fo B71_fastas/${b71_pot2}.fasta -fi B71.fasta -bed -
     
     nucmer -t 24 --maxmatch -p nucmer_out/${guy11_pot2}.${b71_pot2} guy11_fastas/${guy11_pot2}.fasta B71_fastas/${b71_pot2}.fasta
     show-coords nucmer_out/${guy11_pot2}.${b71_pot2}.delta > show_coords_out/${guy11_pot2}.${b71_pot2}.coords
