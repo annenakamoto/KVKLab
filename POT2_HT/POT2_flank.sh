@@ -31,6 +31,7 @@ python /global/scratch/users/annen/KVKLab/POT2_HT/shared_OGs.py guy11.POT2_genes
 ### run mummer on the filtered hits
 module load mummer
 module load imagemagick
+export GNUPLOT_PS_DIR=/global/scratch/users/annen/MUMmer/gnuplot-5.4.2/share/gnuplot/5.4/PostScript
 mkdir -p guy11_fastas B71_fastas nucmer_out show_coords_out mummerplot_out pdf_plots jpg_plots
 rm guy11_fastas/* B71_fastas/* nucmer_out/* show_coords_out/* mummerplot_out/* pdf_plots/* jpg_plots/*
 
