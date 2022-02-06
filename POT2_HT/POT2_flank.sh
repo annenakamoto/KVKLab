@@ -50,7 +50,7 @@ while read line; do
     echo "***show-coords***"
     show-coords nucmer_out/${guy11_pot2}.${b71_pot2}.delta > show_coords_out/${guy11_pot2}.${b71_pot2}.coords
     echo "***mummerplot***"
-    mummerplot --postscript --color -p mummerplot_out/${guy11_pot2}.${b71_pot2} nucmer_out/${guy11_pot2}.${b71_pot2}.delta
+    /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/mummerplot --postscript --color -p mummerplot_out/${guy11_pot2}.${b71_pot2} nucmer_out/${guy11_pot2}.${b71_pot2}.delta
     echo "***ps2pdf***"
     ps2pdf mummerplot_out/${guy11_pot2}.${b71_pot2}.ps pdf_plots/${guy11_pot2}.${b71_pot2}.pdf
     echo "***convert***"
