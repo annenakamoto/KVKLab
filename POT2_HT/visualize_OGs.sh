@@ -52,6 +52,6 @@ while read line; do
     fi
 
     ### write line with new genome name to file
-    echo ${line} | awk -v N=${NEW_NAME} '$4 { print $1 "\t" $2 "\t" $3 "\t" N }' >> OG_${GENOME}.bed
+    echo ${line} | awk -v N=${NEW_NAME} '$4 { print $1 "\t" $2 "\t" $3 "\t" N }' >> E_SCO_OG_${GENOME}.bed
     ((c+=1))
 done < ${GENOME}.bed
