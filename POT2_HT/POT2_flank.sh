@@ -36,8 +36,8 @@ mkdir -p guy11_fastas B71_fastas nucmer_out show_coords_out mummerplot_out pdf_p
 rm guy11_fastas/* B71_fastas/* nucmer_out/* show_coords_out/* mummerplot_out/* pdf_plots/* jpg_plots/*
 
 while read line; do
-    guy11_pot2=$(echo ${line} | awk '{print $5}')
-    b71_pot2=$(echo ${line} | awk '{print $10}')
+    guy11_pot2=$(echo ${line} | awk '{print $5}' | tr \( \_| sed s/\)//)
+    b71_pot2=$(echo ${line} | awk '{print $10}' | tr \( \_| sed s/\)//)
     
     echo "***getfasta***"
     echo ${line} | awk -v OFS='\t' '{print $2, $3, $4, $5}' >  guy11_tmp.bed
