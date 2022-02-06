@@ -32,16 +32,26 @@ python /global/scratch/users/annen/KVKLab/POT2_HT/shared_OGs.py guy11.POT2_genes
 module load mummer
 module load imagemagick
 mkdir -p guy11_fastas B71_fastas nucmer_out show_coords_out mummerplot_out pdf_plots jpg_plots
+rm guy11_fastas/* B71_fastas/* nucmer_out/* show_coords_out/* mummerplot_out/* pdf_plots/* jpg_plots/*
 
 while read line; do
     guy11_pot2=$(echo ${line} | awk '{print $5}')
     b71_pot2=$(echo ${line} | awk '{print $10}')
+    
+    echo "***getfasta***"
     echo ${line} | awk -v OFS='\t' '{print $2 $3 $4 $5}' | bedtools getfasta -s -name+ -fo guy11_fastas/${guy11_pot2}.fasta -fi guy11.fasta -bed -
     echo ${line} | awk -v OFS='\t' '{print $7 $8 $9 $10}' | bedtools getfasta -s -name+ -fo B71_fastas/${b71_pot2}.fasta -fi B71.fasta -bed -
     
+    echo "***nucmer***"
     nucmer -t 24 --maxmatch -p nucmer_out/${guy11_pot2}.${b71_pot2} guy11_fastas/${guy11_pot2}.fasta B71_fastas/${b71_pot2}.fasta
+    echo "***show-coords***"
     show-coords nucmer_out/${guy11_pot2}.${b71_pot2}.delta > show_coords_out/${guy11_pot2}.${b71_pot2}.coords
+    echo "***mummerplot***"
     mummerplot --postscript --color -p mummerplot_out/${guy11_pot2}.${b71_pot2} nucmer_out/${guy11_pot2}.${b71_pot2}.delta
+    echo "***ps2pdf***"
     ps2pdf mummerplot_out/${guy11_pot2}.${b71_pot2}.ps pdf_plots/${guy11_pot2}.${b71_pot2}.pdf
+    echo "***convert***"
     convert -density 150 pdf_plots/${guy11_pot2}.${b71_pot2}.pdf -quality 90 jpg_plots/${guy11_pot2}.${b71_pot2}.jpg
 done < FILTERED_guy11_B71_POT2.txt
+
+echo "***ALL DONE***"
