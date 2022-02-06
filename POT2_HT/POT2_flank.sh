@@ -39,9 +39,9 @@ while read line; do
     b71_pot2=$(echo ${line} | awk '{print $10}')
     
     echo "***getfasta***"
-    echo ${line} | awk -v OFS='\t' '{print $2 $3 $4 $5}' >  guy11_tmp.bed
+    echo ${line} | awk -v OFS='\t' '{print $2, $3, $4, $5}' >  guy11_tmp.bed
     bedtools getfasta -s -name+ -fo guy11_fastas/${guy11_pot2}.fasta -fi guy11.fasta -bed guy11_tmp.bed
-    echo ${line} | awk -v OFS='\t' '{print $7 $8 $9 $10}' > b71_tmp.bed
+    echo ${line} | awk -v OFS='\t' '{print $7, $8, $9, $10}' > b71_tmp.bed
     bedtools getfasta -s -name+ -fo B71_fastas/${b71_pot2}.fasta -fi B71.fasta -bed b71_tmp.bed
     
     echo "***nucmer***"
