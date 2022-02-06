@@ -13,7 +13,7 @@
 
 cd /global/scratch/users/annen/PMB200B_ws2
 
-conda activate lumpy
+source activate /global/scratch/users/annen/anaconda3/envs/lumpy
 module purge ## get rid of loaded modules bc these can interfere 
 
 # B71
@@ -25,3 +25,5 @@ zcat SRR6232156_smoove_out/SRR6232156-smoove.vcf.gz > SRR6232156.lumpy.vcf
 smoove call --name SRR8258942 --fasta guy11.fna --processes 24 --outdir SRR8258942_smoove_out SRR8258942.bam 
 
 zcat SRR8258942_smoove_out/SRR8258942-smoove.vcf.gz > SRR8258942.lumpy.vcf
+
+conda deactivate
