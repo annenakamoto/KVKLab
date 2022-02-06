@@ -29,15 +29,19 @@ bedtools intersect -a B71.POT2_flank.bed -b OG_B71.bed -wa -wb > B71.POT2_genes.
 python /global/scratch/users/annen/KVKLab/POT2_HT/shared_OGs.py guy11.POT2_genes.bed B71.POT2_genes.bed > FILTERED_guy11_B71_POT2.txt
 
 ### run mummer on the filtered hits
+module load mummer
+module load imagemagick
+mkdir -p guy11_fastas B71_fastas nucmer_out show_coords_out mummerplot_out pdf_plots jpg_plots
+
 while read line; do
-    # bedtools getfasta -s -name+ -fo POT2_mummer/${GENOME}.POT2_flank.fasta -fi JC_cons_genomes/${GENOME}.fasta -bed POT2_mummer/${GENOME}.POT2_flank.bed
+    guy11_pot2=$(echo ${line} | awk '{print $5}')
+    b71_pot2=$(echo ${line} | awk '{print $10}')
+    echo ${line} | awk -v OFS='\t' '{print $2 $3 $4 $5}' | bedtools getfasta -s -name+ -fo guy11_fastas/${guy11_pot2}.fasta -fi guy11.fna -bed -
+    echo ${line} | awk -v OFS='\t' '{print $7 $8 $9 $10}' | bedtools getfasta -s -name+ -fo B71_fastas/${b71_pot2}.fasta -fi B71.fna -bed -
     
-    # /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/nucmer -t 24 --maxmatch -p nucmer_out/${query_b}.${ref_b} ${ref} ${query}
-    # /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/show-coords nucmer_out/${query_b}.${ref_b}.delta > show_coords_out/${query_b}.${ref_b}.coords
-    # /global/scratch/users/annen/MUMmer/mummer-4.0.0rc1/mummerplot --postscript --color -p mummerplot_out/${query_b}.${ref_b} nucmer_out/${query_b}.${ref_b}.delta
-    # ps2pdf mummerplot_out/${query_b}.${ref_b}.ps pdf_plots/${query_b}.${ref_b}.pdf
-    # convert -density 150 pdf_plots/${query_b}.${ref_b}.pdf -quality 90 jpg_plots/${query_b}.${ref_b}.jpg
+    nucmer -t 24 --maxmatch -p nucmer_out/${guy11_pot2}.${b71_pot2} guy11_fastas/${guy11_pot2}.fasta B71_fastas/${b71_pot2}.fasta
+    show-coords nucmer_out/${guy11_pot2}.${b71_pot2}.delta > show_coords_out/${guy11_pot2}.${b71_pot2}.coords
+    mummerplot --postscript --color -p mummerplot_out/${guy11_pot2}.${b71_pot2} nucmer_out/${guy11_pot2}.${b71_pot2}.delta
+    ps2pdf mummerplot_out/${guy11_pot2}.${b71_pot2}.ps pdf_plots/${guy11_pot2}.${b71_pot2}.pdf
+    convert -density 150 pdf_plots/${guy11_pot2}.${b71_pot2}.pdf -quality 90 jpg_plots/${guy11_pot2}.${b71_pot2}.jpg
 done < FILTERED_guy11_B71_POT2.txt
-
-
-
