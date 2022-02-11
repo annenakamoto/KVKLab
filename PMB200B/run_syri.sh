@@ -27,4 +27,4 @@ source activate /global/scratch/users/annen/anaconda3/envs/syri ## use source in
 nucmer --maxmatch -p B71_v_MZ5-1-6_full -l 40 -g 90 -c 100 -b 200 -t ${SLURM_NTASKS} MZ5-1-6_chrom_only.fasta B71_chrom_only.fasta
 delta-filter -m -i 90 -l 100 B71_v_MZ5-1-6_full.delta > B71_v_MZ5-1-6_full.filtered.delta
 show-coords -THrd B71_v_MZ5-1-6_full.filtered.delta > B71_v_MZ5-1-6_full.filtered.coords
-~/syri/bin/syri -c B71_v_MZ5-1-6_full.filtered.coords -d B71_v_MZ5-1-6_full.filtered.delta -r MZ5-1-6_chrom_only.fasta -q B71_chrom_only.fasta --nc 5 --all
+~/syri/syri/bin/syri -c B71_v_MZ5-1-6_full.filtered.coords -d B71_v_MZ5-1-6_full.filtered.delta -r MZ5-1-6_chrom_only.fasta -q B71_chrom_only.fasta --nc 5 --all
