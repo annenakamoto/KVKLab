@@ -22,7 +22,7 @@ seqtk subseq B71.fna B71_chromnames.txt > B71_chrom_only.fasta
 
 module purge
 module load mummer
-source activate syri ## use source instead of conda
+source activate /global/scratch/users/annen/anaconda3/envs/syri ## use source instead of conda
 
 nucmer --maxmatch -p B71_v_MZ5-1-6_full -l 40 -g 90 -c 100 -b 200 -t ${SLURM_NTASKS} MZ5-1-6_chrom_only.fasta B71_chrom_only.fasta
 delta-filter -m -i 90 -l 100 B71_v_MZ5-1-6_full.delta > B71_v_MZ5-1-6_full.filtered.delta
