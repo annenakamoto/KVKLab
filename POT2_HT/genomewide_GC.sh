@@ -23,7 +23,7 @@ bedtools makewindows -g ${GENOME}.len -w 200 > ${GENOME}_windowed.bed
 bedtools getfasta -name+ -fo ${GENOME}_windowed.fasta -fi ${GENOME}.fasta -bed ${GENOME}_windowed.bed
 
 ### Determine %GC content for each interval
-geecee -sequence ${GENOME}_windowed.fasta -outfile RIP_analysis/gc_${GENOME}.txt
+geecee -sequence ${GENOME}_windowed.fasta -outfile gc_${GENOME}_windowed.txt
 
 ### Parse output into a bed file for IGV
 
