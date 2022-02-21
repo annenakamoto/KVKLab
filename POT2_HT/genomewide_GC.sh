@@ -29,7 +29,7 @@ geecee -sequence ${GENOME}_windowedn.fasta -outfile gc_${GENOME}_windowed.txt
 
 ### Parse output into a bed file for IGV
 echo 'track name=%gc useScore=1' > gc_${GENOME}_windowed.bed
-cat gc_${GENOME}_windowed.txt | awk -v OFS='\t' '{ split($1,a,"_") } { split(a[4],b,"-") } !/%gc/ { print a[3], b[1], b[2], "%gc", $2; }' >> gc_${GENOME}_windowed.bed
+cat gc_${GENOME}_windowed.txt | awk -v OFS='\t' '{ split($1,a,"_") } { split(a[4],b,"-") } !/GC/ { print a[3], b[1], b[2], "%gc", $2; }' >> gc_${GENOME}_windowed.bed
 
 
 
