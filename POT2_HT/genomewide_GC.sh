@@ -28,7 +28,7 @@ tr \: \_ < ${GENOME}_windowed.fasta > ${GENOME}_windowedn.fasta
 geecee -sequence ${GENOME}_windowedn.fasta -outfile gc_${GENOME}_windowed.txt
 
 ### Parse output into a SEG file for IGV
-cat gc_${GENOME}_windowed.txt | awk -v OFS='\t' '{ split($1,a,"_") } { split(a[4],b,"-") } { print a[3], b[1], b[2], $2; }' > gc_${GENOME}_windowed.bed
+cat gc_${GENOME}_windowed.txt | awk -v OFS='\t' '{ split($1,a,"_") } { split(a[4],b,"-") } { print "%gc", a[3], b[1], b[2], $2; }' > gc_${GENOME}_windowed.seg
 
 
 
