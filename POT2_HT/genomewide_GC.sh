@@ -22,8 +22,10 @@ cat ${GENOME}.fasta | python /global/scratch/users/annen/KVKLab/POT2_HT/chrom_le
 bedtools makewindows -g ${GENOME}.len -w 200 > ${GENOME}_windowed.bed
 bedtools getfasta -name+ -fo ${GENOME}_windowed.fasta -fi ${GENOME}.fasta -bed ${GENOME}_windowed.bed
 
+tr \: \_ < ${GENOME}_windowed.fasta > ${GENOME}_windowedn.fasta
+
 ### Determine %GC content for each interval
-geecee -sequence ${GENOME}_windowed.fasta -outfile gc_${GENOME}_windowed.txt
+geecee -sequence ${GENOME}_windowedn.fasta -outfile gc_${GENOME}_windowed.txt
 
 ### Parse output into a bed file for IGV
 
