@@ -30,6 +30,8 @@ while read GENOME; do
             if [ ! -z "${SCO}" ]; then
                 ### add to SCO bed
                 echo ${line} | awk -v og="${OG}_${GENOME}" '{ print $1 "\t" $2 "\t" $3 "\t" og; d}' >> SCO_BED/SCO_${GENOME}.bed
+            fi
+        fi
         ((c+=1))
     done < GENE_BED/${GENOME}.bed
     bedtools getfasta -name+ -fo SCO_FASTA/SCO_${GENOME}.fasta -fi hq_genomes/${GENOME}.fasta -bed SCO_BED/SCO_${GENOME}.bed
