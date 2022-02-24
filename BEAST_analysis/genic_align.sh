@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=makeTree_nuc
+#SBATCH --job-name=genic_align
 #SBATCH --partition=savio2
 #SBATCH --qos=savio_normal
 #SBATCH --nodes=1
@@ -8,9 +8,9 @@
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
-### Make high quality genome tree with nucleotide alignment (for BEAST)
+### Make genic nucleotide alignment using SCOs (for BEAST)
 
-cd /global/scratch/users/annen/GENOME_TREE
+cd /global/scratch/users/annen/GENOME_TREE 
 
 ### getfasta for the SCOs (one file for each SCO) and align them (into SCO_nuc_alignments)
 
@@ -39,8 +39,7 @@ done < genome_list.txt
 
 ### rearrange the fasta files by SCO instead of by genome
 
-
+ 
 
 ### concatenate all the SCO alignments and preprocess (this can go to BEAST analysis)
 
-### generate tree for alignment using RAxML
