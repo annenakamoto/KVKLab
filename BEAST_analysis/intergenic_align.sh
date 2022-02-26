@@ -20,3 +20,7 @@ while read GENOME; do
 done < genome_list.txt
 
 ### now what to do with intergenic regions bedfiles? Do genome-wide alignments to pick out the syntenic regions, then do alignments 
+
+
+### genome-wide alignments to get syntenic regions (bedfile?)
+### 
