@@ -48,7 +48,7 @@ cd /global/scratch/users/annen/GENOME_TREE
 
 ### align each SCO fasta file 
 while read SCO; do
-    mafft --maxiterate 1000 --globalpair --thread 24 SCO_FASTA/${SCO}.fasta > SCO_ALIGNMENTS/${SCO}.afa
+    mafft --maxiterate 1000 --globalpair --quiet --thread 24 SCO_FASTA/${SCO}.fasta > SCO_ALIGNMENTS/${SCO}.afa
     echo "***aligned ${SCO} SCO fasta***"
 done < /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Nov22/Orthogroups/Orthogroups_SingleCopyOrthologues.txt
 
