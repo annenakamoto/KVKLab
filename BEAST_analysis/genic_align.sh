@@ -38,19 +38,19 @@ cd /global/scratch/users/annen/GENOME_TREE
 # done < genome_list.txt
 
 ### rearrange the fasta files by SCO instead of by genome and align
-while read SCO; do
-    > SCO_FASTA/${SCO}.fasta
-    while read GENOME; do
-        grep -A 1 ${SCO} SCO_FASTA/SCO_${GENOME}.fasta >> SCO_FASTA/${SCO}.fasta
-    done  < genome_list.txt
-    echo "***made ${SCO} SCO fasta***"
-done < /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Nov22/Orthogroups/Orthogroups_SingleCopyOrthologues.txt
+# while read SCO; do
+#     > SCO_FASTA/${SCO}.fasta
+#     while read GENOME; do
+#         grep -A 1 ${SCO} SCO_FASTA/SCO_${GENOME}.fasta >> SCO_FASTA/${SCO}.fasta
+#     done  < genome_list.txt
+#     echo "***made ${SCO} SCO fasta***"
+# done < /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Nov22/Orthogroups/Orthogroups_SingleCopyOrthologues.txt
 
 ### align each SCO fasta file 
-# while read SCO; do
-#     mafft --maxiterate 1000 --globalpair --thread 24 SCO_FASTA/${SCO}.fasta > SCO_ALIGNMENTS/${SCO}.afa
-#     echo "***aligned ${SCO} SCO fasta***"
-# done < /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Nov22/Orthogroups/Orthogroups_SingleCopyOrthologues.txt
+while read SCO; do
+    mafft --maxiterate 1000 --globalpair --thread 24 SCO_FASTA/${SCO}.fasta > SCO_ALIGNMENTS/${SCO}.afa
+    echo "***aligned ${SCO} SCO fasta***"
+done < /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Nov22/Orthogroups/Orthogroups_SingleCopyOrthologues.txt
 
 ### concatenate all the SCO alignments and preprocess (this can go to BEAST analysis)
 
