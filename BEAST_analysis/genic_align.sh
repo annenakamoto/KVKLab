@@ -39,6 +39,7 @@ cd /global/scratch/users/annen/GENOME_TREE
 
 ### rearrange the fasta files by SCO instead of by genome and align
 while read SCO; do
+    > SCO_FASTA/${SCO}.fasta
     while read GENOME; do
         grep -A 1 ${SCO} SCO_FASTA/SCO_${GENOME}.fasta >> SCO_FASTA/${SCO}.fasta
     done  < genome_list.txt
