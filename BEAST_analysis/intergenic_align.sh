@@ -17,7 +17,8 @@ while read GENOME; do
     ### Generate chromosome length file
     cat hq_genomes/${GENOME}.fasta | python /global/scratch/users/annen/KVKLab/POT2_HT/chrom_len.py > LEN/${GENOME}.len
     bedtools complement -i SCO_BED/SCO_${GENOME}.bed -g LEN/${GENOME}.len > INTERGENIC/int_${GENOME}.bed
-done < genome_list.txt
+    echo "***finished ${GENOME}***"
+done < genome_list_no_out.txt
 
 ### now what to do with intergenic regions bedfiles? Do genome-wide alignments to pick out the syntenic regions, then do alignments 
 
