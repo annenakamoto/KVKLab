@@ -40,7 +40,7 @@ cd /global/scratch/users/annen/GENOME_TREE
 ### rearrange the fasta files by SCO instead of by genome and align
 while read SCO; do
     while read GENOME; do
-        grep -A 1 ${SCO} SCO_${GENOME}.fasta >> SCO_FASTA/${SCO}.fasta
+        grep -A 1 ${SCO} SCO_FASTA/SCO_${GENOME}.fasta >> SCO_FASTA/${SCO}.fasta
     done  < genome_list.txt
     echo "***made ${SCO} SCO fasta***"
     mafft --maxiterate 1000 --globalpair --thread 24 SCO_FASTA/${SCO}.fasta > SCO_ALIGNMENTS/${SCO}.afa
