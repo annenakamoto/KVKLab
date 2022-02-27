@@ -28,6 +28,6 @@ cd /global/scratch/users/annen/Cactus_analysis
 source activate /global/scratch/users/annen/anaconda3/envs/cactus
 export PATH=$PATH:/global/scratch/users/annen/cactus-bin-v2.0.5/bin
 d=$(date +"%m-%d-%y_%T")
-cactus --binariesMode local --workDir WORKDIR_${d} JOBSTORE moryzae_seqFile.txt moryzae_wgalign.cactus.hal
+cactus --binariesMode local --workDir WORKDIR JOBSTORE_${d} moryzae_seqFile.txt moryzae_wgalign.cactus.hal
 conda deactivate
 
