@@ -33,7 +33,17 @@ d=$(date +"%m-%d-%y_%T")
 #cactus --binariesMode local --workDir WORKDIR JOBSTORE moryzae_seqFile.txt moryzae_wgalign.cactus.hal
 
 ### convert HAL to MAF (multiple alignment format)
-hal2maf moryzae_wgalign.cactus.hal moryzae_wgalign.cactus.maf
+#hal2maf moryzae_wgalign.cactus.hal moryzae_wgalign.cactus.maf
+echo "***halValidate***"
+halValidate moryzae_wgalign.cactus.hal
+echo
+echo "***halStats***"
+halStats moryzae_wgalign.cactus.hal
+echo
+echo "***halSummarizeMutations***"
+halSummarizeMutations
+
+
 
 conda deactivate
 
