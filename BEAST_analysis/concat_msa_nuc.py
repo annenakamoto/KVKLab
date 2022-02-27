@@ -12,9 +12,9 @@ for line in sys.stdin:
     g = line[:-1]
     GENOMES[g] = SeqRecord(Seq(""), g, '', '')
 
-msa_list = os.listdir("SCO_alignments")
+msa_list = os.listdir("SCO_ALIGNMENTS")
 for msa in msa_list:
-    msa_path =  "SCO_alignments/" + msa
+    msa_path =  "SCO_ALIGNMENTS/" + msa
     for record in SeqIO.parse(msa_path, 'fasta'):
         genome = record.id.split(":")[0].split("_")[1]
         GENOMES[genome].seq += record.seq
