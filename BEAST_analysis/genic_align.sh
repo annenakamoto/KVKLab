@@ -54,7 +54,9 @@ cd /global/scratch/users/annen/GENOME_TREE
 
 ### concatenate all the SCO alignments
 > ALL_SCOs_nuc.afa
+source activate /global/scratch/users/annen/anaconda3/envs/Biopython
 cat genome_list_no_out.txt | python /global/scratch/users/annen/KVKLab/BEAST_analysis/concat_msa_nuc.py
+conda deactivate
 
 ### preprocess/trim alignment (then this can go to BEAST analysis)
 trimal -noallgaps -in ALL_SCOs_nuc.afa -out ALL_SCOs_nuc.trim.afa
