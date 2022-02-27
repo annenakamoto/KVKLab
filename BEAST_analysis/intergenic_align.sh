@@ -41,9 +41,7 @@ echo "***halStats***"
 halStats moryzae_wgalign.cactus.hal
 echo
 echo "***halSummarizeMutations***"
-halSummarizeMutations
-
-
+halSummarizeMutations moryzae_wgalign.cactus.hal
 
 conda deactivate
 
