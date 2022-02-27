@@ -26,6 +26,7 @@ cd /global/scratch/users/annen/GENOME_TREE
 ### genome-wide alignments (of full genomes) to get syntenic regions (bedfile?)
 cd /global/scratch/users/annen/Cactus_analysis
 source activate /global/scratch/users/annen/anaconda3/envs/cactus
-cactus --workDir WORKDIR JOBSTORE moryzae_seqFile.txt moryzae_wgalign.cactus.hal
+export PATH=$PATH:/global/scratch/users/annen/cactus-bin-v2.0.5/bin
+cactus --binariesMode local --workDir WORKDIR JOBSTORE moryzae_seqFile.txt moryzae_wgalign.cactus.hal
 conda deactivate
 
