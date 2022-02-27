@@ -16,26 +16,26 @@ cd /global/scratch/users/annen/GENOME_TREE
 
 ### make SCO bedfiles for all the genomes and getfasta
 # rm SCO_BED/*
-while read GENOME; do
-    cat GFF3/${GENOME}.gff3 | awk '$3 ~ /gene/ { print $1 "\t" $4 "\t" $5 "\t" substr($9, 4, 10) }' > GENE_BED/${GENOME}.bed
-    c=0
-    while read line; do
-        ### name to find gene in OG and SCO files
-        name="gene_${c}_${GENOME}"
-        ### look for gene in Orthogroups
-        OG=$(grep ${name} /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Nov22/Orthogroups/Orthogroups.txt | awk -F ":" '{ print $1; }')
-        if [ ! -z "${OG}" ]; then
-            ### check if OG is a SCO
-            SCO=$(grep ${OG} /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Nov22/Orthogroups/Orthogroups_SingleCopyOrthologues.txt)
-            if [ ! -z "${SCO}" ]; then
-                ### add to SCO bed
-                echo ${line} | awk -v og="${OG}_${GENOME}" '{ print $1 "\t" $2 "\t" $3 "\t" og; d}' >> SCO_BED/SCO_${GENOME}.bed
-            fi
-        fi
-        ((c+=1))
-    done < GENE_BED/${GENOME}.bed
-    #bedtools getfasta -name+ -fo SCO_FASTA/SCO_${GENOME}.fasta -fi hq_genomes/${GENOME}.fasta -bed SCO_BED/SCO_${GENOME}.bed
-done < genome_list.txt
+# while read GENOME; do
+#     cat GFF3/${GENOME}.gff3 | awk '$3 ~ /gene/ { print $1 "\t" $4 "\t" $5 "\t" substr($9, 4, 10) }' > GENE_BED/${GENOME}.bed
+#     c=0
+#     while read line; do
+#         ### name to find gene in OG and SCO files
+#         name="gene_${c}_${GENOME}"
+#         ### look for gene in Orthogroups
+#         OG=$(grep ${name} /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Nov22/Orthogroups/Orthogroups.txt | awk -F ":" '{ print $1; }')
+#         if [ ! -z "${OG}" ]; then
+#             ### check if OG is a SCO
+#             SCO=$(grep ${OG} /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Nov22/Orthogroups/Orthogroups_SingleCopyOrthologues.txt)
+#             if [ ! -z "${SCO}" ]; then
+#                 ### add to SCO bed
+#                 echo ${line} | awk -v og="${OG}_${GENOME}" '{ print $1 "\t" $2 "\t" $3 "\t" og; d}' >> SCO_BED/SCO_${GENOME}.bed
+#             fi
+#         fi
+#         ((c+=1))
+#     done < GENE_BED/${GENOME}.bed
+#     bedtools getfasta -name+ -fo SCO_FASTA/SCO_${GENOME}.fasta -fi hq_genomes/${GENOME}.fasta -bed SCO_BED/SCO_${GENOME}.bed
+# done < genome_list.txt
 
 ### rearrange the fasta files by SCO instead of by genome
 # while read SCO; do
@@ -53,15 +53,15 @@ done < genome_list.txt
 # done < /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Nov22/Orthogroups/Orthogroups_SingleCopyOrthologues.txt
 
 ### concatenate all the SCO alignments
-# > ALL_SCOs_nuc.afa
-# cat PROTEOMES/genome_list_no_out.txt | python /global/scratch/users/annen/KVKLab/BEAST_analysis/concat_msa_nuc.py
+> ALL_SCOs_nuc.afa
+cat PROTEOMES/genome_list_no_out.txt | python /global/scratch/users/annen/KVKLab/BEAST_analysis/concat_msa_nuc.py
 
-# ### preprocess/trim alignment (then this can go to BEAST analysis)
-# trimal -noallgaps -in ALL_SCOs_nuc.afa -out ALL_SCOs_nuc.trim.afa
+### preprocess/trim alignment (then this can go to BEAST analysis)
+trimal -noallgaps -in ALL_SCOs_nuc.afa -out ALL_SCOs_nuc.trim.afa
 
-# ### Make tree
-# echo "*** making fasttree ***"
-# source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
-# fasttree -gamma < ALL_SCOs_nuc.trim.afa > ALL_SCOs_nuc.tree
-# conda deactivate
+### Make tree
+echo "*** making fasttree ***"
+source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
+fasttree -gamma < ALL_SCOs_nuc.trim.afa > ALL_SCOs_nuc.tree
+conda deactivate
 
