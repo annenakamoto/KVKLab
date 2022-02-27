@@ -28,7 +28,12 @@ cd /global/scratch/users/annen/Cactus_analysis
 source activate /global/scratch/users/annen/anaconda3/envs/cactus
 export PATH=$PATH:/global/scratch/users/annen/cactus-bin-v2.0.5/bin
 d=$(date +"%m-%d-%y_%T")
-rm -r JOBSTORE
-cactus --binariesMode local --workDir WORKDIR JOBSTORE moryzae_seqFile.txt moryzae_wgalign.cactus.hal
+#rm -r JOBSTORE
+
+#cactus --binariesMode local --workDir WORKDIR JOBSTORE moryzae_seqFile.txt moryzae_wgalign.cactus.hal
+
+### convert HAL to MAF (multiple alignment format)
+hal2maf moryzae_wgalign.cactus.hal moryzae_wgalign.cactus.maf
+
 conda deactivate
 
