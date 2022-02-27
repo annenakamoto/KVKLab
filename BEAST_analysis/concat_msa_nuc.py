@@ -22,3 +22,4 @@ for msa in msa_list:
 with open("ALL_SCOs_nuc.afa", 'w') as handle:
     for seq in GENOMES.values():
         SeqIO.write(seq, handle, 'fasta')
+
