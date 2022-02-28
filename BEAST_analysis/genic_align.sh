@@ -59,7 +59,7 @@ cd /global/scratch/users/annen/GENOME_TREE
 # conda deactivate
 
 ### preprocess/trim alignment (then this can go to BEAST analysis)
-# trimal -noallgaps -in ALL_SCOs_nuc.afa -out ALL_SCOs_nuc.trim.afa
+trimal -nogaps -in ALL_SCOs_nuc.afa -out ALL_SCOs_nuc.trim.afa
 
 ### Make tree
 # echo "*** making fasttree ***"
