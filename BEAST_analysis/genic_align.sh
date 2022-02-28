@@ -59,14 +59,14 @@ cd /global/scratch/users/annen/GENOME_TREE
 # conda deactivate
 
 ### preprocess/trim alignment (then this can go to BEAST analysis)
-trimal -nogaps -in ALL_SCOs_nuc.afa -out ALL_SCOs_nuc.trim.afa
+# trimal -nogaps -in ALL_SCOs_nuc.afa -out ALL_SCOs_nuc.trim.afa
 
 ### Make tree
-# echo "*** making fasttree ***"
-# source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
-# fasttree -nt -gtr < ALL_SCOs_nuc.trim.afa > ALL_SCOs_nuc.tree
-# conda deactivate
+echo "*** making fasttree ***"
+source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
+fasttree -nt -gtr < ALL_SCOs_nuc.trim.afa > ALL_SCOs_nuc.tree
+conda deactivate
 
-echo "*** making raxml tree ***"
-raxmlHPC-PTHREADS-SSE3 -s ALL_SCOs_nuc.trim.afa -n RAxML.ALL_SCOs_nuc -m GTRGAMMA -T 24 -f a -x 12345 -p 12345 -# 100
+# echo "*** making raxml tree ***"
+# raxmlHPC-PTHREADS-SSE3 -s ALL_SCOs_nuc.trim.afa -n RAxML.ALL_SCOs_nuc -m GTRGAMMA -T 24 -f a -x 12345 -p 12345 -# 100
 
