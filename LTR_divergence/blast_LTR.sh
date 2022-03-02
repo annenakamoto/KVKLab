@@ -51,7 +51,7 @@ while read LTR; do
     blastn -db ${LTR}_flank -query ${LTR}_blast.fasta -out ${LTR}_blast.tab -outfmt 6
     ### parse into bed file and grab the sequences using bedtools getfasta
     echo "*** parsing and getfasta for ${LTR} ***"
-    cat ${LTR}_blast.tab | awk -v OFS="\t" '{ print $1, $7, $8 }' > ${LTR}_blast.bed
+    cat ${LTR}_blast.tab | awk -v OFS="\t" '{ print $2, $9, $10 }' > ${LTR}_blast.bed
     bedtools getfasta -name+ -fi ${LTR}_flank.fasta -bed ${LTR}_blast.bed > ${LTR}_blast.fasta
 done < LTRs_ofinterest.txt
 
