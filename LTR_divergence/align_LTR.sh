@@ -42,7 +42,7 @@ done < LTRs_ofinterest.txt
 ### align the LTR elements + flanking regions (${LTR}_flank.fasta)
 while read LTR; do
     echo "*** aligning ${LTR} ***"
-    mafft --quiet --maxiterate 1000 --localpair --thread 24 ${LTR}_flank.fasta > ${LTR}_flank.afa
+    mafft --quiet --localpair --thread 24 ${LTR}_flank.fasta > ${LTR}_flank.afa
 done < LTRs_ofinterest.txt
 
 ### manually look at alignment and see where to trim it
