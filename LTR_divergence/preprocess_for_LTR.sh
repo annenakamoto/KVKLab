@@ -25,7 +25,7 @@ echo "*** MAGGY ***"
 > MAGGY_I.B71.bed
 > MAGGY_I.LpKY97.bed
 > MAGGY_I.MZ5-1-6.bed
-grep ">" /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs/MAGGY_I.RVT_1.fa_align.Matches.155min.fa | tr \# \:| tr \{ \( | tr \} \) | sort -u | awk '{ print substr($1, 1, length($1)-2) }' | while read line; do
+grep ">" /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs/MAGGY_I.RVT_1.fa_align.Matches.155min.fa | tr \# \:| tr \{ \( | tr \} \) | awk '{ print substr($1, 1, length($1)-2) }' | sort -u | while read line; do
     grep -A 1 ${line} /global/scratch/users/annen/Rep_TE_Lib/Align_TEs/REPHITS_MAGGY_I.fasta >> hq_REPHITS_MAGGY_I.fasta
     genome=$(echo ${line} | awk -v FS=":" '{ print $4 }')
     echo ${line} | python /global/scratch/users/annen/KVKLab/LTR_divergence/name2bed.py >> MAGGY_I.${genome}.bed
@@ -39,7 +39,7 @@ done
 # > GYPSY1_MG.B71.bed
 # > GYPSY1_MG.LpKY97.bed
 # > GYPSY1_MG.MZ5-1-6.bed
-# grep ">" /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs/GYPSY1_MG.RVT_1.fa_align.Matches.155min.fa | tr \# \:| tr \{ \( | tr \} \) | awk '{ print substr($1, 1, length($1)-2) }' | while read line; do
+# grep ">" /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs/GYPSY1_MG.RVT_1.fa_align.Matches.155min.fa | tr \# \:| tr \{ \( | tr \} \) | awk '{ print substr($1, 1, length($1)-2) }' | sort -u | while read line; do
 #     grep -A 1 ${line} /global/scratch/users/annen/Rep_TE_Lib/Align_TEs/REPHITS_GYPSY1_MG.fasta >> hq_REPHITS_GYPSY1_MG.fasta
 #     genome=$(echo ${line} | awk -v FS=":" '{ print $4 }')
 #     echo ${line} | python /global/scratch/users/annen/KVKLab/LTR_divergence/name2bed.py >> GYPSY1_MG.${genome}.bed
@@ -53,7 +53,7 @@ done
 # > Copia_elem.B71.bed
 # > Copia_elem.LpKY97.bed
 # > Copia_elem.MZ5-1-6.bed
-# grep ">" /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs/Copia_elem.RVT_2.fa_align.Matches.170min.fa | tr \# \:| tr \{ \( | tr \} \) | awk '{ print substr($1, 1, length($1)-2) }' | while read line; do
+# grep ">" /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs/Copia_elem.RVT_2.fa_align.Matches.170min.fa | tr \# \:| tr \{ \( | tr \} \) | awk '{ print substr($1, 1, length($1)-2) }' | sort -u | while read line; do
 #     grep -A 1 ${line} /global/scratch/users/annen/Rep_TE_Lib/Align_TEs/REPHITS_Copia_elem.fasta >> hq_REPHITS_Copia_elem.fasta
 #     genome=$(echo ${line} | awk -v FS=":" '{ print $4 }')
 #     echo ${line} | python /global/scratch/users/annen/KVKLab/LTR_divergence/name2bed.py >> Copia_elem.${genome}.bed
@@ -67,7 +67,7 @@ done
 # > MGRL3_I.B71.bed
 # > MGRL3_I.LpKY97.bed
 # > MGRL3_I.MZ5-1-6.bed
-# grep ">" /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs/MGRL3_I.rve.fa_align.Matches.71min.fa | tr \# \:| tr \{ \( | tr \} \) | awk '{ print substr($1, 1, length($1)-2) }' | while read line; do
+# grep ">" /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs/MGRL3_I.rve.fa_align.Matches.71min.fa | tr \# \:| tr \{ \( | tr \} \) | awk '{ print substr($1, 1, length($1)-2) }' | sort -u | while read line; do
 #     grep -A 1 ${line} /global/scratch/users/annen/Rep_TE_Lib/Align_TEs/REPHITS_MGRL3_I.fasta >> hq_REPHITS_MGRL3_I.fasta
 #     genome=$(echo ${line} | awk -v FS=":" '{ print $4 }')
 #     echo ${line} | python /global/scratch/users/annen/KVKLab/LTR_divergence/name2bed.py >> MGRL3_I.${genome}.bed
