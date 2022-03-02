@@ -46,9 +46,13 @@ echo "MZ5-1-6" >> repgenome_list.txt
 
 while read LTR; do
     ### blast and get tabular output (LTR = MAGGY_I, GYPSY1_MG, Copia_elem, or MGRL3_I)
+    echo "*** blasting for ${LTR} ***"
     makeblastdb -in ${LTR}_flank.fasta -out ${LTR}_flank -dbtype nucl -title "${LTR}_flank database"
     blastn -db ${LTR}_flank -query ${LTR}_blast.fasta -out ${LTR}_blast.tab -outfmt 6
     ### parse into bed file and grab the sequences using bedtools getfasta
+    echo "*** parsing and getfasta for ${LTR} ***"
     cat ${LTR}_blast.tab | awk -v OFS="\t" '{ print $1, $7, $8 }' > ${LTR}_blast.bed
     bedtools getfasta -name+ -fi ${LTR}_flank.fasta -bed ${LTR}_blast.bed > ${LTR}_blast.fasta
 done < LTRs_ofinterest.txt
+
+echo "*** done ***"

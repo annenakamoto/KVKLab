@@ -15,8 +15,11 @@ cd /global/scratch/users/annen/LTR_divergence
 LTR=$1
 
 ### align all the sequnces in ${LTR}_blast.fasta
+echo "*** aligning ${LTR} seqs ***"
 mafft --thread 24 ${LTR}_blast.fasta > ${LTR}_blast.afa
 trimal -in ${LTR}_blast.afa -out ${LTR}_blast.trim.afa -noallgaps
 
 ### generate a consensus sequence using the alignment (will go into library for RepeatMasking in next step)
+echo "*** generating ${LTR} consensus ***"
 cons -sequence ${LTR}_blast.trim.afa -outseq ${LTR}_LTR_cons.fasta -name ${LTR}_LTR
+echo "*** done ***"
