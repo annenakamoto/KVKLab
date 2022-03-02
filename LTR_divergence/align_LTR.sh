@@ -31,6 +31,7 @@ done < repgenome_list.txt
 
 ### use bedtools slop to get the element + 1000 bp on each side
 while read LTR; do
+    echo "*** slop and getfasta for ${LTR} ***"
     > ${LTR}_flank.fasta
     while read GENOME; do
         bedtools slop -i ${LTR}.${GENOME}.bed -g LEN/${GENOME}.len -b 1000 > ${LTR}.${GENOME}.flank.bed
@@ -40,7 +41,8 @@ done < LTRs_ofinterest.txt
 
 ### align the LTR elements + flanking regions (${LTR}_flank.fasta)
 while read LTR; do
-    mafft --maxiterate 1000 --localpair --thread 24 ${LTR}_flank.fasta > ${LTR}_flank.afa
+    echo "*** aligning ${LTR} ***"
+    mafft --quiet --maxiterate 1000 --localpair --thread 24 ${LTR}_flank.fasta > ${LTR}_flank.afa
 done < LTRs_ofinterest.txt
 
 ### manually look at alignment and see where to trim it
