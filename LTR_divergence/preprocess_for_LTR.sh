@@ -25,7 +25,7 @@ echo "*** MAGGY ***"
 > MAGGY_I.B71.bed
 > MAGGY_I.LpKY97.bed
 > MAGGY_I.MZ5-1-6.bed
-grep ">" /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs/MAGGY_I.RVT_1.fa_align.Matches.155min.fa | tr \# \:| tr \{ \( | tr \} \) | awk '{ print substr($1, 1, length($1)-2) }' | while read line; do
+grep ">" /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs/MAGGY_I.RVT_1.fa_align.Matches.155min.fa | tr \# \:| tr \{ \( | tr \} \) | sort -u | awk '{ print substr($1, 1, length($1)-2) }' | while read line; do
     grep -A 1 ${line} /global/scratch/users/annen/Rep_TE_Lib/Align_TEs/REPHITS_MAGGY_I.fasta >> hq_REPHITS_MAGGY_I.fasta
     genome=$(echo ${line} | awk -v FS=":" '{ print $4 }')
     echo ${line} | python /global/scratch/users/annen/KVKLab/LTR_divergence/name2bed.py >> MAGGY_I.${genome}.bed
