@@ -48,7 +48,7 @@ while read LTR; do
     ### blast and get tabular output (LTR = MAGGY_I, GYPSY1_MG, Copia_elem, or MGRL3_I)
     echo "*** blasting for ${LTR} ***"
     makeblastdb -in ${LTR}_flank.fasta -out ${LTR}_flank -dbtype nucl -title "${LTR}_flank database"
-    blastn -db ${LTR}_flank -query ${LTR}_blast.fasta -out ${LTR}_blast.tab -outfmt 6
+    blastn -db ${LTR}_flank -query ${LTR}_blast_rep.fasta -out ${LTR}_blast.tab -outfmt 6
     ### parse into bed file and grab the sequences using bedtools getfasta
     echo "*** parsing and getfasta for ${LTR} ***"
     cat ${LTR}_blast.tab | awk -v OFS="\t" '{ print $2, $9, $10 }' > ${LTR}_blast.bed
