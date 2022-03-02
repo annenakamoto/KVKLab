@@ -40,7 +40,7 @@ while read LTR; do
 done < LTRs_ofinterest.txt
 
 ### align the LTR elements + flanking regions (${LTR}_flank.fasta)
-while read LTR; do
+while read LTR; do 
     echo "*** aligning ${LTR} ***"
     mafft --quiet --localpair --thread 24 ${LTR}_flank.fasta > ${LTR}_flank.afa
 done < LTRs_ofinterest.txt
