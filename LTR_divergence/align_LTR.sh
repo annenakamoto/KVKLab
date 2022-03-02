@@ -44,7 +44,7 @@ LTR_in=$1
 ### align the LTR elements + flanking regions (${LTR}_flank.fasta)
 
 echo "*** aligning ${LTR_in} ***"
-mafft --localpair --thread 24 ${LTR_in}_flank.fasta > ${LTR_in}_flank.afa
+mafft --globalpair --thread 24 ${LTR_in}_flank.fasta > ${LTR_in}_flank.afa
 
 ### manually look at alignment and see where to trim it
 
