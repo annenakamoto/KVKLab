@@ -8,7 +8,7 @@
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
-### Annotate LTRs for LTR divergence analysis (for MAGGY, GYPSY1, Copia, and MGRL3)
+### Preprocess for annotating LTRs for LTR divergence analysis (for MAGGY, GYPSY1, Copia, and MGRL3)
 
 cd /global/scratch/users/annen/LTR_divergence
 
@@ -73,8 +73,3 @@ grep ">" /global/scratch/users/annen/Rep_TE_Lib/Align_domseq_TEs/MGRL3_I.rve.fa_
     echo ${line} | python /global/scratch/users/annen/KVKLab/LTR_divergence/name2bed.py >> MGRL3_I.${genome}.bed
 done
 
-
-
-### use bedtools slop to get the element + 1000 bp on each side
-
-### 
