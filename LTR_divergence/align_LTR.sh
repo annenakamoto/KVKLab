@@ -13,10 +13,10 @@
 cd /global/scratch/users/annen/LTR_divergence
 
 > LTRs_ofinterest.txt
-echo "MAGGY" >> LTRs_ofinterest.txt
-echo "GYPSY1" >> LTRs_ofinterest.txt
-echo "Copia" >> LTRs_ofinterest.txt
-echo "MGRL3" >> LTRs_ofinterest.txt
+echo "MAGGY_I" >> LTRs_ofinterest.txt
+echo "GYPSY1_MG" >> LTRs_ofinterest.txt
+echo "Copia_elem" >> LTRs_ofinterest.txt
+echo "MGRL3_I" >> LTRs_ofinterest.txt
 > repgenome_list.txt
 echo "guy11" >> repgenome_list.txt
 echo "US71" >> repgenome_list.txt
