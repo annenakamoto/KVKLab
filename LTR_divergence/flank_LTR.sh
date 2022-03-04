@@ -18,7 +18,7 @@ cd /global/scratch/users/annen/LTR_divergence
 ### this will give flanking LTRs of each internal region
 while read LTR; do
     while read GENOME; do
-        bedtools intersect -a ${LTR}.${GENOME}.flank.bed -b RM_LTR_BED_FASTA/${GENOME}.${LTR}_LTR.bed -wa -wb > FLANKING_LTR_BED/${LTR}.${GENOME}.LTR_flank.bed
+        bedtools intersect -a ${LTR}.${GENOME}.flank.bed -b RM_LTR_BED_FASTA/${GENOME}.${LTR}_LTR.bed -wb -wa > FLANKING_LTR_BED/${LTR}.${GENOME}.LTR_flank.bed
     done < repgenome_list.txt
 done < LTRs_ofinterest.txt
 
