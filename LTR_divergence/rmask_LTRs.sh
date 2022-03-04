@@ -16,10 +16,11 @@ cd /global/scratch/users/annen/LTR_divergence
 
 ### add LTRs to library for ReapeatMasker
 #cat *cons* /global/scratch/users/annen/Rep_TE_Lib/REPLIB_CLASS.fasta > LTR_REPLIB_CLASS.fasta
+cat *cons* LTR_LIB.fasta
 
 ### Run RepeatMasker using LTR_REPLIB_CLASS.fasta TE library on GENOME
 echo "*** RUNNING REPEATMASKER FOR ${GENOME} ***"
-#RepeatMasker -lib LTR_REPLIB_CLASS.fasta -dir RepeatMasker_out -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc /global/scratch/users/annen/GENOME_TREE/hq_genomes/${GENOME}.fasta
+RepeatMasker -lib LTR_LIB.fasta -dir RepeatMasker_out -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc /global/scratch/users/annen/GENOME_TREE/hq_genomes/${GENOME}.fasta
 
 ### create bed file of the RepeatMasker output, where the name of each entry is name_of_element:chrom:start-end (in the genome)
 echo "*** PARSING REPEATMASKER OUTPUT FOR ${GENOME} ***"
