@@ -16,7 +16,7 @@ cd /global/scratch/users/annen/LTR_divergence
 
 ### add LTRs to library for ReapeatMasker
 #cat *cons* /global/scratch/users/annen/Rep_TE_Lib/REPLIB_CLASS.fasta > LTR_REPLIB_CLASS.fasta
-cat *cons* LTR_LIB.fasta
+cat *cons* > LTR_LIB.fasta
 
 ### Run RepeatMasker using LTR_REPLIB_CLASS.fasta TE library on GENOME
 echo "*** RUNNING REPEATMASKER FOR ${GENOME} ***"
