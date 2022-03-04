@@ -18,19 +18,23 @@ cd /global/scratch/users/annen/LTR_divergence
 #cat *cons* /global/scratch/users/annen/Rep_TE_Lib/REPLIB_CLASS.fasta > LTR_REPLIB_CLASS.fasta
 
 ### Run RepeatMasker using LTR_REPLIB_CLASS.fasta TE library on GENOME
+echo "*** RUNNING REPEATMASKER FOR ${GENOME} ***"
 RepeatMasker -lib LTR_REPLIB_CLASS.fasta -dir RepeatMasker_out -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc /global/scratch/users/annen/GENOME_TREE/hq_genomes/${GENOME}.fasta
 
 ### create bed file of the RepeatMasker output, where the name of each entry is name_of_element:chrom:start-end (in the genome)
+echo "*** PARSING REPEATMASKER OUTPUT FOR ${GENOME} ***"
 awk -v OFS='\t' '$1 ~ /^[0-9]+$/ && /\+/ { print $5, $6, $7, $10 ":" $5 ":" $6 "-" $7, 0, $9 } 
                  $1 ~ /^[0-9]+$/ && !/\+/ { print $5, $6, $7, $10 ":" $5 ":" $6 "-" $7, 0, "-" }' RepeatMasker_out/${GENOME}.fasta.out > RM_BED/${GENOME}.bed
 
 ### create separate bed files for each LTR of interest (visualize in IGV)
+echo "*** CREATING LTR BEDFILES FOR ${GENOME} ***"
 grep "Copia_elem_LTR" RM_BED/${GENOME}.bed > RM_LTR_BED_FASTA/${GENOME}.Copia_elem_LTR.bed
 grep "GYPSY1_MG_LTR" RM_BED/${GENOME}.bed > RM_LTR_BED_FASTA/${GENOME}.GYPSY1_MG_LTR.bed
 grep "MAGGY_I_LTR" RM_BED/${GENOME}.bed > RM_LTR_BED_FASTA/${GENOME}.MAGGY_I_LTR.bed
 grep "MGRL3_I_LTR" RM_BED/${GENOME}.bed > RM_LTR_BED_FASTA/${GENOME}.MGRL3_I_LTR.bed
 
 ### getfasta for each LTR
+echo "*** GETFASTA LTRs FOR ${GENOME} ***"
 bedtools getfasta -s -name+ -fi /global/scratch/users/annen/GENOME_TREE/hq_genomes/${GENOME}.fasta -bed RM_LTR_BED_FASTA/${GENOME}.Copia_elem_LTR.bed > RM_LTR_BED_FASTA/${GENOME}.Copia_elem_LTR.fasta
 bedtools getfasta -s -name+ -fi /global/scratch/users/annen/GENOME_TREE/hq_genomes/${GENOME}.fasta -bed RM_LTR_BED_FASTA/${GENOME}.GYPSY1_MG_LTR.bed > RM_LTR_BED_FASTA/${GENOME}.GYPSY1_MG_LTR.fasta
 bedtools getfasta -s -name+ -fi /global/scratch/users/annen/GENOME_TREE/hq_genomes/${GENOME}.fasta -bed RM_LTR_BED_FASTA/${GENOME}.MAGGY_I_LTR.bed > RM_LTR_BED_FASTA/${GENOME}.MAGGY_I_LTR.fasta
