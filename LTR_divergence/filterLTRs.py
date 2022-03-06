@@ -67,6 +67,8 @@ for ltr in duplicates:
         one_rg = range(int(dup[1].split()[1]), int(dup[1].split()[2]))
         zero_overlap = abs(max(int(dup[0].split()[1]), int(ltr.split()[1])) - min(int(dup[0].split()[2]), int(ltr.split()[2])))
         one_overlap = abs(max(int(dup[1].split()[1]), int(ltr.split()[1])) - min(int(dup[1].split()[2]), int(ltr.split()[2])))
+        print("0 overlap: ", zero_overlap)
+        print("1 overlap: ", one_overlap)
         if zero_overlap == one_overlap:
             print("0 and 1 dist same?? removing both")
             LTR_PAIRS.pop(dup[0])
