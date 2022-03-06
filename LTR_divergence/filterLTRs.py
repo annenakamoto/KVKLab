@@ -18,6 +18,12 @@ for line in sys.stdin:
 ### key = internal, value = list of 2 flanking LTRs
 LTR_PAIRS = {}
 for k,v in LTR.items():
+    ### remove entries in v that don't have the same strand (+/-)
+    k_strand = k.split()[5]
+    for e in v:
+        e_strand = e.split()[5]
+        if e_strand != k_strand:
+            LTR[k].remove(e)
     if len(v) >= 2:
         k_left = int(k.split()[1])
         k_right = int(k.split()[2])
@@ -44,31 +50,33 @@ if len(ltrs) != len(ltrs_set):
 ### handle duplicates: only keep the best fit
 for ltr in duplicates:
     print("HANDLING DUPLICATE: ", ltr)
-    right = None
-    left = None
+    dup = []
     for k,v in LTR_PAIRS.items():
-        if ltr == v[0]:
-            left = k
-        if ltr == v[1]:
-            right = k
-    if left == None or right == None:
+        if ltr in v:
+            dup.append(k)
+    if len(dup) < 2:
         print("couldn't find duplicate")
+    elif len(dup) > 2:
+        print("more than 2 duplicates found")
     else:
         print("keep one of:")
-        print("left: ", left)
-        print("right: ", right)
-        left_dist = abs(int(left.split()[1])-int(ltr.split()[1]))
-        right_dist = abs(int(right.split()[2])-int(ltr.split()[2]))
-        if left_dist == right_dist:
-            print("left and right dist same?? removing both")
-            LTR_PAIRS.pop(left)
-            LTR_PAIRS.pop(right)
-        elif left_dist < right_dist:
-            print("kept left")
-            LTR_PAIRS.pop(right)
+        print("0: ", dup[0])
+        print("1: ", dup[1])
+        ltr_avg = (int(ltr.split()[1])+int(ltr.split()[2]))/2
+        zero_avg = (int(dup[0].split()[1])+int(dup[0].split()[2]))/2
+        one_avg = (int(dup[1].split()[1])+int(dup[1].split()[2]))/2
+        zero_dist = abs(zero_avg - ltr_avg)
+        one_dist = abs(one_avg - ltr_avg)
+        if zero_dist == one_dist:
+            print("0 and 1 dist same?? removing both")
+            LTR_PAIRS.pop(dup[0])
+            LTR_PAIRS.pop(dup[1])
+        elif zero_dist < one_dist:
+            print("kept 0")
+            LTR_PAIRS.pop(dup[1])
         else:
-            print("kept right")
-            LTR_PAIRS.pop(left)
+            print("kept 1")
+            LTR_PAIRS.pop(dup[0])
     
     
 
