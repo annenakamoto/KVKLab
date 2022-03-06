@@ -58,8 +58,8 @@ for ltr in duplicates:
         print("keep one of:")
         print("0: ", dup[0])
         print("1: ", dup[1])
-        zero_overlap = abs(max(int(dup[0].split()[1]), int(ltr.split()[1])+1000) - min(int(dup[0].split()[2]), int(ltr.split()[2])-1000))
-        one_overlap = abs(max(int(dup[1].split()[1]), int(ltr.split()[1])+1000) - min(int(dup[1].split()[2]), int(ltr.split()[2])-1000))
+        zero_overlap = abs(max(int(dup[0].split()[1])+1000, int(ltr.split()[1])) - min(int(dup[0].split()[2])-1000, int(ltr.split()[2])))
+        one_overlap = abs(max(int(dup[1].split()[1])+1000, int(ltr.split()[1])) - min(int(dup[1].split()[2])-1000, int(ltr.split()[2])))
         print("0 overlap: ", zero_overlap)
         print("1 overlap: ", one_overlap)
         if zero_overlap == one_overlap:
