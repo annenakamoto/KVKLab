@@ -14,11 +14,12 @@ GENOME=$1
 
 cd /global/scratch/users/annen/LTR_divergence
 
-### use previous internal + flank bedfiles made (LTR.GENOME.flank.bed) in blash_LTR.sh and intersect with RepeatMasker output
+### use previous internal + flank bedfiles made (LTR.GENOME.flank.bed) in blast_LTR.sh and intersect with RepeatMasker output
 ### this will give flanking LTRs of each internal region
 while read LTR; do
     while read GENOME; do
         bedtools intersect -a ${LTR}.${GENOME}.flank.bed -b RM_LTR_BED_FASTA/${GENOME}.${LTR}_LTR.bed -wo > FLANKING_LTR_BED/${LTR}.${GENOME}.LTR_flank.bed
+        cat FLANKING_LTR_BED/${LTR}.${GENOME}.LTR_flank.bed | awk -v OFS='\t' '{ print $7, $8, $9, $10, $11, $12 }' > FLANKING_LTR_BED/${LTR}.${GENOME}.LTR_flank.vis.bed # jsut for visualization
         ### filter LTRs
         > MAPPING/${LTR}.${GENOME}_mapping.txt
         cat FLANKING_LTR_BED/${LTR}.${GENOME}.LTR_flank.bed | python /global/scratch/users/annen/KVKLab/LTR_divergence/filterLTRs.py MAPPING/${LTR}.${GENOME}_mapping.txt > LTR_PAIRS_BED/${LTR}.${GENOME}.bed # LTR_PAIRS_BED
