@@ -54,8 +54,8 @@ for ltr in duplicates:
     print("keep one of:")
     print("left: ", left)
     print("right: ", right)
-    left_dist = abs(left.split()[1]-ltr.split()[1])
-    right_dist = abs(right.split()[2]-ltr.split()[2])
+    left_dist = abs(int(left.split()[1])-int(ltr.split()[1]))
+    right_dist = abs(int(right.split()[2])-int(ltr.split()[2]))
     if left_dist == right_dist:
         print("left and right dist same?? removing both")
         LTR_PAIRS.pop(left)
