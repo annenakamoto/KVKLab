@@ -20,8 +20,8 @@ while read LTR; do
     while read GENOME; do
         bedtools intersect -a ${LTR}.${GENOME}.flank.bed -b RM_LTR_BED_FASTA/${GENOME}.${LTR}_LTR.bed -wo > FLANKING_LTR_BED/${LTR}.${GENOME}.LTR_flank.bed
         ### filter LTRs
-        > LTR_mapping.txt
-        cat FLANKING_LTR_BED/${LTR}.${GENOME}.LTR_flank.bed | python /global/scratch/users/annen/KVKLab/LTR_divergence/filterLTRs.py LTR_mapping.txt > LTR_PAIRS_BED/${LTR}.${GENOME}.txt
+        > MAPPING/${LTR}.${GENOME}_mapping.txt
+        cat FLANKING_LTR_BED/${LTR}.${GENOME}.LTR_flank.bed | python /global/scratch/users/annen/KVKLab/LTR_divergence/filterLTRs.py MAPPING/${LTR}.${GENOME}_mapping.txt > LTR_PAIRS_BED/${LTR}.${GENOME}.bed
     done < repgenome_list.txt
 done < LTRs_ofinterest.txt
 
