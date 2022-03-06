@@ -51,21 +51,24 @@ for ltr in duplicates:
             left = k
         if ltr == v[1]:
             right = k
-    print("keep one of:")
-    print("left: ", left)
-    print("right: ", right)
-    left_dist = abs(int(left.split()[1])-int(ltr.split()[1]))
-    right_dist = abs(int(right.split()[2])-int(ltr.split()[2]))
-    if left_dist == right_dist:
-        print("left and right dist same?? removing both")
-        LTR_PAIRS.pop(left)
-        LTR_PAIRS.pop(right)
-    elif left_dist < right_dist:
-        print("kept left")
-        LTR_PAIRS.pop(right)
+    if left == None or right == None:
+        print("couldn't find duplicate")
     else:
-        print("kept right")
-        LTR_PAIRS.pop(left)
+        print("keep one of:")
+        print("left: ", left)
+        print("right: ", right)
+        left_dist = abs(int(left.split()[1])-int(ltr.split()[1]))
+        right_dist = abs(int(right.split()[2])-int(ltr.split()[2]))
+        if left_dist == right_dist:
+            print("left and right dist same?? removing both")
+            LTR_PAIRS.pop(left)
+            LTR_PAIRS.pop(right)
+        elif left_dist < right_dist:
+            print("kept left")
+            LTR_PAIRS.pop(right)
+        else:
+            print("kept right")
+            LTR_PAIRS.pop(left)
     
     
 
