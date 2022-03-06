@@ -62,16 +62,16 @@ for ltr in duplicates:
         print("keep one of:")
         print("0: ", dup[0])
         print("1: ", dup[1])
-        ltr_avg = (int(ltr.split()[1])+int(ltr.split()[2]))/2
-        zero_avg = (int(dup[0].split()[1])+int(dup[0].split()[2]))/2
-        one_avg = (int(dup[1].split()[1])+int(dup[1].split()[2]))/2
-        zero_dist = abs(zero_avg - ltr_avg)
-        one_dist = abs(one_avg - ltr_avg)
-        if zero_dist == one_dist:
+        ltr_rg = range(int(ltr.split()[1]), int(ltr.split()[2]))
+        zero_rg = range(int(dup[0].split()[1]), int(dup[0].split()[2]))
+        one_rg = range(int(dup[1].split()[1]), int(dup[1].split()[2]))
+        zero_overlap = range(max(zero_rg[0], ltr_rg[0]), min(zero_rg[:-1], ltr_rg[:-1])+1)
+        one_overlap = range(max(one_rg[0], ltr_rg[0]), min(one_rg[:-1], ltr_rg[:-1])+1)
+        if len(zero_overlap) == len(one_overlap):
             print("0 and 1 dist same?? removing both")
             LTR_PAIRS.pop(dup[0])
             LTR_PAIRS.pop(dup[1])
-        elif zero_dist < one_dist:
+        elif len(zero_overlap) > len(one_overlap):
             print("kept 0")
             LTR_PAIRS.pop(dup[1])
         else:
