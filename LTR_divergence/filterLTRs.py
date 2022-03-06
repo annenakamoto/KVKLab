@@ -38,48 +38,56 @@ for v in LTR_PAIRS.values():
     ltrs += v
 ltrs_set = set(ltrs)
 duplicates = []
-print("LENGTHS: ", len(ltrs),  len(ltrs_set))
+# print("LENGTHS: ", len(ltrs),  len(ltrs_set))
 if len(ltrs) != len(ltrs_set):
-    print("THERE ARE DUPLICATE LTRS")
+    # print("THERE ARE DUPLICATE LTRS")
     for ltr in ltrs_set:
         c = ltrs.count(ltr)
         if c > 1:
-            print("count: ", c, ltr)
+            # print("count: ", c, ltr)
             duplicates.append(ltr)
             
 ### handle duplicates: only keep the best fit
 for ltr in duplicates:
-    print("HANDLING DUPLICATE: ", ltr)
+    # print("HANDLING DUPLICATE: ", ltr)
     dup = []
     for k,v in LTR_PAIRS.items():
         if ltr in v:
             dup.append(k)
-    if len(dup) < 2:
-        print("couldn't find duplicate")
-    elif len(dup) > 2:
-        print("more than 2 duplicates found")
-    else:
-        print("keep one of:")
-        print("0: ", dup[0])
-        print("1: ", dup[1])
-        ltr_rg = range(int(ltr.split()[1]), int(ltr.split()[2]))
-        zero_rg = range(int(dup[0].split()[1]), int(dup[0].split()[2]))
-        one_rg = range(int(dup[1].split()[1]), int(dup[1].split()[2]))
+    if len(dup) == 2:
+        # print("keep one of:")
+        # print("0: ", dup[0])
+        # print("1: ", dup[1])
         zero_overlap = abs(max(int(dup[0].split()[1]), int(ltr.split()[1])) - min(int(dup[0].split()[2]), int(ltr.split()[2])))
         one_overlap = abs(max(int(dup[1].split()[1]), int(ltr.split()[1])) - min(int(dup[1].split()[2]), int(ltr.split()[2])))
-        print("0 overlap: ", zero_overlap)
-        print("1 overlap: ", one_overlap)
+        # print("0 overlap: ", zero_overlap)
+        # print("1 overlap: ", one_overlap)
         if zero_overlap == one_overlap:
-            print("0 and 1 dist same?? removing both")
+            # print("0 and 1 dist same?? removing both")
             LTR_PAIRS.pop(dup[0])
             LTR_PAIRS.pop(dup[1])
         elif zero_overlap > one_overlap:
-            print("kept 0")
+            # print("kept 0")
             LTR_PAIRS.pop(dup[1])
         else:
-            print("kept 1")
+            # print("kept 1")
             LTR_PAIRS.pop(dup[0])
-    
-    
 
 ### return output 
+### rename the LTRs
+c = 1
+with open(sys.argv[1], 'w') as f:
+    for k,v in LTR_PAIRS.items():
+        v0 = v[0].split()
+        v1 = v[1].split()
+        n0 = v0[3].split("_")[0] + "_LTR_" + str(c) + "a"
+        n1 = v1[3].split("_")[0] + "_LTR_" + str(c) + "b"
+        v0[3] = n0
+        v1[3] = n1
+        print('\t'.join(v0))
+        print('\t'.join(v1))
+        f.write(str(c) + ": " + k) # keep track of what number referrs to which internal region
+        c += 1
+
+
+
