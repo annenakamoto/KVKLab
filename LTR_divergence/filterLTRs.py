@@ -86,7 +86,7 @@ with open(sys.argv[1], 'w') as f:
         v1[3] = n1
         print('\t'.join(v0))
         print('\t'.join(v1))
-        f.write(str(c) + ": " + k) # keep track of what number referrs to which internal region
+        f.write(str(c) + ": " + k + '\n') # keep track of what number referrs to which internal region
         c += 1
 
 
