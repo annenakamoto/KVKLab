@@ -27,7 +27,7 @@ while read LTR; do
             name=$(echo ${line} | awk '{ print $4 }')
             echo $name
             echo $line
-            echo ${line} | awk -v OFS='\t' '{ print; }' > ${name}.bed
+            echo ${line} | awk -v OFS='\t' '{ print $1, $2, $3, $4, $5, $6 }' > ${name}.bed
             cat ${name}.bed
             bedtools getfasta -fi /global/scratch/users/annen/GENOME_TREE/hq_genomes/${GENOME}.fasta -bed ${name}.bed > LTR_PAIRS_FASTA/${GENOME}.${name}.fasta
             rm ${name}.bed
