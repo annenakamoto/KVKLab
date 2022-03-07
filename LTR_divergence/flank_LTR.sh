@@ -34,8 +34,10 @@ done < LTRs_ofinterest.txt
 
 ### find the divergence between LTR pairs
 while read GENOME; do
+    > LTR_DIV_RESULTS/${GENOME}.LTRdiv.txt
     ls LTR_PAIRS_FASTA | grep ${GENOME} | awk '/a.fasta/' | while read a; do
         b=$(echo "${a::-7}b.fasta")
         needle -asequence LTR_PAIRS_FASTA/${a} -bsequence LTR_PAIRS_FASTA/${b} -outfile LTR_NEEDLE/${GENOME}.${a::-7}.needle -gapopen 10.0 -gapextend 0.5
+        grep "# Identity:" LTR_NEEDLE/${GENOME}.${a::-7}.needle | awk '{ print $3 }' | python /global/scratch/users/annen/KVKLab/LTR_divergence/identity.py ${a::-7} >> LTR_DIV_RESULTS/${GENOME}.LTRdiv.txt
     done
 done < repgenome_list.txt
