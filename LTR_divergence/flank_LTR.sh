@@ -32,5 +32,10 @@ while read LTR; do
     done < repgenome_list.txt
 done < LTRs_ofinterest.txt
 
-
-
+### find the divergence between LTR pairs
+while read GENOME; do
+    ls LTR_PAIRS_FASTA | grep ${GENOME} | awk '/a.fasta/' | while read a; do
+        b=$(echo "${a::-7}b.fasta")
+        needle -asequence LTR_PAIRS_FASTA/${a} -bsequence LTR_PAIRS_FASTA/${b} -outfile LTR_NEEDLE/${GENOME}.${a::-7}.needle
+    done
+done < repgenome_list.txt
