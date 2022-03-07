@@ -36,6 +36,6 @@ done < LTRs_ofinterest.txt
 while read GENOME; do
     ls LTR_PAIRS_FASTA | grep ${GENOME} | awk '/a.fasta/' | while read a; do
         b=$(echo "${a::-7}b.fasta")
-        needle -asequence LTR_PAIRS_FASTA/${a} -bsequence LTR_PAIRS_FASTA/${b} -outfile LTR_NEEDLE/${GENOME}.${a::-7}.needle
+        needle -asequence LTR_PAIRS_FASTA/${a} -bsequence LTR_PAIRS_FASTA/${b} -outfile LTR_NEEDLE/${GENOME}.${a::-7}.needle -gapopen 10.0 -gapextend 0.5
     done
 done < repgenome_list.txt
