@@ -19,17 +19,17 @@ for line in sys.stdin:
 LTR_PAIRS = {}
 for k,v in LTR.items():
     ### remove entries in v that don't have the same strand (+/-)
-    k_strand = k.split()[5]
-    for e in v:
-        e_strand = e.split()[5]
-        if e_strand != k_strand:
-            LTR[k].remove(e)
+    # k_strand = k.split()[5]
+    # for e in v:
+    #     e_strand = e.split()[5]
+    #     if e_strand != k_strand:
+    #         LTR[k].remove(e)
     if len(v) >= 2:
         k_left = int(k.split()[1])+1000     # correct for the 1000 bp added to each side using slop
         k_right = int(k.split()[2])-1000
         left = min(v, key=lambda x:abs(int(x.split()[1])-k_left))
         right = min(v, key=lambda x:abs(int(x.split()[2])-k_right))
-        if left != right:
+        if left != right and left.split()[5] == right.split()[5]: ### check that the left and right aren't the same and that they have the same strand (can be different from the internal region)
             LTR_PAIRS[k] = [left, right]
             
 ### now check that each LTR is only found in the dictionary once
