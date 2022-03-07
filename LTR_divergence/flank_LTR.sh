@@ -25,7 +25,10 @@ while read LTR; do
         cat FLANKING_LTR_BED/${LTR}.${GENOME}.LTR_flank.bed | python /global/scratch/users/annen/KVKLab/LTR_divergence/filterLTRs.py MAPPING/${LTR}.${GENOME}_mapping.txt > LTR_PAIRS_BED/${LTR}.${GENOME}.bed
         cat LTR_PAIRS_BED/${LTR}.${GENOME}.bed | while read line; do
             name=$(echo ${line} | awk '{ print $4 }')
+            echo $name
+            echo $line
             echo ${line} > ${name}.bed
+            cat ${name}.bed
             bedtools getfasta -fi /global/scratch/users/annen/GENOME_TREE/hq_genomes/${GENOME}.fasta -bed ${name}.bed > LTR_PAIRS_FASTA/${GENOME}.${name}.fasta
             rm ${name}.bed
         done
