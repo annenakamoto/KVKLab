@@ -22,7 +22,13 @@ while read LTR; do
         cat FLANKING_LTR_BED/${LTR}.${GENOME}.LTR_flank.bed | awk -v OFS='\t' '{ print $7, $8, $9, $10, $11, $12 }' > FLANKING_LTR_BED/${LTR}.${GENOME}.LTR_flank.vis.bed # jsut for visualization
         ### filter LTRs
         > MAPPING/${LTR}.${GENOME}_mapping.txt
-        cat FLANKING_LTR_BED/${LTR}.${GENOME}.LTR_flank.bed | python /global/scratch/users/annen/KVKLab/LTR_divergence/filterLTRs.py MAPPING/${LTR}.${GENOME}_mapping.txt > LTR_PAIRS_BED/${LTR}.${GENOME}.bed # LTR_PAIRS_BED
+        cat FLANKING_LTR_BED/${LTR}.${GENOME}.LTR_flank.bed | python /global/scratch/users/annen/KVKLab/LTR_divergence/filterLTRs.py MAPPING/${LTR}.${GENOME}_mapping.txt > LTR_PAIRS_BED/${LTR}.${GENOME}.bed
+        cat LTR_PAIRS_BED/${LTR}.${GENOME}.bed | while read line; do
+            name=$(echo ${line} | awk '{ print $4 }')
+            echo ${line} > ${name}.bed
+            bedtools getfasta -fi /global/scratch/users/annen/GENOME_TREE/hq_genomes/${GENOME}.fasta -bed ${name}.bed > LTR_PAIRS_FASTA/${GENOME}.${name}.fasta
+            rm ${name}.bed
+        done
     done < repgenome_list.txt
 done < LTRs_ofinterest.txt
 
