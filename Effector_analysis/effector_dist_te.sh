@@ -19,17 +19,20 @@ while read GENOME; do
     ### Find the distance of ALL genes in GENOME to the nearest TE (any)
     echo "*** STARTING ${GENOME} ***"
     echo "*** ${GENOME}: all genes to all TEs ***"
-    cat /global/scratch/users/annen/visualize_TEs/*${GENOME}.bed > all_TEs.${GENOME}.bed
-    bedtools closest -D a -fu -t first -a /global/scratch/users/annen/visualize_OGs/E_SCO_OG_${GENOME}.bed -b all_TEs.${GENOME}.bed > genes_TEs.U.${GENOME}.bed
-    bedtools closest -D a -fd -t first -a /global/scratch/users/annen/visualize_OGs/E_SCO_OG_${GENOME}.bed -b all_TEs.${GENOME}.bed > genes_TEs.D.${GENOME}.bed
+    sort -k1,1 -k2,2n /global/scratch/users/annen/visualize_OGs/E_SCO_OG_${GENOME}.bed > SORTED/E_SCO_OG_${GENOME}.bed
+    cat /global/scratch/users/annen/visualize_TEs/*${GENOME}.bed | sort -k1,1 -k2,2n > SORTED/all_TEs.${GENOME}.bed
+    bedtools closest -D a -fu -t first -a SORTED/E_SCO_OG_${GENOME}.bed -b SORTED/all_TEs.${GENOME}.bed > genes_TEs.U.${GENOME}.bed
+    bedtools closest -D a -fd -t first -a SORTED/E_SCO_OG_${GENOME}.bed -b SORTED/all_TEs.${GENOME}.bed > genes_TEs.D.${GENOME}.bed
 
     ### parse the data
 
     ### Find the distance of effectors in GENOME to the nearest individual TE (the ones that had expansions in that genome)
     while read TE; do
         echo "*** ${GENOME}: all effectors to ${TE} ***"
-        bedtools closest -D a -fu -t first -a /global/scratch/users/annen/visualize_OGs/EFF_${GENOME}.bed -b /global/scratch/users/annen/visualize_TEs/${TE}.${GENOME}.bed > eff_${TE}.U.${GENOME}.bed
-        bedtools closest -D a -fd -t first -a /global/scratch/users/annen/visualize_OGs/EFF_${GENOME}.bed -b /global/scratch/users/annen/visualize_TEs/${TE}.${GENOME}.bed > eff_${TE}.D.${GENOME}.bed
+        sort -k1,1 -k2,2n /global/scratch/users/annen/visualize_OGs/EFF_${GENOME}.bed > SORTED/EFF_${GENOME}.sorted.bed
+        sort -k1,1 -k2,2n /global/scratch/users/annen/visualize_TEs/${TE}.${GENOME}.bed > SORTED/${TE}.${GENOME}.sorted.bed
+        bedtools closest -D a -fu -t first -a SORTED/EFF_${GENOME}.sorted.bed -b SORTED/${TE}.${GENOME}.sorted.bed > eff_${TE}.U.${GENOME}.bed
+        bedtools closest -D a -fd -t first -a SORTED/EFF_${GENOME}.sorted.bed -b SORTED/${TE}.${GENOME}.sorted.bed > eff_${TE}.D.${GENOME}.bed
     
         ### parse the data
     
