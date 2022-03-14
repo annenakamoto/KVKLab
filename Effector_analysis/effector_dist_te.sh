@@ -27,6 +27,7 @@ while read GENOME; do
     bedtools closest -D a -iu -t first -a SORTED/E_SCO_OG_${GENOME}.bed -b SORTED/all_TEs.${GENOME}.bed > genes_TEs.D.${GENOME}.bed
 
     ### parse the data
+    echo "*** ${GENOME}: parsing data for all TEs ***"
     > genes_TEs.${GENOME}.DATA.txt
     cat genes_TEs.U.${GENOME}.bed | awk '{ print $4 }' | while read GENE; do
         us=$(grep ${GENE} genes_TEs.U.${GENOME}.bed | awk '{ print -$14 }')
@@ -43,11 +44,12 @@ while read GENOME; do
         bedtools closest -D a -iu -t first -a SORTED/EFF_${GENOME}.sorted.bed -b SORTED/${TE}.${GENOME}.sorted.bed > eff_${TE}.D.${GENOME}.bed
     
         ### parse the data
+        echo "*** ${GENOME}: parsing data for ${TE} ***"
         > eff_${TE}.${GENOME}.DATA.txt
         cat eff_${TE}.U.${GENOME}.bed | awk '{ print $4 }' | while read GENE; do
             us=$(grep ${GENE} eff_${TE}.U.${GENOME}.bed | awk '{ print -$14 }')
             ds=$(grep ${GENE} eff_${TE}.D.${GENOME}.bed | awk '{ print $14 }')
-            echo -e "${GENE}\t${us}\t${ds}" >> eff_${TE}.${GENOME}.DATA.txt
+            echo -e "${GENE}\t${us}\t${ds}" | awk '!/-1/' >> eff_${TE}.${GENOME}.DATA.txt
         
     done < te_list.txt 
 done < genome_list.txt
