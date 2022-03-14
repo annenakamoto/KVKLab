@@ -30,10 +30,10 @@ while read GENOME; do
     echo "*** ${GENOME}: parsing data for all TEs ***"
     > genes_TEs.${GENOME}.DATA.txt
     cat genes_TEs.U.${GENOME}.bed | awk -v OFS='\t' '{ print $1, $2, $3, $4 }' | while read LINE; do
-        gene=$(echo "${LINE}" | awk '{ print $4 }')
-        us=$(grep ${LINE} genes_TEs.U.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print -$14 }')
-        ds=$(grep ${LINE} genes_TEs.D.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print $14 }')
-        echo -e "${GENE}\t${us}\t${ds}" | awk '!/none/' >> genes_TEs.${GENOME}.DATA.txt
+        gene=$(echo ${LINE} | awk '{ print $4 }')
+        us=$(grep "${LINE}" genes_TEs.U.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print -$14 }')
+        ds=$(grep "${LINE}" genes_TEs.D.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print $14 }')
+        echo -e "${gene}\t${us}\t${ds}" | awk '!/none/' >> genes_TEs.${GENOME}.DATA.txt
     done
 
     ### Find the distance of effectors in GENOME to the nearest individual TE (the ones that had expansions in that genome)
@@ -48,7 +48,7 @@ while read GENOME; do
         echo "*** ${GENOME}: parsing data for ${TE} ***"
         > eff_${TE}.${GENOME}.DATA.txt
         cat eff_${TE}.U.${GENOME}.bed | awk -v OFS='\t' '{ print $1, $2, $3, $4 }' | while read LINE; do
-            gene=$(echo "${LINE}" | awk '{ print $4 }')
+            gene=$(echo ${LINE} | awk '{ print $4 }')
             us=$(grep "${LINE}" eff_${TE}.U.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print -$14 }')
             ds=$(grep "${LINE}" eff_${TE}.D.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print $14 }')
             echo -e "${gene}\t${us}\t${ds}" | awk '!/none/' >> eff_${TE}.${GENOME}.DATA.txt
