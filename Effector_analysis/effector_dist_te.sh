@@ -46,10 +46,11 @@ while read GENOME; do
         ### parse the data
         echo "*** ${GENOME}: parsing data for ${TE} ***"
         > eff_${TE}.${GENOME}.DATA.txt
-        cat eff_${TE}.U.${GENOME}.bed | awk '{ print $4 }' | while read GENE; do
-            us=$(grep ${GENE} eff_${TE}.U.${GENOME}.bed | awk '{ print -$14 }')
-            ds=$(grep ${GENE} eff_${TE}.D.${GENOME}.bed | awk '{ print $14 }')
-            echo -e "${GENE}\t${us}\t${ds}" | awk '!/-1/' >> eff_${TE}.${GENOME}.DATA.txt
+        cat eff_${TE}.U.${GENOME}.bed | awk -v OFS='\t' '{ print $1, $2, $3, $4 }' | while read LINE; do
+            gene=$(echo "${LINE}" | awk '{ print $4 }')
+            us=$(grep "${LINE}" eff_${TE}.U.${GENOME}.bed | awk '{ print -$14 }')
+            ds=$(grep "${LINE}" eff_${TE}.D.${GENOME}.bed | awk '{ print $14 }')
+            echo -e "${gene}\t${us}\t${ds}" | awk '!/-1/' >> eff_${TE}.${GENOME}.DATA.txt
         done
         
     done < te_list.txt 
