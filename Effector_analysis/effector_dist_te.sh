@@ -50,6 +50,7 @@ while read GENOME; do
             us=$(grep ${GENE} eff_${TE}.U.${GENOME}.bed | awk '{ print -$14 }')
             ds=$(grep ${GENE} eff_${TE}.D.${GENOME}.bed | awk '{ print $14 }')
             echo -e "${GENE}\t${us}\t${ds}" | awk '!/-1/' >> eff_${TE}.${GENOME}.DATA.txt
+        done
         
     done < te_list.txt 
 done < genome_list.txt
