@@ -21,8 +21,8 @@ while read GENOME; do
     echo "*** ${GENOME}: all genes to all TEs ***"
     sort -k1,1 -k2,2n /global/scratch/users/annen/visualize_OGs/E_SCO_OG_${GENOME}.bed > SORTED/E_SCO_OG_${GENOME}.bed
     cat /global/scratch/users/annen/visualize_TEs/*${GENOME}.bed | sort -k1,1 -k2,2n > SORTED/all_TEs.${GENOME}.bed
-    bedtools closest -D a -fu -t first -a SORTED/E_SCO_OG_${GENOME}.bed -b SORTED/all_TEs.${GENOME}.bed > genes_TEs.U.${GENOME}.bed
-    bedtools closest -D a -fd -t first -a SORTED/E_SCO_OG_${GENOME}.bed -b SORTED/all_TEs.${GENOME}.bed > genes_TEs.D.${GENOME}.bed
+    bedtools closest -D a -id -t first -a SORTED/E_SCO_OG_${GENOME}.bed -b SORTED/all_TEs.${GENOME}.bed > genes_TEs.U.${GENOME}.bed
+    bedtools closest -D a -iu -t first -a SORTED/E_SCO_OG_${GENOME}.bed -b SORTED/all_TEs.${GENOME}.bed > genes_TEs.D.${GENOME}.bed
 
     ### parse the data
 
@@ -31,8 +31,8 @@ while read GENOME; do
         echo "*** ${GENOME}: all effectors to ${TE} ***"
         sort -k1,1 -k2,2n /global/scratch/users/annen/visualize_OGs/EFF_${GENOME}.bed > SORTED/EFF_${GENOME}.sorted.bed
         sort -k1,1 -k2,2n /global/scratch/users/annen/visualize_TEs/${TE}.${GENOME}.bed > SORTED/${TE}.${GENOME}.sorted.bed
-        bedtools closest -D a -fu -t first -a SORTED/EFF_${GENOME}.sorted.bed -b SORTED/${TE}.${GENOME}.sorted.bed > eff_${TE}.U.${GENOME}.bed
-        bedtools closest -D a -fd -t first -a SORTED/EFF_${GENOME}.sorted.bed -b SORTED/${TE}.${GENOME}.sorted.bed > eff_${TE}.D.${GENOME}.bed
+        bedtools closest -D a -id -t first -a SORTED/EFF_${GENOME}.sorted.bed -b SORTED/${TE}.${GENOME}.sorted.bed > eff_${TE}.U.${GENOME}.bed
+        bedtools closest -D a -iu -t first -a SORTED/EFF_${GENOME}.sorted.bed -b SORTED/${TE}.${GENOME}.sorted.bed > eff_${TE}.D.${GENOME}.bed
     
         ### parse the data
     
