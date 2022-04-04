@@ -29,8 +29,8 @@ while read GENOME; do
     > genes_genes.${GENOME}.DATA.txt
     cat genes_genes.U.${GENOME}.bed | awk -v OFS='\t' '{ print $1, $2, $3, $4 }' | while read LINE; do
         gene=$(echo ${LINE} | awk '{ print $4 }')
-        us=$(grep "${LINE}" genes_genes.U.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print -$14 }')
-        ds=$(grep "${LINE}" genes_genes.D.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print $14 }')
+        us=$(grep -m 1 "${LINE}" genes_genes.U.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print -$14 }')
+        ds=$(grep -m 1 "${LINE}" genes_genes.D.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print $14 }')
         echo -e "${gene}\t${us}\t${ds}" | awk '!/none/' >> genes_genes.${GENOME}.DATA.txt
     done
     
@@ -63,8 +63,8 @@ while read GENOME; do
     > genes_eff.${GENOME}.DATA.txt
     cat genes_eff.U.${GENOME}.bed | awk -v OFS='\t' '{ print $1, $2, $3, $4 }' | while read LINE; do
         gene=$(echo ${LINE} | awk '{ print $4 }')
-        us=$(grep "${LINE}" genes_eff.U.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print -$14 }')
-        ds=$(grep "${LINE}" genes_eff.D.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print $14 }')
+        us=$(grep -m 1 "${LINE}" genes_eff.U.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print -$14 }')
+        ds=$(grep -m 1 "${LINE}" genes_eff.D.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print $14 }')
         echo -e "${gene}\t${us}\t${ds}" | awk '!/none/' >> genes_eff.${GENOME}.DATA.txt
     done
     
