@@ -30,7 +30,7 @@ while read GENOME; do
     cat genes_genes.U.${GENOME}.bed | awk -v OFS='\t' '{ print $1, $2, $3, $4 }' | while read LINE; do
         gene=$(echo ${LINE} | awk '{ print $4 }')
         us=$(grep -m 1 "${LINE}" genes_genes.U.${GENOME}.bed | awk '$9 == "-1" { print "none" } $9 != "-1" { print -$9 }')
-        ds=$(grep -m 1 "${LINE}" genes_genes.D.${GENOME}.bed | awk '$9 == "-1" { print "none" } $9 != "-1" { print $9 }')
+        ds=$(grep -m2 "${LINE}" genes_genes.D.${GENOME}.bed | awk '$9 == "-1" { print "none" } $9 != "-1" { print $9 }')
         echo -e "${gene}\t${us}\t${ds}" | awk '!/none/' >> genes_genes.${GENOME}.DATA.txt
     done
     
