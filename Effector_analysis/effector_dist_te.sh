@@ -74,7 +74,7 @@ while read GENOME; do
     sort -k1,1 -k2,2n /global/scratch/users/annen/visualize_OGs/EFF_${GENOME}.bed > SORTED/EFF_${GENOME}.sorted.bed
     cat /global/scratch/users/annen/visualize_TEs/*${GENOME}.bed | sort -k1,1 -k2,2n > SORTED/all_TEs.${GENOME}.bed
     bedtools closest -D a -id -t first -a SORTED/EFF_${GENOME}.sorted.bed -b SORTED/all_TEs.${GENOME}.bed > eff_TEs.U.${GENOME}.bed
-    bedtools closest -D a -iu -t first -a SORTED/EFF_${GENOME}.sorted.bed -b SORTED/all_TEs.${GENOME}.bed > eff_TEs.D.${GENOME}.bed\
+    bedtools closest -D a -iu -t first -a SORTED/EFF_${GENOME}.sorted.bed -b SORTED/all_TEs.${GENOME}.bed > eff_TEs.D.${GENOME}.bed
     ### parse the data
     echo "*** ${GENOME}: parsing data for all effectors to TEs ***"
     > eff_TEs.${GENOME}.DATA.txt
