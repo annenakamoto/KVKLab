@@ -34,5 +34,3 @@ while read GENOME; do
         echo -e "${GENOME}\t${TE}\tNON\t${non}" >> DATA.eff_ins.txt
     done < te_list.txt
 done < genome_list.txt
-
-bedtools intersect -a ${LTR}.${GENOME}.flank.bed -b RM_LTR_BED_FASTA/${GENOME}.${LTR}_LTR.bed -wo > FLANKING_LTR_BED/${LTR}.${GENOME}.LTR_flank.bed
