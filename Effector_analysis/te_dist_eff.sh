@@ -33,7 +33,8 @@ while read GENOME; do
         gene=$(echo ${LINE} | awk '{ print $4 }')
         us=$(grep "${LINE}" TEs_eff.U.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print -$14 }')
         ds=$(grep "${LINE}" TEs_eff.D.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print $14 }')
-        echo -e "${gene}\t${us}\t${ds}" | awk '!/none/' >> TEs_eff.${GENOME}.DATA.txt
+        sc=$(echo ${LINE} | awk '{ print substr($13, 1, 4) }')
+        echo -e "${gene}\t${us}\t${ds}\t${sc}" | awk '!/none/' >> TEs_eff.${GENOME}.DATA.txt
     done
 
     ### Find the distance of an individual TE (the ones that had expansions in that genome) in GENOME to the nearest Effector
@@ -50,7 +51,8 @@ while read GENOME; do
             gene=$(echo ${LINE} | awk '{ print $4 }')
             us=$(grep "${LINE}" ${TE}_eff.U.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print -$14 }')
             ds=$(grep "${LINE}" ${TE}_eff.D.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print $14 }')
-            echo -e "${gene}\t${us}\t${ds}" | awk '!/none/' >> ${TE}_eff.${GENOME}.DATA.txt
+            sc=$(echo ${LINE} | awk '{ print substr($13, 1, 4) }')
+            echo -e "${gene}\t${us}\t${ds}\t${sc}" | awk '!/none/' >> ${TE}_eff.${GENOME}.DATA.txt
         done  
     done < te_list.txt 
 done < genome_list.txt
