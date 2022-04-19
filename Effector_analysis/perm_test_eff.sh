@@ -11,11 +11,11 @@
 ### Run permutation tests on the Effector Distances to TEs data
 ###     uses python script for permutation tests
 
-cd /global/scratch/users/annen/Effector_dist_TE
+cd /global/scratch/users/annen/TE_dist_Eff
 
 > perm_test_results.txt
 while read GENOME; do
     while read TE; do
-        cat eff_${TE}.${GENOME}.DATA.txt | /global/scratch/users/annen/KVKLab/Effector_analysis/perm_test.py ${TE} ${GENOME} eff_TEs.${GENOME}.DATA.txt >> perm_test_results.txt
+        /global/scratch/users/annen/KVKLab/Effector_analysis/perm_test.py ${TE} ${GENOME} TEs_eff.${GENOME}.DATA.txt ${TE}_eff.${GENOME}.DATA.txt >> perm_test_results.txt
     done < te_list.txt 
 done < genome_list.txt
