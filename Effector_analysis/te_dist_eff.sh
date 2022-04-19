@@ -33,7 +33,7 @@ while read GENOME; do
         gene=$(echo ${LINE} | awk '{ print $4 }')
         us=$(grep "${LINE}" TEs_eff.U.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print -$14 }')
         ds=$(grep "${LINE}" TEs_eff.D.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print $14 }')
-        sc=$(grep "${LINE}" ${TE}_eff.D.${GENOME}.bed | awk '{ print substr($13, 1, 4) }')
+        sc=$(grep "${LINE}" TEs_eff.D.${GENOME}.bed | awk '{ print substr($13, 1, 4) }')
         echo -e "${gene}\t${us}\t${ds}\t${sc}" | awk '!/none/' >> TEs_eff.${GENOME}.DATA.txt
     done
 
