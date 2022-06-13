@@ -42,7 +42,7 @@ ltrs = []
 for v in LTR_PAIRS.values():
     ltrs += v
 if "NULL" in ltrs:
-    ltrs.remove("NULL")
+    ltrs = list(filter(("NULL").__ne__, ltrs))
 ltrs_set = set(ltrs)
 duplicates = []
 print("LENGTHS: ", len(ltrs),  len(ltrs_set))
