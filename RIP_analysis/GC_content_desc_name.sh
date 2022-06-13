@@ -10,7 +10,7 @@
 
 ### Analyzing RIP using GC content
 
-cd  /global/scratch/users/annen
+cd  /global/scratch/users/annen/RIP_analysis
 
 ### GC content for TEs
 while read TE; do
