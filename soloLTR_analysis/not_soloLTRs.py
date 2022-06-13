@@ -29,7 +29,7 @@ for k,v in LTR.items():
         k_right = int(k.split()[2])-1000
         left = min(v, key=lambda x:abs(int(x.split()[1])-k_left))
         right = min(v, key=lambda x:abs(int(x.split()[2])-k_right))
-        if left != right and left.split()[5] == right.split()[5]: ### check that the left and right aren't the same and that they have the same strand (can be different from the internal region)
+        if left != right: #and left.split()[5] == right.split()[5]: ### check that the left and right aren't the same and that they have the same strand (can be different from the internal region)
             LTR_PAIRS[k] = [left, right]
         if left == right:
             if abs(int(left.split()[1])-k_left) < abs(int(right.split()[2])-k_right):
