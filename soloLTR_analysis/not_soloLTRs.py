@@ -41,7 +41,8 @@ for k,v in LTR.items():
 ltrs = []
 for v in LTR_PAIRS.values():
     ltrs += v
-ltrs.remove("NULL")
+if "NULL" in ltrs:
+    ltrs.remove("NULL")
 ltrs_set = set(ltrs)
 duplicates = []
 # print("LENGTHS: ", len(ltrs),  len(ltrs_set))
