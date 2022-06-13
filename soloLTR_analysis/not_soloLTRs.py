@@ -45,39 +45,39 @@ if "NULL" in ltrs:
     ltrs.remove("NULL")
 ltrs_set = set(ltrs)
 duplicates = []
-# print("LENGTHS: ", len(ltrs),  len(ltrs_set))
+print("LENGTHS: ", len(ltrs),  len(ltrs_set))
 if len(ltrs) != len(ltrs_set):
-    # print("THERE ARE DUPLICATE LTRS")
+    print("THERE ARE DUPLICATE LTRS")
     for ltr in ltrs_set:
         c = ltrs.count(ltr)
         if c > 1:
-            # print("count: ", c, ltr)
+            print("count: ", c, ltr)
             duplicates.append(ltr)
             
 ### handle duplicates: only keep the best fit
 for ltr in duplicates:
-    # print("HANDLING DUPLICATE: ", ltr)
+    print("HANDLING DUPLICATE: ", ltr)
     dup = []
     for k,v in LTR_PAIRS.items():
         if ltr in v:
             dup.append(k)
     if len(dup) == 2:
-        # print("keep one of:")
-        # print("0: ", dup[0])
-        # print("1: ", dup[1])
+        print("keep one of:")
+        print("0: ", dup[0])
+        print("1: ", dup[1])
         zero_overlap = abs(max(int(dup[0].split()[1])+1000, int(ltr.split()[1])) - min(int(dup[0].split()[2])-1000, int(ltr.split()[2])))
         one_overlap = abs(max(int(dup[1].split()[1])+1000, int(ltr.split()[1])) - min(int(dup[1].split()[2])-1000, int(ltr.split()[2])))
-        # print("0 overlap: ", zero_overlap)
-        # print("1 overlap: ", one_overlap)
+        print("0 overlap: ", zero_overlap)
+        print("1 overlap: ", one_overlap)
         if zero_overlap == one_overlap:
-            # print("0 and 1 dist same?? removing both")
+            print("0 and 1 dist same?? removing both")
             LTR_PAIRS.pop(dup[0])
             LTR_PAIRS.pop(dup[1])
         elif zero_overlap > one_overlap:
-            # print("kept 0")
+            print("kept 0")
             LTR_PAIRS.pop(dup[1])
         else:
-            # print("kept 1")
+            print("kept 1")
             LTR_PAIRS.pop(dup[0])
 
 ### return output 
