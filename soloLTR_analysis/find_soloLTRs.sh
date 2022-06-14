@@ -8,7 +8,7 @@
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
-### Find soloLTRs to calculate LTR removal intensity
+### Find soloLTRs to calculate LTR removal intensity (NO GOOD, use soloLTR_analysys.sh)
 
 cd /global/scratch/users/annen/SOLO_LTRs
 
