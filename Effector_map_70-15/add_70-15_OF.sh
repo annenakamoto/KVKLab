@@ -20,7 +20,7 @@ source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
 #orthofinder -oa -f PROTEOMES_filt -t 24 -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree -o OrthoFinder_out
 
 ### Use blast results from previous run and add the 70-15 proteome
-orthofinder -b OrthoFinder_out/Results_Nov22 -f 70-15_PROTEOME -t 24 -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree -o OrthoFinder_70-15_out
+orthofinder -b OrthoFinder_out/Results_Nov22 -f 70-15_PROTEOME -t 24 -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree
 
 conda deactivate
 echo "*****DONE*****"
