@@ -63,13 +63,14 @@ gene_tree_list="gene_tree_list.txt"   # text file with list of paths to the gene
 #echo -e "orto_mode\ts" >> config_file.txt   # s: Orthology and paralogy nodes will be predicted using the species overlap algorithm
 #echo -e "root_method\tm" >> config_file.txt # s: root at the midpoint
 #echo -e "root_species\tNI9" >> config_file.txt  # specify the species to root trees at
-#echo -e "print_strict_distance" >> config_file.txt  # only print strict distance
+echo -e "print_strict_distance" >> config_file.txt  # only print strict distance
+echo -e "verbose" >> config_file.txt
 #echo -e "print_all" >> config_file.txt
 
 ### run TreeKO
 echo "*** starting treeKO ***"
 source activate /global/scratch/users/annen/anaconda3/envs/treeKO
-python /global/scratch/users/annen/treeKO/treeKO.py -p tc -a ${genome_tree} -l ${gene_tree_list} -o treeKO_output.txt # -c config_file.txt 
+python /global/scratch/users/annen/treeKO/treeKO.py -p tc -a ${genome_tree} -l ${gene_tree_list} -o treeKO_output.txt -c config_file.txt 
 echo "*** treeKO done ***"
 conda deactivate
 echo "*** DONE ***"
