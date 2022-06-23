@@ -68,6 +68,7 @@ gene_tree_list="gene_tree_list.txt"   # text file with list of paths to the gene
 
 ### run TreeKO
 echo "*** starting treeKO ***"
+source activate /global/scratch/users/annen/anaconda3/envs/treeKO
 python /global/scratch/users/annen/treeKO/treeKO.py -p tc -a ${genome_tree} -l ${gene_tree_list} -o treeKO_output.txt # -c config_file.txt 
 echo "*** treeKO done ***"
 conda deactivate
