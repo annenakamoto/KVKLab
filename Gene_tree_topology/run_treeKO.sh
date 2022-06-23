@@ -44,9 +44,14 @@ conda deactivate
 > gene_tree_list.txt
 source activate /global/scratch/users/annen/anaconda3/envs/MinVar-Rooting
 ls OF_RENAMED | while read TREE; do
-    python3 /global/scratch/users/annen/MinVar-Rooting-master/FastRoot.py -i OF_RENAMED/${TREE} -m MV -o ROOTED/${TREE}
-    echo "ROOTED/${TREE}" >> gene_tree_list.txt
-    echo "*** rooted ${TREE} ***"
+    #python3 /global/scratch/users/annen/MinVar-Rooting-master/FastRoot.py -i OF_RENAMED/${TREE} -m MV -o ROOTED/${TREE}
+    if [ -s ROOTED/${TREE} ]; then
+        echo "ROOTED/${TREE}" >> gene_tree_list.txt
+        #echo "*** rooted ${TREE} ***"
+    else
+        rm ROOTED/${TREE}
+        echo "*** couldn't root ${TREE}, removing ***"
+    fi
 done
 conda deactivate
 
