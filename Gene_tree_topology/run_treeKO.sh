@@ -12,15 +12,15 @@
 
 cd /global/scratch/users/annen/treeKO_analysis
 module unload python
-echo "*** activating treeKO conda env ***"
-source activate /global/scratch/users/annen/anaconda3/envs/treeKO
-echo "*** activated ***"
+# echo "*** activating treeKO conda env ***"
+# source activate /global/scratch/users/annen/anaconda3/envs/treeKO
+# echo "*** activated ***"
 
 ### process the genome and gene trees to be formatted properly for TreeKO
 ###     want only the genes from the representative genomes
 ###     first 3 letters of the name of each leaf should indicate the "species" (genome)
-path_to_OF_genome_tree="/global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jun21/Species_Tree/SpeciesTree_rooted.txt"
-path_to_OF_gene_trees="/global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jun21/Gene_Trees"
+# path_to_OF_genome_tree="/global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jun21/Species_Tree/SpeciesTree_rooted.txt"
+# path_to_OF_gene_trees="/global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jun21/Gene_Trees"
 
 # prune genome tree
 # echo "*** prune the genome tree ***"
@@ -38,22 +38,22 @@ path_to_OF_gene_trees="/global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/R
 #     fi
 # done
 # echo "*** done pruning ***"
-conda deactivate
+# conda deactivate
 
 ### root the trees using the min variance option of FastRoot
-> gene_tree_list.txt
-source activate /global/scratch/users/annen/anaconda3/envs/MinVar-Rooting
-ls OF_RENAMED | while read TREE; do
-    #python3 /global/scratch/users/annen/MinVar-Rooting-master/FastRoot.py -i OF_RENAMED/${TREE} -m MV -o ROOTED/${TREE}
-    if [ -s ROOTED/${TREE} ]; then
-        echo "ROOTED/${TREE}" >> gene_tree_list.txt
-        #echo "*** rooted ${TREE} ***"
-    else
-        rm ROOTED/${TREE}
-        echo "*** couldn't root ${TREE}, removing ***"
-    fi
-done
-conda deactivate
+# > gene_tree_list.txt
+# source activate /global/scratch/users/annen/anaconda3/envs/MinVar-Rooting
+# ls OF_RENAMED | while read TREE; do
+#     #python3 /global/scratch/users/annen/MinVar-Rooting-master/FastRoot.py -i OF_RENAMED/${TREE} -m MV -o ROOTED/${TREE}
+#     if [ -s ROOTED/${TREE} ]; then
+#         echo "ROOTED/${TREE}" >> gene_tree_list.txt
+#         echo "*** rooted ${TREE} ***"
+#     else
+#         rm ROOTED/${TREE}
+#         echo "*** couldn't root ${TREE}, removing ***" # these trees only have one leaf
+#     fi
+# done
+# conda deactivate
 
 genome_tree="ROOTED/GenomeTree.txt" # path to genome tree to use for treeKO
 gene_tree_list="gene_tree_list.txt"   # text file with list of paths to the gene trees
