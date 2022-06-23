@@ -22,10 +22,11 @@ for line in sys.stdin:
                  # current format: NI907_gene_544_NI907
                  # want: NI9_544
                 KEEP[k + i + k] = REPLACE[k] + "_" + i.split("_")[2]
-    t = Tree(line)
-    t.prune(KEEP.keys())
-    s = t.write()
-    for k,v in KEEP.items():
-        s = s.replace(k, v) # replace the original name (k) with the reformatted name (v)
-    print s
+    if KEEP:    # continue only if there are leaves to keep
+        t = Tree(line)
+        t.prune(KEEP.keys())
+        s = t.write()
+        for k,v in KEEP.items():
+            s = s.replace(k, v) # replace the original name (k) with the reformatted name (v)
+        print s
     break
