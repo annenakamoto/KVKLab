@@ -46,8 +46,8 @@ gene_tree_list="gene_tree_list.txt"   # text file with list of paths to the gene
 
 ### create the config file for TreeKO
 > config_file.txt
-echo -e "orto_mode\ts" >> config_file.txt   # s: Orthology and paralogy nodes will be predicted using the species overlap algorithm
-echo -e "root_method\tm" >> config_file.txt # s: root at the midpoint
+#echo -e "orto_mode\ts" >> config_file.txt   # s: Orthology and paralogy nodes will be predicted using the species overlap algorithm
+#echo -e "root_method\tm" >> config_file.txt # s: root at the midpoint
 #echo -e "root_species\tNI9" >> config_file.txt  # specify the species to root trees at
 echo -e "print_strict_distance" >> config_file.txt  # only print strict distance
 
