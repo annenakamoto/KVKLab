@@ -12,7 +12,9 @@
 
 cd /global/scratch/users/annen/treeKO_analysis
 module unload python
+echo "*** activating treeKO conda env ***"
 source activate /global/scratch/users/annen/anaconda3/envs/treeKO
+echo "*** activated ***"
 
 ### process the genome and gene trees to be formatted properly for TreeKO
 ###     want only the genes from the representative genomes
@@ -21,14 +23,18 @@ path_to_OF_genome_tree="/global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/
 path_to_OF_gene_trees="/global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jun21/Gene_Trees"
 
 # prune genome tree
+echo "*** prune the genome tree ***"
 cat ${path_to_OF_genome_tree} | python /global/scratch/users/annen/KVKLab/Gene_tree_topology/prune_genome_tree.py "guy11 US71 B71 LpKY97 MZ5-1-6 NI907" > OF_RENAMED/GenomeTree.txt
+echo "*** done ***"
 
 > gene_tree_list.txt
 ls ${path_to_OF_gene_trees} | while read OG; do
     # Keeps only the leaves of the specified species
     cat ${path_to_OF_gene_trees}/${OG} | python /global/scratch/users/annen/KVKLab/Gene_tree_topology/prune_gene_tree.py "guy11 US71 B71 LpKY97 MZ5-1-6 NI907" > OF_RENAMED/${OG}
     echo "OF_RENAMED/${OG}" >> gene_tree_list.txt
+    echo "*** pruned ${OG} ***"
 done
+echo "*** done pruning ***"
 
 genome_tree="OF_RENAMED/GenomeTree.txt" # path to genome tree to use for treeKO
 gene_tree_list="gene_tree_list.txt"   # text file with list of paths to the gene trees
@@ -41,5 +47,8 @@ echo -e "root_species\tNI9" >> config_file.txt  # specify the species to root tr
 echo -e "print_strict_distance" >> config_file.txt  # only print strict distance
 
 ### run TreeKO
+echo "*** starting treeKO ***"
 python /global/scratch/users/annen/treeKO/treeKo.py -p tc -a ${genome_tree} -l ${gene_tree_list} -c config_file.txt -o treeKO_output.txt
+echo "*** treeKO done ***"
 conda deactivate
+echo "*** DONE ***"
