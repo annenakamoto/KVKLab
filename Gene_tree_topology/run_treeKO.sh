@@ -89,7 +89,7 @@ ls /global/scratch/users/annen/Effector_analysis/*_effector_protein_names | whil
     echo "*** making SCO strict distance file for ${genome} ***"
     > EFFs.${genome}.strict_d.txt
     cat ${list} | while read gene; do
-        OG=$(grep ${gene} GENOME_TREE/OrthoFinder_out/Results_Jun21/Orthogroups/Orthogroups.txt | awk '{ print substr($1, 1, 9) }')
+        OG=$(grep ${gene} /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jun21/Orthogroups/Orthogroups.txt | awk '{ print substr($1, 1, 9) }')
         grep ${OG} treeKO_output_table.txt >> EFFs.${genome}.strict_d.txt
     done
     sort EFFs.${genome}.strict_d.txt | uniq > EFF.${genome}.strict_d.txt
