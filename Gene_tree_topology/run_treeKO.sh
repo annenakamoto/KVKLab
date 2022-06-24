@@ -59,19 +59,37 @@ genome_tree="ROOTED/GenomeTree.txt" # path to genome tree to use for treeKO
 gene_tree_list="gene_tree_list.txt"   # text file with list of paths to the gene trees
 
 ### create the config file for TreeKO
-> config_file.txt
-#echo -e "orto_mode\ts" >> config_file.txt   # s: Orthology and paralogy nodes will be predicted using the species overlap algorithm
-echo -e "root_method1\tn" >> config_file.txt # n: tree is already rooted
-echo -e "root_method2\tn" >> config_file.txt # n: tree is already rooted
-#echo -e "root_species\tNI9" >> config_file.txt  # specify the species to root trees at
-#echo -e "print_strict_distance" >> config_file.txt  # only print strict distance
-echo -e "print_oneline" >> config_file.txt
-#echo -e "print_all" >> config_file.txt
+# > config_file.txt
+# echo -e "root_method1\tn" >> config_file.txt # n: tree is already rooted
+# echo -e "root_method2\tn" >> config_file.txt # n: tree is already rooted
+# echo -e "print_oneline" >> config_file.txt  # prints output in one line per tree, easier to parse
 
 ### run TreeKO
-echo "*** starting treeKO ***"
-source activate /global/scratch/users/annen/anaconda3/envs/treeKO
-python /global/scratch/users/annen/treeKO/treeKO.py -p tc -a ${genome_tree} -l ${gene_tree_list} -o treeKO_output.txt -c config_file.txt 
-echo "*** treeKO done ***"
-conda deactivate
+# echo "*** starting treeKO ***"
+# source activate /global/scratch/users/annen/anaconda3/envs/treeKO
+# python /global/scratch/users/annen/treeKO/treeKO.py -p tc -a ${genome_tree} -l ${gene_tree_list} -o treeKO_output.txt -c config_file.txt 
+# echo "*** treeKO done ***"
+# conda deactivate
+
+### parse treeKO output into tabular format
+echo "*** parsing treeKO data to tabular format ***"
+cat treeKO_output.txt | awk -v OFS='\t' '/Results/ { print substr($3, 8, 9), $4 }' > treeKO_output_table.txt
+
+### group data by SCOs (need OG names that are SCOs)
+> SCO.strict_d.txt
+cat /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jun21/Orthogroups/Orthogroups_SingleCopyOrthologues.txt | while read OG; do
+    grep ${OG} treeKO_output_table.txt >> SCO.strict_d.txt
+done
+
+### group data by effectors (need OG names containing predicted effectors)
+ls /global/scratch/users/annen/Effector_analysis/*_effector_protein_names | while read list; do
+    file_name=$(basename ${list})
+    genome=$(echo ${file_name} | awk -v FS='_' '{ print $1 }')
+    > EFFs.${genome}.strict_d.txt
+    cat ${list} | while read gene; do
+        OG=$(grep ${gene} GENOME_TREE/OrthoFinder_out/Results_Jun21/Orthogroups/Orthogroups.txt | awk '{ print substr($1, 1, 9) }')
+        grep ${OG} treeKO_output_table.txt >> EFFs.${genome}.strict_d.txt
+    sort EFFs.${genome}.strict_d.txt | uniq > EFF.${genome}.strict_d.txt
+    rm EFFs.${genome}.strict_d.txt
+
 echo "*** DONE ***"
