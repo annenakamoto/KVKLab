@@ -10,5 +10,5 @@ for line in sys.stdin:
     lst = line.split()
     original = lst[3].split("_")
     new = "gene_" + str(int(original[1]) - 1) + "_" + genome
-    lst[0] = new
+    lst[3] = new
     print('\t'.join(lst))
