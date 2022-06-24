@@ -72,30 +72,38 @@ gene_tree_list="gene_tree_list.txt"   # text file with list of paths to the gene
 # conda deactivate
 
 ### parse treeKO output into tabular format
-echo "*** parsing treeKO data to tabular format ***"
-cat treeKO_output.txt | awk -v OFS='\t' '/Results/ { print substr($3, 8, 9), $4 }' > treeKO_output_table.txt
+# echo "*** parsing treeKO data to tabular format ***"
+# cat treeKO_output.txt | awk -v OFS='\t' '/Results/ { print substr($3, 8, 9), $4 }' > treeKO_output_table.txt
 
 ### group data by SCOs (need OG names that are SCOs)
-echo "*** making SCO strict distance file ***"
-> SCO.strict_d.txt
-cat /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jun21/Orthogroups/Orthogroups_SingleCopyOrthologues.txt | while read OG; do
-    grep ${OG} treeKO_output_table.txt >> SCO.strict_d.txt
-done
+# echo "*** making SCO strict distance file ***"
+# > SCO.strict_d.txt
+# cat /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jun21/Orthogroups/Orthogroups_SingleCopyOrthologues.txt | while read OG; do
+#     grep ${OG} treeKO_output_table.txt >> SCO.strict_d.txt
+# done
 
 ### group data by effectors (need OG names containing predicted effectors)
-ls /global/scratch/users/annen/Effector_analysis/*_effector_protein_names | while read list; do
-    file_name=$(basename ${list})
-    genome=$(echo ${file_name} | awk -v FS='_' '{ print $1 }')
-    echo "*** making EFF strict distance file for ${genome} ***"
-    > EFFs.${genome}.strict_d.txt
-    cat ${list} | while read gene; do
-        OG=$(grep ${gene} /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jun21/Orthogroups/Orthogroups.txt | awk '{ print substr($1, 1, 9) }')
-        grep ${OG} treeKO_output_table.txt >> EFFs.${genome}.strict_d.txt
-    done
-    sort EFFs.${genome}.strict_d.txt | uniq > EFF.${genome}.strict_d.txt
-    rm EFFs.${genome}.strict_d.txt
-    echo "*** checking for overlap with the SCOs: ***"
-    comm -12 <(sort SCO.strict_d.txt) <(sort EFF.${genome}.strict_d.txt)
-done
+# ls /global/scratch/users/annen/Effector_analysis/*_effector_protein_names | while read list; do
+#     file_name=$(basename ${list})
+#     genome=$(echo ${file_name} | awk -v FS='_' '{ print $1 }')
+#     echo "*** making EFF strict distance file for ${genome} ***"
+#     > EFFs.${genome}.strict_d.txt
+#     cat ${list} | while read gene; do
+#         OG=$(grep ${gene} /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jun21/Orthogroups/Orthogroups.txt | awk '{ print substr($1, 1, 9) }')
+#         grep ${OG} treeKO_output_table.txt >> EFFs.${genome}.strict_d.txt
+#     done
+#     sort EFFs.${genome}.strict_d.txt | uniq > EFF.${genome}.strict_d.txt
+#     rm EFFs.${genome}.strict_d.txt
+#     echo "*** checking for overlap with the SCOs: ***"
+#     comm -12 <(sort SCO.strict_d.txt) <(sort EFF.${genome}.strict_d.txt)
+# done
+
+### Group the orthogroups by congruent (d < 0.5) vs incongruent (d ≥ 0.5)
+cat treeKO_output_table.txt | awk -v OFS='\t' '{ if ($2 < 0.5) print $1, $2; }' > congruent.txt
+cat treeKO_output_table.txt | awk -v OFS='\t' '{ if ($2 >= 0.5) print $1, $2; }' > incongruent.txt
+
+cat SCO.strict_d.txt | awk -v OFS='\t' '{ if ($2 < 0.5) print $1, $2; }' > congruent_SCO.txt
+cat SCO.strict_d.txt | awk -v OFS='\t' '{ if ($2 >= 0.5) print $1, $2; }' > incongruent_SCO.txt
+
 
 echo "*** DONE ***"
