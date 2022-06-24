@@ -86,7 +86,7 @@ done
 ls /global/scratch/users/annen/Effector_analysis/*_effector_protein_names | while read list; do
     file_name=$(basename ${list})
     genome=$(echo ${file_name} | awk -v FS='_' '{ print $1 }')
-    echo "*** making SCO strict distance file for ${genome} ***"
+    echo "*** making EFF strict distance file for ${genome} ***"
     > EFFs.${genome}.strict_d.txt
     cat ${list} | while read gene; do
         OG=$(grep ${gene} /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jun21/Orthogroups/Orthogroups.txt | awk '{ print substr($1, 1, 9) }')
@@ -94,6 +94,8 @@ ls /global/scratch/users/annen/Effector_analysis/*_effector_protein_names | whil
     done
     sort EFFs.${genome}.strict_d.txt | uniq > EFF.${genome}.strict_d.txt
     rm EFFs.${genome}.strict_d.txt
+    echo "*** checking for overlap with the SCOs: ***"
+    comm <(sort SCO.strict_d.txt) <(sort EFF.${genome}.strict_d.txt)
 done
 
 echo "*** DONE ***"
