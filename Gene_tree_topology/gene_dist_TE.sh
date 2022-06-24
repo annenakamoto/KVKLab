@@ -35,9 +35,18 @@ while read TE; do
         us=$(grep "${LINE}" UPSTREAM/gene_${TE}.U.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print -$14 }')
         ds=$(grep "${LINE}" DOWNSTREAM/gene_${TE}.D.${GENOME}.bed | awk '$14 == "-1" { print "none" } $14 != "-1" { print $14 }')
         OG=$(grep "${gene}" /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jun21/Orthogroups/Orthogroups.txt | awk -v FS=':' '{ print $1; }')
-        SCO=$(grep "${OG}" /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jun21/Orthogroups/Orthogroups_SingleCopyOrthologues.txt | awk '/OG/ { print "SCO"; } !/OG/ { print "no"; }')
-        EFF=$(grep "${gene}" /global/scratch/users/annen/Effector_analysis/${GENOME}_effector_protein_names | awk '/gene/ { print "EFF"; } !/gene/ { print "no"; }')
-        SD=$(grep ${OG} /global/scratch/users/annen/treeKO_analysis/treeKO_output_table.txt | awk '/OG/ { print $2; } !/OG/ { print "none"; }')
+        SCO=$(grep "${OG}" /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jun21/Orthogroups/Orthogroups_SingleCopyOrthologues.txt | awk '/OG/ { print "SCO"; }')
+        if [ -z "${SCO}" ]; then
+            SCO="x"
+        fi
+        EFF=$(grep "${gene}" /global/scratch/users/annen/Effector_analysis/${GENOME}_effector_protein_names | awk '/gene/ { print "EFF"; }')
+        if [ -z "${EFF}" ]; then
+            EFF="x"
+        fi
+        SD=$(grep ${OG} /global/scratch/users/annen/treeKO_analysis/treeKO_output_table.txt | awk '/OG/ { print $2; }')
+        if [ -z "${SD}" ]; then
+            SD="x"
+        fi
         echo -e "${gene}\t${us}\t${ds}\t${OG}\t${SCO}\t${EFF}\t${SD}" >> gene_${TE}.${GENOME}.DATA.txt
         ### columns: gene_name, upstream_dist_TE, downstream_dist_TE, Orthogrup, SCO?, EFF?, strict_distance, congruent_or_incongruent?
     done
