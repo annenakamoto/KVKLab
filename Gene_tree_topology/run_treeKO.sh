@@ -95,7 +95,7 @@ ls /global/scratch/users/annen/Effector_analysis/*_effector_protein_names | whil
     sort EFFs.${genome}.strict_d.txt | uniq > EFF.${genome}.strict_d.txt
     rm EFFs.${genome}.strict_d.txt
     echo "*** checking for overlap with the SCOs: ***"
-    comm <(sort SCO.strict_d.txt) <(sort EFF.${genome}.strict_d.txt)
+    comm -12 <(sort SCO.strict_d.txt) <(sort EFF.${genome}.strict_d.txt)
 done
 
 echo "*** DONE ***"
