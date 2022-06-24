@@ -47,7 +47,8 @@ while read TE; do
         if [ -z "${SD}" ]; then
             SD="x"
         fi
-        echo -e "${gene}\t${us}\t${ds}\t${OG}\t${SCO}\t${EFF}\t${SD}" >> gene_${TE}.${GENOME}.DATA.txt
+        CI=$(echo ${SD} | awk '{ if ($1 == "x") print "x"; else if ($1 < 0.5) print "congruent"; else if ($1 >= 0.5) print "incongruent"; }')
+        echo -e "${gene}\t${us}\t${ds}\t${OG}\t${SCO}\t${EFF}\t${SD}\t${CI}" >> gene_${TE}.${GENOME}.DATA.txt
         ### columns: gene_name, upstream_dist_TE, downstream_dist_TE, Orthogrup, SCO?, EFF?, strict_distance, congruent_or_incongruent?
     done
 done < te_list.txt 
