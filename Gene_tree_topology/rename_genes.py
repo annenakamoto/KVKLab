@@ -8,7 +8,7 @@ genome = sys.argv[1]
 
 for line in sys.stdin:
     lst = line.split()
-    original = lst[0].split("_")
+    original = lst[3].split("_")
     new = "gene_" + str(int(original[1]) - 1) + "_" + genome
     lst[0] = new
     print('\t'.join(lst))
