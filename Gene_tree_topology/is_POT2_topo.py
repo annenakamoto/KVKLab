@@ -17,7 +17,7 @@ for line in sys.stdin:
             if b_closest[:3] == "GUY":
                 guy = t&b_closest
                 tmp2 = Leaves[:]
-                tmp2.remove(l)
+                tmp2.remove(b_closest)
                 g_closest = min(tmp2, key=lambda x: guy.get_distance(x))
                 if g_closest == b71.name:
                     print '\t'.join([tree_file, b71.name, guy.name])
