@@ -17,4 +17,6 @@ for line in sys.stdin:
                 g_closest = min(Leaves, key=lambda x: guy.get_distance(x))
                 if g_closest == b71.name:
                     print '\t'.join([tree_file, b71.name, guy.name])
+                    print line
+                    break
 

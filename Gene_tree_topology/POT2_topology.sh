@@ -18,6 +18,8 @@ source activate /global/scratch/users/annen/anaconda3/envs/treeKO   # to use ete
 > POT2_topo.DATA.txt
 ls ROOTED | while read TREE; do
     cat ROOTED/${TREE} | python /global/scratch/users/annen/KVKLab/Gene_tree_topology/is_POT2_topo.py ${TREE} >> POT2_topo.DATA.txt
+    echo "*** finished ${TREE} ***"
 done
 
 conda deactivate
+echo "*** DONE ***"
