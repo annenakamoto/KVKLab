@@ -12,15 +12,23 @@ D = {}
 # key = full element, value = list of LTR entries that overlap it
 for line in sys.stdin:
     lst = line.split()
-    ltr = lst[0:5]
-    full = lst[6:11]
-    overlap = int(lst[12])
-
-
+    ltr = "\t".join(lst[0:6])
+    full = "\t".join(lst[6:12])
+    if D.get(full):
+        D[full].append(ltr)
+    else:
+        D[full] = [ltr]
 
 
 c = 1
 with open(mapping, 'w') as f:
-    
-    f.write(str(c) + ": " + k + '\n') # keep track of what number referrs to which full element
-    c += 1
+    for k,v in D.items():
+        c1 = 1
+        for i in v:
+            e = i.split()
+            n =  e[3].split("_")[0] + "_LTR_" + str(c) + "." + str(c1)
+            e[3] = n
+            print('\t'.join(e))
+            f.write(str(c) + ": " + k + '\n') # keep track of what number referrs to which internal region
+            c1 += 1
+        c += 1

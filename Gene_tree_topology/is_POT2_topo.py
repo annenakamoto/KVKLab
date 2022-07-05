@@ -20,7 +20,7 @@ for line in sys.stdin:
                 tmp2.remove(b_closest)
                 g_closest = min(tmp2, key=lambda x: guy.get_distance(x))
                 if g_closest == b71.name:
-                    print '\t'.join([tree_file, b71.name, guy.name])
+                    print '\t'.join([tree_file, b71.name, guy.name, b71.get_distance(b_closest)])
                     print line
                     break
 

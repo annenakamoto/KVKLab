@@ -18,17 +18,18 @@ cd /global/scratch/users/annen/SOLO_LTRs
 while read LTR; do
     while read GENOME; do
         # make all TEs bedfile for LTR in genome
-        cat /global/scratch/users/annen/Rep_TE_Lib/Align_TEs/REPHITS_${LTR}.fasta | python /global/scratch/users/annen/KVKLab/soloLTR_analysis/tobed.py ${GENOME} > REPHITS/REPHITS.${GENOME}.${LTR}.bed
+        #cat /global/scratch/users/annen/Rep_TE_Lib/Align_TEs/REPHITS_${LTR}.fasta | python /global/scratch/users/annen/KVKLab/soloLTR_analysis/tobed.py ${GENOME} > REPHITS/REPHITS.${GENOME}.${LTR}.bed
         
         # find solo LTRs
         # -v: Only report those entries in A that have no overlap in B.
-        bedtools intersect -v -a /global/scratch/users/annen/LTR_divergence/RM_LTR_BED_FASTA/${GENOME}.${LTR}_LTR.bed -b REPHITS/REPHITS.${GENOME}.${LTR}.bed > UNNAMED_SOLOS/${LTR}.${GENOME}.unnamed.solo.bed
-        cat UNNAMED_SOLOS/${LTR}.${GENOME}.unnamed.solo.bed | python /global/scratch/users/annen/KVKLab/soloLTR_analysis/name_solos.py ${LTR} > NEW_SOLOS/${LTR}.${GENOME}.solo.bed
+        #bedtools intersect -v -a /global/scratch/users/annen/LTR_divergence/RM_LTR_BED_FASTA/${GENOME}.${LTR}_LTR.bed -b REPHITS/REPHITS.${GENOME}.${LTR}.bed > UNNAMED_SOLOS/${LTR}.${GENOME}.unnamed.solo.bed
+        #cat UNNAMED_SOLOS/${LTR}.${GENOME}.unnamed.solo.bed | python /global/scratch/users/annen/KVKLab/soloLTR_analysis/name_solos.py ${LTR} > NEW_SOLOS/${LTR}.${GENOME}.solo.bed
 
         # find flanking LTRs
         # -wo: 	Write the original A and B entries plus the number of base pairs of overlap between the two features. Only A features with overlap are reported. Restricted by -f and -r.
-        bedtools intersect -wo -a /global/scratch/users/annen/LTR_divergence/RM_LTR_BED_FASTA/${GENOME}.${LTR}_LTR.bed -b REPHITS/REPHITS.${GENOME}.${LTR}.bed > UNNAMED_FLANK/${LTR}.${GENOME}.unnamed.flank.bed
-        #cat UNNAMED_FLANK/${LTR}.${GENOME}.unnamed.flank.bed | python /global/scratch/users/annen/KVKLab/soloLTR_analysis/name_flank.py ${LTR} "mapping.txt" > NEW_FLANK/${LTR}.${GENOME}.flank.bed
+        #bedtools intersect -wo -a /global/scratch/users/annen/LTR_divergence/RM_LTR_BED_FASTA/${GENOME}.${LTR}_LTR.bed -b REPHITS/REPHITS.${GENOME}.${LTR}.bed > UNNAMED_FLANK/${LTR}.${GENOME}.unnamed.flank.bed
+        > mapping.txt
+        cat UNNAMED_FLANK/${LTR}.${GENOME}.unnamed.flank.bed | python /global/scratch/users/annen/KVKLab/soloLTR_analysis/name_flank.py ${LTR} "mapping.txt" > NEW_FLANK/${LTR}.${GENOME}.flank.bed
 
     done < repgenome_list.txt
 done < LTRs_ofinterest.txt
