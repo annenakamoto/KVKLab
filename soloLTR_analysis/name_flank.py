@@ -23,7 +23,7 @@ alpha = ["a", "b", "c", "d"]
 c = 1
 with open(mapping, 'w') as f:
     for k,v in D.items():
-        c1 = 1
+        c1 = 0
         for i in v:
             e = i.split()
             n =  e[3].split("_")[0] + "_LTR_" + str(c) + "." + alpha[c1]
