@@ -12,6 +12,7 @@ D = {}
 # key = full element, value = list of LTR entries that overlap it
 for line in sys.stdin:
     lst = line.split()
+    lst[4] = lst[12]
     ltr = "\t".join(lst[0:6])
     full = "\t".join(lst[6:12])
     if D.get(full):
