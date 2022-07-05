@@ -19,5 +19,5 @@ while read GENOME; do
     bedtools getfasta -s -name -fo FASTA_FOR_TREE/${LTR}.${GENOME}.fasta -fi /global/scratch/users/annen/GENOME_TREE/hq_genomes/${GENOME}.fasta -bed BED_FOR_TREE/${LTR}.${GENOME}.all.bed
     mafft --thread 24 FASTA_FOR_TREE/${LTR}.${GENOME}.fasta > ALIGNED_FOR_TREE/${LTR}.${GENOME}.afa
     trimal -in ALIGNED_FOR_TREE/${LTR}.${GENOME}.afa -out ALIGNED_FOR_TREE/${LTR}.${GENOME}.trim.afa -noallgaps
-    raxml -T 24 -n Raxml_${LTR}.${GENOME}.out -f a -x 12345 -p 12345 -# $bootstraps -m GTRCAT -s ALIGNED_FOR_TREE/${LTR}.${GENOME}.trim.afa
+    raxmlHPC-PTHREADS-SSE3 -T 24 -n Raxml_${LTR}.${GENOME}.out -f a -x 12345 -p 12345 -# 100 -m GTRCAT -s ALIGNED_FOR_TREE/${LTR}.${GENOME}.trim.afa
 done < repgenome_list.txt
