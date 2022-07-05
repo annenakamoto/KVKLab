@@ -19,14 +19,14 @@ for line in sys.stdin:
     else:
         D[full] = [ltr]
 
-
+alpha = ["a", "b", "c", "d"]
 c = 1
 with open(mapping, 'w') as f:
     for k,v in D.items():
         c1 = 1
         for i in v:
             e = i.split()
-            n =  e[3].split("_")[0] + "_LTR_" + str(c) + "." + str(c1)
+            n =  e[3].split("_")[0] + "_LTR_" + str(c) + "." + alpha[c1]
             e[3] = n
             print('\t'.join(e))
             f.write(str(c) + ": " + k + '\n') # keep track of what number referrs to which internal region

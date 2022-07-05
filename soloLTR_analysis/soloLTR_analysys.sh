@@ -28,8 +28,8 @@ while read LTR; do
         # find flanking LTRs
         # -wo: 	Write the original A and B entries plus the number of base pairs of overlap between the two features. Only A features with overlap are reported. Restricted by -f and -r.
         #bedtools intersect -wo -a /global/scratch/users/annen/LTR_divergence/RM_LTR_BED_FASTA/${GENOME}.${LTR}_LTR.bed -b REPHITS/REPHITS.${GENOME}.${LTR}.bed > UNNAMED_FLANK/${LTR}.${GENOME}.unnamed.flank.bed
-        > mapping.txt
-        cat UNNAMED_FLANK/${LTR}.${GENOME}.unnamed.flank.bed | python /global/scratch/users/annen/KVKLab/soloLTR_analysis/name_flank.py ${LTR} "mapping.txt" > NEW_FLANK/${LTR}.${GENOME}.flank.bed
+        > NEW_MAPPING/${LTR}.${GENOME}.mapping.txt
+        cat UNNAMED_FLANK/${LTR}.${GENOME}.unnamed.flank.bed | python /global/scratch/users/annen/KVKLab/soloLTR_analysis/name_flank.py ${LTR} "NEW_MAPPING/${LTR}.${GENOME}.mapping.txt" > NEW_FLANK/${LTR}.${GENOME}.flank.bed
 
     done < repgenome_list.txt
 done < LTRs_ofinterest.txt
