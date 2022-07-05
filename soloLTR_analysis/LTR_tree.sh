@@ -16,7 +16,7 @@ LTR=$1
 
 > FASTA_FOR_TREE/${LTR}.fasta
 while read GENOME; do
-    cat NEW_SOLOS/${LTR}.${GENOME}.solo.bed NEW_FLANK/${LTR}.${GENOME}.flank.bed > awk -v OFS='\t' -v genome=${GENOME} '{ print $1, $2, $3, genome "_" $4}' > BED_FOR_TREE/${LTR}.${GENOME}.all.bed
+    cat NEW_SOLOS/${LTR}.${GENOME}.solo.bed NEW_FLANK/${LTR}.${GENOME}.flank.bed | awk -v OFS='\t' -v genome=${GENOME} '{ print $1, $2, $3, genome "_" $4}' > BED_FOR_TREE/${LTR}.${GENOME}.all.bed
     bedtools getfasta -s -name -fo FASTA_FOR_TREE/${LTR}.${GENOME}.fasta -fi /global/scratch/users/annen/GENOME_TREE/hq_genomes/${GENOME}.fasta -bed BED_FOR_TREE/${LTR}.${GENOME}.all.bed
     cat FASTA_FOR_TREE/${LTR}.${GENOME}.fasta | awk -v FS='(' '/>/ { print $1; } !/>/ { print; }' >> FASTA_FOR_TREE/${LTR}.fasta
 done < repgenome_list.txt
