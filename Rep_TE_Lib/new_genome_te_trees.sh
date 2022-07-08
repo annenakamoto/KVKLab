@@ -53,5 +53,5 @@ cp ${TE}.${DOM}.fa_align.Matches.${leng}min.fa /global/scratch/users/annen/Rep_T
 cd /global/scratch/users/annen/Rep_TE_Lib/NEW_TE_TREES
 
 echo "********* STARTING TO MAKE TREE *********"
-raxml -T 24 -n Raxml_${TE}.${DOM}.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s ${TE}.${DOM}.fa_align.Matches.${leng}min.fa
+raxmlHPC-PTHREADS-SSE3 -T 24 -n Raxml_${TE}.${DOM}.out -f a -x 12345 -p 12345 -# 100 -m PROTCATJTT -s ${TE}.${DOM}.fa_align.Matches.${leng}min.fa
 echo "ran RAXML for ${TE}.${DOM}"
