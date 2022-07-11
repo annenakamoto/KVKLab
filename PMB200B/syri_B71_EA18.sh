@@ -42,7 +42,7 @@ source activate /global/scratch/users/annen/anaconda3/envs/syri ## use source in
 # show-coords -THrd LpKY97_v_MZ5-1-6_full.filtered.delta > LpKY97_v_MZ5-1-6_full.filtered.coords
 # ~/syri/syri/bin/syri -c LpKY97_v_MZ5-1-6_full.filtered.coords -d LpKY97_v_MZ5-1-6_full.filtered.delta -r LpKY97_chrom_only.fasta -q MZ5-1-6_chrom_only.fasta --prefix LpKY97_v_MZ5-1-6 --nc 5 --all
 
-nucmer --maxmatch -p B71_v_EA18_full -l 40 -g 90 -c 100 -b 200 -t 24 B71_chrom_only.fasta EA18_chrom_only.fasta
+nucmer --maxmatch -p B71_v_EA18_full -l 40 -g 90 -c 100 -b 200 -t 20 B71_chrom_only.fasta EA18_chrom_only.fasta
 delta-filter -m -i 90 -l 100 B71_v_EA18_full.delta > B71_v_EA18_full.filtered.delta
 show-coords -THrd B71_v_EA18_full.filtered.delta > B71_v_EA18_full.filtered.coords
 ~/syri/syri/bin/syri -c B71_v_EA18_full.filtered.coords -d B71_v_EA18_full.filtered.delta -r B71_chrom_only.fasta -q EA18_chrom_only.fasta --prefix B71_v_EA18 --nc 5 --all
