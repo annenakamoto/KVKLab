@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=syri_B71_EA18
-#SBATCH --partition=savio2
+#SBATCH --partition=savio
 #SBATCH --qos=savio_normal
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
@@ -55,11 +55,13 @@ source activate /global/scratch/users/annen/anaconda3/envs/plotsr
 # echo -e $(realpath LpKY97_chrom_only.fasta)"\t"LpKY97 >> genomes_list
 # echo -e $(realpath MZ5-1-6_chrom_only.fasta)"\t"MZ5-1-6 >> genomes_list
 
-# plotsr --sr EA18_v_B71syri.out --sr B71_v_LpKY97syri.out --sr LpKY97_v_MZ5-1-6syri.out --genomes genomes_list -o EA18_B71_LpKY97_MZ5-1-6.png --tracks POT2.EA18.bed
+# plotsr --sr EA18_v_B71syri.out --sr B71_v_LpKY97syri.out --sr LpKY97_v_MZ5-1-6syri.out --genomes genomes_list -o EA18_B71_LpKY97_MZ5-1-6.png --tracks tracks.txt
 
 echo -e $(realpath B71_chrom_only.fasta)"\t"B71 > genomes_list
 echo -e $(realpath EA18_chrom_only.fasta)"\t"EA18 >> genomes_list
 
-plotsr --sr B71_v_EA18syri.out --genomes genomes_list -o B71_v_EA18_w_POT2.png --tracks POT2.B71.chromnames.bed
+echo -e "POT2.B71.chromnames.bed\tPOT2" > tracks.txt
+
+plotsr --sr B71_v_EA18syri.out --genomes genomes_list -o B71_v_EA18_w_POT2.png --tracks tracks.txt
 
 conda deactivate
