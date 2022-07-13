@@ -21,6 +21,10 @@ D = {   "MGG": [],
         "guy11": []   }
 
 for line in sys.stdin:
+    if not line:
+        ret = [group, "NONE"] + ["0"] * 15
+        print('\t'.join(ret))
+        break
     lst = line.split()
     og = lst[0][:-1]
     for gene in lst[1:]:
