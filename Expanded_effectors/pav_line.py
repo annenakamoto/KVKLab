@@ -21,13 +21,6 @@ D = {   "MGG": [],
         "guy11": []   }
 
 for line in sys.stdin:
-    if "OG" not in line:
-        if option == "names":
-            ret = [group, "NONE"] + ["x"] * 15
-        if option == "num":
-            ret = [group, "NONE"] + ["0"] * 15
-        print('\t'.join(ret))
-        break
     lst = line.split()
     og = lst[0][:-1]
     for gene in lst[1:]:
@@ -50,4 +43,10 @@ for line in sys.stdin:
         for genome in genomes:
             ret.append(str(len(D[genome])))
         print('\t'.join(ret))
-    break
+    exit()
+
+if option == "names":
+    ret = [group, "NONE"] + ["x"] * 15
+if option == "num":
+    ret = [group, "NONE"] + ["0"] * 15
+print('\t'.join(ret))
