@@ -41,6 +41,6 @@ for line in sys.stdin:
     if option == "num":
         ret = [group, og]
         for genome in genomes:
-            ret.append(len(D[genome]))
+            ret.append(str(len(D[genome])))
         print('\t'.join(ret))
     break
