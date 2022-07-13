@@ -4,7 +4,8 @@ group = sys.argv[1]
 option = sys.argv[2]
 
 genomes = ["MGG", "guy11", "AV1-1-1", "FJ72ZC7-77", "FJ81278", "FJ98099", "FR13", "Sar-2-20-1", "US71", "B71", "BR32", "LpKY97", "MZ5-1-6", "CD156", "NI907"]
-D = {   "AV1-1-1": [],
+D = {   "MGG": [],
+        "AV1-1-1": [],
         "B71": [],
         "BR32": [],
         "CD156": [],
