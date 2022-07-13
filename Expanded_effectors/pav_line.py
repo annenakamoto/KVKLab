@@ -21,7 +21,7 @@ D = {   "MGG": [],
         "guy11": []   }
 
 for line in sys.stdin:
-    if not line:
+    if "OG" not in line:
         if option == "names":
             ret = [group, "NONE"] + ["x"] * 15
         if option == "num":
