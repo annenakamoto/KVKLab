@@ -22,7 +22,10 @@ D = {   "MGG": [],
 
 for line in sys.stdin:
     if not line:
-        ret = [group, "NONE"] + ["0"] * 15
+        if option == "names":
+            ret = [group, "NONE"] + ["x"] * 15
+        if option == "num":
+            ret = [group, "NONE"] + ["0"] * 15
         print('\t'.join(ret))
         break
     lst = line.split()
