@@ -25,8 +25,8 @@ for line in sys.stdin:
     og = lst[0][:-1]
     for gene in lst[1:]:
         g_lst = gene.split("_")
-        if len(g_lst) == 2:
-            g = g_lst[0]
+        if len(g_lst) < 3:
+            g = "MGG"
         else:
             g = g_lst[2]
         D[g].append(gene)
