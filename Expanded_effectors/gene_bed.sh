@@ -37,9 +37,9 @@ while read line; do
 done < ${GENOME}.bed
 
 > info_genes_${GENOME}.bed
-echo -e "chr\tstart\tend\tgene\tEFF\tMGG_orthogroup\tSCO" >> info_genes_${GENOME}.bed  ### col names
+echo -e "chr\tstart\tend\tgene\tMGG_orthogroup\tSCO\tEFF\tEFF_group" >> info_genes_${GENOME}.bed  ### col names
 while read line; do
-    name=$(echo line | awk '{ print $4 }')
+    name=$(echo ${line} | awk '{ print $4 }')
     ### determine if the gene is a predicted effector
     EFF=$(grep ${name} /global/scratch/users/annen/Effector_analysis/${GENOME}_effector_protein_names)
     if [ ! -z "${EFF}" ]; then
@@ -56,5 +56,12 @@ while read line; do
     else
         SCO_col="x"
     fi
-    echo -e "${line}\t${EFF_col}\t${OG}\t${SCO_col}" >> info_genes_${GENOME}.bed
+    ### determine if the gene is in an ART or MAX effector orthogroup
+    GROUP=$(grep ${name} /global/scratch/users/annen/Expanded_effectors/ART_MAX_pav.DATA.txt | awk '{ print $1; }')
+    if [ ! -z "${GROUP}" ]; then
+        GROUP_col=${GROUP}
+    else
+        GROUP_col="x"
+    fi
+    echo -e "${line}\t${OG}\t${SCO_col}\t${EFF_col}\t${GROUP_col}" >> info_genes_${GENOME}.bed
 done < genes_${GENOME}.bed
