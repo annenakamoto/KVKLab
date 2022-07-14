@@ -36,7 +36,7 @@ while read GENOME; do
             echo -e "${info}\t${us}\t${ds}" >> DIST_DATA/genes_${TE}.${GENOME}.DATA.txt
         done
     done < te_list.txt 
-done < genome_list.txt
+done < rep_genome_list.txt
 
 
 
