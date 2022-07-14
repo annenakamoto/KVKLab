@@ -27,7 +27,7 @@ cat visualize_OGs/${GENOME}.gff | awk '$3 ~ /gene/ { print $1 "\t" $4 "\t" $5 "\
 cd /global/scratch/users/annen/Expanded_effectors/GENE_BED
 
 c=0
-> OG_${GENOME}.bed
+> genes_${GENOME}.bed
 while read line; do
     ### name to find gene in OG and SCO files
     name="gene_${c}_${GENOME}"
@@ -35,3 +35,26 @@ while read line; do
     echo ${line} | awk -v N=${name} '$4 { print $1 "\t" $2 "\t" $3 "\t" N }' >> genes_${GENOME}.bed
     ((c+=1))
 done < ${GENOME}.bed
+
+> info_genes_${GENOME}.bed
+echo -e "chr\tstart\tend\tgene\tEFF\tMGG_orthogroup\tSCO" >> info_genes_${GENOME}.bed  ### col names
+while read line; do
+    name=$(echo line | awk '{ print $4 }')
+    ### determine if the gene is a predicted effector
+    EFF=$(grep ${name} /global/scratch/users/annen/Effector_analysis/${GENOME}_effector_protein_names)
+    if [ ! -z "${EFF}" ]; then
+        EFF_col="EFF"
+    else
+        EFF_col="x"
+    fi
+    ### determine the orthogroup the gene is in, using orthogroups with MGG reference genes
+    OG=$(grep ${name} /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jul13/Orthogroups/Orthogroups.txt | awk -F ":" '{ print $1; }')
+    ### determine if the orthogroup is a SCO in this orthofinder run
+    SCO=$(grep ${OG} /global/scratch/users/annen/GENOME_TREE/OrthoFinder_out/Results_Jul13/Orthogroups/Orthogroups_SingleCopyOrthologues.txt)
+    if [ ! -z "${SCO}" ]; then
+        SCO_col="SCO"
+    else
+        SCO_col="x"
+    fi
+    echo -e "${line}\t${EFF_col}\t${OG}\t${SCO_col}" >> info_genes_${GENOME}.bed
+done < genes_${GENOME}.bed
