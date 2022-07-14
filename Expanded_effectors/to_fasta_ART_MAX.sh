@@ -14,10 +14,10 @@ cd /global/scratch/users/annen/Expanded_effectors
 
 while read GENOME; do
     ### make ART fasta
-    cat GENE_BED/info_genes_${GENOME}.bed | awk -v OFS='\t' '/ART/ { print $1, $2, $3, $4 ":" $8; }' > tmp.${GENOME}.ART.bed
+    cat GENE_BED/info_genes_${GENOME}.bed | awk -v OFS='\t' '/gene/&&/ART/ { print $1, $2, $3, $4 ":" $8; }' > tmp.${GENOME}.ART.bed
     bedtools getfasta -name -fi /global/scratch/users/annen/GENOME_TREE/hq_genomes/${GENOME}.fasta -fo ${GENOME}.ART.fasta -bed tmp.${GENOME}.ART.bed
     ### make MAX fasta
-    cat GENE_BED/info_genes_${GENOME}.bed | awk -v OFS='\t' '/MAX/||/AVR/||/TOX/ { print $1, $2, $3, $4 ":" $8; }' > tmp.${GENOME}.MAX.bed
+    cat GENE_BED/info_genes_${GENOME}.bed | awk -v OFS='\t' '/gene/&&/MAX/||/AVR/||/TOX/ { print $1, $2, $3, $4 ":" $8; }' > tmp.${GENOME}.MAX.bed
     bedtools getfasta -name -fi /global/scratch/users/annen/GENOME_TREE/hq_genomes/${GENOME}.fasta -fo ${GENOME}.MAX.fasta -bed tmp.${GENOME}.MAX.bed
 done < genome_list.txt
 
