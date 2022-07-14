@@ -15,10 +15,10 @@ GENOME=$1
 ### genomes in original .gff are of form gene_00001, gene_00002, etc.
 ### genomes in OG and SCO files are of form gene_0_guy11, gene_1_guy11, etc.
 ### want to change the gene names to their OGs, and indicate if they're SCOs and/or Effectors
-###     gene_00001 -> gene_0_guy11 -> SCO_OG0000001_guy11
-###     gene_00002 -> gene_1_guy11 -> OG0000002_guy11
-###     gene_00003 -> gene_2_guy11 -> E_OG0000003_guy11
-###     gene_00004 -> gene_3_guy11 -> E_SCO_OG0000004_guy11
+###     gene_00001 -> gene_0_guy11 
+###     gene_00002 -> gene_1_guy11 
+###     gene_00003 -> gene_2_guy11 
+###     gene_00004 -> gene_3_guy11 
 ###         etc... (these are just examples, not actual data)
 
 cd /global/scratch/users/annen
