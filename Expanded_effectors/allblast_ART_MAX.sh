@@ -24,9 +24,11 @@ done < genome_list.txt
 # makeblastdb -in FASTA/MAX.fasta -dbtype nucl -out MAX_db
 # blastn -db MAX_db -query FASTA/MAX.fasta -outfmt 6 -out allblast_MAX.out -num_threads 24
 
-echo "*** aligning ART ***"
-mafft --maxiterate 1000 --globalpair --quiet --thread 24 FASTA/ART.fasta > FASTA/ART_align.fasta
-echo "*** aligning MAX ***"
-mafft --maxiterate 1000 --globalpair --quiet --thread 24 FASTA/MAX.fasta > FASTA/MAX_align.fasta
-echo "*** done ***"
+# echo "*** aligning ART ***"
+# mafft --maxiterate 1000 --globalpair --quiet --thread 24 FASTA/ART.fasta > FASTA/ART_align.fasta
+# echo "*** aligning MAX ***"
+# mafft --maxiterate 1000 --globalpair --quiet --thread 24 FASTA/MAX.fasta > FASTA/MAX_align.fasta
+# echo "*** done ***"
 
+trimal -noallgaps -in FASTA/ART_align.fasta -out FASTA/ART_align.trim.fasta
+trimal -noallgaps -in FASTA/MAX_align.fasta -out FASTA/MAX_align.trim.fasta
