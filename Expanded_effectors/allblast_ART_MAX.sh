@@ -19,7 +19,14 @@ while read GENOME; do
     cat FASTA/${GENOME}.MAX.fasta >> FASTA/MAX.fasta
 done < genome_list.txt
 
-makeblastdb -in FASTA/ART.fasta -dbtype nucl -out ART_db
-blastn -db ART_db -query FASTA/ART.fasta -outfmt 6 -out allblast_ART.out -num_threads 24
-makeblastdb -in FASTA/MAX.fasta -dbtype nucl -out MAX_db
-blastn -db MAX_db -query FASTA/MAX.fasta -outfmt 6 -out allblast_MAX.out -num_threads 24
+# makeblastdb -in FASTA/ART.fasta -dbtype nucl -out ART_db
+# blastn -db ART_db -query FASTA/ART.fasta -outfmt 6 -out allblast_ART.out -num_threads 24
+# makeblastdb -in FASTA/MAX.fasta -dbtype nucl -out MAX_db
+# blastn -db MAX_db -query FASTA/MAX.fasta -outfmt 6 -out allblast_MAX.out -num_threads 24
+
+echo "*** aligning ART ***"
+mafft --maxiterate 1000 --globalpair --quiet --thread 24 FASTA/ART.fasta > FASTA/ART_align.fasta
+echo "*** aligning MAX ***"
+mafft --maxiterate 1000 --globalpair --quiet --thread 24 FASTA/MAX.fasta > FASTA/MAX_align.fasta
+echo "*** done ***"
+
