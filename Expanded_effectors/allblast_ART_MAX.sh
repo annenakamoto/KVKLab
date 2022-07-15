@@ -1,0 +1,25 @@
+#!/bin/bash
+#SBATCH --job-name=needle_ART_MAX
+#SBATCH --partition=savio2
+#SBATCH --qos=savio_normal
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24
+#SBATCH --time=24:00:00
+#SBATCH --mail-user=annen@berkeley.edu
+#SBATCH --mail-type=ALL
+
+### generate fasta files for ART & MAX effector nucleotide sequences
+
+cd /global/scratch/users/annen/Expanded_effectors
+
+> FASTA/ART.fasta
+> FASTA/MAX.fasta
+while read GENOME; do
+    cat FASTA/${GENOME}.ART.fasta >> FASTA/ART.fasta
+    cat FASTA/${GENOME}.MAX.fasta >> FASTA/MAX.fasta
+done < genome_list.txt
+
+makeblastdb -in FASTA/ART.fasta -dbtype nucl -out ART_db
+blastn -db ART_db -query FASTA/ART.fasta -outfmt 6 -out allblast_ART.out -num_threads 24
+makeblastdb -in FASTA/MAX.fasta -dbtype nucl -out MAX_db
+blastn -db MAX_db -query FASTA/MAX.fasta -outfmt 6 -out allblast_MAX.out -num_threads 24
