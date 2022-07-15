@@ -32,3 +32,6 @@ done < genome_list.txt
 
 trimal -noallgaps -in FASTA/ART_align.fasta -out FASTA/ART_align.trim.fasta
 trimal -noallgaps -in FASTA/MAX_align.fasta -out FASTA/MAX_align.trim.fasta
+
+trimal -nogaps -in FASTA/ART_align.fasta -out FASTA/ART_align.trim.nogap.fasta
+trimal -nogaps -in FASTA/MAX_align.fasta -out FASTA/MAX_align.trim.nogap.fasta
