@@ -15,8 +15,8 @@ cd /global/scratch/users/annen/Expanded_effectors
 
 while read GENOME; do
     # ART bed
-    cat GENE_BED/info_genes_${GENOME}.bed | -v OFS='\t' '$8 ~ "ART" { print $1, $2, $3, $4 "_" $8}' > ART_${GENOME}.bed
+    cat GENE_BED/info_genes_${GENOME}.bed | awk -v OFS='\t' '$8 ~ "ART" { print $1, $2, $3, $4 "_" $8}' > ART_${GENOME}.bed
     # MAX bed
-    cat GENE_BED/info_genes_${GENOME}.bed | -v OFS='\t' '$8 !~ "x" && $8 !~ "ART" { print $1, $2, $3, $4 "_" $8}' > MAX_${GENOME}.bed
+    cat GENE_BED/info_genes_${GENOME}.bed | awk -v OFS='\t' '$8 !~ "x" && $8 !~ "ART" { print $1, $2, $3, $4 "_" $8}' > MAX_${GENOME}.bed
 done < rep_genome_list.txt
 
