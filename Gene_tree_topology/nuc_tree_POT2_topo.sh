@@ -24,7 +24,7 @@ echo "*** made list of genes for ${OG} ***"
 > treeKO_analysis/NUC_TREES/${OG}.fasta
 while read g; do
     GENOME=$(echo ${g} | awk -v FS='_' '{ print $3; }')
-    grep ${g} Expanded_effectors/GENE_BED/genes_${GENOME}.bed > tmp${OG}.bed
+    grep -m 1 ${g} Expanded_effectors/GENE_BED/genes_${GENOME}.bed > tmp${OG}.bed
     bedtools getfasta -name -fo tmp${OG}.fasta -fi GENOME_TREE/hq_genomes/${GENOME}.fasta -bed tmp${OG}.bed
     cat tmp${OG}.fasta >> treeKO_analysis/NUC_TREES/${OG}.fasta
 done < treeKO_analysis/NUC_TREES/${OG}_genes.txt
