@@ -43,6 +43,7 @@ echo "*** made tree for ${OG} ***"
 
 # determine if phylogeny still matches POT2 topology
 echo "*** checking ${OG} nucleotide tree for POT2 topology: ***"
+module unload python
 source activate /global/scratch/users/annen/anaconda3/envs/treeKO   # to use ete2 python module
 cat RAxML_bipartitionsBranchLabels.RAxML.${OG} | python /global/scratch/users/annen/KVKLab/Gene_tree_topology/is_nuc_pot2_topo.py
 conda deactivate
