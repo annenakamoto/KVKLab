@@ -27,3 +27,5 @@ for line in sys.stdin:
                             sisters = "sisters"
                     print '\t'.join([OG, b71.name, guy.name, b71.get_distance(b_closest), sisters])
                     break
+    print '\t'.join([OG, "x", "x", "x", "x"])
+    break
