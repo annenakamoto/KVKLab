@@ -37,7 +37,7 @@ while read OG; do
     echo "*** aligned and trimmed alignment for ${OG} ***"
 
     # make tree
-    #cd /global/scratch/users/annen/treeKO_analysis/NUC_TREES
+    cd /global/scratch/users/annen/treeKO_analysis/NUC_TREES
     #raxmlHPC-PTHREADS-SSE3 -s ${OG}.align.trim.fasta -n RAxML.${OG} -m GTRGAMMA -T 20 -f a -x 12345 -p 12345 -# 100
     echo "*** made tree for ${OG} ***"
 
