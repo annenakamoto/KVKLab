@@ -2,6 +2,8 @@ import sys
 import ete2
 from ete2 import Tree
 
+OG = sys.argv[1]
+
 Leaves = []
 for line in sys.stdin:
     t = Tree(line[:-1])
@@ -19,8 +21,9 @@ for line in sys.stdin:
                 tmp2.remove(b_closest)
                 g_closest = min(tmp2, key=lambda x: guy.get_distance(x))
                 if g_closest == b71.name:
-                    print '\t'.join([b71.name, guy.name, b71.get_distance(b_closest)])
-                    print "sister leaves of guy11:"
+                    sisters = "x"
                     for s in guy.get_sisters():
-                        print s.name
+                        if s.name == b71.name:
+                            sisters = "sisters"
+                    print '\t'.join([OG, b71.name, guy.name, b71.get_distance(b_closest), sisters])
                     break
