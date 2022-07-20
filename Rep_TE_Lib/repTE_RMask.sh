@@ -44,5 +44,8 @@ cat $GENOME.RM.cdd_list.txt $GENOME.RM.pfam_list.txt | python /global/scratch/us
 ### count the number of each element
 cat $GENOME.RM.uniq.txt | python /global/scratch/users/annen/KVKLab/Phase1/count_elems.py > data_$GENOME.txt
 
+### find the number of bp each element takes up
+cat $GENOME.RM.uniq.txt | python /global/scratch/users/annen/KVKLab/Phase1/length_elems.py > data_bp_$GENOME.txt
+
 source deactivate
 
