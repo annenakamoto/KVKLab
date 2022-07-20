@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH --job-name=POT2_topology
-#SBATCH --partition=savio
+#SBATCH --partition=savio2
 #SBATCH --qos=savio_normal
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=20
-#SBATCH --time=72:00:00
+#SBATCH --ntasks-per-node=24
+#SBATCH --time=24:00:00
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
@@ -36,13 +36,13 @@ while read OG; do
     echo "*** made fasta for ${OG} ***"
 
     # align fasta and trim
-    mafft --maxiterate 1000 --globalpair --quiet --thread 20 treeKO_analysis/NUC_TREES/${OG}.fasta > treeKO_analysis/NUC_TREES/${OG}.align.fasta
+    mafft --maxiterate 1000 --globalpair --quiet --thread 24 treeKO_analysis/NUC_TREES/${OG}.fasta > treeKO_analysis/NUC_TREES/${OG}.align.fasta
     trimal -gappyout -in treeKO_analysis/NUC_TREES/${OG}.align.fasta -out treeKO_analysis/NUC_TREES/${OG}.align.trim.fasta
     echo "*** aligned and trimmed alignment for ${OG} ***"
 
     # make tree
     cd /global/scratch/users/annen/treeKO_analysis/NUC_TREES
-    raxmlHPC-PTHREADS-SSE3 -s ${OG}.align.trim.fasta -n RAxML.${OG} -m GTRGAMMA -T 20 -f a -x 12345 -p 12345 -# 100
+    raxmlHPC-PTHREADS-SSE3 -s ${OG}.align.trim.fasta -n RAxML.${OG} -m GTRGAMMA -T 24 -f a -x 12345 -p 12345 -# 100
     echo "*** made tree for ${OG} ***"
 
     # determine if phylogeny still matches POT2 topology
