@@ -21,28 +21,28 @@ while read OG; do
 
     # getfasta for those genes
     # bedfiles for each genome are at /global/scratch/users/annen/Expanded_effectors/GENE_BED/genes_${GENOME}.bed
-    > treeKO_analysis/NUC_TREES/${OG}.fasta
-    while read g; do
-        GENOME=$(echo ${g} | awk -v FS='_' '{ print $3; }')
-        if [ "${GENOME}" = "NI907" ]; then
-            cat GENOME_TREE/PROTEOMES/NI907_nuc_cds.fasta | awk -v RS='>' -v g=${g} '$0 ~ g { print ">" substr($0, 1, length($0)-1); }' >> treeKO_analysis/NUC_TREES/${OG}.fasta
-        else
-            grep -m 1 ${g} Expanded_effectors/GENE_BED/genes_${GENOME}.bed > tmp${OG}.bed
-            bedtools getfasta -name -fo tmp${OG}.fasta -fi GENOME_TREE/hq_genomes/${GENOME}.fasta -bed tmp${OG}.bed
-            cat tmp${OG}.fasta >> treeKO_analysis/NUC_TREES/${OG}.fasta
-        fi
-    done < treeKO_analysis/NUC_TREES/${OG}_genes.txt
-    rm tmp${OG}.fasta tmp${OG}.bed
+    #> treeKO_analysis/NUC_TREES/${OG}.fasta
+    #while read g; do
+    #    GENOME=$(echo ${g} | awk -v FS='_' '{ print $3; }')
+    #    if [ "${GENOME}" = "NI907" ]; then
+    #        cat GENOME_TREE/PROTEOMES/NI907_nuc_cds.fasta | awk -v RS='>' -v g=${g} '$0 ~ g { print ">" substr($0, 1, length($0)-1); }' >> treeKO_analysis/NUC_TREES/${OG}.fasta
+    #    else
+    #        grep -m 1 ${g} Expanded_effectors/GENE_BED/genes_${GENOME}.bed > tmp${OG}.bed
+    #        bedtools getfasta -name -fo tmp${OG}.fasta -fi GENOME_TREE/hq_genomes/${GENOME}.fasta -bed tmp${OG}.bed
+    #        cat tmp${OG}.fasta >> treeKO_analysis/NUC_TREES/${OG}.fasta
+    #    fi
+    #done < treeKO_analysis/NUC_TREES/${OG}_genes.txt
+    #rm tmp${OG}.fasta tmp${OG}.bed
     echo "*** made fasta for ${OG} ***"
 
     # align fasta and trim
-    mafft --maxiterate 1000 --globalpair --quiet --thread 24 treeKO_analysis/NUC_TREES/${OG}.fasta > treeKO_analysis/NUC_TREES/${OG}.align.fasta
-    trimal -gappyout -in treeKO_analysis/NUC_TREES/${OG}.align.fasta -out treeKO_analysis/NUC_TREES/${OG}.align.trim.fasta
+    #mafft --maxiterate 1000 --globalpair --quiet --thread 24 treeKO_analysis/NUC_TREES/${OG}.fasta > treeKO_analysis/NUC_TREES/${OG}.align.fasta
+    #trimal -gappyout -in treeKO_analysis/NUC_TREES/${OG}.align.fasta -out treeKO_analysis/NUC_TREES/${OG}.align.trim.fasta
     echo "*** aligned and trimmed alignment for ${OG} ***"
 
     # make tree
     cd /global/scratch/users/annen/treeKO_analysis/NUC_TREES
-    raxmlHPC-PTHREADS-SSE3 -s ${OG}.align.trim.fasta -n RAxML.${OG} -m GTRGAMMA -T 24 -f a -x 12345 -p 12345 -# 100
+    #raxmlHPC-PTHREADS-SSE3 -s ${OG}.align.trim.fasta -n RAxML.${OG} -m GTRGAMMA -T 24 -f a -x 12345 -p 12345 -# 100
     echo "*** made tree for ${OG} ***"
 
     # determine if phylogeny still matches POT2 topology
