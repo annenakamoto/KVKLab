@@ -16,9 +16,9 @@ for line in sys.stdin:
     if line and ">" in line:
         # change name: : -> # and () -> {}
         name = line[1:-1]
-        name.replace(":", "#")
-        name.replace("(", "{")
-        name.replace(")", "}")
+        name1 = name.replace(":", "#")
+        name2 = name1.replace("(", "{")
+        name3 = name2.replace(")", "}")
         jc = str(round(float(JC[c]), 6))
-        print(name + " " + jc)
+        print(name3 + " " + jc)
         c += 1
