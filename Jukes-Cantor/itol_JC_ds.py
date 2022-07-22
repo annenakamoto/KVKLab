@@ -1,13 +1,5 @@
 import sys
 
-print("DATASET_GRADIENT")
-print("SEPARATOR SPACE")
-print("DATASET_LABEL GC content")
-print("COLOR #ff0000")
-print("COLOR_MIN #ff0000")
-print("COLOR_MAX #0000ff")
-print("DATA")
-
 JC = {}
 c = 0
 with open(sys.argv[1], 'r') as file:
