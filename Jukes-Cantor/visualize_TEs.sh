@@ -27,7 +27,7 @@ while read TE; do
     echo "COLOR #ff0000" >> itol_JC_ds.${TE}.txt
     echo "COLOR_MIN #ff0000" >> itol_JC_ds.${TE}.txt
     echo "COLOR_MAX #0000ff" >> itol_JC_ds.${TE}.txt
-    echo "DATA"
+    echo "DATA" >> itol_JC_ds.${TE}.txt
     while read genome; do
         cat ${TE}.${genome}.filt_lib.fasta | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_JC_ds.py ${TE}.${genome}.filt.JC.out.txt >> itol_JC_ds.${TE}.txt
     done < genome_list.txt
