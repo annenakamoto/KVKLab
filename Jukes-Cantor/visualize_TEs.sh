@@ -21,7 +21,7 @@ cd /global/scratch/users/annen/visualize_TEs
 
 while read TE; do
     while read genome; do
-        cat ${TE}.${genome}.filt_lib.fasta | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_JC_ds.py ${TE}.${genome}.filt.JC.out.txt > ${TE}.${genome}.itol_JC_ds.txt
+        cat ${TE}.${genome}.filt_lib.fasta | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_JC_ds.py ${TE}.${genome}.filt.JC.out.txt > itol_JC_ds.${TE}.${genome}.txt
     done < genome_list.txt
 done < TE_list.txt
 
