@@ -20,8 +20,16 @@ cd /global/scratch/users/annen/visualize_TEs
 
 
 while read TE; do
+    > itol_JC_ds.${TE}.txt
+    echo "DATASET_GRADIENT" >> itol_JC_ds.${TE}.txt
+    echo "SEPARATOR SPACE" >> itol_JC_ds.${TE}.txt
+    echo "DATASET_LABEL GC content" >> itol_JC_ds.${TE}.txt
+    echo "COLOR #ff0000" >> itol_JC_ds.${TE}.txt
+    echo "COLOR_MIN #ff0000" >> itol_JC_ds.${TE}.txt
+    echo "COLOR_MAX #0000ff" >> itol_JC_ds.${TE}.txt
+    echo "DATA"
     while read genome; do
-        cat ${TE}.${genome}.filt_lib.fasta | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_JC_ds.py ${TE}.${genome}.filt.JC.out.txt > itol_JC_ds.${TE}.${genome}.txt
+        cat ${TE}.${genome}.filt_lib.fasta | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_JC_ds.py ${TE}.${genome}.filt.JC.out.txt >> itol_JC_ds.${TE}.txt
     done < genome_list.txt
 done < TE_list.txt
 
