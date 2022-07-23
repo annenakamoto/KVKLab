@@ -39,13 +39,13 @@ while read TE; do
     > itol_JC_ds_lin.${TE}.txt
     echo "DATASET_GRADIENT" >> itol_JC_ds_lin.${TE}.txt
     echo "SEPARATOR SPACE" >> itol_JC_ds_lin.${TE}.txt
-    echo "DATASET_LABEL JC_lin" itol_JC_ds_lin.${TE}.txt
+    echo "DATASET_LABEL JC_lin" >> itol_JC_ds_lin.${TE}.txt
     echo "COLOR #ff0000" >> itol_JC_ds_lin.${TE}.txt
     echo "COLOR_MIN #ff0000" >> itol_JC_ds_lin.${TE}.txt
     echo "COLOR_MAX #0000ff" >> itol_JC_ds_lin.${TE}.txt
     echo "DATA" >> itol_JC_ds_lin.${TE}.txt
     while read genome; do
-        cat ${TE}/${TE}.${genome}.filt_lib.fasta | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_JC_ds.py ${TE}/${TE}.${genome}.filt.JC.out.txt >> itol_JC_ds_lin.${TE}.txt
+        grep ${genome} ${TE}.ALL_LIN.JC.txt | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_JC_lin_ds.py ${TE}/${TE}.${genome}.filt_lib.fasta >> itol_JC_ds_lin.${TE}.txt
     done < genome_list.txt
 done < TE_list.txt
 
