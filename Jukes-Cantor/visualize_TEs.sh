@@ -18,20 +18,37 @@ cd /global/scratch/users/annen/visualize_TEs
 #     done < genome_list.txt
 # done < TE_list.txt
 
-### produce itol dataset file to visualize JC dist around each of the TE trees
+### produce itol dataset file to visualize JC dist (one consensus for all) around each of the TE trees
+# while read TE; do
+#     > itol_JC_ds.${TE}.txt
+#     echo "DATASET_GRADIENT" >> itol_JC_ds.${TE}.txt
+#     echo "SEPARATOR SPACE" >> itol_JC_ds.${TE}.txt
+#     echo "DATASET_LABEL JC" >> itol_JC_ds.${TE}.txt
+#     echo "COLOR #ff0000" >> itol_JC_ds.${TE}.txt
+#     echo "COLOR_MIN #ff0000" >> itol_JC_ds.${TE}.txt
+#     echo "COLOR_MAX #0000ff" >> itol_JC_ds.${TE}.txt
+#     echo "DATA" >> itol_JC_ds.${TE}.txt
+#     while read genome; do
+#         cat ${TE}.${genome}.filt_lib.fasta | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_JC_ds.py ${TE}.${genome}.filt.JC.out.txt >> itol_JC_ds.${TE}.txt
+#     done < genome_list.txt
+# done < TE_list.txt
+
+### produce itol dataset file to visualize JC dist (consensusper lineage) around each of the TE trees
+cd /global/scratch/users/annen/JC_dist_indiv_TEs
 while read TE; do
     > itol_JC_ds.${TE}.txt
     echo "DATASET_GRADIENT" >> itol_JC_ds.${TE}.txt
     echo "SEPARATOR SPACE" >> itol_JC_ds.${TE}.txt
-    echo "DATASET_LABEL GC content" >> itol_JC_ds.${TE}.txt
+    echo "DATASET_LABEL JC_lin" >> itol_JC_ds.${TE}.txt
     echo "COLOR #ff0000" >> itol_JC_ds.${TE}.txt
     echo "COLOR_MIN #ff0000" >> itol_JC_ds.${TE}.txt
     echo "COLOR_MAX #0000ff" >> itol_JC_ds.${TE}.txt
     echo "DATA" >> itol_JC_ds.${TE}.txt
     while read genome; do
-        cat ${TE}.${genome}.filt_lib.fasta | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_JC_ds.py ${TE}.${genome}.filt.JC.out.txt >> itol_JC_ds.${TE}.txt
+        cat ${TE}/${TE}.${genome}.filt_lib.fasta | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_JC_ds.py ${TE}/${TE}.${genome}.filt.JC.out.txt >> itol_JC_ds_lin.${TE}.txt
     done < genome_list.txt
 done < TE_list.txt
+
 
 ### produce itol dataset file to visualize LTR divergence around each of the TE trees
 ###     LTR_DIV_RESULTS/ALL_RESULTS.LTRdiv.txt contains columns: LTR(name)	pair(#)	genome	divergence
