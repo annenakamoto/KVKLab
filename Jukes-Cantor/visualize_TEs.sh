@@ -66,7 +66,7 @@ while read TE; do
     echo "DATA" >> itol_LTR_ds.${TE}.txt
     TE_short=$(echo ${TE} | awk -v FS="_" '{ print $1 }')
     while read genome; do
-        cat LTR_DIV_RESULTS/ALL_RESULTS.LTRdiv.txt awk -v g=${genome} -v t=${TE_short} '$1 ~ t && $3 ~ g' | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_LTR_ds.py MAPPING/${TE}.${genome}_mapping.txt ${genome} >> itol_LTR_ds.${TE}.txt
+        cat LTR_DIV_RESULTS/ALL_RESULTS.LTRdiv.txt | awk -v g=${genome} -v t=${TE_short} '$1 ~ t && $3 ~ g' | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_LTR_ds.py MAPPING/${TE}.${genome}_mapping.txt ${genome} >> itol_LTR_ds.${TE}.txt
     done < genome_list.txt
 done < TE_list.txt
 
