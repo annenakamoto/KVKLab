@@ -21,7 +21,6 @@ cat treeKO_analysis/B71_pot2_topo_region_genes.bed | awk '{ print $4; }' | while
     # get the orthogroup the gene is in, filter the genes in it to only contain the representative genomes + outgroup, and make sure its a SCO
     OG=$(grep ${GENE} GENOME_TREE/OrthoFinder_out/Results_Nov22/Orthogroups/Orthogroups.txt | awk -v FS=":" '{ print $1; }')
     grep ${OG} GENOME_TREE/OrthoFinder_out/Results_Nov22/Orthogroups/Orthogroups.txt | python /global/scratch/users/annen/KVKLab/Gene_tree_topology/filter_og_region.py > treeKO_analysis/REGION_TREE/${OG}_genes.txt
-    echo "*** made list of genes for ${OG} ***"
     if [ -s treeKO_analysis/REGION_TREE/${OG}_genes.txt ]; then # only continue if the file isn't empty
         echo "*** made list of genes for ${OG} ***"
         ### getfasta for those genes
