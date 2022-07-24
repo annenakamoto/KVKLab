@@ -55,5 +55,18 @@ done < TE_list.txt
 ###     MAPPING/${TE}.${GENOME}_mapping.txt contains columns:   pair(#): chrom  start   end LTR(name)   score(0)    strand
 ###         EXAMPLE:    1: MQOP01000001.1	2161562	2169220	MAGGY_I	0	+
 cd /global/scratch/users/annen/LTR_divergence
-
+while read TE; do
+    > itol_LTR_ds.${TE}.txt
+    echo "DATASET_GRADIENT" >> itol_LTR_ds.${TE}.txt
+    echo "SEPARATOR SPACE" >> itol_LTR_ds.${TE}.txt
+    echo "DATASET_LABEL LTR" >> itol_LTR_ds.${TE}.txt
+    echo "COLOR #ff0000" >> itol_LTR_ds.${TE}.txt
+    echo "COLOR_MIN #ff0000" >> itol_LTR_ds.${TE}.txt
+    echo "COLOR_MAX #0000ff" >> itol_LTR_ds.${TE}.txt
+    echo "DATA" >> itol_LTR_ds.${TE}.txt
+    TE_short=$(echo ${TE} | awk -v FS="_" '{ print $1 }')
+    while read genome; do
+        cat LTR_DIV_RESULTS/ALL_RESULTS.LTRdiv.txt awk -v g=${genome} -v t=${TE_short} '$1 ~ t && $3 ~ g' | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_LTR_ds.py MAPPING/${TE}.${genome}_mapping.txt >> itol_LTR_ds.${TE}.txt
+    done < genome_list.txt
+done < TE_list.txt
 
