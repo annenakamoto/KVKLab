@@ -15,7 +15,7 @@ for line in sys.stdin:
 
 p = True
 for v in GENES.values():
-    if v == 0:
+    if v != 1:
         p = False
 
 if p:
