@@ -14,7 +14,7 @@ with open(sys.argv[1], 'r') as m:
     for line in m:
         lst = line.split()
         pair = lst[0][:-1]
-        name = lst[4] + "#" + lst[1] + "#" + lst[2] + "-" + lst[3] + "{" + lst[6] + "}#" + genome
+        name = lst[4] + "#" + lst[1] + "#" + str(int(lst[2])+1000) + "-" + str(int(lst[3])-1000) + "{" + lst[6] + "}#" + genome
         MAPPING[pair] = name
 
 for line in sys.stdin:
