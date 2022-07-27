@@ -44,7 +44,8 @@ with open(LTR_file, 'r') as f4:
             lst = line.split()
             full_name = lst[0]
             value = lst[1]
-            D[full_name][3] = value
+            if D.get(full_name):
+                D[full_name][3] = value
 
 print('\t'.join(["chr", "start", "end", "TE_name", "genome", "GC_content", "JC_one_cons", "JC_lin_cons", "LTR_div"]))
 ### Example of ful_name: MAGGY_I#MQOP01000011.1#470091-475728{+}#guy11
