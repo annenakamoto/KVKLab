@@ -50,11 +50,12 @@ with open(LTR_file, 'r') as f4:
 print('\t'.join(["chr", "start", "end", "TE_name", "genome", "GC_content", "JC_one_cons", "JC_lin_cons", "LTR_div"]))
 ### Example of ful_name: MAGGY_I#MQOP01000011.1#470091-475728{+}#guy11
 for k,v in D.items():
-    lst = k.split("#")
-    te = lst[0]
-    chrom = lst[1]
-    start = lst[2][:-3].split("-")[0]
-    end = lst[2][:-3].split("-")[1]
-    genome = lst[3]
-    print('\t'.join([chrom, start, end, te, genome] + v))
+    if v[1] != "x" and v[2] != "x":
+        lst = k.split("#")
+        te = lst[0]
+        chrom = lst[1]
+        start = lst[2][:-3].split("-")[0]
+        end = lst[2][:-3].split("-")[1]
+        genome = lst[3]
+        print('\t'.join([chrom, start, end, te, genome] + v))
     
