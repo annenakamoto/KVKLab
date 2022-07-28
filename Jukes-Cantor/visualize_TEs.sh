@@ -19,19 +19,20 @@
 # done < TE_list.txt
 
 ### produce itol dataset file to visualize JC dist (one consensus for all) around each of the TE trees
-# while read TE; do
-#     > itol_JC_ds.${TE}.txt
-#     echo "DATASET_GRADIENT" >> itol_JC_ds.${TE}.txt
-#     echo "SEPARATOR SPACE" >> itol_JC_ds.${TE}.txt
-#     echo "DATASET_LABEL JC" >> itol_JC_ds.${TE}.txt
-#     echo "COLOR #ff0000" >> itol_JC_ds.${TE}.txt
-#     echo "COLOR_MIN #ff0000" >> itol_JC_ds.${TE}.txt
-#     echo "COLOR_MAX #0000ff" >> itol_JC_ds.${TE}.txt
-#     echo "DATA" >> itol_JC_ds.${TE}.txt
-#     while read genome; do
-#         cat ${TE}.${genome}.filt_lib.fasta | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_JC_ds.py ${TE}.${genome}.filt.JC.out.txt >> itol_JC_ds.${TE}.txt
-#     done < genome_list.txt
-# done < TE_list.txt
+cd /global/scratch/users/annen/JC_dist_filt
+while read TE; do
+    > itol_JC_ds.${TE}.txt
+    echo "DATASET_GRADIENT" >> itol_JC_ds.${TE}.txt
+    echo "SEPARATOR SPACE" >> itol_JC_ds.${TE}.txt
+    echo "DATASET_LABEL JC" >> itol_JC_ds.${TE}.txt
+    echo "COLOR #ff0000" >> itol_JC_ds.${TE}.txt
+    echo "COLOR_MIN #ff0000" >> itol_JC_ds.${TE}.txt
+    echo "COLOR_MAX #0000ff" >> itol_JC_ds.${TE}.txt
+    echo "DATA" >> itol_JC_ds.${TE}.txt
+    while read genome; do
+        cat ${TE}.${genome}.filt_lib.fasta | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_JC_ds.py ${TE}.ALL_LIN.JC.txt >> itol_JC_ds.${TE}.txt
+    done < genome_list.txt
+done < TE_list.txt
 
 ### produce itol dataset file to visualize JC dist (consensus per lineage) around each of the TE trees
 # cd /global/scratch/users/annen/JC_dist_indiv_TEs
@@ -79,6 +80,6 @@
 cd /global/scratch/users/annen
 > pos_GC_JC_LTR.DATA.txt
 while read TE; do
-    python KVKLab/Jukes-Cantor/pos_GC_JC_LTR.py ${TE} RIP_analysis/name_gc_${TE}.txt visualize_TEs/itol_JC_ds.${TE}.txt JC_dist_indiv_TEs/itol_JC_ds_lin.${TE}.txt LTR_divergence/itol_LTR_ds.${TE}.txt >> pos_GC_JC_LTR.DATA.txt
+    python KVKLab/Jukes-Cantor/pos_GC_JC_LTR.py ${TE} RIP_analysis/name_gc_${TE}.txt JC_dist_filt/itol_JC_ds.${TE}.txt JC_dist_indiv_TEs/itol_JC_ds_lin.${TE}.txt LTR_divergence/itol_LTR_ds.${TE}.txt >> pos_GC_JC_LTR.DATA.txt
 done < LTR_divergence/TE_list.txt
 
