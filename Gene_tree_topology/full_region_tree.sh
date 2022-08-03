@@ -36,11 +36,17 @@ done < rep_genomes_list.txt
 
 ### align, trim, make tree
 cd POT2_topo_region
-mafft --maxiterate 1000 --globalpair --quiet --thread 24 sec1.fasta > sec1.afa
-mafft --maxiterate 1000 --globalpair --quiet --thread 24 sec2.fasta > sec2.afa
+# mafft --maxiterate 1000 --globalpair --quiet --thread 24 sec1.fasta > sec1.afa
+# mafft --maxiterate 1000 --globalpair --quiet --thread 24 sec2.fasta > sec2.afa
+echo "*** starting sec1 alignment..."
+mafft --auto --quiet --thread 24 sec1.fasta > sec1.afa
+echo "*** done, starting sec2 alignment..."
+mafft --auto --quiet --thread 24 sec2.fasta > sec2.afa
+echo "*** done, trimming..."
 trimal -gappyout -in sec1.afa -out sec1.trim.afa
 trimal -gappyout -in sec2.afa -out sec2.trim.afa
+echo "*** done, making trees..."
 raxmlHPC-PTHREADS-SSE3 -s sec1.trim.afa -n RAxML.sec1 -m GTRGAMMA -T 20 -f a -x 12345 -p 12345 -# 100
 raxmlHPC-PTHREADS-SSE3 -s sec2.trim.afa -n RAxML.sec2 -m GTRGAMMA -T 20 -f a -x 12345 -p 12345 -# 100
-
+echo "*** done"
 
