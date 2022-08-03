@@ -30,7 +30,7 @@ while read TE; do
     echo "COLOR_MAX #0000ff" >> itol_JC_ds.${TE}.txt
     echo "DATA" >> itol_JC_ds.${TE}.txt
     while read genome; do
-        cat ${TE}.${genome}.filt_lib.fasta | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_JC_ds.py ${TE}.ALL_LIN.JC.txt >> itol_JC_ds.${TE}.txt
+        grep ${genome} ${TE}.ALL_LIN.JC.txt | python /global/scratch/users/annen/KVKLab/Jukes-Cantor/itol_JC_lin_ds.py /global/scratch/users/annen/visualize_TEs/${TE}.${genome}.filt_lib.fasta >> itol_JC_ds.${TE}.txt
     done < genome_list.txt
 done < TE_list.txt
 
