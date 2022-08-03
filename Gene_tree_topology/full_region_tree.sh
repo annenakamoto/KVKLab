@@ -50,6 +50,6 @@ echo "*** done, making trees..."
 #cat sec1.trim1.afa | tr \( \{ | tr \) \} > sec1.trim.afa
 cat sec2.trim1.afa | tr \( \{ | tr \) \} > sec2.trim.afa
 #raxmlHPC-PTHREADS-SSE3 -s sec1.trim.afa -n RAxML.sec1 -m GTRGAMMA -T 20 -f a -x 12345 -p 12345 -# 100
-raxmlHPC-PTHREADS-SSE3 -s sec2.trim.afa -n RAxML.sec2 -m GTRGAMMA -T 20 -f a -x 12345 -p 12345 -# 100
+raxmlHPC-PTHREADS-SSE3 -s sec2.trim.afa -n RAxML.sec2.guy11strand -m GTRGAMMA -T 20 -f a -x 12345 -p 12345 -# 100
 echo "*** done"
 
