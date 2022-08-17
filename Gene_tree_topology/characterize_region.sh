@@ -120,3 +120,43 @@ cat sec1*.OG | python /global/scratch/users/annen/KVKLab/Gene_tree_topology/regi
 cat sec2*.OG | python /global/scratch/users/annen/KVKLab/Gene_tree_topology/region_pav.py > sec2_PAV.DATA.txt
 
 ### make mummer plots to visualize the regions synteny to each other
+module unload python
+module load mummer
+module load ghostscript
+
+cd /global/scratch/users/annen
+while read GENOME; do
+    bedtools getfasta -name -s -fi GENOME_TREE/hq_genomes/${GENOME}.fasta -bed POT2_topo_region/sec1_${GENOME}.bed > POT2_topo_region/sec1_${GENOME}.fasta
+    bedtools getfasta -name -s -fi GENOME_TREE/hq_genomes/${GENOME}.fasta -bed POT2_topo_region/sec2_${GENOME}.bed > POT2_topo_region/sec2_${GENOME}.fasta
+done < rep_genomes_list.txt
+
+cd /global/scratch/users/annen/POT2_topo_region
+
+cat genomes_pairwise_list.txt | while read pair; do
+    GENOME1=$(echo ${pair} | awk '{ print $1 }')
+    GENOME2=$(echo ${pair} | awk '{ print $2 }')
+    ### section 1
+    nucmer --maxmatch  -p sec1_${GENOME1}_v_${GENOME2} sec1_${GENOME1}.fasta sec1_${GENOME2}.fasta
+    mummerplot --color -postscript -p sec1_${GENOME1}_v_${GENOME2} sec1_${GENOME1}_v_${GENOME2}.delta
+    gnuplot sec1_${GENOME1}_v_${GENOME2}.gp
+    ps2pdf sec1_${GENOME1}_v_${GENOME2}.ps sec1_${GENOME1}_v_${GENOME2}.pdf
+    ### section 2
+    nucmer --maxmatch -p sec2_${GENOME1}_v_${GENOME2} sec2_${GENOME1}.fasta sec2_${GENOME2}.fasta
+    mummerplot --color -postscript -p sec2_${GENOME1}_v_${GENOME2} sec2_${GENOME1}_v_${GENOME2}.delta
+    gnuplot sec2_${GENOME1}_v_${GENOME2}.gp
+    ps2pdf sec2_${GENOME1}_v_${GENOME2}.ps sec2_${GENOME1}_v_${GENOME2}.pdf
+done
+
+### gene ontology analysis
+cd /global/scratch/users/annen
+ # grab the protein sequences of genes in each section
+while read GENOME; do
+    > POT2_topo_region/sec1_${GENOME}_genes.faa
+    cat POT2_topo_region/sec1_${GENOME}_genes.bed | awk '{ print $4; }' | while read gene; do
+        cat GENOME_TREE/PROTEOMES_filt/${GENOME}.faa | awk -v RS=">" -v g=${gene} '$0 ~ g { print ">" substr($0,1,length($0)-1); }' >> POT2_topo_region/sec1_${GENOME}_genes.faa
+    done
+    > POT2_topo_region/sec2_${GENOME}_genes.faa
+    cat POT2_topo_region/sec2_${GENOME}_genes.bed | awk '{ print $4; }' | while read gene; do
+        cat GENOME_TREE/PROTEOMES_filt/${GENOME}.faa | awk -v RS=">" -v g=${gene} '$0 ~ g { print ">" substr($0,1,length($0)-1); }' >> POT2_topo_region/sec2_${GENOME}_genes.faa
+    done
+done < rep_genomes_list.txt
