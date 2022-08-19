@@ -10,7 +10,7 @@
 
 ### characterize genes in the the POT2 toplology region
 
-cd /global/scratch/users/annen/POT2_topo_region
+cd /global/scratch/users/annen/POT2_topo_region/GO_terms
 
 ### GO term analysis
 while read GENOME; do
