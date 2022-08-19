@@ -15,23 +15,23 @@ for line in sys.stdin:
     goid = lst[2]
     desc = lst[3]
     if not DATA.get(gene_name):
-        DATA[gene_name] = [None]*6
+        DATA[gene_name] = ["None"]*6
     if ont == "MF":
-        if DATA[gene_name][0] != None:
+        if DATA[gene_name][0] != "None":
             DATA[gene_name][0] += ";" + str(goid)
             DATA[gene_name][3] += ";" + str(desc)
         else:
             DATA[gene_name][0] = str(goid)
             DATA[gene_name][3] = str(desc)
     if ont == "BP":
-        if DATA[gene_name][1] != None:
+        if DATA[gene_name][1] != "None":
             DATA[gene_name][1] += ";" + str(goid)
             DATA[gene_name][4] += ";" + str(desc)
         else:
             DATA[gene_name][1] = str(goid)
             DATA[gene_name][4] = str(desc)
     if ont == "CC":
-        if DATA[gene_name][2] != None:
+        if DATA[gene_name][2] != "None":
             DATA[gene_name][2] += ";" + str(goid)
             DATA[gene_name][5] += ";" + str(desc)
         else:
