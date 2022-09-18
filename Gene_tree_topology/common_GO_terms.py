@@ -28,10 +28,10 @@ for line in sys.stdin:
 
 print("*** BP ***")
 for k,v in sorted(BP.items(), key=lambda kv: kv[1], reverse=True):
-    print(v + "\t" + k)
+    print(str(v) + "\t" + k)
 print("*** MF ***")
 for k,v in sorted(MF.items(), key=lambda kv: kv[1], reverse=True):
-    print(v + "\t" + k)
+    print(str(v) + "\t" + k)
 print("*** CC ***")
 for k,v in sorted(CC.items(), key=lambda kv: kv[1], reverse=True):
-    print(v + "\t" + k)
+    print(str(v) + "\t" + k)
