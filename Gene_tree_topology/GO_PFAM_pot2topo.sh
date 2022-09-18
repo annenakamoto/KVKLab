@@ -13,7 +13,7 @@
 cd /global/scratch/users/annen/POT2_topo_region/GO_terms
 
 ### GO term analysis
-while read GENOME; do
+#while read GENOME; do
     ### filter the PANNZER output for PPV value of 0.6
     #cat ${GENOME}.GO.out | awk -v FS='\t' '{ if ( $6 >= 0.6 ) { print; }}' > ${GENOME}.GO.filt.out
     ### python script to construct GO term table
@@ -21,7 +21,7 @@ while read GENOME; do
     #cat ${GENOME}.GO.filt.out | python /global/scratch/users/annen/KVKLab/Gene_tree_topology/GO_table.py ${GENOME} > ${GENOME}.GO.TABLE.txt
     #cat ${GENOME}.GO.filt.out | python /global/scratch/users/annen/KVKLab/Gene_tree_topology/common_GO_terms.py > ${GENOME}.common_GO_terms.txt
 
-done < genome_list.txt
+#done < genome_list.txt
 
 
 ### PFAM term analysis
