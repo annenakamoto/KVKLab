@@ -25,10 +25,30 @@ cd /global/scratch/users/annen/POT2_topo_region/GO_terms
 
 
 ### PFAM term analysis
-source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
-while read GENOME; do
+#source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
+#while read GENOME; do
     ### find pfam domains in genes in POT2 topo region
-    pfam_scan.pl -fasta sec1_${GENOME}_genes.faa -dir PFAM_lib -e_dom 0.01 -e_seq 0.01 -outfile sec1_${GENOME}_genes.pfam.out
+    #pfam_scan.pl -fasta sec1_${GENOME}_genes.faa -dir PFAM_lib -e_dom 0.01 -e_seq 0.01 -outfile sec1_${GENOME}_genes.pfam.out
     ### parse the output
-    cat sec1_${GENOME}_genes.pfam.out | python /global/scratch/users/annen/KVKLab/Phase1/parse_pfam.py > sec1_${GENOME}.pfam_list.out
-done < genome_list.txt
+    #cat sec1_${GENOME}_genes.pfam.out | python /global/scratch/users/annen/KVKLab/Phase1/parse_pfam.py > sec1_${GENOME}.pfam_list.out
+#done < genome_list.txt
+#conda deactivate
+
+
+### for B71 whole proteome
+
+### filter the PANNZER output for PPV value of 0.6
+#cat B71.GO.out | awk -v FS='\t' '{ if ( $6 >= 0.6 ) { print; }}' > B71.GO.filt.out
+### python script to construct GO term table
+###     columns: gene_name  MF_goid BP_goid CC_goid     MF_desc BP_desc CC_desc
+#cat B71.GO.filt.out | python /global/scratch/users/annen/KVKLab/Gene_tree_topology/GO_table.py B71 > B71.GO.TABLE.txt
+#cat B71.GO.filt.out | python /global/scratch/users/annen/KVKLab/Gene_tree_topology/common_GO_terms.py > B71.common_GO_terms.txt
+
+
+source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
+### find pfam domains in genes in POT2 topo region
+pfam_scan.pl -fasta B71.faa -dir PFAM_lib -e_dom 0.01 -e_seq 0.01 -outfile B71.pfam.out
+### parse the output
+cat B71.pfam.out | python /global/scratch/users/annen/KVKLab/Phase1/parse_pfam.py > B71.pfam_list.out
+conda deactivate
+
