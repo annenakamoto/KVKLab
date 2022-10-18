@@ -1,7 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=GO_PFAM_terms
+#SBATCH --account=co_minium
 #SBATCH --partition=savio2
-#SBATCH --qos=savio_normal
+#SBATCH --qos=savio_lowprio
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
 #SBATCH --time=24:00:00
