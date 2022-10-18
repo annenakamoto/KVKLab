@@ -39,17 +39,17 @@ cd /global/scratch/users/annen/POT2_topo_region/GO_terms
 ### for B71 whole proteome
 
 ### filter the PANNZER output for PPV value of 0.6
-#cat B71.GO.out | awk -v FS='\t' '{ if ( $6 >= 0.6 ) { print; }}' > B71.GO.filt.out
+cat B71_full.GO.txt | awk -v FS='\t' '{ if ( $6 >= 0.6 ) { print; }}' > B71_full.GO.filt.out
 ### python script to construct GO term table
 ###     columns: gene_name  MF_goid BP_goid CC_goid     MF_desc BP_desc CC_desc
-#cat B71.GO.filt.out | python /global/scratch/users/annen/KVKLab/Gene_tree_topology/GO_table.py B71 > B71.GO.TABLE.txt
-#cat B71.GO.filt.out | python /global/scratch/users/annen/KVKLab/Gene_tree_topology/common_GO_terms.py > B71.common_GO_terms.txt
+cat B71_full.GO.filt.out | python /global/scratch/users/annen/KVKLab/Gene_tree_topology/GO_table.py B71 > B71_full.GO.TABLE.txt
+cat B71_full.GO.filt.out | python /global/scratch/users/annen/KVKLab/Gene_tree_topology/common_GO_terms.py > B71_full.common_GO_terms.txt
 
 
-source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
+#source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 ### find pfam domains in genes in POT2 topo region
-pfam_scan.pl -fasta B71.faa -dir PFAM_lib -e_dom 0.01 -e_seq 0.01 -outfile B71.pfam.out
+#pfam_scan.pl -fasta B71.faa -dir PFAM_lib -e_dom 0.01 -e_seq 0.01 -outfile B71.pfam.out
 ### parse the output
-cat B71.pfam.out | python /global/scratch/users/annen/KVKLab/Phase1/parse_pfam.py > B71.pfam_list.out
-conda deactivate
+#cat B71.pfam.out | python /global/scratch/users/annen/KVKLab/Phase1/parse_pfam.py > B71.pfam_list.out
+#conda deactivate
 
