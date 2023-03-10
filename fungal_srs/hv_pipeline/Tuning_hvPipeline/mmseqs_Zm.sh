@@ -1,12 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name=mmseqs_Zm
-#SBATCH --account=co_minium
-#SBATCH --qos=savio_lowprio
 #SBATCH --partition=savio2
-#SBATCH --requeue
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
-#SBATCH --time=12:00:00
+#SBATCH --time=24:00:00
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
