@@ -28,6 +28,8 @@ echo "*** running mmseqs linclust ***"
 mmseqs linclust Zm_panPROTEOME Zm_panPROTEOME_clu tmp --cov-mode 0 -c 0.5                   # run the linear clustering algorithm on the database
 echo "*** producing msa to center sequence ***"
 mmseqs result2msa Zm_panPROTEOME Zm_panPROTEOME Zm_panPROTEOME_clu Zm_panPROTEOME_clu_msa   # produce an MSA to center sequence (pseudo alignment)
+echo "*** make tsv of clusters ***"
+mmseqs createtsv Zm_panPROTEOME Zm_panPROTEOME Zm_panPROTEOME_clu Zm_panPROTEOME_clu.tsv    # make tsv to more easily view clusters
 source deactivate
 
 ### download Maize_NLRome_GeneTable.txt
