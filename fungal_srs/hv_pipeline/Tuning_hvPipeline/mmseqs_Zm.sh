@@ -1,7 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name=mmseqs_Zm
+#SBATCH --account=co_minium
 #SBATCH --partition=savio2
-#SBATCH --qos=savio_normal
+#SBATCH --qos=savio_lowprio
+#SBATCH --requeue
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
 #SBATCH --time=12:00:00
