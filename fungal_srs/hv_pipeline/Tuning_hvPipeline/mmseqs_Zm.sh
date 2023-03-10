@@ -2,6 +2,7 @@
 #SBATCH --job-name=mmseqs_Zm
 #SBATCH --account=co_minium
 #SBATCH --qos=savio_lowprio
+#SBATCH --partition=savio2
 #SBATCH --requeue
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
