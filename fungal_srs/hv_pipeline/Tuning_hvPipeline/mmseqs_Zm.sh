@@ -36,5 +36,5 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
 # wget https://github.com/daniilprigozhin/NLRCladeFinder/raw/main/Maize_NLRome/Maize_NLRome_GeneTable.txt
 
 ### parse Maize_NLRome_GeneTable.txt and Zm_panPROTEOME_clu.tsv, then check for broken clades
-python //global/scratch/users/annen/KVKLab/fungal_srs/Tuning_hvPipeline/check_clades.py > check_clades_REPORT_c50.txt
+python /global/scratch/users/annen/KVKLab/fungal_srs/Tuning_hvPipeline/check_clades.py > check_clades_REPORT_c50.txt
 
