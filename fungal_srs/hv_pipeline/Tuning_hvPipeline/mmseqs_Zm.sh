@@ -29,7 +29,7 @@ source activate /global/scratch/users/annen/anaconda3/envs/MMseqs2
 echo "*** creating mmseqs database ***"
 mmseqs createdb Zm_panPROTEOME.fa Zm_panPROTEOME                                            # convert fasta file to MMseqs2 database format
 echo "*** running mmseqs linclust ***"
-mmseqs linclust Zm_panPROTEOME Zm_panPROTEOME_clu tmp --cov-mode 0 -c 0.${COV} --min-seq-id 0.${MSID}                  # run the linear clustering algorithm on the database
+mmseqs linclust Zm_panPROTEOME Zm_panPROTEOME_clu tmp --cov-mode 0 -c 0.${COV} --min-seq-id 0.${MSID} --alignment-mode 3    # run the linear clustering algorithm on the database
 echo "*** producing msa to center sequence ***"
 mmseqs result2msa Zm_panPROTEOME Zm_panPROTEOME Zm_panPROTEOME_clu Zm_panPROTEOME_clu_msa   # produce an MSA to center sequence (pseudo alignment)
 echo "*** make tsv of clusters ***"
