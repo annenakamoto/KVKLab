@@ -24,8 +24,9 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
 
 ### Run MMSeqs2 on the filtered pan-proteome
 source activate /global/scratch/users/annen/anaconda3/envs/MMseqs2
+rm Zm_panPROTEOME*
 echo "*** creating mmseqs database ***"
-mmseqs createdb Zm_panPROTEOME.fa Zm_panPROTEOME                                            # convert fasta file to MMseqs2 database format
+mmseqs createdb maize_NAM_proteomes/Zm_panPROTEOME.fa Zm_panPROTEOME                                            # convert fasta file to MMseqs2 database format
 echo "*** running mmseqs linclust ***"
 mmseqs linclust Zm_panPROTEOME Zm_panPROTEOME_clu tmp --cov-mode 0 -c 0.${COV}                   # run the linear clustering algorithm on the database
 echo "*** producing msa to center sequence ***"
