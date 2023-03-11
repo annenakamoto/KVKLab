@@ -20,13 +20,13 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/maize_NAM_pr
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
 
 ### Combine all 26 maize NAM proteomes into one pan-proteome, keeping only genes with P001 suffix (filter out all other alternative transcripts)
-# cat maize_NAM_proteomes/*protein.fa | awk -v RS=">" '/P001/ { print ">" substr($0, 1, length($0)-1); }' > Zm_panPROTEOME.fa
+rm Zm_panPROTEOME*
+cat maize_NAM_proteomes/*protein.fa | awk -v RS=">" '/P001/ { print ">" substr($0, 1, length($0)-1); }' > Zm_panPROTEOME.fa
 
 ### Run MMSeqs2 on the filtered pan-proteome
 source activate /global/scratch/users/annen/anaconda3/envs/MMseqs2
-rm Zm_panPROTEOME*
 echo "*** creating mmseqs database ***"
-mmseqs createdb maize_NAM_proteomes/Zm_panPROTEOME.fa Zm_panPROTEOME                                            # convert fasta file to MMseqs2 database format
+mmseqs createdb Zm_panPROTEOME.fa Zm_panPROTEOME                                            # convert fasta file to MMseqs2 database format
 echo "*** running mmseqs linclust ***"
 mmseqs linclust Zm_panPROTEOME Zm_panPROTEOME_clu tmp --cov-mode 0 -c 0.${COV}                   # run the linear clustering algorithm on the database
 echo "*** producing msa to center sequence ***"
