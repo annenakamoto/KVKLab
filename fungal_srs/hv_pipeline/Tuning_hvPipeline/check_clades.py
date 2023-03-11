@@ -32,7 +32,7 @@ with open("Zm_panPROTEOME_clu.tsv", 'r') as f:
         if rep != current:              # arrived at new cluster
             count += 1
             current = rep
-        CLUSTER[gene].add(rep)
+        CLUSTER[gene] = rep
 print("Number of clusters in MMseqs2 output: " + str(count))
 print()
 
