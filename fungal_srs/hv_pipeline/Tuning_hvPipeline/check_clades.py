@@ -34,6 +34,18 @@ with open("Zm_panPROTEOME_clu.tsv", 'r') as f:
         else:                           # add gene to the current cluster
             CLUSTER[rep].add(gene)
 print("Number of clusters in MMseqs2 output: " + str(len(CLUSTER)))
+print()
+
+print("*** PRINTING CLUSTER: key=rep_gene, value=genes_in_cluster ***")
+for k,v in CLUSTER.items():
+    print(k + " : " + ",".join(v))
+print("*** PRINTING CLADE_0: key=clade_name, value=genes_in_clade ***")
+for k,v in CLADE_0.items():
+    print(k + " : " + ",".join(v))
+print("*** PRINTING CLADE_F: key=clade_name, value=genes_in_clade ***")
+for k,v in CLADE_F.items():
+    print(k + " : " + ",".join(v))
+print()
 
 ### Compare cluster sets to clade sets, report any clades that are broken
 print("*** Checking for broken Clade_0 groups ***")
@@ -55,6 +67,7 @@ print("Number of broken clade_0: " + str(len(broken_clade_0)))
 print("List of broken clade_0: " + ",".join(broken_clade_0))
 print("Number of clade_0 with missing cluster: " + str(len(cluster_missing_0)))        
 print("List of clade_0 with missing cluster: " + ",".join(cluster_missing_0))
+print()
 
 print("*** Checking for broken Clade (final) groups ***")
 broken_clade_f = []      # append to if a Clade_f group is broken
