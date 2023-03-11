@@ -31,7 +31,7 @@ mmseqs createdb Zm_panPROTEOME.fa Zm_panPROTEOME                                
 # echo "*** running mmseqs linclust ***"
 # mmseqs linclust Zm_panPROTEOME Zm_panPROTEOME_clu tmp --cov-mode 0 -c 0.${COV} --min-seq-id 0.${MSID} --alignment-mode 3 --cluster-mode 1    # run the linear clustering algorithm on the database
 echo "*** running mmseqs cluster (cascade) ***"
-mmseqs cluster Zm_panPROTEOME Zm_panPROTEOME_clu tmp --cov-mode 0 -c 0.5
+mmseqs cluster Zm_panPROTEOME Zm_panPROTEOME_clu tmp --cov-mode 0 -c 0.5 --cluster-reassign
 echo "*** producing msa to center sequence ***"
 mmseqs result2msa Zm_panPROTEOME Zm_panPROTEOME Zm_panPROTEOME_clu Zm_panPROTEOME_clu_msa   # produce an MSA to center sequence (pseudo alignment)
 echo "*** make tsv of clusters ***"
