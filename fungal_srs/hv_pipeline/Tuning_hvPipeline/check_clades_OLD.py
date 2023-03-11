@@ -20,20 +20,20 @@ with open("Maize_NLRome_GeneTable.txt", 'r') as f:
             else:
                 CLADE_F[clade_f] = set([gene])
 
-### parse mmseqs clusters
-CLUSTER = {}        # key=gene, value=representative gene of cluster
-count = 0
+### parse mmseqs clusters (can go block-by-block because the clusters are in order)
+CLUSTER = {}        # key=representative gene of cluster, value=set of genes in cluster
 current = None
 with open("Zm_panPROTEOME_clu.tsv", 'r') as f:
     for line in f:
         lst = line.split()
         rep = lst[0].upper()
         gene = lst[1].upper()           # make gene names all uppercase to match the GeneTable above
-        if rep != current:              # arrived at new cluster
-            count += 1
+        if rep != current:              # arrived at new cluster, initiate in dictionary
             current = rep
-        CLUSTER[gene].add(rep)
-print("Number of clusters in MMseqs2 output: " + str(count))
+            CLUSTER[rep] = set([gene])
+        else:                           # add gene to the current cluster
+            CLUSTER[rep].add(gene)
+print("Number of clusters in MMseqs2 output: " + str(len(CLUSTER)))
 print()
 
 ### print dictionaries for debugging
@@ -53,18 +53,17 @@ print("*** Checking for broken Clade_0 groups ***")
 broken_clade_0 = []      # append to if a Clade_0 group is broken
 cluster_missing_0 = []   # append to if a Clade_0 group has no corresponding cluster (this should not happen)
 for clade, genes in CLADE_0.items():
-    rep_genes = set([])
+    rep_genes = []
     for gene in genes:
         if CLUSTER.get(gene):
-            rep_genes.add(CLUSTER[gene])
-        else:
-            print("ERROR: gene not in any cluster!")
+            rep_genes.append(gene)
     if len(rep_genes) > 1:          # this clade_0 has more than 1 corresponding cluster, so it was broken
         broken_clade_0.append(clade)
-    elif len(rep_genes) == 0:       # this clade_0 has no corresponding cluster(s)
+    elif len(rep_genes) == 0:       # this clade_0 has no corresponding cluster
         cluster_missing_0.append(clade)
-    else:                           # this clade_0 has 1 corresponding cluster (good), with all genes in the cluster
-        pass
+    else:                           # this clade_0 has 1 corresponding cluster (good), check if all genes in clade_0 set are in the cluster set
+        if not genes.issubset(CLUSTER[rep_genes[0]]):
+            broken_clade_0.append(clade)
 print("Number of broken clade_0: " + str(len(broken_clade_0)))        
 print("List of broken clade_0: " + ",".join(broken_clade_0))
 print("Number of clade_0 with missing cluster: " + str(len(cluster_missing_0)))        
@@ -75,18 +74,17 @@ print("*** Checking for broken Clade (final) groups ***")
 broken_clade_f = []      # append to if a Clade_f group is broken
 cluster_missing_f = []   # append to if a Clade_f group has no corresponding cluster (this should not happen)
 for clade, genes in CLADE_F.items():
-    rep_genes = set([])
+    rep_genes = []
     for gene in genes:
         if CLUSTER.get(gene):
-            rep_genes.add(CLUSTER[gene])
-        else:
-            print("ERROR: gene not in any cluster!")
+            rep_genes.append(gene)
     if len(rep_genes) > 1:          # this clade_f has more than 1 corresponding cluster, so it was broken
         broken_clade_f.append(clade)
-    elif len(rep_genes) == 0:       # this clade_f has no corresponding cluster(s)
+    elif len(rep_genes) == 0:       # this clade_f has no corresponding cluster
         cluster_missing_f.append(clade)
-    else:                           # this clade_f has 1 corresponding cluster (good), with all genes in the cluster
-        pass
+    else:                           # this clade_f has 1 corresponding cluster (good), check if all genes in clade_f set are in the cluster set
+        if not genes.issubset(CLUSTER[rep_genes[0]]):
+            broken_clade_f.append(clade)
 print("Number of broken clade_f: " + str(len(broken_clade_f)))        
 print("List of broken clade_f: " + ",".join(broken_clade_f))
 print("Number of clade_f with missing cluster: " + str(len(cluster_missing_f)))        
