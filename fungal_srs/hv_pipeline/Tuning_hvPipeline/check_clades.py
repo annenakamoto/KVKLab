@@ -36,17 +36,17 @@ with open("Zm_panPROTEOME_clu.tsv", 'r') as f:
 print("Number of clusters in MMseqs2 output: " + str(len(CLUSTER)))
 print()
 
-# print dictionaries for debugging
-print("*** PRINTING CLUSTER: key=rep_gene, value=genes_in_cluster ***")
-for k,v in CLUSTER.items():
-    print(k + " : " + ",".join(v))
-print("*** PRINTING CLADE_0: key=clade_name, value=genes_in_clade ***")
-for k,v in CLADE_0.items():
-    print(k + " : " + ",".join(v))
-print("*** PRINTING CLADE_F: key=clade_name, value=genes_in_clade ***")
-for k,v in CLADE_F.items():
-    print(k + " : " + ",".join(v))
-print()
+### print dictionaries for debugging
+# print("*** PRINTING CLUSTER: key=rep_gene, value=genes_in_cluster ***")
+# for k,v in CLUSTER.items():
+#     print(k + " : " + ",".join(v))
+# print("*** PRINTING CLADE_0: key=clade_name, value=genes_in_clade ***")
+# for k,v in CLADE_0.items():
+#     print(k + " : " + ",".join(v))
+# print("*** PRINTING CLADE_F: key=clade_name, value=genes_in_clade ***")
+# for k,v in CLADE_F.items():
+#     print(k + " : " + ",".join(v))
+# print()
 
 ### Compare cluster sets to clade sets, report any clades that are broken
 print("*** Checking for broken Clade_0 groups ***")
