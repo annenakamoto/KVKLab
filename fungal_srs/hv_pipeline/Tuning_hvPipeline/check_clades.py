@@ -19,6 +19,10 @@ with open("Maize_NLRome_GeneTable.txt", 'r') as f:
                 CLADE_F[clade_f].add(gene)
             else:
                 CLADE_F[clade_f] = set([gene])
+print("Number of Clade_0: " + str(len(CLADE_0.keys())))
+print()
+print("Number of Clade_F: " + str(len(CLADE_F.keys())))
+print()
 
 ### parse mmseqs clusters
 CLUSTER = {}        # key=gene, value=representative gene of cluster
