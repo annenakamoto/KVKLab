@@ -26,7 +26,7 @@ current = None
 with open("Zm_panPROTEOME_clu.tsv", 'r') as f:
     for line in f:
         lst = line.split()
-        rep = lst[0]
+        rep = lst[0].upper()
         gene = lst[1].upper()           # make gene names all uppercase to match the GeneTable above
         if rep != current:              # arrived at new cluster, initiate in dictionary
             current = rep
@@ -36,6 +36,7 @@ with open("Zm_panPROTEOME_clu.tsv", 'r') as f:
 print("Number of clusters in MMseqs2 output: " + str(len(CLUSTER)))
 print()
 
+# print dictionaries for debugging
 print("*** PRINTING CLUSTER: key=rep_gene, value=genes_in_cluster ***")
 for k,v in CLUSTER.items():
     print(k + " : " + ",".join(v))
