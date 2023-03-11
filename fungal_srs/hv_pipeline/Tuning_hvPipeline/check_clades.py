@@ -65,6 +65,7 @@ for clade, genes in CLADE_0.items():
             print("ERROR: gene not in any cluster!")
     if len(rep_genes) > 1:          # this clade_0 has more than 1 corresponding cluster, so it was broken
         broken_clade_0.append(clade)
+        print("\t" + clade + " : " + ",".join(rep_genes))
     elif len(rep_genes) == 0:       # this clade_0 has no corresponding cluster(s)
         cluster_missing_0.append(clade)
     else:                           # this clade_0 has 1 corresponding cluster (good), with all genes in the cluster
