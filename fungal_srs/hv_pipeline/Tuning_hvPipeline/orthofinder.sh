@@ -9,6 +9,8 @@
 
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
 
+rm -r OrthoFinder_out
+
 source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
 orthofinder -oa -f OrthoFinder_in -t 24 -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree -o OrthoFinder_out
 conda deactivate
