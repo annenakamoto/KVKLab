@@ -7,9 +7,6 @@
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
-cd /global/scratch/users/annen
-wget https://zenodo.org/record/7651486/files/analysis_files.tar.gz?download=1
-
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
 
 rm -r OrthoFinder_out
