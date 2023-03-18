@@ -23,4 +23,18 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
 # conda deactivate
 
 ### check orthogroups, were any clades from Maize_NLRome_GeneTable.txt broken?
-python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Tuning_hvPipeline/check_ogs.py > check_OGs_REPORT.txt
+# python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Tuning_hvPipeline/check_ogs.py > check_OGs_REPORT.txt
+
+### download Pfam library (Pfam-A.hmm and Pfam-A.dat)
+cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/Pfam_lib
+wget https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.gz
+wget https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.dat.gz
+gunzip *.gz
+hmmpress Pfam-A.hmm
+
+### run pfam_scan to determine domain architecture for each OG
+cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
+#source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
+
+
+#source deactivate
