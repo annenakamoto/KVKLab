@@ -35,7 +35,7 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/Pfam_lib
 ### run pfam_scan to determine domain architecture for each OG
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
 source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
-rm Pfam_Scan_out/*.pfamscan.out
+#rm Pfam_Scan_out/*.pfamscan.out
 PARA="$1"
 ls OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${PARA} | while read fa; do
     og=$(basename "${fa}")
