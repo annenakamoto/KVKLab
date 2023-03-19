@@ -36,8 +36,10 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/Pfam_lib
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
 source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 rm Pfam_Scan_out/*.pfamscan.out
-ls OrthoFinder_out/Results_Mar16/Orthogroup_Sequences | while read fa; do
-    echo ${fa}
-    pfam_scan.pl -fasta OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${fa} -dir Pfam_lib -e_dom 0.01 -e_seq 0.01 -outfile Pfam_Scan_out/${fa}.pfamscan.out
+PARA="$1"
+ls OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${PARA} | while read fa; do
+    og=$(basename "${fa}")
+    echo ${og}
+    pfam_scan.pl -fasta OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${og} -dir Pfam_lib -e_dom 0.01 -e_seq 0.01 -outfile Pfam_Scan_out/${og}.pfamscan.out
 done
 source deactivate
