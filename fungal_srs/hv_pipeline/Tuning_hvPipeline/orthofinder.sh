@@ -34,12 +34,21 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/Pfam_lib
 
 ### run pfam_scan to determine domain architecture for each OG
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
-source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
-#rm Pfam_Scan_out/*.pfamscan.out
-PARA="$1"
-ls OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${PARA} | while read fa; do
-    og=$(basename "${fa}")
+# source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
+# PARA="$1"
+# ls OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${PARA} | while read fa; do
+#     og=$(basename "${fa}")
+#     echo ${og}
+#     pfam_scan.pl -fasta OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${og} -dir Pfam_lib -e_dom 0.01 -e_seq 0.01 -outfile Pfam_Scan_out/${og}.pfamscan.out
+# done
+# source deactivate
+
+### parse each pfam_scan output file for domain architecture of the OG
+ls Pfam_Scan_out | while read ps; do
+    og=$(echo ${ps} | awk -v FS="." '{ print $1; }')
+    num=$(grep -c ">" OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${og}.fa)
     echo ${og}
-    pfam_scan.pl -fasta OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${og} -dir Pfam_lib -e_dom 0.01 -e_seq 0.01 -outfile Pfam_Scan_out/${og}.pfamscan.out
+    ### python script that outputs the line: OG, num_genes_in_OG, num_total_pfamscan_hits, percent_genes_with_common_arch, most_common_domarch, set_of_all_domains_in_OG_and_counts
+    cat ls Pfam_Scan_out/${ps} | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Tuning_hvPipeline/dom_arch.py ${og} ${num} > Domain_Arch/${og}.domarch.txt
 done
-source deactivate
+
