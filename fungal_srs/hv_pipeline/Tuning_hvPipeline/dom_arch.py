@@ -46,7 +46,7 @@ for k,v in COMMON_ARCH.items():
     if v > high_count:
         common_domarch = k
         high_count = v
-perc_common = round(high_count / num_genes, 2)
+perc_common = round(high_count / int(num_genes), 2)
 
 ### Output line: OG, num_genes_in_OG, num_total_pfamscan_hits, percent_genes_with_common_arch, most_common_domarch, set_of_all_domains_in_OG_and_counts
 out = [orthogroup, str(num_genes), str(num_hits), str(perc_common), common_domarch, dom_counts]
