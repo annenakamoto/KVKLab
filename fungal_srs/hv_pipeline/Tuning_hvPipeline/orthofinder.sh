@@ -50,7 +50,7 @@ ls Pfam_Scan_out | while read ps; do
     num=$(grep -c ">" OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${og}.fa)
     echo ${og}
     ### python script that outputs the line: OG, num_genes_in_OG, num_total_pfamscan_hits, percent_genes_with_common_arch, most_common_domarch, set_of_all_domains_in_OG_and_counts
-    cat ls Pfam_Scan_out/${ps} | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Tuning_hvPipeline/dom_arch.py ${og} ${num} >> Domain_Arch/OGs_domarch.REPORT.txt
+    cat Pfam_Scan_out/${ps} | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Tuning_hvPipeline/dom_arch.py ${og} ${num} >> Domain_Arch/OGs_domarch.REPORT.txt
 done
 
 ### parse Domain_Arch/OG_domarch.REPORT.txt for 1) a list of domains and the count and 2) a list of domain archs and their count, both ordered greatest to least
