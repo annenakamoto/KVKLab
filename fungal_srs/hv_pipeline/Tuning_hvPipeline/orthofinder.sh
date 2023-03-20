@@ -44,11 +44,15 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
 # source deactivate
 
 ### parse each pfam_scan output file for domain architecture of the OG
+> Domain_Arch/OG_domarch.REPORT.txt
 ls Pfam_Scan_out | while read ps; do
     og=$(echo ${ps} | awk -v FS="." '{ print $1; }')
     num=$(grep -c ">" OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${og}.fa)
     echo ${og}
     ### python script that outputs the line: OG, num_genes_in_OG, num_total_pfamscan_hits, percent_genes_with_common_arch, most_common_domarch, set_of_all_domains_in_OG_and_counts
-    cat ls Pfam_Scan_out/${ps} | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Tuning_hvPipeline/dom_arch.py ${og} ${num} > Domain_Arch/${og}.domarch.txt
+    cat ls Pfam_Scan_out/${ps} | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Tuning_hvPipeline/dom_arch.py ${og} ${num} >> Domain_Arch/OGs_domarch.REPORT.txt
 done
 
+### parse Domain_Arch/OG_domarch.REPORT.txt for 1) a list of domains and the count and 2) a list of domain archs and their count, both ordered greatest to least
+# cat Domain_Arch/OG_domarch.REPORT.txt | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Tuning_hvPipeline/common_dom.py > Domain_Arch/Common_Domains.REPORT.txt
+# cat Domain_Arch/OG_domarch.REPORT.txt | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Tuning_hvPipeline/common_arch.py > Domain_Arch/Common_Archs.REPORT.txt
