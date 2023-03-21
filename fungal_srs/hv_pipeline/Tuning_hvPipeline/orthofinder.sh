@@ -20,7 +20,7 @@ module purge
 # rm -r OrthoFinder_out
 source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
 # orthofinder -oa -f OrthoFinder_in -t 24 -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree -X -o OrthoFinder_out
-orthofinder -ft OrthoFinder_out/Results_Mar16 -t 24 -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree -X
+orthofinder -fg OrthoFinder_out/Results_Mar16 -t 24 -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree -X
 conda deactivate
 
 ### check orthogroups, were any clades from Maize_NLRome_GeneTable.txt broken?
