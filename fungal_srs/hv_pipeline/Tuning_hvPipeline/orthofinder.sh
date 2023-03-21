@@ -16,11 +16,11 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/maize_NAM_pr
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
 
 ### Run OrthoFinder on maize NAM proteomes
-# module purge
+module purge
 # rm -r OrthoFinder_out
 source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
 # orthofinder -oa -f OrthoFinder_in -t 24 -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree -X -o OrthoFinder_out
-orthofinder -fg OrthoFinder_out/Results_Mar16 -t 24 -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree -X
+orthofinder -ft OrthoFinder_out/Results_Mar16 -t 24 -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree -X
 conda deactivate
 
 ### check orthogroups, were any clades from Maize_NLRome_GeneTable.txt broken?
