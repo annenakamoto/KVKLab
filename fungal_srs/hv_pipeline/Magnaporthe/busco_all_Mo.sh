@@ -22,9 +22,10 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoGENOMES_all
 # conda deactivate
 
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000
+GCA=${1}
 
 ### run busco on all genomes in MoGENOMES_all
 module purge    # loaded modules interfere with busco
 source activate /global/scratch/users/annen/anaconda3/envs/busco
-busco -i MoGENOMES_all -l sordariomycetes_odb10 -o BUSCO_allMo_out -m genome -c 24
+busco -i MoGENOMES_all/${GCA} -l sordariomycetes_odb10 -o BUSCO_allMo_out/${GCA} -m genome -c 24
 conda deactivate
