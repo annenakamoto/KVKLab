@@ -27,5 +27,5 @@ GCA=${1}
 ### run busco on all genomes in MoGENOMES_all
 module purge    # loaded modules interfere with busco
 source activate /global/scratch/users/annen/anaconda3/envs/busco
-busco -i MoGENOMES_all/${GCA} -l sordariomycetes_odb10 -o BUSCO_allMo_out/${GCA} -m genome -c 24
+busco -i MoGENOMES_all/${GCA} -l sordariomycetes_odb10 -o BUSCO_allMo_out/${GCA} -m genome -c 24 -f
 conda deactivate
