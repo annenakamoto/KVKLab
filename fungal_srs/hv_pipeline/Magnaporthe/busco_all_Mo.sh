@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=orthofinder
+#SBATCH --job-name=busco_Mo
 #SBATCH --partition=savio2
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
@@ -29,3 +29,6 @@ module purge    # loaded modules interfere with busco
 source activate /global/scratch/users/annen/anaconda3/envs/busco
 busco -i MoGENOMES_all/${GCA} -l sordariomycetes_odb10 -o BUSCO_allMo_out/${GCA} -m genome -c 24 -f
 conda deactivate
+
+cd /global/scratch/users/annen/000_FUNGAL_SRS_000/BUSCO_allMo_out
+grep "\"Complete\":" *.fna/*.json | awk '{ print substr($1, 1, 15) "\t" substr($3, 1, 4); }' > gca_busco_RESULTS.txt
