@@ -17,7 +17,6 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoFunGAP
 mkdir ${GCA}
 cd ${GCA}
 
-conda deactivate
 module purge
 export PERL5LIB=''
 ## this path has to be set otherwise augustus tries to write within the singularity container
