@@ -10,7 +10,7 @@
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoFunGAP/run_files
 
 ### download all RNA-Seq datasets
-modile load sra-tools
+module load sra-tools
 
 > sra_list.txt
 echo "SRR8842990" >> sra_list.txt   # MoO (guy11) that I used

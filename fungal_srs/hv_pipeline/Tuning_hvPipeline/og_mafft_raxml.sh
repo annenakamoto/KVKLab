@@ -5,7 +5,7 @@
 #SBATCH --ntasks-per-node=24
 #SBATCH --time=24:00:00
 #SBATCH --mail-user=annen@berkeley.edu
-#SBATCH --mail-type=FAIL
+#SBATCH --mail-type=ALL
 
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
 
