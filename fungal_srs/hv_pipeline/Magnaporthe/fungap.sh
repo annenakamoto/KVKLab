@@ -24,7 +24,7 @@ export AUGUSTUS_CONFIG_PATH=/global/scratch/users/annen/fungap_tarball/fungap_co
 
 ## for GeneMark to work, a non-expired gm_key_64 has to be placed at ~/.gm_key (done)
 
-assembly=$(ls ../../MoGENOMES_all/${GCA}*)
+assembly=$(ls ../../MoGENOMES_all/${GCA}*.fna)
 
 singularity exec /global/scratch/users/annen/fungap_tarball/fungap.sif python /workspace/FunGAP/fungap.py \
         --output_dir fungap_out \
