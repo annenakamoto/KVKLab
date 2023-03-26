@@ -16,14 +16,14 @@ SRA=${2}
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoFunGAP
 mkdir ${GCA}
 cd ${GCA}
-mkdir fungap_out
 
+conda deactivate
 module purge
 export PERL5LIB=''
 ## this path has to be set otherwise augustus tries to write within the singularity container
 export AUGUSTUS_CONFIG_PATH=/global/scratch/users/annen/fungap_tarball/fungap_config_copy/
 
-## for GeneMark to work, a non-expired gm_key_64 has to be placed at ~/.gm_key 
+## for GeneMark to work, a non-expired gm_key_64 has to be placed at ~/.gm_key (done)
 
 assembly=$(ls ../../MoGENOMES_all/${GCA}*)
 
