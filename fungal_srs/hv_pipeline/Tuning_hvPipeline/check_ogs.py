@@ -76,7 +76,7 @@ for clade, genes in CLADE_F.items():
             orthogroups.add(OG[gene])
         else:
             print("WARNING: " + gene + " not in any orthogroup")
-    if HV[clade] == 1:
+    if HV[clade] == "1":
         print("\t" + str(len(orthogroups)) + "\t" + str(HV[clade]) + "\t" + clade + "\t" + ",".join(orthogroups))
     if len(orthogroups) > 1:          # this clade_f has more than 1 corresponding OG, so it was broken
         broken_clade_f.append(clade)
