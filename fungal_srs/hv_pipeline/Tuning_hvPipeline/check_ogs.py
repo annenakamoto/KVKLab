@@ -55,7 +55,7 @@ for clade, genes in CLADE_0.items():
             print("WARNING: " + gene + " not in any orthogroup")
     if len(orthogroups) > 1:          # this clade_0 has more than 1 corresponding OG, so it was broken
         broken_clade_0.append(clade)
-        print("\t" + str(len(orthogroups)) + "\t" + clade + "\t" + ",".join(orthogroups))
+        #print("\t" + str(len(orthogroups)) + "\t" + clade + "\t" + ",".join(orthogroups))
     elif len(orthogroups) == 0:       # this clade_0 has no corresponding OG(s)
         og_missing_0.append(clade)
     else:                           # this clade_0 has 1 corresponding OG (good), with all genes in the OG
@@ -76,9 +76,10 @@ for clade, genes in CLADE_F.items():
             orthogroups.add(OG[gene])
         else:
             print("WARNING: " + gene + " not in any orthogroup")
+    if HV[clade] == 1:
+        print("\t" + str(len(orthogroups)) + "\t" + str(HV[clade]) + "\t" + clade + "\t" + ",".join(orthogroups))
     if len(orthogroups) > 1:          # this clade_f has more than 1 corresponding OG, so it was broken
         broken_clade_f.append(clade)
-        print("\t" + str(len(orthogroups)) + "\t" + str(HV[clade]) + "\t" + clade + "\t" + ",".join(orthogroups))
     elif len(orthogroups) == 0:       # this clade_f has no corresponding OG(s)
         og_missing_f.append(clade)
     else:                           # this clade_f has 1 corresponding OG (good), with all genes in the OG
