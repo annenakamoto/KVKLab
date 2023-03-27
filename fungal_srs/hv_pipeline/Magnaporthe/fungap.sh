@@ -22,7 +22,7 @@ export PERL5LIB=''
 ## this path has to be set otherwise augustus tries to write within the singularity container
 export AUGUSTUS_CONFIG_PATH=/global/scratch/users/annen/fungap_tarball/fungap_config_copy/
 ## this path is necessary, otherwise braker fails
-export AUGUSTUS_SCRIPTS_PATH=/global/scratch/users/annen/fungap_tarball/fungap_config_copy
+export AUGUSTUS_SCRIPTS_PATH=/opt/conda/bin
 
 ## for GeneMark to work, a non-expired gm_key_64 has to be placed at ~/.gm_key (done)
 
