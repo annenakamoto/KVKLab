@@ -42,4 +42,4 @@ while read ${GCA}; do
         cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoFunGAP/${GCA}/fungap_out
         rm -r augustus_out  braker_out  busco_out  gene_filtering  hisat2_out  maker_out  repeat_modeler_out  trinity_out
     fi
-done < tmp_rm_list.sh
+done < /global/scratch/users/annen/000_FUNGAL_SRS_000/MoFunGAP/tmp_rm_list.sh
