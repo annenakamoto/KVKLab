@@ -34,8 +34,8 @@ echo GCA_024704655.1 >> tmp_rm_list.sh
 echo GCA_024704695.1 >> tmp_rm_list.sh
 echo GCA_024704685.1 >> tmp_rm_list.sh
 
-while read ${GCA}; do
-    if [ -f ${GCA}/fungap_out/fungap_out/fungap_out.gff3 ]; then
+while read GCA; do
+    if [ -f "${GCA}/fungap_out/fungap_out/fungap_out.gff3" ]; then
         echo "${GCA}: fungap finished, removing dirs to make space"
         rm -r ${GCA}/busco_downloads
         rm -r ${GCA}/fungap_out/augustus_out  ${GCA}/fungap_out/braker_out  ${GCA}/fungap_out/busco_out  ${GCA}/fungap_out/gene_filtering 
