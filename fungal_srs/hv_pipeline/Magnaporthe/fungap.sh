@@ -39,7 +39,7 @@ singularity exec /global/scratch/users/annen/fungap_tarball/fungap.sif python /w
         --num_cores ${SLURM_NTASKS}
 
 if [ -f fungap_out/fungap_out/fungap_out.gff3 ]; then
-    echo "${GCA}: fungap finished, removing dirs to make space"
+    echo "fungap finished, removing dirs to make space"
     rm -r busco_downloads
     cd fungap_out
     rm -r augustus_out  braker_out  busco_out  gene_filtering  hisat2_out  maker_out  repeat_modeler_out  trinity_out
