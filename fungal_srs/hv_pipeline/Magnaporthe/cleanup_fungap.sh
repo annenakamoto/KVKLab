@@ -10,6 +10,7 @@
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoFunGAP
 
 > tmp_rm_list.sh
+echo GCA_001548775.1 >> tmp_rm_list.sh
 echo GCA_001548785.1 >> tmp_rm_list.sh
 echo GCA_002925165.1 >> tmp_rm_list.sh
 echo GCA_002925415.1 >> tmp_rm_list.sh
