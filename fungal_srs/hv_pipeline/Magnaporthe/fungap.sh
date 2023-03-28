@@ -37,3 +37,10 @@ singularity exec /global/scratch/users/annen/fungap_tarball/fungap.sif python /w
         --sister_proteome ../run_files/prot_db.faa  \
         --busco_dataset sordariomycetes_odb10 \
         --num_cores ${SLURM_NTASKS}
+
+if [ -f fungap_out/fungap_out/fungap_out.gff3 ]; then
+    echo "${GCA}: fungap finished, removing dirs to make space"
+    rm -r busco_downloads
+    cd fungap_out
+    rm -r augustus_out  braker_out  busco_out  gene_filtering  hisat2_out  maker_out  repeat_modeler_out  trinity_out
+fi
