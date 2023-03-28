@@ -22,7 +22,7 @@ assess_alignment <- function(afa) {
     autoMasked <- maskGaps(maa, min.fraction = MinGapFraction, min.block.width = MinGapBlockWidth) ##KEY FILTERING PARAMETERS
     MinAli <- as(autoMasked, "AAStringSet")
   } else { 
-    MinAli<-as(subsetaa, "AAStringSet") 
+    MinAli<-as(maa, "AAStringSet") 
   }
   
   ## Calculating Consensus Matrix
