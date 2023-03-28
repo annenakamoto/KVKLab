@@ -35,11 +35,10 @@ echo GCA_024704695.1 >> tmp_rm_list.sh
 echo GCA_024704685.1 >> tmp_rm_list.sh
 
 while read ${GCA}; do
-    cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoFunGAP/${GCA}
-    if [ -f fungap_out/fungap_out/fungap_out.gff3 ]; then
+    if [ -f ${GCA}/fungap_out/fungap_out/fungap_out.gff3 ]; then
         echo "${GCA}: fungap finished, removing dirs to make space"
-        rm -r busco_downloads
-        cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoFunGAP/${GCA}/fungap_out
-        rm -r augustus_out  braker_out  busco_out  gene_filtering  hisat2_out  maker_out  repeat_modeler_out  trinity_out
+        rm -r ${GCA}/busco_downloads
+        rm -r ${GCA}/fungap_out/augustus_out  ${GCA}/fungap_out/braker_out  ${GCA}/fungap_out/busco_out  ${GCA}/fungap_out/gene_filtering 
+        rm -r ${GCA}/fungap_out/hisat2_out  ${GCA}/fungap_out/maker_out  ${GCA}/fungap_out/repeat_modeler_out  ${GCA}/fungap_out/trinity_out
     fi
 done < /global/scratch/users/annen/000_FUNGAL_SRS_000/MoFunGAP/tmp_rm_list.sh
