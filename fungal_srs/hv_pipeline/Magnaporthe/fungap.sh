@@ -4,7 +4,7 @@
 #SBATCH --qos=savio_normal
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=20
-#SBATCH --time=72:00:00
+#SBATCH --time=48:00:00
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 #SBATCH --output=/global/scratch/users/annen/stdout_slurm/slurm-%j.out
