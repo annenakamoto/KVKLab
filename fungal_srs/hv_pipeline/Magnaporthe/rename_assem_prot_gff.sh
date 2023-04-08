@@ -74,7 +74,10 @@ cat KVKLab/fungal_srs/hv_pipeline/Magnaporthe/renaming_tbl.txt | awk '$1 ~ "pier
         old_faa=analysis_files_Pierre_PAV/genome_annotation/wheat_blast/all_proteomes_corrected/${gca}*fungap_out_prot_filtered.faa
     fi
     new_faa=000_FUNGAL_SRS_000/MoOrthoFinder/MoPROTEOMES/${new_name}.processed.faa
-    old_gff=analysis_files_Pierre_PAV/genome_annotation/*_blast/all_proteomes_corrected/${iso}*fungap_out_prot_filtered.faa
+    old_gff=analysis_files_Pierre_PAV/genome_annotation/*_blast/all_gffs_fixed/${iso}*fixed.gff3
+    if [ ! -f "${old_gff}" ]; then
+        old_gff=analysis_files_Pierre_PAV/genome_annotation/wheat_blast/all_gffs_fixed/${gca}*fixed.gff3
+    fi
     new_gff=000_FUNGAL_SRS_000/MoOrthoFinder/MoPROTEINGFF3/${new_name}.processed.gff3
     # process faa (change gene names, remove stop codons)
     python KVKLab/fungal_srs/hv_pipeline/Magnaporthe/process_faa_for_orthofinder_PIERR.py ${new_name} ${old_faa} ${new_faa}
