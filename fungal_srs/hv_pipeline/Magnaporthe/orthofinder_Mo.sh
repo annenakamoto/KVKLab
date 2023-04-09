@@ -14,5 +14,5 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder
 module purge
 
 source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
-orthofinder -os -f MoPROTEOMES -t 24 -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree -X -o OrthoFinder_out
+orthofinder -os -f MoPROTEOMES -t 20 -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree -X -o OrthoFinder_out
 conda deactivate
