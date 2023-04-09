@@ -9,6 +9,7 @@
 
 cd /global/scratch/users/annen
 source activate /global/scratch/users/annen/anaconda3/envs/Biopython
+module unload python
 
 ### rename assemblies
 ###     NCBI assemblies (includes outgroups)
@@ -64,20 +65,27 @@ source activate /global/scratch/users/annen/anaconda3/envs/Biopython
 #     # process gff3 files by replacing any "gene_" with the new_name
 #     sed "s/gene\_/${new_name}\_/g" ${old_gff} > ${new_gff}
 # done
-###     pierre's annotations
-cat KVKLab/fungal_srs/hv_pipeline/Magnaporthe/renaming_tbl.txt | awk '$1 ~ "pierre"' | while read line; do
+###     pierre's annotations (from rice_blast)
+cat KVKLab/fungal_srs/hv_pipeline/Magnaporthe/renaming_tbl.txt | awk '$1 ~ "pierre" && !/UU/ && $4 ~ "MoO"' | while read line; do
     iso=$(echo ${line} | awk '{ print $3; }')
-    gca=$(echo ${line} | awk '{ print $2; }')
     new_name=$(echo ${line} | awk '{ print $8; }')
     old_faa=analysis_files_Pierre_PAV/genome_annotation/rice_blast/all_proteomes_corrected/${iso}*fungap_out_prot_filtered.faa
-    if [ ! -f ${old_faa} ]; then
-        old_faa=analysis_files_Pierre_PAV/genome_annotation/wheat_blast/all_proteomes_corrected/${gca}*fungap_out_prot_filtered.faa
-    fi
     new_faa=000_FUNGAL_SRS_000/MoOrthoFinder/MoPROTEOMES/${new_name}.processed.faa
-    old_gff=analysis_files_Pierre_PAV/genome_annotation/*_blast/all_gffs_fixed/${iso}*fixed.gff3
-    if [ ! -f ${old_gff} ]; then
-        old_gff=analysis_files_Pierre_PAV/genome_annotation/wheat_blast/all_gffs_fixed/${gca}*fixed.gff3
-    fi
+    old_gff=analysis_files_Pierre_PAV/genome_annotation/rice_blast/all_gffs_fixed/${iso}*fixed.gff3
+    new_gff=000_FUNGAL_SRS_000/MoOrthoFinder/MoPROTEINGFF3/${new_name}.processed.gff3
+    # process faa (change gene names, remove stop codons)
+    python KVKLab/fungal_srs/hv_pipeline/Magnaporthe/process_faa_for_orthofinder_PIERR.py ${new_name} ${old_faa} ${new_faa}
+    # process gff3 files to have same gene names as faa
+    cat ${old_gff} | python KVKLab/fungal_srs/hv_pipeline/Magnaporthe/process_gff3_PIERR.py ${new_name} ${new_gff}
+done
+###     pierre's annotations (from wheat_blast)
+cat KVKLab/fungal_srs/hv_pipeline/Magnaporthe/renaming_tbl.txt | awk '(/MoT/ || /MoX/ || /MoOUU/) && $1 ~ "pierre"' | while read line; do
+    gca=$(echo ${line} | awk '{ print $2; }')
+    gca_num=$(echo ${gca} | awk '{ print substr($1, 5, 11); }')
+    new_name=$(echo ${line} | awk '{ print $8; }')
+    old_faa=analysis_files_Pierre_PAV/genome_annotation/wheat_blast/all_proteomes_corrected/GCA${gca_num}*fungap_out_prot_filtered.faa
+    new_faa=000_FUNGAL_SRS_000/MoOrthoFinder/MoPROTEOMES/${new_name}.processed.faa
+    old_gff=analysis_files_Pierre_PAV/genome_annotation/wheat_blast/all_gffs_fixed/${gca}*fixed.gff3
     new_gff=000_FUNGAL_SRS_000/MoOrthoFinder/MoPROTEINGFF3/${new_name}.processed.gff3
     # process faa (change gene names, remove stop codons)
     python KVKLab/fungal_srs/hv_pipeline/Magnaporthe/process_faa_for_orthofinder_PIERR.py ${new_name} ${old_faa} ${new_faa}
