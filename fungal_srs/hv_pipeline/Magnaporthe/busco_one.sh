@@ -15,6 +15,6 @@ cd ${genome}
 ### run busco on a genome
 module purge    # loaded modules interfere with busco
 source activate /global/scratch/users/annen/anaconda3/envs/busco
-busco -i ../../MoASSEMBLIES/${genome}.fna -l sordariomycetes_odb10 -o . -m genome -c ${SLURM_NTASKS} -f
+busco -i ../../MoASSEMBLIES/${genome}.fna -l sordariomycetes_odb10 -m genome -c ${SLURM_NTASKS} -f
 conda deactivate
 
