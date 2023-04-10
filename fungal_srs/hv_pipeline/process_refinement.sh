@@ -30,4 +30,4 @@ cd ${new}
 raxmlHPC-PTHREADS-SSE3 -s ${clade}.afa -n RAxML.${clade} -T 24 -m PROTCATJTT -f a -x 12345 -p 12345 -# 100
 
 ### remove the temporary fasta and list files
-rm ../${clade}.fa ../tmp.${clade}.list.txt
+rm ../tmp.${clade}.fa ../tmp.${clade}.list.txt
