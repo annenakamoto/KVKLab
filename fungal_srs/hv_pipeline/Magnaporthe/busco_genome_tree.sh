@@ -6,6 +6,8 @@
 #SBATCH --time=72:00:00
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
+#SBATCH --output=/global/scratch/users/annen/stdout_slurm-%j.out
+#SBATCH --error=/global/scratch/users/annen/stder_slurm-%j.out
 
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder
 
