@@ -10,7 +10,9 @@
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder
 
 module purge
+echo "activating conda env..."
 source activate /global/scratch/users/annen/anaconda3/envs/BUSCO_phylogenomics
+echo "env activated"
 python ../../BUSCO_phylogenomics/BUSCO_phylogenomics.py -i MoBUSCO -o MoBUSCO_PHYLO -t ${SLURM_NTASKS} --supermatrix_only --gene_tree_program fasttree
 conda deactivate
 
