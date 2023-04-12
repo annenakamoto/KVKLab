@@ -31,6 +31,9 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder
 # trimal -gt 1 -in ALL_BUSCOs.afa -out ALL_BUSCOs.trim.afa
 
 ### make fasttree
-source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
-fasttree -gamma -out ALL_BUSCOs.tree ALL_BUSCOs.trim.afa 
-source deactivate
+#source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
+#fasttree -gamma -out ALL_BUSCOs.tree ALL_BUSCOs.trim.afa 
+#source deactivate
+
+module load fasttreeMP
+FastTreeMP -gamma -out ALL_BUSCOs.tree.mp ALL_BUSCOs.trim.afa 
