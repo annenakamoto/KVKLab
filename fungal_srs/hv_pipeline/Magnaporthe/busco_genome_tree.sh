@@ -23,12 +23,12 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder
 # done
 
 ### concatenate the alignments
-source activate /global/scratch/users/annen/anaconda3/envs/Biopython
-cat ../../KVKLab/fungal_srs/hv_pipeline/Magnaporthe/renaming_tbl.txt | awk '{ print $8; }' | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Magnaporthe/concat_msa.py
-source deactivate
+# source activate /global/scratch/users/annen/anaconda3/envs/Biopython
+# cat ../../KVKLab/fungal_srs/hv_pipeline/Magnaporthe/renaming_tbl.txt | awk '{ print $8; }' | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Magnaporthe/concat_msa.py
+# source deactivate
 
 ### trim the alignment
-trimal -gt 1 -in ALL_BUSCOs.afa -out ALL_BUSCOs.trim.afa
+# trimal -gt 1 -in ALL_BUSCOs.afa -out ALL_BUSCOs.trim.afa
 
 ### make fasttree
 source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
