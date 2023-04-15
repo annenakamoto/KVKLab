@@ -52,16 +52,16 @@ ls ${sco_dir}/OG000${part}* | awk -v FS="." '{ print $1; }' | while read sco; do
 done
 
 ### Concatenate MSAs
-source activate /global/scratch/users/annen/anaconda3/envs/Biopython
-cat tmp_gn.txt | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Magnaporthe/concat_msa.py SCO_Alignments ALL_SCOs.afa
-source deactivate
-echo "done concatenating alignment"
+# source activate /global/scratch/users/annen/anaconda3/envs/Biopython
+# cat tmp_gn.txt | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Magnaporthe/concat_msa.py SCO_Alignments ALL_SCOs.afa
+# source deactivate
+# echo "done concatenating alignment"
 
 ### Trim alignment
-module load trimal
-trimal -gt 1 -in ALL_SCOs.afa -out ALL_SCOs.trim.afa
-echo "done trimming alignment"
+# module load trimal
+# trimal -gt 1 -in ALL_SCOs.afa -out ALL_SCOs.trim.afa
+# echo "done trimming alignment"
 
-module load fasttreeMP
-echo "starting fasttree"
-FastTreeMP -gamma -out ALL_SCOs.tree.mp ALL_SCOs.trim.afa 
+# module load fasttreeMP
+# echo "starting fasttree"
+# FastTreeMP -gamma -out ALL_SCOs.tree.mp ALL_SCOs.trim.afa 
