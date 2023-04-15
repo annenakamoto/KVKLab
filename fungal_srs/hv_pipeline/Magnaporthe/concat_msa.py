@@ -19,7 +19,7 @@ msa_list = os.listdir(msa_dir)
 for msa in msa_list:
     msa_path =  msa_dir + "/" + msa
     for record in SeqIO.parse(msa_path, 'fasta'):
-        genome = record.id
+        genome = record.id[:-6]
         GENOMES[genome].seq += record.seq
 
 with open(out_file, 'w') as handle:
