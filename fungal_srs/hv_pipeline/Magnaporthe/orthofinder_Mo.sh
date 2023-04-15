@@ -43,25 +43,25 @@ module purge
 ### MAKE GENOME TREE ###
 
 ### align SCOs
-sco_dir=/global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder/OrthoFinder_out/Results_out/WorkingDirectory/OrthoFinder/Results_out/Single_Copy_Orthologue_Sequences
-mkdir -p SCO_Alignments
-part=${1}
-ls ${sco_dir}/OG000${part}* | awk -v FS="." '{ print substr($1, length($1)-8, length($1)) }' | while read sco; do
-    mafft --maxiterate 1000 --globalpair --thread ${SLURM_NTASKS} --quiet ${sco_dir}/${sco}.fa > SCO_Alignments/${sco}.afa
-    echo "${sco} done"
-done
+# sco_dir=/global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder/OrthoFinder_out/Results_out/WorkingDirectory/OrthoFinder/Results_out/Single_Copy_Orthologue_Sequences
+# mkdir -p SCO_Alignments
+# part=${1}
+# ls ${sco_dir}/OG000${part}* | awk -v FS="." '{ print substr($1, length($1)-8, length($1)) }' | while read sco; do
+#     mafft --maxiterate 1000 --globalpair --thread ${SLURM_NTASKS} --quiet ${sco_dir}/${sco}.fa > SCO_Alignments/${sco}.afa
+#     echo "${sco} done"
+# done
 
 ### Concatenate MSAs
-# source activate /global/scratch/users/annen/anaconda3/envs/Biopython
-# cat tmp_gn.txt | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Magnaporthe/concat_msa.py SCO_Alignments ALL_SCOs.afa
-# source deactivate
-# echo "done concatenating alignment"
+source activate /global/scratch/users/annen/anaconda3/envs/Biopython
+cat tmp_gn.txt | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Magnaporthe/concat_msa.py SCO_Alignments ALL_SCOs.afa
+source deactivate
+echo "done concatenating alignment"
 
 ### Trim alignment
-# module load trimal
-# trimal -gt 1 -in ALL_SCOs.afa -out ALL_SCOs.trim.afa
-# echo "done trimming alignment"
+module load trimal
+trimal -gt 1 -in ALL_SCOs.afa -out ALL_SCOs.trim.afa
+echo "done trimming alignment"
 
-# module load fasttreeMP
-# echo "starting fasttree"
-# FastTreeMP -gamma -out ALL_SCOs.tree.mp ALL_SCOs.trim.afa 
+module load fasttreeMP
+echo "starting fasttree"
+FastTreeMP -gamma -out ALL_SCOs.tree.mp ALL_SCOs.trim.afa 
