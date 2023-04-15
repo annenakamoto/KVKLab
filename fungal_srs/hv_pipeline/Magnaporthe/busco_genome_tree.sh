@@ -24,7 +24,7 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder
 
 ### concatenate the alignments
 # source activate /global/scratch/users/annen/anaconda3/envs/Biopython
-# cat ../../KVKLab/fungal_srs/hv_pipeline/Magnaporthe/renaming_tbl.txt | awk '{ print $8; }' | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Magnaporthe/concat_msa.py
+# cat ../../KVKLab/fungal_srs/hv_pipeline/Magnaporthe/renaming_tbl.txt | awk '{ print $8; }' | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Magnaporthe/concat_msa.py MoBUSCO_MAFFT ALL_BUSCOs.afa
 # source deactivate
 
 ### trim the alignment
