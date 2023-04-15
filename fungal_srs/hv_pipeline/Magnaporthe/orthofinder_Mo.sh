@@ -14,7 +14,7 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder
 module purge
 
 ### parallelize diamond blastp part
-# source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
+source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
 
 # orthofinder -op -S diamond_ultra_sens -f MoPROTEOMES_72 -n out -o OrthoFinder_out | grep "diamond blastp" > jobqueue
 
