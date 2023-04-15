@@ -16,4 +16,5 @@ module purge
 
 export PERL5LIB=''
 
+module load parallel
 parallel -j ${SLURM_NTASKS} < jobqueue_${node}
