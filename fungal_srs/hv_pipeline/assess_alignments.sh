@@ -12,6 +12,10 @@ cd /global/scratch/users/annen
 source activate /global/scratch/users/annen/anaconda3/envs/R
 
 ### run the R script that outputs a list of OGs with alignments that pass hv parameters
-Rscript KVKLab/fungal_srs/hv_pipeline/assess_alignment.R | awk '/[1]/ { print substr($2,2,9); }' > HValn_OGs_list.txt
+
+### maize
+#Rscript KVKLab/fungal_srs/hv_pipeline/assess_alignment.R | awk '/[1]/ { print substr($2,2,9); }' > HValn_OGs_list.txt
+Rscript KVKLab/fungal_srs/hv_pipeline/assess_alignment.R | awk '/[1]/ { print substr($2,2,9); }' > MoHValn_OGs_list.txt
+
 
 conda deactivate
