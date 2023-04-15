@@ -45,7 +45,8 @@ module purge
 ### align SCOs
 sco_dir=/global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder/OrthoFinder_out/Results_out/WorkingDirectory/OrthoFinder/Results_out/Single_Copy_Orthologue_Sequences
 mkdir -p SCO_Alignments
-ls ${sco_dir} | awk -v FS="." '{ print $1; }' | while read sco; do
+part=${1}
+ls ${sco_dir}/OG000${part}* | awk -v FS="." '{ print $1; }' | while read sco; do
     mafft --maxiterate 1000 --globalpair --thread ${SLURM_NTASKS} --quiet ${sco_dir}/${sco}.fa > SCO_Alignments/${sco}.afa
     echo "${sco} done"
 done
