@@ -58,7 +58,7 @@ part=${1}   ## 00 to 18
 ls ${og_dir}/OG00${part}* | awk -v FS="." '{ print substr($1, length($1)-8, length($1)) }' | while read sco; do
     if [ -f "SCO_Alignments/${sco}.afa" ]; then 
         cp SCO_Alignments/${sco}.afa OG_Alignments/${sco}.afa
-        echo "copied over ${${sco}}"
+        echo "copied over ${sco}"
     else 
         echo "aligning ${sco}..."
         mafft --maxiterate 1000 --globalpair --thread ${SLURM_NTASKS} --quiet ${og_dir}/${sco}.fa > OG_Alignments/${sco}.afa
