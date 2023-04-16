@@ -71,7 +71,11 @@ module purge
 
 ### Concatenate MSAs
 source activate /global/scratch/users/annen/anaconda3/envs/Biopython
-cat tmp_gn.txt | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Magnaporthe/concat_msa.py SCO_Alignments_with_outgroup ALL_SCOs_outgroup.afa
+#cat tmp_gn.txt | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Magnaporthe/concat_msa.py SCO_Alignments_with_outgroup ALL_SCOs_outgroup.afa
+cat tmp_gn.txt > tmp_outgrp.txt
+echo "Mgrxx_NI907" >> tmp_outgrp.txt
+echo "Mgrxx_NI919" >> tmp_outgrp.txt
+cat tmp_outgrp.txt | python /global/scratch/users/annen/KVKLab/fungal_srs/hv_pipeline/Magnaporthe/concat_msa.py SCO_Alignments_with_outgroup ALL_SCOs_outgroup.afa
 source deactivate
 echo "done concatenating alignment"
 
