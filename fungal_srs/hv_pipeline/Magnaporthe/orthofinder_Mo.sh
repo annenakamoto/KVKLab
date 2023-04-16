@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name=orthofinder
-#SBATCH --partition=savio
+#SBATCH --partition=savio2
 #SBATCH --qos=savio_normal
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=20
+#SBATCH --ntasks-per-node=24
 #SBATCH --time=72:00:00
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
