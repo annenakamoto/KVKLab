@@ -15,11 +15,11 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder
 mkdir -p Pfam_Scan_out
 source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
-part=${1}
+part=${1}   # 000, 001, etc; 01 to 18
 ls OrthoFinder_out/Results_out/WorkingDirectory/OrthoFinder/Results_out/Orthogroup_Sequences/OG00${part}* | while read fa; do
     og=$(basename "${fa}")
     echo ${og}
-    pfam_scan.pl -fasta OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${og} -dir Pfam_lib -e_dom 0.01 -e_seq 0.01 -outfile Pfam_Scan_out/${og}.pfamscan.out
+    pfam_scan.pl -fasta OrthoFinder_out/Results_out/WorkingDirectory/OrthoFinder/Results_out/Orthogroup_Sequences/${og} -dir Pfam_lib -e_dom 0.01 -e_seq 0.01 -outfile Pfam_Scan_out/${og}.pfamscan.out
 done
 source deactivate
 
