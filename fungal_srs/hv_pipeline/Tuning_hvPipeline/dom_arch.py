@@ -8,7 +8,7 @@ ARCHS = {}      # key=gene, value=ordered list of domains "name,id"
 num_hits = 0
 for line in sys.stdin:
     lst = line.split()
-    if len(lst) > 0 and "Zm" in lst[0]:
+    if len(lst) > 0 and "Mo" in lst[0]:
         num_hits += 1
         gene = lst[0]
         pfid = lst[5]
