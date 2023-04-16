@@ -14,7 +14,7 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder
 module purge
 
 ### parallelize diamond blastp part
-# source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
+source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
 
 # orthofinder -op -S diamond_ultra_sens -f MoPROTEOMES_72 -n out -o OrthoFinder_out | grep "diamond blastp" > jobqueue
 
@@ -38,7 +38,9 @@ module purge
 
 ### command for single orthofinder run with no parallelization
 #orthofinder -os -f MoPROTEOMES_72 -t ${SLURM_NTASKS} -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree -X -o OrthoFinder_out
-# source deactivate
+### command for adding outgroups to orthofinder results
+orthofinder -os -b OrthoFinder_out/Results_out/WorkingDirectory -f MoOUTGROUPS -t ${SLURM_NTASKS} -a 10 -M msa -S diamond_ultra_sens -A mafft -T fasttree -X -o OrthoFinder_out
+source deactivate
 
 ### MAKE GENOME TREE ###
 
@@ -52,19 +54,19 @@ module purge
 # done
 
 ### align other OGs
-og_dir=/global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder/OrthoFinder_out/Results_out/WorkingDirectory/OrthoFinder/Results_out/Orthogroup_Sequences
-mkdir -p OG_Alignments
-part=${1}   ## 00 to 18
-ls ${og_dir}/OG00${part}* | awk -v FS="." '{ print substr($1, length($1)-8, length($1)) }' | while read sco; do
-    if [ -f "SCO_Alignments/${sco}.afa" ]; then 
-        cp SCO_Alignments/${sco}.afa OG_Alignments/${sco}.afa
-        echo "copied over ${sco}"
-    else 
-        echo "aligning ${sco}..."
-        mafft --maxiterate 1000 --globalpair --thread ${SLURM_NTASKS} --quiet ${og_dir}/${sco}.fa > OG_Alignments/${sco}.afa
-        echo "${sco} done"
-    fi
-done
+# og_dir=/global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder/OrthoFinder_out/Results_out/WorkingDirectory/OrthoFinder/Results_out/Orthogroup_Sequences
+# mkdir -p OG_Alignments
+# part=${1}   ## 00 to 18
+# ls ${og_dir}/OG00${part}* | awk -v FS="." '{ print substr($1, length($1)-8, length($1)) }' | while read sco; do
+#     if [ -f "SCO_Alignments/${sco}.afa" ]; then 
+#         cp SCO_Alignments/${sco}.afa OG_Alignments/${sco}.afa
+#         echo "copied over ${sco}"
+#     else 
+#         echo "aligning ${sco}..."
+#         mafft --maxiterate 1000 --globalpair --thread ${SLURM_NTASKS} --quiet ${og_dir}/${sco}.fa > OG_Alignments/${sco}.afa
+#         echo "${sco} done"
+#     fi
+# done
 
 ### Concatenate MSAs
 # source activate /global/scratch/users/annen/anaconda3/envs/Biopython
