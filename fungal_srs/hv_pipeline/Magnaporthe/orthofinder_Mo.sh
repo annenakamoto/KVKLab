@@ -39,7 +39,7 @@ source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
 ### command for single orthofinder run with no parallelization
 #orthofinder -os -f MoPROTEOMES_72 -t ${SLURM_NTASKS} -a 5 -M msa -S diamond_ultra_sens -A mafft -T fasttree -X -o OrthoFinder_out
 ### command for adding outgroups to orthofinder results
-orthofinder -os -b OrthoFinder_out/Results_out/WorkingDirectory -f MoOUTGROUPS -t ${SLURM_NTASKS} -a 10 -M msa -S diamond_ultra_sens -A mafft -T fasttree -X -o OrthoFinder_outgroup
+orthofinder -os -b OrthoFinder_out/Results_out/WorkingDirectory -f MoOUTGROUPS -t ${SLURM_NTASKS} -a 10 -M msa -S diamond_ultra_sens -A mafft -T fasttree -X 
 source deactivate
 
 ### MAKE GENOME TREE ###
