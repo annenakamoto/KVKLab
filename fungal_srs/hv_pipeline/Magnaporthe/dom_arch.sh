@@ -9,24 +9,19 @@
 
 ### download Pfam library (Pfam-A.hmm and Pfam-A.dat)
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder
-mkdir -p Pfam_lib
-cd Pfam_lib
-wget http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam35.0/Pfam-A.hmm.gz
-wget http://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam35.0/Pfam-A.hmm.dat.gz
-gunzip *.gz
-hmmpress Pfam-A.hmm
+# cp /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/Pfam_lib/* Pfam_lib
 
 ### run pfam_scan to determine domain architecture for each OG
-# cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder
-# mkdir -p Pfam_Scan_out
-# source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
-# part=${1}
-# ls OrthoFinder_out/Results_out/WorkingDirectory/OrthoFinder/Results_out/Orthogroup_Sequences/OG00${part}* | while read fa; do
-#     og=$(basename "${fa}")
-#     echo ${og}
-#     pfam_scan.pl -fasta OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${og} -dir Pfam_lib -e_dom 0.01 -e_seq 0.01 -outfile Pfam_Scan_out/${og}.pfamscan.out
-# done
-# source deactivate
+cd /global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder
+mkdir -p Pfam_Scan_out
+source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
+part=${1}
+ls OrthoFinder_out/Results_out/WorkingDirectory/OrthoFinder/Results_out/Orthogroup_Sequences/OG00${part}* | while read fa; do
+    og=$(basename "${fa}")
+    echo ${og}
+    pfam_scan.pl -fasta OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${og} -dir Pfam_lib -e_dom 0.01 -e_seq 0.01 -outfile Pfam_Scan_out/${og}.pfamscan.out
+done
+source deactivate
 
 ### parse each pfam_scan output file for domain architecture of the OG
 # > Domain_Arch/OG_domarch.REPORT.txt
