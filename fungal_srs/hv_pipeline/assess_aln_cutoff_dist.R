@@ -4,8 +4,8 @@ require(treeio)
 require(msa)
 require(entropy)
 
-setwd("/global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/OG_MAFFT")
-#setwd("/global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder/OG_Alignments")
+#setwd("/global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/OG_MAFFT")
+setwd("/global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder/OG_Alignments")
 
 ### Function: determine if an alignment meets hv criteria
 ###     afa is the alignment file name
