@@ -15,7 +15,10 @@ source activate /global/scratch/users/annen/anaconda3/envs/R
 
 ### maize
 #Rscript KVKLab/fungal_srs/hv_pipeline/assess_alignment.R | awk '/[1]/ { print substr($2,2,9); }' > HValn_OGs_list.txt
-Rscript KVKLab/fungal_srs/hv_pipeline/assess_alignment.R | awk '/[1]/ { print substr($2,2,9); }' > MoHValn_OGs_list.txt
+Rscript KVKLab/fungal_srs/hv_pipeline/assess_aln_cutoff_dist.R | awk '/[1]/ { print substr($2,2,9); }' > HValn_OGs_cutoff_dist_Zm.txt
+
+### magnaporthe
+#Rscript KVKLab/fungal_srs/hv_pipeline/assess_alignment.R | awk '/[1]/ { print substr($2,2,9); }' > MoHValn_OGs_list.txt
 
 
 conda deactivate
