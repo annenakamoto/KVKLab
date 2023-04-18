@@ -63,7 +63,6 @@ for og in NLR_OGs:
     all_genes = OG_REV[og]
     num_genes = len(all_genes)
     num_nlrs = len(NLRs.intersection(set(all_genes)))
-    print(str(num_nlrs) + " / " + str(num_genes))
     if num_nlrs/num_genes >= 0.5:
         print(og)
 print()
@@ -74,6 +73,5 @@ for og in NLR_OGs:
     all_genes = OG_REV[og]
     num_genes = len(all_genes)
     num_nlrs = len(NLRs.intersection(set(all_genes)))
-    print(str(num_nlrs) + " / " + str(num_genes))
     if num_nlrs/num_genes >= 0.2:
         print(og)
