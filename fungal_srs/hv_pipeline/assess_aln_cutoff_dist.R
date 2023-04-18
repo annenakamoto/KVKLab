@@ -51,7 +51,7 @@ assess_alignment <- function(afa) {
   nHVsites <- length(which(entNG > hvSiteEntCutoff))                          ####KEY CUTOFF PARAMETER
   
   ## CHANGED: print the alignment name and the number of hv sites it contains (to make a distribution)
-  nsites <- length(entNG)
+  nsites <- length(which(entNG >= 0)) 
   HVsites_norm <- nHVsites / nsites
   print(paste(afa, nHVsites, HVsites_norm, collapse='\t'))
 }
