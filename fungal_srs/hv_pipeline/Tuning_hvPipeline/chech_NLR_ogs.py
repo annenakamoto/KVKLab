@@ -44,7 +44,7 @@ with open("OrthoFinder_out/Results_Mar16/Orthogroups/Orthogroups.txt", 'r') as f
         for gene in lst[1:]:
             gene_up = gene.upper()  # make gene names all uppercase to match the GeneTable above
             OG[gene_up] = og
-            OG_REV[og].append(gene) 
+            OG_REV[og].append(gene.upper()) 
 print("Number of orthogroups: " + str(count))
 print()
 
