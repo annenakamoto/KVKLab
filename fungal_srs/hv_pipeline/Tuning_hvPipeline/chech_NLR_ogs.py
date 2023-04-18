@@ -55,16 +55,20 @@ for clade,genes in CLADE_F.items():
         NLR_OGs.add(OG[gene])
 print("list of OGs that contain any NLR:")
 print("\n".join(list(NLR_OGs)))
+print()
 
 ### print the list of OGs that contain >= 50% NLRs
+print("list of OGs that contain >= 50% NLRs:")
 for og in NLR_OGs:
     all_genes = OG_REV[og]
     num_genes = len(all_genes)
     num_nlrs = len(NLRs.intersection(set(all_genes)))
     if num_nlrs/num_genes >= 0.5:
         print(og)
+print()
 
 ### print the list of OGs that contain >= 20% NLRs
+print("list of OGs that contain >= 20% NLRs:")
 for og in NLR_OGs:
     all_genes = OG_REV[og]
     num_genes = len(all_genes)
