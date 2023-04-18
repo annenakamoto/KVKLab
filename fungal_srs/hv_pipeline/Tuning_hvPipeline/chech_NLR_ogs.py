@@ -55,6 +55,7 @@ for clade,genes in CLADE_F.items():
         NLR_OGs.add(OG[gene])
 print("list of OGs that contain any NLR:")
 print("\n".join(list(NLR_OGs)))
+print("Total: " + str(len(NLR_OGs)))
 print()
 
 ### print the list of OGs that contain >= 75% NLRs
