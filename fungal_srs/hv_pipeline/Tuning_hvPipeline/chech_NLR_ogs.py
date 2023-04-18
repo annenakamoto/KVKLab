@@ -57,21 +57,40 @@ print("list of OGs that contain any NLR:")
 print("\n".join(list(NLR_OGs)))
 print()
 
+### print the list of OGs that contain >= 75% NLRs
+print("list of OGs that contain >= 75% NLRs:")
+c = 0
+for og in NLR_OGs:
+    all_genes = OG_REV[og]
+    num_genes = len(all_genes)
+    num_nlrs = len(NLRs.intersection(set(all_genes)))
+    if num_nlrs/num_genes >= 0.75:
+        print(og)
+        c += 1
+print("Total: " + str(c))
+print()
+
 ### print the list of OGs that contain >= 50% NLRs
 print("list of OGs that contain >= 50% NLRs:")
+c = 0
 for og in NLR_OGs:
     all_genes = OG_REV[og]
     num_genes = len(all_genes)
     num_nlrs = len(NLRs.intersection(set(all_genes)))
     if num_nlrs/num_genes >= 0.5:
         print(og)
+        c += 1
+print("Total: " + str(c))
 print()
 
-### print the list of OGs that contain >= 20% NLRs
-print("list of OGs that contain >= 20% NLRs:")
+### print the list of OGs that contain >= 25% NLRs
+print("list of OGs that contain >= 25% NLRs:")
+c = 0
 for og in NLR_OGs:
     all_genes = OG_REV[og]
     num_genes = len(all_genes)
     num_nlrs = len(NLRs.intersection(set(all_genes)))
-    if num_nlrs/num_genes >= 0.2:
+    if num_nlrs/num_genes >= 0.25:
         print(og)
+        c += 1
+print("Total: " + str(c))
