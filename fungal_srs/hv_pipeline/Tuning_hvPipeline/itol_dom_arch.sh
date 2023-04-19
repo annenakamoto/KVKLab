@@ -29,5 +29,5 @@ source activate /global/scratch/users/annen/anaconda3/envs/R
 hmmsearch --domtblout ${OG}.Pfam.tbl Pfam_lib/Pfam-A.hmm OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${OG}.fa
 tr -s ' ' <${OG}.Pfam.tbl > ${OG}.Pfam.ws.tbl
 Rscript ../../ProteinFamily/scripts/reduce_pfam.R -i ${OG}.Pfam.ws.tbl -o ${OG}.Pfam.reduced.tbl -e 1e-3 -f 0.3 -a 10
-Rscript ../../ProteinFamily/scripts/DomainDiagrams_sm.R -o ${OG}.iTOL.domains.txt -i ${OG}.Pfam.reduced.tbl -f ${OG}.fulllength.fa -a pbNB-ARC.hmmalign.afa
+Rscript ../../ProteinFamily/scripts/DomainDiagrams_sm.R -o ${OG}.iTOL.domains.txt -i ${OG}.Pfam.reduced.tbl -f OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${OG}.fa -a pbNB-ARC.hmmalign.afa
 source deactivate
