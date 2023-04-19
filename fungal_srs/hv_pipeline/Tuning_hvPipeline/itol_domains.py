@@ -36,11 +36,11 @@ with open(dm, 'r') as tbl:
             shape = "DI"
             color = "#9e9e9e"   # grey
     if DOMAINS.get(gene_name):
-        item = [shape,start,stop,color,domain_name]
-        DOMAINS[gene_name].append(item)
+        item = [str(shape),str(start),str(stop),str(color),str(domain_name)]
+        DOMAINS[str(gene_name)].append(item)
     else:
-        item = [shape,start,stop,color,domain_name]
-        DOMAINS[gene_name] = [item]
+        item = [str(shape),str(start),str(stop),str(color),str(domain_name)]
+        DOMAINS[str(gene_name)] = [item]
 
 print(DOMAINS)
 
