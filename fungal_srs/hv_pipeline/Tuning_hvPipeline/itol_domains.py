@@ -35,12 +35,12 @@ with open(dm, 'r') as tbl:
         else:
             shape = "DI"
             color = "#9e9e9e"   # grey
-    if DOMAINS.get(gene_name):
-        item = [str(shape),str(start),str(stop),str(color),str(domain_name)]
-        DOMAINS[str(gene_name)].append(item)
-    else:
-        item = [str(shape),str(start),str(stop),str(color),str(domain_name)]
-        DOMAINS[str(gene_name)] = [item]
+        if DOMAINS.get(gene_name):
+            item = [str(shape),str(start),str(stop),str(color),str(domain_name)]
+            DOMAINS[str(gene_name)].append(item)
+        else:
+            item = [str(shape),str(start),str(stop),str(color),str(domain_name)]
+            DOMAINS[str(gene_name)] = [item]
 
 print(DOMAINS)
 
