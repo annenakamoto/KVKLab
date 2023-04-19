@@ -22,7 +22,6 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
 # done
 
 OG=${1}
-THR=${2}    # specify number of threads for raxml
 ### run raxml on OG alignment
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/OG_RAXML
-raxmlHPC-PTHREADS-SSE3 -s /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/OG_MAFFT/${OG}.afa -n RAxML.${OG}.${THR} -T ${THR} -m PROTCATJTT -f a -x 12345 -p 12345 -# 100
+raxmlHPC-PTHREADS-SSE3 -s ../OG_MAFFT/${OG}.afa -n RAxML.${OG} -T ${SLURM_NTASKS} -m PROTCATJTT -f a -x 12345 -p 12345 -# 100

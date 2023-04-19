@@ -31,7 +31,7 @@ with open(dm, 'r') as tbl:
             color = "#de4b4d"   # red
         elif "Rx_N" in domain_name:
             shape = "EL"
-            color = "6aeb65"   # green
+            color = "#6aeb65"   # green
         else:
             shape = "DI"
             color = "#9e9e9e"   # grey
@@ -43,6 +43,11 @@ with open(dm, 'r') as tbl:
             DOMAINS[str(gene_name)] = [item]
 
 with open(out, 'w') as output:
+    output.write("DATASET_DOMAINS\n")
+    output.write("SEPARATOR COMMA\n")
+    output.write("DATASET_LABEL,Domains\n")
+    output.write("COLOR,#ff0000\n")
+    output.write("DATA\n")
     for i in range(len(record_list)):
         record = record_list[i]
         gene_name = record.id
