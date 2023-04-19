@@ -42,14 +42,12 @@ with open(dm, 'r') as tbl:
             item = [str(shape),str(start),str(stop),str(color),str(domain_name)]
             DOMAINS[str(gene_name)] = [item]
 
-print(DOMAINS)
-
 with open(out, 'w') as output:
     for i in range(len(record_list)):
         record = record_list[i]
         gene_name = record.id
         length = len(record.seq)
-        result = [gene_name,length]
+        result = [str(gene_name),str(length)]
         for d in DOMAINS[gene_name]:
             result.append("|".join(d))
         #output.write(",".join(result))
