@@ -40,6 +40,7 @@ with open(dm, 'r') as tbl:
     else:
         DOMAINS[gene_name] = [[shape,start,stop,color,domain_name]]
 
+print(DOMAINS)
 
 with open(out, 'w') as output:
     for i in range(len(record_list)):
