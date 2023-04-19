@@ -48,8 +48,9 @@ with open(out, 'w') as output:
         gene_name = record.id
         length = len(record.seq)
         result = [str(gene_name),str(length)]
-        for d in DOMAINS[gene_name]:
-            result.append("|".join(d))
-        #output.write(",".join(result))
-        print(",".join(result))
+        if DOMAINS.get(gene_name):
+            for d in DOMAINS[gene_name]:
+                result.append("|".join(d))
+            #output.write(",".join(result))
+            print(",".join(result))
 
