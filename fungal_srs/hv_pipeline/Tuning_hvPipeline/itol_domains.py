@@ -51,6 +51,6 @@ with open(out, 'w') as output:
         if DOMAINS.get(gene_name):
             for d in DOMAINS[gene_name]:
                 result.append("|".join(d))
-            output.write(",".join(result))
+            output.write(",".join(result) + "\n")
             #print(",".join(result))
 
