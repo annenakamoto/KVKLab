@@ -26,7 +26,9 @@ esl-alimask --rf-is-mask pbNB-ARC.hmmalign.sto | esl-alimanip --lmin 100 -|esl-r
 source deactivate
 
 source activate /global/scratch/users/annen/anaconda3/envs/R
-hmmsearch --domtblout ${OG}.Pfam.tbl Pfam_lib/Pfam-A.hmm OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${OG}.fa
+cat Pfam_lib/Pfam-A.hmm ../../ProteinFamily/HMM_models/* > Pfam-A.plus.hmm
+hmmpress Pfam-A.plus.hmm
+hmmsearch --domtblout ${OG}.Pfam.tbl Pfam-A.plus.hmm OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${OG}.fa
 tr -s ' ' <${OG}.Pfam.tbl > ${OG}.Pfam.ws.tbl
 Rscript ../../ProteinFamily/scripts/reduce_pfam.R -i ${OG}.Pfam.ws.tbl -o ${OG}.Pfam.reduced.tbl -e 1e-3 -f 0.3 -a 10
 Rscript ../../ProteinFamily/scripts/DomainDiagrams_sm.R -o ${OG}.iTOL.domains.txt -i ${OG}.Pfam.reduced.tbl -f OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${OG}.fa -a pbNB-ARC.hmmalign.afa
