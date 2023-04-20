@@ -14,7 +14,7 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/OG_RAXML
 start=${1}
 stop=${2}
 
-cat HValn_OGs_list.txt | sed -n "${start},${stop}p" | while read OG; do
+cat ../../../HValn_OGs_list.txt | sed -n "${start},${stop}p" | while read OG; do
     #sbatch -A co_minium --qos=savio_lowprio --requeue KVKLab/fungal_srs/hv_pipeline/Tuning_hvPipeline/og_mafft_raxml.sh ${OG}
     if [ ! -f "RAxML_bipartitionsBranchLabels.RAxML.${OG}" ]; then
         echo "*********** ${OG} starting raxml ***********"
