@@ -19,7 +19,7 @@ option_list = list(
   make_option(c("-s", "--min_hvSites"), type="numeric", default=10, 
               help="minimum number of highly variable sites in alignment [default=10]", metavar="numeric"),
   make_option(c("-e", "--Eco_cutoff"), type="numeric", default=17, 
-              help="number of ecotypes cutoff (this will depend on the number of proteomes used, rule of thumb is 2/3 so 17 for Zm) [default=17]", metavar="numeric"),
+              help="number of ecotypes cutoff (this will depend on the number of proteomes used, rule of thumb is 2/3 so 17 for Zm) [default=17]", metavar="numeric")
 ); 
  
 opt_parser = OptionParser(option_list=option_list);
