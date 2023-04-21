@@ -14,7 +14,7 @@ option_list = list(
               help="minimum gap fraction of alignment [default=0.9]", metavar="numeric"),
   make_option(c("-w", "--MinGapBlockWidth"), type="numeric", default=3, 
               help="minimum gap block width of alignment [default=3]", metavar="numeric"),
-  make_option(c("-h", "--hvSiteEntCutoff"), type="numeric", default=1.5, 
+  make_option(c("-v", "--hvSiteEntCutoff"), type="numeric", default=1.5, 
               help="highly variable site entropy cutoff [default=1.5]", metavar="numeric"),
   make_option(c("-s", "--min_hvSites"), type="numeric", default=10, 
               help="minimum number of highly variable sites in alignment [default=10]", metavar="numeric"),
