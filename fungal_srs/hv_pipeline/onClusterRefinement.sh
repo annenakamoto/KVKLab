@@ -47,6 +47,7 @@ ls ${working_dir}/${ref_dir} | awk -v FS="_" -v n="${num}" '$n ~ /.afa/ { print 
     rm ${working_dir}/tmp.${clade}.list.txt
 
     ### run mafft
+    module load mafft
     mafft --maxiterate 1000 --localpair --thread ${SLURM_NTASKS} --quiet ${working_dir}/tmp.${clade}.fa > ${working_dir}/${new_dir}/${clade}.afa
     rm ${working_dir}/tmp.${clade}.fa
 
