@@ -3,22 +3,22 @@
 ### options passed from command line
 library("optparse")
 option_list = list(
-  make_option(c("-wd", "--working_dir"), type="character", default=NULL, 
+  make_option(c("-d", "--working_dir"), type="character", default=NULL, 
               help="working directory path, where Refinement and Initial directories are located", metavar="character"),
   make_option(c("-i", "--init_dir"), type="character", default=NULL, 
               help="name of initial directory containing the trees and alignments to refine", metavar="character"),
   make_option(c("-r", "--ref_dir"), type="character", default=NULL, 
               help="name of the directory to output the results of the refinement to", metavar="character"),
 
-  make_option(c("-mgf", "--MinGapFraction"), type="numeric", default=0.9, 
+  make_option(c("-f", "--MinGapFraction"), type="numeric", default=0.9, 
               help="minimum gap fraction of alignment [default=0.9]", metavar="numeric"),
-  make_option(c("-mgbw", "--MinGapBlockWidth"), type="numeric", default=3, 
+  make_option(c("-w", "--MinGapBlockWidth"), type="numeric", default=3, 
               help="minimum gap block width of alignment [default=3]", metavar="numeric"),
-  make_option(c("-hve", "--hvSiteEntCutoff"), type="numeric", default=1.5, 
+  make_option(c("-h", "--hvSiteEntCutoff"), type="numeric", default=1.5, 
               help="highly variable site entropy cutoff [default=1.5]", metavar="numeric"),
-  make_option(c("-hvs", "--min_hvSites"), type="numeric", default=10, 
+  make_option(c("-s", "--min_hvSites"), type="numeric", default=10, 
               help="minimum number of highly variable sites in alignment [default=10]", metavar="numeric"),
-  make_option(c("-eco", "--Eco_cutoff"), type="numeric", default=17, 
+  make_option(c("-e", "--Eco_cutoff"), type="numeric", default=17, 
               help="number of ecotypes cutoff (this will depend on the number of proteomes used, rule of thumb is 2/3 so 17 for Zm) [default=17]", metavar="numeric"),
 ); 
  
