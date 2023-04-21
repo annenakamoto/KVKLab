@@ -18,6 +18,7 @@ tasks=${4}
 
 cat HValn_OGs_list.txt | sed -n "${start},${stop}p" | while read OG; do
     if [ ! -f "000_FUNGAL_SRS_000/Tuning_hvPipeline/OG_RAXML/RAxML_bipartitionsBranchLabels.RAxML.${OG}" ]; then
+        rm 000_FUNGAL_SRS_000/Tuning_hvPipeline/OG_RAXML/*${OG}
         echo "*********** ${OG} starting job ***********"
         sbatch -A co_minium --qos=savio_lowprio -p ${part} --ntasks-per-node=${tasks} --requeue KVKLab/fungal_srs/hv_pipeline/Tuning_hvPipeline/og_mafft_raxml.sh ${OG}
     else

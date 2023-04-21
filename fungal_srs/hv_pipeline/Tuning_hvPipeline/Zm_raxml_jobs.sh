@@ -20,6 +20,7 @@ cat ../../../HValn_OGs_list.txt | sed -n "${start},${stop}p" | while read OG; do
         echo "*********** ${OG} starting raxml ***********"
         dt=$(date '+%m/%d/%Y %H:%M:%S')
         echo "STARTING: ${dt}"
+        rm *${OG}
         raxmlHPC-PTHREADS-SSE3 -s ../OG_MAFFT/${OG}.afa -n RAxML.${OG} -T ${SLURM_NTASKS} -m PROTCATJTT -f a -x 12345 -p 12345 -# 100
         dt=$(date '+%m/%d/%Y %H:%M:%S')
         echo "DONE: ${dt}"
