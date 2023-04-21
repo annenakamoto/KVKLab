@@ -18,24 +18,24 @@ ref_dir="Refinement${ref_num}"              # name of the directory to output th
 new_dir="Refinement${next_ref_num}_init"    # name of new directory to output msa to for next refinement step (ie. Refinement2_init)
 
 module purge
-source activate /global/scratch/users/annen/anaconda3/envs/R
 ### Run a Refinement step from the directories specified above and with default settings (are for Zm)
-dt=$(date '+%m/%d/%Y %H:%M:%S')
-echo "STARTING ${ref_dir}: ${dt}"
-Rscript ../../KVKLab/fungal_srs/hv_pipeline/onCluster_AutoRefinement.R -d ${working_dir} -i ${init_dir} -r ${ref_dir}
-dt=$(date '+%m/%d/%Y %H:%M:%S')
-echo "DONE ${ref_dir}: ${dt}"
-source deactivate
+# source activate /global/scratch/users/annen/anaconda3/envs/R
+# dt=$(date '+%m/%d/%Y %H:%M:%S')
+# echo "STARTING ${ref_dir}: ${dt}"
+# Rscript ../../KVKLab/fungal_srs/hv_pipeline/onCluster_AutoRefinement.R -d ${working_dir} -i ${init_dir} -r ${ref_dir}
+# dt=$(date '+%m/%d/%Y %H:%M:%S')
+# echo "DONE ${ref_dir}: ${dt}"
+# source deactivate
 
 ### set up the dir/files for the next Refinement step
 mkdir -p ${working_dir}/${new_dir}     # create the new refinement directory if it doesn't already exist
 num=$((${ref_num}*3+1))     # Refinement1=4, Refinement2=7 , Refinement3=10 (ref_num*3 + 1) for distinguishing new clades
-new_todo=$(ls ${ref_dir} | awk -v FS="_" -v n="${num}" '$n ~ /.afa/ { print substr($0,1,length($0)-4); }' | wc -l)
+new_todo=$(ls ${working_dir}/${ref_dir} | awk -v FS="_" -v n="${num}" '$n ~ /.afa/ { print substr($0,1,length($0)-4); }' | wc -l)
 echo
 echo "*** There are ${new_todo} split clades for next refinement step ***"
 echo
 
-ls ${ref_dir} | awk -v FS="_" -v n="${num}" '$n ~ /.afa/ { print substr($0,1,length($0)-4); }' | while read clade; do    
+ls ${working_dir}/${ref_dir} | awk -v FS="_" -v n="${num}" '$n ~ /.afa/ { print substr($0,1,length($0)-4); }' | while read clade; do    
     # clade = name of a clade that has been split and made it to next refinement step (ie. OG0000110_216_L_149)
     OG=$(echo ${clade} | awk -v FS="_" '{ print $1; }')     # get the name of the orthogroup from the clade name
     
