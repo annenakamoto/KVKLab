@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=og_raxml
+#SBATCH --job-name=process_refinement
 #SBATCH --partition=savio2
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
