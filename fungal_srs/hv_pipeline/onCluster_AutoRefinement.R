@@ -4,11 +4,11 @@
 library("optparse")
 option_list = list(
   make_option(c("-d", "--working_dir"), type="character", default=NULL, 
-              help="working directory path, where Refinement and Initial directories are located", metavar="character"),
+              help="working directory path, where Refinement and Initial directories are located [REQUIRED]", metavar="character"),
   make_option(c("-i", "--init_dir"), type="character", default=NULL, 
-              help="name of initial directory containing the trees and alignments to refine", metavar="character"),
+              help="name of initial directory containing the trees and alignments to refine [REQUIRED]", metavar="character"),
   make_option(c("-r", "--ref_dir"), type="character", default=NULL, 
-              help="name of the directory to output the results of the refinement to", metavar="character"),
+              help="name of the directory to output the results of the refinement to [REQUIRED]", metavar="character"),
 
   make_option(c("-f", "--MinGapFraction"), type="numeric", default=0.9, 
               help="minimum gap fraction of alignment [default=0.9]", metavar="numeric"),
