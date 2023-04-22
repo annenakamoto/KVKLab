@@ -23,19 +23,11 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
 
 OG=${1}
 ### run raxml on OG alignment
-# cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/REFINEMENT/RAxML_ref2
-# echo "*********** ${OG} starting raxml ***********"
-# dt=$(date '+%m/%d/%Y %H:%M:%S')
-# echo "STARTING: ${dt}"
-# raxmlHPC-PTHREADS-SSE3 -s ../Refinement2_init/${OG}.afa -n RAxML.${OG} -T ${SLURM_NTASKS} -m PROTCATJTT -f a -x 12345 -p 12345 -# 100
-# dt=$(date '+%m/%d/%Y %H:%M:%S')
-# echo "DONE: ${dt}"
-
-
-cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/REFINEMENT_nlrs/Refinement2_init_corrected
+cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/REFINEMENT/RAxML_ref2
 echo "*********** ${OG} starting raxml ***********"
 dt=$(date '+%m/%d/%Y %H:%M:%S')
 echo "STARTING: ${dt}"
-raxmlHPC-PTHREADS-SSE3 -s ${OG}.afa -n RAxML.${OG} -T ${SLURM_NTASKS} -m PROTCATJTT -f a -x 12345 -p 12345 -# 100
+raxmlHPC-PTHREADS-SSE3 -s ../Refinement2_init/${OG}.afa -n RAxML.${OG} -T ${SLURM_NTASKS} -m PROTCATJTT -f a -x 12345 -p 12345 -# 100
 dt=$(date '+%m/%d/%Y %H:%M:%S')
 echo "DONE: ${dt}"
+
