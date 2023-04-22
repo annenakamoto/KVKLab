@@ -81,15 +81,13 @@ get_mrca_name <- function(tree,node){
   }
 }
 
+### Daniil's function (edited for Zm)
 get_eco_name <- function(tree,node){
   require(treeio)
   if (!inherits(tree,"tbl_tree")) stop("Agrument must be a 'tbl_tree' object, use as_tibble() on treedata or phylo objects before passing to this function")
   if (!isTip(tree,node)){return(NA)}else{
     label <- tree[node,]$label
-    if(grepl(x=label,pattern = "GWHPA")){eco = label %>%str_remove_all("[0-9]")}else
-      if(grepl(x=label,pattern = "ZH13")){eco = "ZH13"}else
-        if(grepl(x=label,pattern = "W05")){eco = "W05"}else
-          if(grepl(x=label,pattern = "GLYMA")){eco = "Wm82"}else{eco = NA}
+    eco <- substring(label, 1, 9)   # gets the unique genome identifier, i.e. Zm00021ab
     return(eco)
   }
 }
