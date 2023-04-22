@@ -19,13 +19,13 @@ new_dir="Refinement${next_ref_num}_init"    # name of new directory to output ms
 
 module purge
 ### Run a Refinement step from the directories specified above and with default settings (are for Zm)
-# source activate /global/scratch/users/annen/anaconda3/envs/R
-# dt=$(date '+%m/%d/%Y %H:%M:%S')
-# echo "STARTING ${ref_dir}: ${dt}"
-# Rscript ../../KVKLab/fungal_srs/hv_pipeline/onCluster_AutoRefinement.R -d ${working_dir} -i ${init_dir} -r ${ref_dir}
-# dt=$(date '+%m/%d/%Y %H:%M:%S')
-# echo "DONE ${ref_dir}: ${dt}"
-# source deactivate
+source activate /global/scratch/users/annen/anaconda3/envs/R
+dt=$(date '+%m/%d/%Y %H:%M:%S')
+echo "STARTING ${ref_dir}: ${dt}"
+Rscript ../../KVKLab/fungal_srs/hv_pipeline/onCluster_AutoRefinement.R -d ${working_dir} -i ${init_dir} -r ${ref_dir}
+dt=$(date '+%m/%d/%Y %H:%M:%S')
+echo "DONE ${ref_dir}: ${dt}"
+source deactivate
 
 ### set up the dir/files for the next Refinement step
 mkdir -p ${working_dir}/${new_dir}     # create the new refinement directory if it doesn't already exist
