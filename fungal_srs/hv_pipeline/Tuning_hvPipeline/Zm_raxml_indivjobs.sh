@@ -18,7 +18,7 @@ part=${3}
 tasks=${4}
 
 #cat HValn_OGs_list.txt 
-cat Ref2_clade_list.txt | sed -n "${start},${stop}p" | while read OG; do
+cat Ref3_clade_list.txt | sed -n "${start},${stop}p" | while read OG; do
     if [ ! -f "000_FUNGAL_SRS_000/Tuning_hvPipeline/REFINEMENT/RAxML_ref3/RAxML_bipartitionsBranchLabels.RAxML.${OG}" ]; then
         rm 000_FUNGAL_SRS_000/Tuning_hvPipeline/REFINEMENT/RAxML_ref3/*${OG}
         echo "*********** ${OG} starting job ***********"
