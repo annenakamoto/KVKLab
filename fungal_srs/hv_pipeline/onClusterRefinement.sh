@@ -7,10 +7,13 @@
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
-cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
-
 working_dir=${1}    # working directory path, where Refinement and Initial directories are located [REFINEMENT]
 ref_num=${2}        # the refinement number (1,2,3, etc)
+sp_dir=${3}         # species dir (Zm: Tuning_hvPipeline, Mo: MoOrthoFinder)
+eco_cut=17          # set ecotype cutoff for Zm (17)
+eco_cut=${4}        # specify different species ecotype cutoff (Mo: 48)
+
+cd /global/scratch/users/annen/000_FUNGAL_SRS_000/${sp_dir}
 
 next_ref_num=$((${ref_num}+1))
 init_dir="Refinement${ref_num}_init"        # name of initial directory containing the trees and alignments to refine (ie. Refinement1_init)
@@ -18,11 +21,11 @@ ref_dir="Refinement${ref_num}"              # name of the directory to output th
 new_dir="Refinement${next_ref_num}_init"    # name of new directory to output msa to for next refinement step (ie. Refinement2_init)
 
 module purge
-### Run a Refinement step from the directories specified above and with default settings (are for Zm)
+### Run a Refinement step from the directories specified above
 source activate /global/scratch/users/annen/anaconda3/envs/R
 dt=$(date '+%m/%d/%Y %H:%M:%S')
 echo "STARTING ${ref_dir}: ${dt}"
-Rscript ../../KVKLab/fungal_srs/hv_pipeline/onCluster_AutoRefinement.R -d ${working_dir} -i ${init_dir} -r ${ref_dir}
+Rscript ../../KVKLab/fungal_srs/hv_pipeline/onCluster_AutoRefinement.R -d ${working_dir} -i ${init_dir} -r ${ref_dir} -e ${eco_cut}
 dt=$(date '+%m/%d/%Y %H:%M:%S')
 echo "DONE ${ref_dir}: ${dt}"
 source deactivate
