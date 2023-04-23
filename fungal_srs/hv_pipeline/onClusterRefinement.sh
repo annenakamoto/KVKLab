@@ -44,7 +44,7 @@ ls ${working_dir}/${ref_dir} | awk -v FS="_" -v n="${num}" '$n ~ /.afa/ { print 
     
     ### make new fasta file of genes just in the CLADE
     module load seqtk
-    fa=OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/${OG}.fa
+    fa=OrthoFinder_out/${of_dir}/Orthogroup_Sequences/${OG}.fa
     cat ${working_dir}/${ref_dir}/${clade}.afa | awk '/>/ { print substr($1, 2); }' > ${working_dir}/tmp.${clade}.list.txt
     seqtk subseq -l 60 ${fa} ${working_dir}/tmp.${clade}.list.txt > ${working_dir}/tmp.${clade}.fa
     rm ${working_dir}/tmp.${clade}.list.txt
