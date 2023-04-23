@@ -10,8 +10,8 @@
 working_dir=${1}    # working directory path, where Refinement and Initial directories are located [REFINEMENT]
 ref_num=${2}        # the refinement number (1,2,3, etc)
 sp_dir=${3}         # species dir (Zm: Tuning_hvPipeline, Mo: MoOrthoFinder)
-eco_cut=17          # set ecotype cutoff for Zm (17)
 eco_cut=${4}        # specify different species ecotype cutoff (Mo: 48)
+of_dir=${5}         # orthofinder results dir (Zm: Results_Mar16, Mo: Results_out)
 
 cd /global/scratch/users/annen/000_FUNGAL_SRS_000/${sp_dir}
 
