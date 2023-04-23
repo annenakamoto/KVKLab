@@ -22,12 +22,14 @@ cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline
 # done
 
 OG=${1}
+raxml_dir=${2}
+aln_dir=${3}
 ### run raxml on OG alignment
-cd /global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/REFINEMENT/RAxML_ref3
+cd /global/scratch/users/annen/000_FUNGAL_SRS_000/${raxml_dir}
 echo "*********** ${OG} starting raxml ***********"
 dt=$(date '+%m/%d/%Y %H:%M:%S')
 echo "STARTING: ${dt}"
-raxmlHPC-PTHREADS-SSE3 -s ../Refinement3_init/${OG}.afa -n RAxML.${OG} -T ${SLURM_NTASKS} -m PROTCATJTT -f a -x 12345 -p 12345 -# 100
+raxmlHPC-PTHREADS-SSE3 -s ${aln_dir}/${OG}.afa -n RAxML.${OG} -T ${SLURM_NTASKS} -m PROTCATJTT -f a -x 12345 -p 12345 -# 100
 dt=$(date '+%m/%d/%Y %H:%M:%S')
 echo "DONE: ${dt}"
 

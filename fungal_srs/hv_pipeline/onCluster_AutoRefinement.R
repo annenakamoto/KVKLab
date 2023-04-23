@@ -2,6 +2,7 @@
 
 ### options passed from command line
 library("optparse")
+library(stringr)
 option_list = list(
   make_option(c("-d", "--working_dir"), type="character", default=NULL, 
               help="working directory path, where Refinement and Initial directories are located [REQUIRED]", metavar="character"),
@@ -87,7 +88,12 @@ get_eco_name <- function(tree,node){
   if (!inherits(tree,"tbl_tree")) stop("Agrument must be a 'tbl_tree' object, use as_tibble() on treedata or phylo objects before passing to this function")
   if (!isTip(tree,node)){return(NA)}else{
     label <- tree[node,]$label
-    eco <- substring(label, 1, 9)   # gets the unique genome identifier, i.e. Zm00021ab
+    if (substring(label, 1, 2) == "Zm") {
+        eco <- substring(label, 1, 9)   # gets the unique genome identifier, i.e. Zm00021ab
+    }
+    if (substring(label, 1, 2) == "Mo") {
+        eco <- str_split_1(label, "_")[2]   # gets the unique genome identifier, i.e. D10s71 in MoExx_D10s71_02126
+    }
     return(eco)
   }
 }
