@@ -13,14 +13,17 @@ source activate /global/scratch/users/annen/anaconda3/envs/R
 
 ### run the R script that outputs a list of OGs with alignments that pass hv parameters
 
-### maize
-#Rscript KVKLab/fungal_srs/hv_pipeline/assess_alignment.R | awk '/[1]/ { print substr($2,2,9); }' > HValn_OGs_list.txt
-Rscript KVKLab/fungal_srs/hv_pipeline/assess_aln_cutoff_dist.R | awk '/[1]/' > HValn_OGs_cutoff_dist_Zm.txt
-cat HValn_OGs_cutoff_dist_Zm.txt | awk '{ print substr($2,2,9) "\t" $3 "\t" substr($4,1,length($4)-1); }' > HValn_OGs_cutoff_dist_Zm_formatted.txt
+### maize initial
+# Rscript KVKLab/fungal_srs/hv_pipeline/assess_alignment.R | awk '/[1]/ { print substr($2,2,9); }' > HValn_OGs_list.txt
+# Rscript KVKLab/fungal_srs/hv_pipeline/assess_aln_cutoff_dist.R | awk '/[1]/' > HValn_OGs_cutoff_dist_Zm.txt
+# cat HValn_OGs_cutoff_dist_Zm.txt | awk '{ print substr($2,2,9) "\t" $3 "\t" substr($4,1,length($4)-1); }' > HValn_OGs_cutoff_dist_Zm_formatted.txt
 
-### magnaporthe
-#Rscript KVKLab/fungal_srs/hv_pipeline/assess_alignment.R | awk '/[1]/ { print substr($2,2,9); }' > MoHValn_OGs_list.txt
-Rscript KVKLab/fungal_srs/hv_pipeline/assess_aln_cutoff_dist.R | awk '/[1]/' > MoHValn_OGs_cutoff_dist.txt
-cat MoHValn_OGs_cutoff_dist.txt | awk '{ print substr($2,2,9) "\t" $3 "\t" substr($4,1,length($4)-1); }' > MoHValn_OGs_cutoff_dist_formatted.txt
+### magnaporthe initial
+# Rscript KVKLab/fungal_srs/hv_pipeline/assess_alignment.R | awk '/[1]/ { print substr($2,2,9); }' > MoHValn_OGs_list.txt
+# Rscript KVKLab/fungal_srs/hv_pipeline/assess_aln_cutoff_dist.R | awk '/[1]/' > MoHValn_OGs_cutoff_dist.txt
+# cat MoHValn_OGs_cutoff_dist.txt | awk '{ print substr($2,2,9) "\t" $3 "\t" substr($4,1,length($4)-1); }' > MoHValn_OGs_cutoff_dist_formatted.txt
+
+### maize final clades
+Rscript KVKLab/fungal_srs/hv_pipeline/assess_alignment.R | awk '/[1]/ { print substr($2,2,9); }' > ZmHV_final_clades.txt
 
 conda deactivate
