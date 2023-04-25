@@ -9,7 +9,14 @@ import csv
 ###     ${OG}.Pfam.reduced.tbl
 
 og = sys.argv[1]    # OG
-fa = "OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/" + og + ".fa"
+
+## Zm NLRs
+# fa = "OrthoFinder_out/Results_Mar16/Orthogroup_Sequences/" + og + ".fa"
+# dm = og + ".Pfam.reduced.tbl"
+# out = og + ".iTOL.domains.txt"
+
+## Mo HV OGs
+fa = "OrthoFinder_out/Results_out/WorkingDirectory/OrthoFinder/Results_out/Orthogroup_Sequences/" + og + ".fa"
 dm = og + ".Pfam.reduced.tbl"
 out = og + ".iTOL.domains.txt"
 
@@ -26,12 +33,33 @@ with open(dm, 'r') as tbl:
         if "NB-ARC" in domain_name:
             shape = "HH"
             color = "#ffff99"   # yellow
+        elif "NACHT" in domain_name:
+            shape = "HH"
+            color = "#6378ff"   # darkblue
+        elif "AAA" in domain_name:
+            shape = "HH"
+            color = "#63e5ff"   # lightblue
         elif "LRR" in domain_name:
             shape = "RE"
             color = "#de4b4d"   # red
+        elif "Ank" in domain_name:
+            shape = "RE"
+            color = "#ffaa00"   # yellow-orange
+        elif "WD" in domain_name:
+            shape = "RE"
+            color = "#8a3200"   # brown
+        elif "TPR" in domain_name:
+            shape = "RE"
+            color = "#ff6a00"   # orange
         elif "Rx_N" in domain_name:
             shape = "EL"
             color = "#6aeb65"   # green
+        elif "Pkinase" in domain_name:
+            shape = "EL"
+            color = "#00a38b"   # teal
+        elif "PNP_UDP" in domain_name:
+            shape = "EL"
+            color = "#b163ff"   # purple
         else:
             shape = "DI"
             color = "#9e9e9e"   # grey
