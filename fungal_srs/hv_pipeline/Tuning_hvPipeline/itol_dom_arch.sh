@@ -23,11 +23,11 @@ module purge
 module load hmmer
 
 ## need to generate pbNB-ARC.hmmalign.afa
-source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
-wget -O pbNB-ARC.hmm https://static-content.springer.com/esm/art%3A10.1186%2Fs13059-018-1392-6/MediaObjects/13059_2018_1392_MOESM16_ESM.hmm
-hmmsearch -E 1e-5 -A pbNB-ARC.hmmalign.sto --domtblout pbNB-ARC.hmmalign.tbl ${og_dir}/${OG}.fa
-esl-alimask --rf-is-mask pbNB-ARC.hmmalign.sto | esl-alimanip --lmin 100 -|esl-reformat afa - |cut -d ' ' -f 1 |tr -d ' ' > pbNB-ARC.hmmalign.afa
-source deactivate
+# source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
+# #wget -O pbNB-ARC.hmm https://static-content.springer.com/esm/art%3A10.1186%2Fs13059-018-1392-6/MediaObjects/13059_2018_1392_MOESM16_ESM.hmm
+# hmmsearch -E 1e-5 -A pbNB-ARC.${OG}.hmmalign.sto --domtblout pbNB-ARC.${OG}.hmmalign.tbl pbNB-ARC.hmm ${og_dir}/${OG}.fa
+# esl-alimask --rf-is-mask pbNB-ARC.${OG}.hmmalign.sto | esl-alimanip --lmin 100 -|esl-reformat afa - |cut -d ' ' -f 1 |tr -d ' ' > pbNB-ARC.${OG}.hmmalign.afa
+# source deactivate
 
 source activate /global/scratch/users/annen/anaconda3/envs/R
 # cp -r ../Tuning_hvPipeline/Pfam_lib Pfam_lib
