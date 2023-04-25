@@ -39,5 +39,6 @@ Rscript ../../ProteinFamily/scripts/reduce_pfam.R -i ${OG}.Pfam.ws.tbl -o ${OG}.
 #Rscript ../../ProteinFamily/scripts/DomainDiagrams_sm.R -o ${OG}.iTOL.domains.txt -i ${OG}.Pfam.reduced.tbl -f ${og_dir}/${OG}.fa -a pbNB-ARC.hmmalign.afa
 source deactivate
 
+source activate /global/scratch/users/annen/anaconda3/envs/Biopython
 python ../../KVKLab/fungal_srs/hv_pipeline/Tuning_hvPipeline/itol_domains.py ${OG}
-
+source deactivate
