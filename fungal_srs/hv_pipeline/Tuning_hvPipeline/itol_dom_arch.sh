@@ -30,9 +30,9 @@ esl-alimask --rf-is-mask pbNB-ARC.hmmalign.sto | esl-alimanip --lmin 100 -|esl-r
 source deactivate
 
 source activate /global/scratch/users/annen/anaconda3/envs/R
-cp -r ../Tuning_hvPipeline/Pfam_lib Pfam_lib
-cat Pfam_lib/Pfam-A.hmm ../../ProteinFamily/HMM_models/* > Pfam-A.plus.hmm
-hmmpress Pfam-A.plus.hmm
+# cp -r ../Tuning_hvPipeline/Pfam_lib Pfam_lib
+# cat Pfam_lib/Pfam-A.hmm ../../ProteinFamily/HMM_models/* > Pfam-A.plus.hmm
+# hmmpress Pfam-A.plus.hmm
 hmmsearch --domtblout ${OG}.Pfam.tbl Pfam-A.plus.hmm ${og_dir}/${OG}.fa
 tr -s ' ' <${OG}.Pfam.tbl > ${OG}.Pfam.ws.tbl
 Rscript ../../ProteinFamily/scripts/reduce_pfam.R -i ${OG}.Pfam.ws.tbl -o ${OG}.Pfam.reduced.tbl -e 1e-3 -f 0.3 -a 10
