@@ -231,7 +231,7 @@ for (name in new_files){
           nHVsites <- length(which(entNG > hvSiteEntCutoff))                          ####KEY CUTOFF PARAMETER
           
           ##if entropy is >1.5 for >10 position, would be candidate hv, but want to do them all here
-          if(True){alignment2Fasta(subsetaa,paste0(cls_dir, "/",clade,".afa"))
+          if(1 == 1){alignment2Fasta(subsetaa,paste0(cls_dir, "/",clade,".afa"))
             m <- max(2.2,na.omit(ent[,1])%>%unlist)
             ## Make Plots directory if it is not there already
             plots_dir <- paste0(cls_dir, "/")
