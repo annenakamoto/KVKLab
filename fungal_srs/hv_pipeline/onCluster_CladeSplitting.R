@@ -238,7 +238,7 @@ for (name in new_files){
             if (!dir.exists(plots_dir)){dir.create(plots_dir)}
             ## Entropy plotting
               cat(clade)
-              cat(" is a candidate highly variable clade\n")
+              cat(" is a clade\n")
               Ent <- as_tibble(cbind(1:nrow(ent),ent,entNG))
               colnames(Ent)<-c("Position","Entropy", "EntropyNG")
               
