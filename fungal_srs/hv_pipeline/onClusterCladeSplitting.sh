@@ -25,7 +25,7 @@ module purge
 source activate /global/scratch/users/annen/anaconda3/envs/R
 dt=$(date '+%m/%d/%Y %H:%M:%S')
 echo "STARTING ${cls_dir}: ${dt}"
-Rscript ../../KVKLab/fungal_srs/hv_pipeline/onCluster_CladeSplitting.R -d ${working_dir} -i ${init_dir} -r ${cls_dir} -e ${eco_cut}
+Rscript ../../KVKLab/fungal_srs/hv_pipeline/onCluster_CladeSplitting.R -d ${working_dir} -i ${init_dir} -c ${cls_dir} -e ${eco_cut}
 dt=$(date '+%m/%d/%Y %H:%M:%S')
 echo "DONE ${cls_dir}: ${dt}"
 source deactivate
