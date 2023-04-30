@@ -1,8 +1,32 @@
+### options passed from command line
+library("optparse")
+library(stringr)
+option_list = list(
+  make_option(c("-w", "--working_dir"), type="character", default=NULL, 
+              help="the directory containing alignments for hvsite assessment", metavar="character")
+); 
+
+opt_parser = OptionParser(option_list=option_list);
+opt = parse_args(opt_parser);
+
+if (is.null(opt$working_dir)){
+  print_help(opt_parser)
+  stop("Working directory is required", call.=FALSE)
+}
+
+setwd(opt$working_dir)
+
+cat("*** Running hvsite assessment ***\n")
+Sys.time()
+cat(paste0("\nworking directory: ", opt$working_dir, "\n"))
+
+## packages
 require(tidyverse)
 require(tidytree)
 require(treeio)
 require(msa)
 require(entropy)
+
 
 setwd("/global/scratch/users/annen/000_FUNGAL_SRS_000/Tuning_hvPipeline/OG_MAFFT")
 #setwd("/global/scratch/users/annen/000_FUNGAL_SRS_000/MoOrthoFinder/OG_Alignments")

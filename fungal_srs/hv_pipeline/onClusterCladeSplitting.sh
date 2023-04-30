@@ -28,7 +28,7 @@ echo "STARTING ${cls_dir}: ${dt}"
 Rscript ../../KVKLab/fungal_srs/hv_pipeline/onCluster_CladeSplitting.R -d ${working_dir} -i ${init_dir} -c ${cls_dir} -e ${eco_cut}
 dt=$(date '+%m/%d/%Y %H:%M:%S')
 echo "DONE ${cls_dir}: ${dt}"
-source deactivate
+
 
 ### set up the dir/files for the next Cladesplit step
 mkdir -p ${working_dir}/${new_dir}     # create the new cladesplit directory if it doesn't already exist
@@ -57,4 +57,10 @@ ls ${working_dir}/${cls_dir} | awk -v FS="_" -v n="${num}" '$n ~ /.afa/ { print 
     echo "${clade} alignment finished"
 done
 
-### go and make trees from alignments in new_dir separately, then run this again for next cladesplit
+### assess alignment hvsites
+Rscript KVKLab/fungal_srs/hv_pipeline/assess_aln_cutoff_dist.R -w ${working_dir}/${new_dir} | awk '/[1]/ { print substr($2,2,9); }' > ${working_dir}/hvsites_for_cls${next_cls_num}.txt
+
+source deactivate
+
+### move any alignments with <4 sequences, or with hvsites==0, or that wasn't split into subclades, from Cladesplit2_init into ALL_FINAL_CLADE_AFA
+### make those trees from alignments in new_dir separately, then run this again for next cladesplit
