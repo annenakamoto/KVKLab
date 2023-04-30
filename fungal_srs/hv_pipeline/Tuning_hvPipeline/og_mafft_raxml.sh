@@ -3,7 +3,7 @@
 #SBATCH --partition=savio2
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
-#SBATCH --time=48:00:00
+#SBATCH --time=72:00:00
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
@@ -25,7 +25,7 @@ OG=${1}
 raxml_dir=${2}
 aln_dir=${3}
 ### run raxml on OG alignment
-# cd /global/scratch/users/annen/000_FUNGAL_SRS_000/${raxml_dir}
+cd /global/scratch/users/annen/000_FUNGAL_SRS_000/${raxml_dir}
 # echo "*********** ${OG} starting raxml ***********"
 # dt=$(date '+%m/%d/%Y %H:%M:%S')
 # echo "STARTING: ${dt}"
