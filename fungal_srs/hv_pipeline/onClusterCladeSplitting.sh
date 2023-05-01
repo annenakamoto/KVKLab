@@ -23,11 +23,11 @@ new_dir="Cladesplit${next_cls_num}_init"    # name of new directory to output ms
 module purge
 ### Run a Cladesplit step from the directories specified above
 source activate /global/scratch/users/annen/anaconda3/envs/R
-# dt=$(date '+%m/%d/%Y %H:%M:%S')
-# echo "STARTING ${cls_dir}: ${dt}"
-# Rscript ../../KVKLab/fungal_srs/hv_pipeline/onCluster_CladeSplitting.R -d ${working_dir} -i ${init_dir} -c ${cls_dir} -e ${eco_cut}
-# dt=$(date '+%m/%d/%Y %H:%M:%S')
-# echo "DONE ${cls_dir}: ${dt}"
+dt=$(date '+%m/%d/%Y %H:%M:%S')
+echo "STARTING ${cls_dir}: ${dt}"
+Rscript ../../KVKLab/fungal_srs/hv_pipeline/onCluster_CladeSplitting.R -d ${working_dir} -i ${init_dir} -c ${cls_dir} -e ${eco_cut}
+dt=$(date '+%m/%d/%Y %H:%M:%S')
+echo "DONE ${cls_dir}: ${dt}"
 
 
 ### set up the dir/files for the next Cladesplit step
