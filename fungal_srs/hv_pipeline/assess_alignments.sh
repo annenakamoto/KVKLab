@@ -24,6 +24,15 @@ source activate /global/scratch/users/annen/anaconda3/envs/R
 # cat MoHValn_OGs_cutoff_dist.txt | awk '{ print substr($2,2,9) "\t" $3 "\t" substr($4,1,length($4)-1); }' > MoHValn_OGs_cutoff_dist_formatted.txt
 
 ### maize final clades
-Rscript KVKLab/fungal_srs/hv_pipeline/assess_alignment.R | awk '/[1]/ { print substr($2,2,9); }' > ZmHV_final_clades.txt
+# Rscript KVKLab/fungal_srs/hv_pipeline/assess_alignment.R | awk '/[1]/ { print substr($2,2,9); }' > ZmHV_final_clades.txt
+
+### NLR hv-site distributions from NLRCladeFinder
+Arabidopsis_dir=/global/scratch/users/annen/222_HV_Parameters_Distributions_222/Atha_NLR_FINAL_AFA
+Maize_dir=/global/scratch/users/annen/222_HV_Parameters_Distributions_222/Maize_NLR_FINAL_AFA
+Soy_dir=/global/scratch/users/annen/222_HV_Parameters_Distributions_222/Soy_NLR_FINAL_AFA
+
+Rscript KVKLab/fungal_srs/hv_pipeline/assess_aln_cutoff_dist.R -w ${Arabidopsis_dir} | awk '{ print substr($2,2,length($2)-4) "\t" $3 "\t" substr($4,1,length($4)-1); }' > 222_HV_Parameters_Distributions_222/Atha_NLR_hvsites.txt
+Rscript KVKLab/fungal_srs/hv_pipeline/assess_aln_cutoff_dist.R -w ${Maize_dir} | awk '{ print substr($2,2,length($2)-4) "\t" $3 "\t" substr($4,1,length($4)-1); }' > 222_HV_Parameters_Distributions_222/Maize_NLR_hvsites.txt
+Rscript KVKLab/fungal_srs/hv_pipeline/assess_aln_cutoff_dist.R -w ${Soy_dir} | awk '{ print substr($2,2,length($2)-4) "\t" $3 "\t" substr($4,1,length($4)-1); }' > 222_HV_Parameters_Distributions_222/Soy_NLR_hvsites.txt
 
 conda deactivate
