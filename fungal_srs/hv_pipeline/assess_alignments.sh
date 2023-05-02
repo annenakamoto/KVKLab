@@ -31,8 +31,8 @@ Arabidopsis_dir=/global/scratch/users/annen/222_HV_Parameters_Distributions_222/
 Maize_dir=/global/scratch/users/annen/222_HV_Parameters_Distributions_222/Maize_NLR_FINAL_AFA
 Soy_dir=/global/scratch/users/annen/222_HV_Parameters_Distributions_222/Soy_NLR_FINAL_AFA
 
-Rscript KVKLab/fungal_srs/hv_pipeline/assess_aln_cutoff_dist.R -w ${Arabidopsis_dir} | awk '{ print substr($2,2,length($2)-4) "\t" $3 "\t" substr($4,1,length($4)-1); }' > 222_HV_Parameters_Distributions_222/Atha_NLR_hvsites.txt
-Rscript KVKLab/fungal_srs/hv_pipeline/assess_aln_cutoff_dist.R -w ${Maize_dir} | awk '{ print substr($2,2,length($2)-4) "\t" $3 "\t" substr($4,1,length($4)-1); }' > 222_HV_Parameters_Distributions_222/Maize_NLR_hvsites.txt
-Rscript KVKLab/fungal_srs/hv_pipeline/assess_aln_cutoff_dist.R -w ${Soy_dir} | awk '{ print substr($2,2,length($2)-4) "\t" $3 "\t" substr($4,1,length($4)-1); }' > 222_HV_Parameters_Distributions_222/Soy_NLR_hvsites.txt
+Rscript KVKLab/fungal_srs/hv_pipeline/assess_aln_cutoff_dist.R -w ${Arabidopsis_dir} | awk '{ print substr($2,2,length($2)-5) "\t" $3 "\t" substr($4,1,length($4)-1); }' > 222_HV_Parameters_Distributions_222/Atha_NLR_hvsites.txt
+Rscript KVKLab/fungal_srs/hv_pipeline/assess_aln_cutoff_dist.R -w ${Maize_dir} | awk '{ print substr($2,2,length($2)-5) "\t" $3 "\t" substr($4,1,length($4)-1); }' > 222_HV_Parameters_Distributions_222/Maize_NLR_hvsites.txt
+Rscript KVKLab/fungal_srs/hv_pipeline/assess_aln_cutoff_dist.R -w ${Soy_dir} | awk '{ print substr($2,2,length($2)-5) "\t" $3 "\t" substr($4,1,length($4)-1); }' > 222_HV_Parameters_Distributions_222/Soy_NLR_hvsites.txt
 
 conda deactivate
