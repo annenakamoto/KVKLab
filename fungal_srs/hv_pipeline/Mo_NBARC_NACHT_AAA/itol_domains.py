@@ -58,12 +58,15 @@ with open(dm, 'r') as tbl:
         elif "HeLo" in domain_name:
             shape = "EL"
             color = "#168262"   # dark-teal
-        elif "Ses_B" in domain_name:
+        elif "Ses_" in domain_name:
             shape = "EL"
             color = "#f0719d"   # pink
         elif "Goodbye" in domain_name:
             shape = "EL"
             color = "#870b36"   # magenta
+        elif "Patatin" in domain_name:
+            shape = "EL"
+            color = "#b85e11"   # dark-orange
         else:
             shape = "DI"
             color = "#9e9e9e"   # grey
