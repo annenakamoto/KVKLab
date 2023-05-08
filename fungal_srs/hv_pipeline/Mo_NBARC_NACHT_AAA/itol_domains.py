@@ -8,7 +8,7 @@ import csv
 
 dom = sys.argv[1]    # domain (NB-ARC, NACHT, AAA)
 
-fa = dom + ".Mo.filt.fa"
+fa = dom + ".fa"
 dm = dom + ".Pfam.reduced.tbl"
 out = dom + ".iTOL.domains.txt"
 
