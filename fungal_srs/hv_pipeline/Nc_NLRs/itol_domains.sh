@@ -25,9 +25,9 @@ seqtk subseq -l 60 Nc_OR74A_PROTEOME.fa ${DOM}.gene_list.txt > Nc_${DOM}.filt.fi
 source activate /global/scratch/users/annen/anaconda3/envs/R
 hmmsearch --domtblout ${DOM}.Pfam.tbl Pfam-A.hmm Nc_${DOM}.filt.final.fa
 tr -s ' ' <${DOM}.Pfam.tbl > ${DOM}.Pfam.ws.tbl
-Rscript ../../../ProteinFamily/scripts/reduce_pfam.R -i ${DOM}.Pfam.ws.tbl -o ${DOM}.Pfam.reduced.tbl -e 0.01 -f 0.1 -a 10
+Rscript ../../ProteinFamily/scripts/reduce_pfam.R -i ${DOM}.Pfam.ws.tbl -o ${DOM}.Pfam.reduced.tbl -e 0.01 -f 0.1 -a 10
 source deactivate
 
 source activate /global/scratch/users/annen/anaconda3/envs/Biopython
-python ../../../KVKLab/fungal_srs/hv_pipeline/Mo_NBARC_NACHT_AAA/itol_domains.py ${DOM} Nc_${DOM}.filt.final
+python ../../KVKLab/fungal_srs/hv_pipeline/Mo_NBARC_NACHT_AAA/itol_domains.py ${DOM} Nc_${DOM}.filt.final
 source deactivate
