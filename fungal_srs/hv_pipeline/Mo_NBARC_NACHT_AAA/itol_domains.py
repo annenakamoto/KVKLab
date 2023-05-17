@@ -7,8 +7,9 @@ import csv
 ### Generate domain annotations for itol
 
 dom = sys.argv[1]    # domain (NB-ARC, NACHT, AAA)
+fa_prefix = sys.argv[2]
 
-fa = dom + ".fa"
+fa = fa_prefix + ".fa"
 dm = dom + ".Pfam.reduced.tbl"
 out = dom + ".iTOL.domains.txt"
 
