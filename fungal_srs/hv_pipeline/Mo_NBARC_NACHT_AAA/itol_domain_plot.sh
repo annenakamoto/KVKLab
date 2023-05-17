@@ -3,7 +3,7 @@
 #SBATCH --partition=savio2
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24
-#SBATCH --time=72:00:00
+#SBATCH --time=9:00:00
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
