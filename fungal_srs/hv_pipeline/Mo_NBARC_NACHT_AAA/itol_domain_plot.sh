@@ -26,5 +26,5 @@ Rscript ../../../ProteinFamily/scripts/reduce_pfam.R -i ${DOM}.Pfam.ws.tbl -o ${
 source deactivate
 
 source activate /global/scratch/users/annen/anaconda3/envs/Biopython
-python ../../../KVKLab/fungal_srs/hv_pipeline/Mo_NBARC_NACHT_AAA/itol_domains.py ${DOM}
+python ../../../KVKLab/fungal_srs/hv_pipeline/Mo_NBARC_NACHT_AAA/itol_domains.py ${DOM}.Mo.filt
 source deactivate
