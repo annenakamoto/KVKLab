@@ -18,7 +18,7 @@ tr a-z - < Nc_${DOM}.sto > Nc_${DOM}.noins.sto                            ## con
 esl-reformat --mingap -o Nc_${DOM}.nogap.sto afa Nc_${DOM}.noins.sto      ## remove all-gap columns so that the number of columns matches HMM length
 esl-alimanip -o Nc_${DOM}.filt.sto --lmin 10 Nc_${DOM}.nogap.sto          ## remove sequences with less than 10 AA
 esl-reformat -o Nc_${DOM}.filt.afa afa Nc_${DOM}.filt.sto                 ## reformat to fasta
-cat Nc_${DOM}.filt.afa | awk -v d=${DOM} '!/>/ { print; } />/ { print ">" substr($0,length($0)-9) "|" d; }' > Nc_${DOM}.filt.final.afa    ## fix gene names
+cat Nc_${DOM}.filt.afa | awk -v d=NB-ARC '!/>/ { print; } />/ { split($1,a,"/"); print ">" substr($0,length($0)-9) "|" a[2] "|" d; }' > Nc_${DOM}.filt.final.afa    ## fix gene names
 
 source deactivate
 
