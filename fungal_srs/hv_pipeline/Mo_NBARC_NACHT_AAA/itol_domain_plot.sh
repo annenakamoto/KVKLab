@@ -20,7 +20,7 @@ cat ${DOM}.Mo.filt.afa | awk '/>/ { print $4; }' > ${DOM}.gene_list.txt
 seqtk subseq -l 60 MoPANPROTEOME_72.fa ${DOM}.gene_list.txt > ${DOM}.Mo.filt.fa
 
 source activate /global/scratch/users/annen/anaconda3/envs/R
-hmmsearch --domtblout ${DOM}.Pfam.tbl Pfam-A.hmm ${DOM}.Mo.filt.fa
+hmmsearch --cpu ${SLURM_NTASKS} --domtblout ${DOM}.Pfam.tbl Pfam-A.hmm ${DOM}.Mo.filt.fa
 tr -s ' ' <${DOM}.Pfam.tbl > ${DOM}.Pfam.ws.tbl
 Rscript ../../../ProteinFamily/scripts/reduce_pfam.R -i ${DOM}.Pfam.ws.tbl -o ${DOM}.Pfam.reduced.tbl -e 0.01 -f 0.1 -a 10
 source deactivate
