@@ -16,10 +16,13 @@ module load hmmer
 
 ### generate fasta file of genes containing the domain
 module load seqtk
-> ${DOM}.gene_list.txt
-cat Nc_${DOM}.filt.final.afa | awk -v FS="|" '/>/ { print substr($1,2); }' | while read gene; do
-    grep ${gene} Nc_OR74A_PROTEOME.fa | awk '{ print substr($1,2); }' >> ${DOM}.gene_list.txt
+> ${DOM}.gene_map.txt
+cat Nc_${DOM}.filt.final.afa | while read dom; do
+    acc=$(echo ${dom} | awk -v FS="|" '/>/ { print substr($1,2); }')
+    gene=$(grep ${acc} Nc_OR74A_PROTEOME.fa | awk '{ print substr($1,2); }') 
+    echo -e "${gene}\t${dom}" >> ${DOM}.gene_map.txt
 done
+cat ${DOM}.gene_map.txt | awk '{ print $1; }' > ${DOM}.gene_list.txt
 seqtk subseq -l 60 Nc_OR74A_PROTEOME.fa ${DOM}.gene_list.txt > Nc_${DOM}.filt.final.fa
 
 source activate /global/scratch/users/annen/anaconda3/envs/R
@@ -29,5 +32,5 @@ Rscript ../../ProteinFamily/scripts/reduce_pfam.R -i ${DOM}.Pfam.ws.tbl -o ${DOM
 source deactivate
 
 source activate /global/scratch/users/annen/anaconda3/envs/Biopython
-python ../../KVKLab/fungal_srs/hv_pipeline/Mo_NBARC_NACHT_AAA/itol_domains.py ${DOM} Nc_${DOM}.filt.final
+python ../../KVKLab/fungal_srs/hv_pipeline/Nc_NLRs/itol_domains2.py ${DOM} Nc_${DOM}.filt.final ${DOM}.gene_map.txt
 source deactivate
