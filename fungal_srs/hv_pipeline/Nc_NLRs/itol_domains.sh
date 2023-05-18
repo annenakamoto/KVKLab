@@ -17,8 +17,8 @@ module load hmmer
 ### generate fasta file of genes containing the domain
 module load seqtk
 > ${DOM}.gene_map.txt
-cat Nc_${DOM}.filt.final.afa | while read dom; do
-    acc=$(echo ${dom} | awk -v FS="|" '/>/ { print substr($1,2); }')
+cat Nc_${DOM}.filt.final.afa | awk '/>/ { print substr($1,2); }' | while read dom; do
+    acc=$(echo ${dom} | awk -v FS="|" '{ print $1; }')
     gene=$(grep ${acc} Nc_OR74A_PROTEOME.fa | awk '{ print substr($1,2); }') 
     echo -e "${gene}\t${dom}" >> ${DOM}.gene_map.txt
 done
