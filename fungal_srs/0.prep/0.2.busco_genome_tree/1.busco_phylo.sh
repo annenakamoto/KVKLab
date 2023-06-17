@@ -18,6 +18,6 @@ cd ${working_dir}
 
 module purge
 source activate /global/scratch/users/annen/anaconda3/envs/BUSCO_phylogenomics
-python /global/scratch/users/annen/BUSCO_phylogenomics/BUSCO_phylogenomics.py -i ${species}BUSCO -o ${species}BUSCO_PHYLO -t ${SLURM_NTASKS} --supermatrix_only --gene_tree_program fasttree > BUSCO_phylogenomics.LOG.txt
+python /global/scratch/users/annen/BUSCO_phylogenomics/BUSCO_phylogenomics.py -i BUSCO -o ${species}BUSCO_PHYLO -t ${SLURM_NTASKS} --supermatrix_only --gene_tree_program fasttree > BUSCO_phylogenomics.LOG.txt
 conda deactivate
 
