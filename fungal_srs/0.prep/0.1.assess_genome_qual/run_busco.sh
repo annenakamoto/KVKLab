@@ -14,6 +14,6 @@ busco_list=${7}     # list of genome names to run busco for
 
 while read genome_name; do 
     sbatch -A ${sbatch_A} --qos=${sbatch_qos} -p savio4_htc --ntasks-per-node=${sbatch_t} KVKLab/fungal_srs/0.prep/0.1.assess_genome_qual/busco_one.sh ${working_dir} ${genome_path} ${genome_name}
-done < ${busco_list}
+done < ${working_dir}/${busco_list}
 
 ### ZYMO ncbi: bash KVKLab/fungal_srs/0.prep/0.1.assess_genome_qual/run_busco.sh co_minium savio_lowprio savio2 24 /global/scratch/users/annen/000_FUNGAL_SRS_000/ZYMO/NCBI_genomes BUSCO busco_list.txt
