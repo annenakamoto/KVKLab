@@ -24,17 +24,17 @@ done
 fasterq-dump ${read_prefix}
 conda deactivate
 
-module load spades
-
 read1=${read_prefix}_1.fastq
 read2=${read_prefix}_2.fastq
 
 echo ${sample} ${read1} ${read2} ;
 mkdir -p ${sample}
 
+source activate /global/scratch/users/annen/anaconda3/envs/spades
 spades.py  \
   --careful \
   --threads ${SLURM_NTASKS} \
   -1 ${read1} \
   -2 ${read2} \
   -o ${sample}
+conda deactivate
