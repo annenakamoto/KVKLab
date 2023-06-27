@@ -14,6 +14,9 @@ working_dir=${1}    ## ORTHOFINDER directory for the species
 cd ${working_dir}
 mkdir -p OG_ALIGNMENTS
 
+module purge
+module load mafft
+
 ### align with mafft
 prefix=OrthoFinder_out/Results_out/WorkingDirectory/OrthoFinder/Results_out/Orthogroup_Sequences
 ls ${prefix} | while read fa; do
