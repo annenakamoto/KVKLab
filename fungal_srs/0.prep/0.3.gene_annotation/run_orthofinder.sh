@@ -14,5 +14,4 @@ cd ${working_dir}
 ### run orthofinder after parallel diamond blastp
 orthofinder -os -M msa -A mafft -T fasttree -t ${SLURM_NTASKS} -a 5 -n out -b OrthoFinder_out/Results_out/WorkingDirectory
 
-### MAKE GENOME TREE ###
 
