@@ -13,6 +13,8 @@ working_dir=${1}    # ORTHOFINDER directory
 
 cd ${working_dir}
 
+module purge
+
 source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
 
 orthofinder -op -S diamond_ultra_sens -f FAA -n out -o OrthoFinder_out | grep "diamond blastp" > jobqueue
