@@ -19,6 +19,6 @@ prefix=OrthoFinder_out/Results_out/WorkingDirectory/OrthoFinder/Results_out/Orth
 ls ${prefix} | while read fa; do
     OG=$(echo ${fa} | awk '{ print substr($1,1,length($1)-3); }')
     echo "aligning ${OG}..."
-    mafft --maxiterate 1000 --localpair --thread 24 --quiet ${prefix}/${OG}.fa > OG_ALIGNMENTS/${OG}.afa
+    mafft --maxiterate 1000 --localpair --thread ${SLURM_NTASKS} --quiet ${prefix}/${OG}.fa > OG_ALIGNMENTS/${OG}.afa
     echo "done"
 done
