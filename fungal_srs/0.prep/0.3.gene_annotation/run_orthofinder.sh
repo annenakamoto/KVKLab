@@ -12,6 +12,7 @@ working_dir=${1}    # ORTHOFINDER directory
 cd ${working_dir}
 
 ### run orthofinder after parallel diamond blastp
+module purge
 source activate /global/scratch/users/annen/anaconda3/envs/OrthoFinder
 orthofinder -os -M msa -A mafft -T fasttree -t ${SLURM_NTASKS} -a 5 -n out -b OrthoFinder_out/Results_out/WorkingDirectory
 conda deactivate
