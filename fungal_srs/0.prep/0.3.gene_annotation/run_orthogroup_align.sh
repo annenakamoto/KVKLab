@@ -15,7 +15,7 @@ cd ${working_dir}
 mkdir -p OG_ALIGNMENTS
 
 module purge
-module load mafft
+source activate /global/scratch/users/annen/anaconda3/envs/mafft
 
 ### align with mafft
 prefix=OrthoFinder_out/Results_out/WorkingDirectory/OrthoFinder/Results_out/Orthogroup_Sequences
@@ -25,3 +25,5 @@ ls ${prefix} | while read fa; do
     mafft --maxiterate 1000 --localpair --thread ${SLURM_NTASKS} --quiet ${prefix}/${OG}.fa > OG_ALIGNMENTS/${OG}.afa
     echo "done"
 done
+
+conda deactivate
