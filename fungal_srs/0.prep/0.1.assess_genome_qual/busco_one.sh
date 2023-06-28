@@ -21,5 +21,5 @@ cd ${working_dir}
 ### run busco on a genome
 module purge    # loaded modules interfere with busco
 source activate /global/scratch/users/annen/anaconda3/envs/busco
-busco -i ${genome_path}/${genome_name}.fna -o ${genome_name} -l ${lineage} -m genome -c ${SLURM_NTASKS} -f
+busco -i ${genome_path}/${genome_name}.fna -o ${genome_name} -l ${lineage} -m genome -c ${SLURM_NTASKS} -f --download_path ${genome_name}
 conda deactivate
