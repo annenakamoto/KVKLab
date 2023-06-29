@@ -3,7 +3,11 @@ library("optparse")
 library(stringr)
 option_list = list(
   make_option(c("-w", "--working_dir"), type="character", default=NULL, 
-              help="the directory containing alignments for hvsite assessment", metavar="character")
+              help="the directory containing alignments for hvsite assessment", metavar="character"),
+  make_option(c("-f", "--MinGapFraction"), type="numeric", default=0.9, 
+              help="minimum gap fraction of alignment [default=0.9]", metavar="numeric"),
+  make_option(c("-w", "--MinGapBlockWidth"), type="numeric", default=3, 
+              help="minimum gap block width of alignment [default=3]", metavar="numeric")
 ); 
 
 opt_parser = OptionParser(option_list=option_list);
@@ -30,9 +34,9 @@ require(entropy)
 
 ### Function: determine if an alignment meets hv criteria
 ###     afa is the alignment file name
-assess_alignment <- function(afa) {
-  MinGapFraction <- 0.9
-  MinGapBlockWidth <- 3
+assess_alignment <- function(afa, mgf, mgbw) {
+  MinGapFraction <- mgf       ## standard is: 0.9
+  MinGapBlockWidth <- mgbw    ## standard is: 3
   hvSiteEntCutoff <- 1.5
   min_hvSites <- 10
   Alph_21 <- c("A","R","N","D","C","Q","E","G","H","I","L","K","M","F","P","S","T","W","Y","V","-")
@@ -79,7 +83,7 @@ assess_alignment <- function(afa) {
 
 ### MAIN
 for (aln in list.files()) {
-    assess_alignment(aln)
+    assess_alignment(aln, opt$MinGapFraction, opt$MinGapBlockWidth)
 }
 
 

@@ -7,7 +7,7 @@
 #SBATCH --mail-user=annen@berkeley.edu
 #SBATCH --mail-type=ALL
 
-### align genes within an orthogroup (OG) and make tree
+### align genes within an orthogroup (OG)
 
 working_dir=${1}    ## ORTHOFINDER directory for the species
 
