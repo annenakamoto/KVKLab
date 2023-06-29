@@ -34,7 +34,7 @@ hmmbuild ${species}.${DOM}.hmm ${species}.${DOM}.filt.afa                       
 ### Search back in the panproteome to generate alignment for making tree
 echo "*** Final ${DOM} search in ${species} panproteome to make alignment ***"
 hmmalign --trim --amino --informat fasta -o ${species}.${DOM}.F.sto ${species}.${DOM}.hmm ${species}_PANPROTEOME.faa     ## align species-specific domain model using hmmalign
-tr a-z - < ${species}.${DOM}.F.sto > ${species}.${DOM}.noins.F.sto                              ## convert lower case characters (insertions) to gaps
+cat ${species}.${DOM}.F.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > ${species}.${DOM}.noins.F.sto                              ## convert lower case characters (insertions) to gaps
 esl-reformat --mingap -o ${species}.${DOM}.nogap.F.sto afa ${species}.${DOM}.noins.F.sto                  ## remove all-gap columns
 leng=$(grep LENG ${species}.${DOM}.hmm | awk '{ print int($2*0.7) }')
 esl-alimanip -o ${species}.${DOM}.filt.F.sto --lmin ${leng} ${species}.${DOM}.nogap.F.sto          ## remove sequences with less than ~70% of the model length
