@@ -2,7 +2,7 @@
 library("optparse")
 library(stringr)
 option_list = list(
-  make_option(c("-w", "--working_dir"), type="character", default=NULL, 
+  make_option(c("-d", "--working_dir"), type="character", default=NULL, 
               help="the directory containing alignments for hvsite assessment", metavar="character"),
   make_option(c("-f", "--MinGapFraction"), type="numeric", default=0.9, 
               help="minimum gap fraction of alignment [default=0.9]", metavar="numeric"),

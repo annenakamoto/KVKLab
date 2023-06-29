@@ -16,5 +16,5 @@ cd /global/scratch/users/annen
 
 module purge
 source activate /global/scratch/users/annen/anaconda3/envs/R
-Rscript KVKLab/fungal_srs/3.hv_analysis/assess_aln_cutoff_dist.R -w ${working_dir} -f ${mgf} -w 3
+Rscript KVKLab/fungal_srs/3.hv_analysis/assess_aln_cutoff_dist.R -d ${working_dir} -f ${mgf} -w 3
 conda deactivate
