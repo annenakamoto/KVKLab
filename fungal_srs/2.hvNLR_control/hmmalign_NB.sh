@@ -27,7 +27,7 @@ echo "*** Initial ${DOM} search in ${species} panproteome to regenerate HMM ***"
 hmmalign --trim --amino --informat fasta -o ${species}.${DOM}.sto ${DOM}.hmm ${species}_PANPROTEOME.faa     ## align domain using hmmalign
 esl-reformat --mingap -o ${species}.${DOM}.nogap.sto afa ${species}.${DOM}.sto                 ## remove all-gap columns
 leng=$(grep LENG ${DOM}.hmm | awk '{ print int($2*0.7) }')
-esl-alimanip -o ${species}.${DOM}.filt.sto --lmin ${leng} ${species}.${DOM}.nogap.sto          ## remove sequences with less than ~70% of the model length
+esl-alimanip -o ${species}.${DOM}.filt.sto --lmin 30 ${species}.${DOM}.nogap.sto          ## remove sequences with less than 30 AA
 esl-reformat -o ${species}.${DOM}.filt.afa afa ${species}.${DOM}.filt.sto                      ## reformat to fasta
 hmmbuild ${species}.${DOM}.hmm ${species}.${DOM}.filt.afa                                      ## rebuild profile to be species-specific
 
@@ -37,7 +37,7 @@ hmmalign --trim --amino --informat fasta -o ${species}.${DOM}.F.sto ${species}.$
 cat ${species}.${DOM}.F.sto | awk '{ gsub(/[a-z]/, "-", $(NF)); print; }' > ${species}.${DOM}.noins.F.sto                              ## convert lower case characters (insertions) to gaps
 esl-reformat --mingap -o ${species}.${DOM}.nogap.F.sto afa ${species}.${DOM}.noins.F.sto                  ## remove all-gap columns
 leng=$(grep LENG ${species}.${DOM}.hmm | awk '{ print int($2*0.7) }')
-esl-alimanip -o ${species}.${DOM}.filt.F.sto --lmin ${leng} ${species}.${DOM}.nogap.F.sto          ## remove sequences with less than ~70% of the model length
+esl-alimanip -o ${species}.${DOM}.filt.F.sto --lmin 30 ${species}.${DOM}.nogap.F.sto          ## remove sequences with less than ~70% of the model length
 esl-reformat -o ${species}.${DOM}.filt.F.afa afa ${species}.${DOM}.filt.F.sto                      ## reformat to fasta
 
 cp ${species}.${DOM}.filt.F.afa ../${species}.${DOM}.filt.F.afa     ## copy result alignment, next make tree
