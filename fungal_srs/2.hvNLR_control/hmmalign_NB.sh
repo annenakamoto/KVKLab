@@ -26,9 +26,9 @@ cat ../../ORTHOFINDER/FAA/${species}*.faa > ${species}_PANPROTEOME.faa
 echo "*** Initial ${DOM} search in ${species} panproteome to regenerate HMM ***"
 hmmsearch -A ${species}.${DOM}.sto --cpu ${SLURM_NTASKS} ${DOM}.hmm ${species}_PANPROTEOME.faa              ## search for and align domain using hmmalign
 esl-reformat --mingap -o ${species}.${DOM}.nogap.sto afa ${species}.${DOM}.sto                 ## remove all-gap columns
-leng=$(grep LENG ${DOM}.hmm | awk '{ print int($2*0.7) }')
-echo "${DOM} hmm 70% length: ${leng}"
-esl-alimanip -o ${species}.${DOM}.filt.sto --lmin ${leng} ${species}.${DOM}.nogap.sto          ## remove sequences with less than 30 AA
+leng=$(grep LENG ${DOM}.hmm | awk '{ print int($2*0.5) }')
+echo "${DOM} hmm 50% length: ${leng}"
+esl-alimanip -o ${species}.${DOM}.filt.sto --lmin ${leng} ${species}.${DOM}.nogap.sto          ## remove sequences with less than ~50% of the model length
 esl-reformat -o ${species}.${DOM}.filt.afa afa ${species}.${DOM}.filt.sto                      ## reformat to fasta
 hmmbuild ${species}.${DOM}.hmm ${species}.${DOM}.filt.afa                                      ## rebuild profile to be species-specific
 
