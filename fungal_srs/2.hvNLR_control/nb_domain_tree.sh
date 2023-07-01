@@ -22,6 +22,6 @@ module load /global/home/groups/consultsw/sl-7.x86_64/modfiles/raxml/8.2.11     
 echo "*********** ${DOM} starting raxml ***********"
 dt=$(date '+%m/%d/%Y %H:%M:%S')
 echo "STARTING: ${dt}"
-raxmlHPC-PTHREADS-SSE3 -s ${species}.${DOM}.filt.F.afa -n RAxML.${species}.${DOM} -w DOMAIN_TREES -T ${SLURM_NTASKS} -m PROTCATJTT -f a -x 12345 -p 12345 -# 100
+raxmlHPC-PTHREADS-SSE3 -s ${species}.${DOM}.filt.F.afa -n RAxML.${species}.${DOM} -w ${working_dir}/DOMAIN_TREES -T ${SLURM_NTASKS} -m PROTCATJTT -f a -x 12345 -p 12345 -# 100
 dt=$(date '+%m/%d/%Y %H:%M:%S')
 echo "DONE: ${dt}"
