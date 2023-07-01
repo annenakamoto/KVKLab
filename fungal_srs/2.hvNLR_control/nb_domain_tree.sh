@@ -17,7 +17,7 @@ cd ${working_dir}
 mkdir -p DOMAIN_TREES
 
 module purge
-module load module load /global/home/groups/consultsw/sl-7.x86_64/modfiles/raxml/8.2.11     ## has pthreads version
+module load /global/home/groups/consultsw/sl-7.x86_64/modfiles/raxml/8.2.11     ## has pthreads version
 
 echo "*********** ${DOM} starting raxml ***********"
 dt=$(date '+%m/%d/%Y %H:%M:%S')
