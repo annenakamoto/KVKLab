@@ -27,9 +27,9 @@ source activate /global/scratch/users/annen/anaconda3/envs/R
 hmmsearch --cpu ${SLURM_NTASKS} --domtblout ${species}.${DOM}.Pfam.tbl WD/Pfam-A.hmm ${species}.${DOM}.filt.F.fa
 tr -s ' ' < ${species}.${DOM}.Pfam.tbl > ${species}.${DOM}.Pfam.ws.tbl
 Rscript /global/scratch/users/annen/KVKLab/fungal_srs/2.hvNLR_control/reduce_pfam.R -i ${species}.${DOM}.Pfam.ws.tbl -o ${species}.${DOM}.Pfam.reduced.tbl -e 0.001 -f 0.3 -a 10
-source deactivate
+conda deactivate
 
 source activate /global/scratch/users/annen/anaconda3/envs/Biopython
 python /global/scratch/users/annen/KVKLab/fungal_srs/2.hvNLR_control/itol_domains.py ${species}.${DOM} ${species}.${DOM}.filt.F
-source deactivate
+conda deactivate
 
