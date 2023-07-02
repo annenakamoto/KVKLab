@@ -20,7 +20,7 @@ module load hmmer
 
 ### generate fasta file of genes containing the domain
 module load seqtk
-cat ${species}.${DOM}.filt.F.afa | awk '/>/ { print $4; }' > ${species}.${DOM}.gene_list.txt
+cat ${species}.${DOM}.filt.F.afa | awk '/>/ { print substr($1,2); }' > ${species}.${DOM}.gene_list.txt
 seqtk subseq -l 60 WD/${species}_PANPROTEOME.faa ${species}.${DOM}.gene_list.txt > ${species}.${DOM}.filt.F.fa
 
 source activate /global/scratch/users/annen/anaconda3/envs/R
