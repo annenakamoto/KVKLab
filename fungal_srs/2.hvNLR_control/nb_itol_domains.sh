@@ -26,7 +26,7 @@ seqtk subseq -l 60 WD/${species}_PANPROTEOME.faa ${species}.${DOM}.gene_list.txt
 source activate /global/scratch/users/annen/anaconda3/envs/R
 hmmsearch --cpu ${SLURM_NTASKS} --domtblout ${species}.${DOM}.Pfam.tbl WD/Pfam-A.hmm ${species}.${DOM}.filt.F.fa
 tr -s ' ' < ${species}.${DOM}.Pfam.tbl > ${species}.${DOM}.Pfam.ws.tbl
-Rscript /global/scratch/users/annen/KVKLab/fungal_srs/2.hvNLR_control/reduce_pfam.R -i ${species}.${DOM}.Pfam.ws.tbl -o ${species}.${DOM}.Pfam.reduced.tbl -e 0.01 -f 0.1 -a 10
+Rscript /global/scratch/users/annen/KVKLab/fungal_srs/2.hvNLR_control/reduce_pfam.R -i ${species}.${DOM}.Pfam.ws.tbl -o ${species}.${DOM}.Pfam.reduced.tbl -e 0.001 -f 0.3 -a 10
 source deactivate
 
 source activate /global/scratch/users/annen/anaconda3/envs/Biopython
