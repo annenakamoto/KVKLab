@@ -22,7 +22,7 @@ tree_file=../OG_TREES_filtered/RAxML_bipartitionsBranchLabels.RAxML.${species}.$
 if [[ -f "${tree_file}" && -s "${tree_file}" ]]; then
     echo "${OG} tree done (RAxML_bipartitionsBranchLabels.RAxML.${species}.${OG} is present and nonempty)"
 else
-    rm -f *${species}.${OG}
+    rm -f ../OG_TREES_filtered/*${species}.${OG}
     echo "*********** ${OG} starting raxml ***********"
     dt=$(date '+%m/%d/%Y %H:%M:%S')
     echo "STARTING: ${dt}"
