@@ -9,12 +9,12 @@
 
 ### compare TE content with/wothout filtering for TE domains
 
-cd /global/scratch/users/annen/Rep_TE_Lib/RMask_out
+cd /global/scratch/users/annen/Rep_TE_Lib
 
 GENOME=$1
 
 source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
-RepeatClassifier -consensi REPLIB_clust.fasta -pa 24
+RepeatClassifier -consensi REPLIB_clust.fasta -pa ${SLURM_NTASKS}
 conda deactivate
 
 ### run RepeatMasker on GENOME using REPLIB_clust.fasta, which is the TE library before domain filtering
