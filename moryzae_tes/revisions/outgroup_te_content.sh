@@ -18,6 +18,7 @@ cd /global/scratch/users/annen/Rep_TE_Lib/RMask_out
 GENOME=$1
 
 ### run RepeatMasker on GENOME using high quality TE library that was scanned for domains
+module load RepeatMasker bedtools blast
 RepeatMasker -lib REPLIB_CLASS.fasta -dir RepeatMasker_out -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
 
 ### create fasta file of the RepeatMasker output, where the name of each entry is >name_of_element:start-end (in the genome)
