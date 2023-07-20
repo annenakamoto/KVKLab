@@ -9,13 +9,13 @@
 
 ### compare TE content with/wothout filtering for TE domains
 
-cd /global/scratch/users/annen/Rep_TE_Lib
+cd /global/scratch/users/annen/Rep_TE_Lib/RMask_out
 
 GENOME=$1
 
 source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 
 ### run RepeatMasker on GENOME using REPLIB_clust.fasta, which is the TE library before domain filtering
-RepeatMasker -lib REPLIB_clust_noirf.fasta -dir RepeatMasker_out_rev -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
+RepeatMasker -lib ../REPLIB_clust_noirf.fasta -dir RepeatMasker_out_rev -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
 
 conda deactivate
