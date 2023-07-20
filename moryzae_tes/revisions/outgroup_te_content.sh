@@ -30,7 +30,7 @@ bedtools getfasta -fo $GENOME.RM.fasta -name -s -fi hq_genomes/$GENOME.fasta -be
 rpstblastn -query $GENOME.RM.fasta -db /global/scratch/users/annen/Rep_TE_Lib/CDD_lib/CDD_lib -out $GENOME.RM.cdd.out -evalue 0.001 -outfmt 6
 
 ### parse rpsblast output into a text file list of elements and their domains ($GENOME.RM.cdd_list.txt)
-cat $GENOME.RM.cdd.out | python py_helpers/parse_cdd.py > $GENOME.RM.cdd_list.txt
+cat $GENOME.RM.cdd.out | python ../../KVKLab/moryzae_tes/revisions/py_helpers/parse_cdd.py > $GENOME.RM.cdd_list.txt
 
 
 source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
@@ -38,15 +38,15 @@ source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 pfam_scan.pl -fasta $GENOME.RM.fasta -dir /global/scratch/users/annen/Rep_TE_Lib/PFAM_lib -e_dom 0.01 -e_seq 0.01 -translate all -outfile $GENOME.RM.pfam.out
 
 ### parse pfam_scan.pl output into a text file list of elements and their domains (pfam_LIB_list.txt)
-cat $GENOME.RM.pfam.out | python py_helpers/parse_pfam.py > $GENOME.RM.pfam_list.txt
+cat $GENOME.RM.pfam.out | python ../../KVKLab/moryzae_tes/revisions/py_helpers/parse_pfam.py > $GENOME.RM.pfam_list.txt
 
 ### merge cdd and pfam lists into one list
-cat $GENOME.RM.cdd_list.txt $GENOME.RM.pfam_list.txt | python py_helpers/parse_cddpfam.py > $GENOME.RM.uniq.txt
+cat $GENOME.RM.cdd_list.txt $GENOME.RM.pfam_list.txt | python ../../KVKLab/moryzae_tes/revisions/py_helpers/parse_cddpfam.py > $GENOME.RM.uniq.txt
 
 ### count the number of each element
-cat $GENOME.RM.uniq.txt | python py_helpers/count_elems.py > data_$GENOME.txt
+cat $GENOME.RM.uniq.txt | python ../../KVKLab/moryzae_tes/revisions/py_helpers/count_elems.py > data_$GENOME.txt
 
 ### find the number of bp each element takes up
-cat $GENOME.RM.uniq.txt | python py_helpers/length_elems.py > data_bp_$GENOME.txt
+cat $GENOME.RM.uniq.txt | python ../../KVKLab/moryzae_tes/revisions/py_helpers/length_elems.py > data_bp_$GENOME.txt
 
 source deactivate
