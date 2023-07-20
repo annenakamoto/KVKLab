@@ -14,11 +14,8 @@ cd /global/scratch/users/annen/Rep_TE_Lib
 GENOME=$1
 
 source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
-#RepeatClassifier -consensi REPLIB_clust.fasta -pa ${SLURM_NTASKS}
-RepeatClassifier -consensi REPLIB_clust_noirf.fasta -pa ${SLURM_NTASKS}
-conda deactivate
 
 ### run RepeatMasker on GENOME using REPLIB_clust.fasta, which is the TE library before domain filtering
-# module load RepeatMasker
-# RepeatMasker -lib REPLIB_clust.fasta -dir RepeatMasker_out_rev -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
+RepeatMasker -lib REPLIB_clust_noirf.fasta -dir RepeatMasker_out_rev -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
 
+conda deactivate
