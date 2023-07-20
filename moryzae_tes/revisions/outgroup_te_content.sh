@@ -18,8 +18,11 @@ cd /global/scratch/users/annen/Rep_TE_Lib/RMask_out
 GENOME=$1
 
 ### run RepeatMasker on GENOME using high quality TE library that was scanned for domains
-module load RepeatMasker bedtools blast hmmer
+module purge
+module load bedtools blast hmmer
+source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 RepeatMasker -lib REPLIB_CLASS.fasta -dir RepeatMasker_out -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
+conda deactivate
 
 ### create fasta file of the RepeatMasker output, where the name of each entry is >name_of_element:start-end (in the genome)
 awk -v OFS='\t' '$1 ~ /^[0-9]+$/ && /\+/ { print $5, $6, $7, $10 ":" $5 ":" $6 "-" $7, 0, $9 } 
