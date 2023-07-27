@@ -18,7 +18,7 @@ option_list = list(
               help="minimum branch length cutoff [REQUIRED]", metavar="numeric"),
   make_option(c("-b", "--min_bs_support"), type="numeric", default=NULL, 
               help="minimum bootstrap support [REQUIRED]", metavar="numeric"),
-  make_option(c("-o", "--out_dir"), type="numeric", default=NULL, 
+  make_option(c("-o", "--out_dir"), type="character", default=NULL, 
               help="path from the working dir to the output dir [REQUIRED]", metavar="numeric")
 ); 
  
