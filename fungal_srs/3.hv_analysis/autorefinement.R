@@ -204,7 +204,7 @@ print(final_nodes)
 #####################
 ## Output Results ---
 #####################
-save.image("SM.RData")
+save.image(paste0(out_dir, "/SM.RData"))
 ## Output original tree in the beast format
 write.beast(as.treedata(tree_table),file = paste0(tree_dir,"/",clade,".beast"))
 
