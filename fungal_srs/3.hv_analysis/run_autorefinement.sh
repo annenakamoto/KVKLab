@@ -27,8 +27,8 @@ source activate /global/scratch/users/annen/anaconda3/envs/R
 ls OG_TREES_filtered/RAxML_bipartitionsBranchLabels.RAxML* | awk -v FS="." '{ print $4; }' | while read OG; do
     Rscript /global/scratch/users/annen/KVKLab/fungal_srs/3.hv_analysis/autorefinement.R \
         --working_dir ${working_dir} \
-        --tree_path OG_ALIGNMENTS_filtered/${OG}.afa \
-        --alignment_path OG_TREES_filtered/RAxML_bipartitionsBranchLabels.RAxML.${species}.${OG} \
+        --tree_path OG_TREES_filtered/RAxML_bipartitionsBranchLabels.RAxML.${species}.${OG} \
+        --alignment_path OG_ALIGNMENTS_filtered/${OG}.afa\
         --min_eco_overlap ${min_eco} \
         --max_branch_length ${max_bl} \
         --min_branch_length ${min_bl} \
