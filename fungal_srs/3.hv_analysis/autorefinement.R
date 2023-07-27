@@ -67,7 +67,7 @@ min_branch_length <- opt$min_branch_length
 min_bs_support <- opt$min_bs_support
 
 out_dir <- opt$out_dir
-list <- paste0(out_dir, "/subclade_list.txt")
+list <- paste0(out_dir, "/", clade, ".subclade_list.txt")
 tree_dir <- paste0(out_dir, "/BEAST_TREES")
 
 setwd(opt$working_dir)
@@ -204,7 +204,7 @@ print(final_nodes)
 #####################
 ## Output Results ---
 #####################
-save.image(paste0(out_dir, "/SM.RData"))
+save.image(paste0(out_dir, "/", clade, ".SM.RData"))
 ## Output original tree in the beast format
 write.beast(as.treedata(tree_table),file = paste0(out_dir,"/",clade,".beast"))
 
