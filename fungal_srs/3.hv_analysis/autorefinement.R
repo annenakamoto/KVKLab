@@ -206,7 +206,7 @@ print(final_nodes)
 #####################
 save.image(paste0(out_dir, "/SM.RData"))
 ## Output original tree in the beast format
-write.beast(as.treedata(tree_table),file = paste0(tree_dir,"/",clade,".beast"))
+write.beast(as.treedata(tree_table),file = paste0(out_dir,"/",clade,".beast"))
 
 
 ##Export sub-clade lists and trees; read, subset, gap mask, and export alignments ----
