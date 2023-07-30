@@ -34,6 +34,7 @@ for clade in afa_list:
         if len(added) >= 2:
             print("Clade merged more than once: " + str(len(added)) + " times, merging these clades")
             print(clade)
+            print(added)
             new_merged = set()
             for c in added:
                 new_merged.union(MERGED[c])
@@ -47,5 +48,5 @@ for k,v in MERGED.items():
     f = species + ".NLR_Clade" + str(clade_count) + "_" + str(len(v)) + ".list.txt"
     with open(f, 'w') as txt:
         for gene in v:
-            txt.write(gene)
+            txt.write(gene + '\n')
     clade_count += 1
