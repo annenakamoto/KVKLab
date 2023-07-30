@@ -37,7 +37,7 @@ for clade in afa_list:
             print(added)
             new_merged = set()
             for c in added:
-                new_merged.union(MERGED[c])
+                new_merged = new_merged.union(MERGED[c])
                 MERGED[c] = set()
             MERGED[clade] = new_merged
             print("The new merged clade has: " + str(len(new_merged)) + " genes")
