@@ -40,6 +40,7 @@ for clade in afa_list:
                 new_merged.union(MERGED[c])
                 del MERGED[c]
             MERGED[clade] = new_merged
+            print("The new merged clade has: " + str(len(new_merged)) + " genes")
 
     
 ## print a list of genes for each clade
