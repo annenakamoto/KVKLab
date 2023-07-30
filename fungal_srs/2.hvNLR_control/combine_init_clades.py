@@ -32,11 +32,11 @@ for clade in afa_list:
         if not added:
             MERGED[clade] = CLADES[clade]
         if len(added) >= 2:
-            print("Clade merged more than once: " + str(added) + " times, merging these clades")
+            print("Clade merged more than once: " + str(len(added)) + " times, merging these clades")
             print(clade)
             new_merged = set()
             for c in added:
-                new_merged.add(MERGED[c])
+                new_merged.union(MERGED[c])
                 del MERGED[c]
             MERGED[clade] = new_merged
 
