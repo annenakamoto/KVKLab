@@ -42,3 +42,4 @@ for k,v in MERGED.items():
     with open(f, 'w') as txt:
         for gene in v:
             txt.write(gene)
+    clade_count += 1
