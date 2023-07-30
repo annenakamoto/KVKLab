@@ -24,21 +24,27 @@ for clade in afa_list:
     if len(MERGED.keys()) == 0:
         MERGED[clade] = CLADES[clade]
     else:
-        added = 0
+        added = []
         for k,v in MERGED.items():
             if not CLADES[clade].isdisjoint(v):
                 MERGED[k] = CLADES[clade].union(v)
-                added += 1
+                added.append(k)
         if not added:
             MERGED[clade] = CLADES[clade]
-        if added >= 2:
-            print("ERROR: clade merged more than once: " + str(added) + "times")
+        if len(added) >= 2:
+            print("Clade merged more than once: " + str(added) + " times, merging these clades")
             print(clade)
+            new_merged = set()
+            for c in added:
+                new_merged.add(MERGED[c])
+                del MERGED[c]
+            MERGED[clade] = new_merged
+
     
 ## print a list of genes for each clade
 clade_count = 1
 for k,v in MERGED.items():
-    f = species + ".NLR_Clade" + str(clade_count) + ".list.txt"
+    f = species + ".NLR_Clade" + str(clade_count) + "_" + str(len(v)) + ".list.txt"
     with open(f, 'w') as txt:
         for gene in v:
             txt.write(gene)
