@@ -37,7 +37,7 @@ for clade in afa_list:
 ## print a list of genes for each clade
 clade_count = 1
 for k,v in MERGED.items():
-    f = species + ".NLR_Clade" + clade_count + ".list.txt"
+    f = species + ".NLR_Clade" + str(clade_count) + ".list.txt"
     with open(f, 'w') as txt:
         for gene in v:
             txt.write(gene)
