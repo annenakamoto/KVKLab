@@ -32,7 +32,7 @@ for clade in afa_list:
         if not added:
             MERGED[clade] = CLADES[clade]
         if added >= 2:
-            print("ERROR: clade merged more than once: " + added + "times")
+            print("ERROR: clade merged more than once: " + str(added) + "times")
             print(clade)
     
 ## print a list of genes for each clade
