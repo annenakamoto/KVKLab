@@ -19,21 +19,14 @@ cd ${working_dir}
 module purge
 
 ### run autorefinement tree-splitting R script on the domain-based tree
-# source activate /global/scratch/users/annen/anaconda3/envs/R
-# Rscript /global/scratch/users/annen/KVKLab/fungal_srs/3.hv_analysis/autorefinement.R \
-#     --working_dir ${working_dir} \
-#     --tree_path DOMAIN_TREES/RAxML_bipartitionsBranchLabels.RAxML.${species}.${DOM} \
-#     --alignment_path ${species}.${DOM}.filt.F.afa \
-#     --min_eco_overlap 0 \
-#     --max_branch_length 1 \
-#     --min_branch_length 0.3 \
-#     --min_bs_support 90 \
-#     --out_dir ${out_dir}
-# source deactivate
-
-### python script to combine the NACHT and NB_ARC clades
-source activate /global/scratch/users/annen/anaconda3/envs/Biopython
-python /global/scratch/users/annen/KVKLab/fungal_srs/2.hvNLR_control/combine_init_clades.py ${working_dir} ${species}
+source activate /global/scratch/users/annen/anaconda3/envs/R
+Rscript /global/scratch/users/annen/KVKLab/fungal_srs/3.hv_analysis/autorefinement.R \
+    --working_dir ${working_dir} \
+    --tree_path DOMAIN_TREES/RAxML_bipartitionsBranchLabels.RAxML.${species}.${DOM} \
+    --alignment_path ${species}.${DOM}.filt.F.afa \
+    --min_eco_overlap 0 \
+    --max_branch_length 1 \
+    --min_branch_length 0.3 \
+    --min_bs_support 90 \
+    --out_dir ${out_dir}
 source deactivate
-
-module load seqtk
