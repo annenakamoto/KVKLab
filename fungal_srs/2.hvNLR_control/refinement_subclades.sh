@@ -41,7 +41,19 @@ cd ${out_dir}/SUBALIGNMENTS
 Rscript /global/scratch/users/annen/KVKLab/fungal_srs/3.hv_analysis/assess_aln_cutoff_dist.R \
     --working_dir . \
     --MinGapFraction 0.9 \
-    --MinGapBlockWidth 3 #| awk '/subali.afa/ { print substr($2,2,length($2)-12) "\t" $3 "\t" substr($4,1,length($4)-1); }' > ${working_dir}/${out_dir}.HVSITE_RESULTS.txt
+    --MinGapBlockWidth 3 | awk -v OFS="\t" '/.subali.afa/ { split($2,a,"."); c1 = substr(a[1],2) "." a[2]; split(c1,n,"_"); if (n[3] == n[5]) { c2 = n[1] "_" n[2] "_" n[3] } else { c2 = c1 }; if ($3 >= 10) { h = 1 } else { h = 0 }; print c1, c2, h, $3, substr($4,1,length($4)-1); }' > ${working_dir}/${out_dir}.HVSITE_RESULTS.txt
+
+cd ${working_dir}
+echo -e "DATASET_STYLE\nSEPARATOR COMMA\nDATASET_LABEL,hv genes\nCOLOR,#ffff00\nDATA" > ${out_dir}.HV_HILIGHT.iTOL.txt
+> ${out_dir}.GENE_TABLE.txt
+cat ${out_dir}.HVSITE_RESULTS.txt | while read line; do
+    clade=$(echo ${line} | awk '{ print $2; }')
+    cat ${out_dir}/SUBALIGNMENTS/${species}.${clade}.subali.afa | awk -v d=${line} '/>/ { print substr($1,2) "\t" substr(d,1,length(d)-1); }' >> ${out_dir}.GENE_TABLE.txt
+    hv=$(echo ${line} | awk '{ print $3; }')
+    if [ "${hv}" -eq "1" ]; then
+        cat ${out_dir}/SUBALIGNMENTS/${species}.${clade}.subali.afa | awk '/>/ { print substr($1,2) ",label,node,#000000,1,normal,#fff93d"; }' >> ${out_dir}.HV_HILIGHT.iTOL.txt
+    fi
+done
 
 conda deactivate
 
