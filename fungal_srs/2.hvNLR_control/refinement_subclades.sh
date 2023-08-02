@@ -45,15 +45,17 @@ source activate /global/scratch/users/annen/anaconda3/envs/R
 
 cd ${working_dir}
 echo -e "DATASET_STYLE\nSEPARATOR COMMA\nDATASET_LABEL,hv genes\nCOLOR,#ffff00\nDATA" > ${out_dir}.HV_HILIGHT.iTOL.txt
-> ${out_dir}.GENE_TABLE.txt
+echo -e "GENE\tREFINED_CLADE\tFINAL_CLADE\tHV\tHVSITES\tHVSITES_LEN_NORM" > ${out_dir}.GENE_TABLE.txt
 cat ${out_dir}.HVSITE_RESULTS.txt | while read line; do
-    clade=$(echo ${line} | awk '{ print $2; }')
-    cat ${out_dir}/SUBALIGNMENTS/${clade}.subali.afa | awk -v d=${line} '/>/ { print substr($1,2) "\t" substr(d,1,length(d)-1); }' >> ${out_dir}.GENE_TABLE.txt
+    clade_f=$(echo ${line} | awk '{ print $1; }')
+    clade_i=$(echo ${clade_f} | awk '{ split($1,n,"_"); print n[1] "_" n[2] "_" n[3]; }')
+    cat ${out_dir}/${clade_i}.subclade_list.txt | awk -v data=${line} -v cf=${clade_f} '$3 ~ cf { print $1 "\t" substr(data,1,length(data)-1); }' >> ${out_dir}.GENE_TABLE.txt
     hv=$(echo ${line} | awk '{ print $3; }')
     if [ "${hv}" -eq "1" ]; then
-        cat ${out_dir}/SUBALIGNMENTS/${clade}.subali.afa | awk '/>/ { print substr($1,2) ",label,node,#000000,1,normal,#fff93d"; }' >> ${out_dir}.HV_HILIGHT.iTOL.txt
+        cat ${out_dir}/${clade_i}.subclade_list.txt | awk -v cf=${clade_f} '$3 ~ cf { print $1 ",label,node,#000000,1,normal,#fff93d"; }' >> ${out_dir}.HV_HILIGHT.iTOL.txt
     fi
 done
+
 
 conda deactivate
 
