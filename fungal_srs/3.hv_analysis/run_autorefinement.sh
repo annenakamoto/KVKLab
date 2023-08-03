@@ -77,11 +77,12 @@ TP=$(cat ${out_dir}.PRECISION_RECALL.txt | awk '$2 ~ 1 && $3 ~ 1' | wc -l)
 FP=$(cat ${out_dir}.PRECISION_RECALL.txt | awk '$2 ~ 0 && $3 ~ 1' | wc -l)
 FN=$(cat ${out_dir}.PRECISION_RECALL.txt | awk '$2 ~ 1 && $3 ~ 0' | wc -l)
 TN=$(cat ${out_dir}.PRECISION_RECALL.txt | awk '$2 ~ 0 && $3 ~ 0' | wc -l)
-PRECISION=$(( TP / (TP + FP) ))
-RECALL=$(( TP / (TP + FN) ))
+
+PRECISION=$(awk -v tp=${TP} -v fp=${FP} 'BEGIN { print (tp / (tp + fp)); }')
+RECALL=$(awk -v tp=${TP} -v fn=${FN} 'BEGIN { print (tp / (tp + fn)); }')
 echo -e "\nTP\tFP\tFN\tTN" >> ${out_dir}.PRECISION_RECALL.txt
 echo -e "${TP}\t${FP}\t${FN}\t${TN}\n" >> ${out_dir}.PRECISION_RECALL.txt
-echo "Precision = ${TP} / (${TP} + ${FP}) = ${PRECISION}"
-echo "Recall = ${TP} / (${TP} + ${FN}) = ${RECALL}"
+echo "Precision = ${TP} / (${TP} + ${FP}) = ${PRECISION}" >> ${out_dir}.PRECISION_RECALL.txt
+echo "Recall = ${TP} / (${TP} + ${FN}) = ${RECALL}" >> ${out_dir}.PRECISION_RECALL.txt
 
 conda deactivate
