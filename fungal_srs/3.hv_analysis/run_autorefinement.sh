@@ -63,7 +63,7 @@ done
 
 mv ${out_dir}.GENE_TABLE.txt ${out_dir}.GENE_TABLE.tmp.txt
 echo -e "GENE\tREFINED_CLADE\tFINAL_CLADE\tHV\tHVSITES\tHVSITES_LEN_NORM" > ${out_dir}.GENE_TABLE.txt
-cat ${out_dir}.GENE_TABLE.tmp.txt | awk '/NLR_Clade/' | sort | uniq >> ${out_dir}.GENE_TABLE.txt
+cat ${out_dir}.GENE_TABLE.tmp.txt | awk '/OG/' | sort | uniq >> ${out_dir}.GENE_TABLE.txt
 rm ${out_dir}.GENE_TABLE.tmp.txt
 
 ### calculate precision and recall
