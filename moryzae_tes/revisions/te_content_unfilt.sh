@@ -19,8 +19,8 @@ source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 #RepeatMasker -lib ../REPLIB_clust_noirf.fasta -dir RepeatMasker_out_rev -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
 
 ### format element name
-awk -v OFS='\t' '$1 ~ /^[0-9]+$/ && /\+/ { print $10 ":" $5 ":" $6 "-" $7, 0, $9 } 
-                 $1 ~ /^[0-9]+$/ && !/\+/ { print $10 ":" $5 ":" $6 "-" $7, 0, "-" }' RepeatMasker_out_rev/$GENOME.fasta.out > RepeatMasker_out_rev/$GENOME.fasta.names
+awk -v OFS='\t' '$1 ~ /^[0-9]+$/ && /\+/ { print $10 ":" $5 ":" $6 "-" $7; } 
+                 $1 ~ /^[0-9]+$/ && !/\+/ { print $10 ":" $5 ":" $6 "-" $7; }' RepeatMasker_out_rev/$GENOME.fasta.out > RepeatMasker_out_rev/$GENOME.fasta.names
 
 ### count the number of each element
 cat RepeatMasker_out_rev/$GENOME.fasta.names | python /global/scratch/users/annen/KVKLab/moryzae_tes/revisions/py_helpers/count_elems.py > RepeatMasker_out_rev/data_$GENOME.txt
