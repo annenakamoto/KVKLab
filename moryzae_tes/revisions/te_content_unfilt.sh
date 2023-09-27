@@ -25,7 +25,7 @@ awk -v OFS='\t' '$1 ~ /^[0-9]+$/ && /\+/ { print $10 ":" $5 ":" $6 "-" $7, 0, $9
                  $1 ~ /^[0-9]+$/ && !/\+/ { print $10 ":" $5 ":" $6 "-" $7, 0, "-" }' RepeatMasker_out_rev/$GENOME.fasta.out > RepeatMasker_out_rev/$GENOME.fasta.names
 
 ### count the number of each element
-cat RepeatMasker_out_rev/$GENOME.fasta.names | python /global/scratch/users/annen/KVKLab/revisions/py_helpers/count_elems.py > RepeatMasker_out_rev/data_$GENOME.txt
+cat RepeatMasker_out_rev/$GENOME.fasta.names | python /global/scratch/users/annen/KVKLab/moryzae_tes/revisions/py_helpers/count_elems.py > RepeatMasker_out_rev/data_$GENOME.txt
 
 ### find the number of bp each element takes up
-cat RepeatMasker_out_rev/$GENOME.fasta.names | python /global/scratch/users/annen/KVKLab/revisions/py_helpers/length_elems.py > RepeatMasker_out_rev/data_bp_$GENOME.txt
+cat RepeatMasker_out_rev/$GENOME.fasta.names | python /global/scratch/users/annen/KVKLab/moryzae_tes/revisions/py_helpers/length_elems.py > RepeatMasker_out_rev/data_bp_$GENOME.txt
