@@ -13,9 +13,19 @@ cd /global/scratch/users/annen/Rep_TE_Lib/RMask_out
 
 GENOME=$1
 
-source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
+#source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 
 ### run RepeatMasker on GENOME using REPLIB_clust.fasta, which is the TE library before domain filtering
-RepeatMasker -lib ../REPLIB_clust_noirf.fasta -dir RepeatMasker_out_rev -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
+#RepeatMasker -lib ../REPLIB_clust_noirf.fasta -dir RepeatMasker_out_rev -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
 
-conda deactivate
+#conda deactivate
+
+### format element name
+awk -v OFS='\t' '$1 ~ /^[0-9]+$/ && /\+/ { print $10 ":" $5 ":" $6 "-" $7, 0, $9 } 
+                 $1 ~ /^[0-9]+$/ && !/\+/ { print $10 ":" $5 ":" $6 "-" $7, 0, "-" }' RepeatMasker_out_rev/$GENOME.fasta.out > RepeatMasker_out_rev/$GENOME.fasta.names
+
+### count the number of each element
+cat RepeatMasker_out_rev/$GENOME.fasta.names | python /global/scratch/users/annen/KVKLab/revisions/py_helpers/count_elems.py > RepeatMasker_out_rev/data_$GENOME.txt
+
+### find the number of bp each element takes up
+cat RepeatMasker_out_rev/$GENOME.fasta.names | python /global/scratch/users/annen/KVKLab/revisions/py_helpers/length_elems.py > RepeatMasker_out_rev/data_bp_$GENOME.txt
