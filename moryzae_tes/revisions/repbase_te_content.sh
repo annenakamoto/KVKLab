@@ -29,7 +29,7 @@ bedtools getfasta -fo RepeatMasker_out_fngrep/$GENOME.RM.fasta -name -s -fi hq_g
 rpstblastn -query RepeatMasker_out_fngrep/$GENOME.RM.fasta -db /global/scratch/users/annen/Rep_TE_Lib/CDD_lib/CDD_lib -out RepeatMasker_out_fngrep/$GENOME.RM.cdd.out -evalue 0.001 -outfmt 6
 
 ### parse rpsblast output into a text file list of elements and their domains ($GENOME.RM.cdd_list.txt)
-cat RepeatMasker_out_fngrep/$GENOME.RM.cdd.out | python /global/scratch/users/annen/KVKLab/Phase1/parse_cdd.py > RepeatMasker_out_fngrep/$GENOME.RM.cdd_list.txt
+cat RepeatMasker_out_fngrep/$GENOME.RM.cdd.out | python /global/scratch/users/annen/KVKLab/moryzae_tes/revisions/py_helpers/parse_cdd.py > RepeatMasker_out_fngrep/$GENOME.RM.cdd_list.txt
 
 
 source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
@@ -37,15 +37,15 @@ source activate /global/scratch/users/annen/anaconda3/envs/pfam_scan.pl
 pfam_scan.pl -fasta RepeatMasker_out_fngrep/$GENOME.RM.fasta -dir /global/scratch/users/annen/Rep_TE_Lib/PFAM_lib -e_dom 0.01 -e_seq 0.01 -translate all -outfile RepeatMasker_out_fngrep/$GENOME.RM.pfam.out
 
 ### parse pfam_scan.pl output into a text file list of elements and their domains (pfam_LIB_list.txt)
-cat RepeatMasker_out_fngrep/$GENOME.RM.pfam.out | python /global/scratch/users/annen/KVKLab/Phase1/parse_pfam.py > RepeatMasker_out_fngrep/$GENOME.RM.pfam_list.txt
+cat RepeatMasker_out_fngrep/$GENOME.RM.pfam.out | python /global/scratch/users/annen/KVKLab/moryzae_tes/revisions/py_helpers/parse_pfam.py > RepeatMasker_out_fngrep/$GENOME.RM.pfam_list.txt
 
 ### merge cdd and pfam lists into one list
-cat RepeatMasker_out_fngrep/$GENOME.RM.cdd_list.txt RepeatMasker_out_fngrep/$GENOME.RM.pfam_list.txt | python /global/scratch/users/annen/KVKLab/Phase1/parse_cddpfam.py > RepeatMasker_out_fngrep/$GENOME.RM.uniq.txt
+cat RepeatMasker_out_fngrep/$GENOME.RM.cdd_list.txt RepeatMasker_out_fngrep/$GENOME.RM.pfam_list.txt | python /global/scratch/users/annen/KVKLab/moryzae_tes/revisions/py_helpers/parse_cddpfam.py > RepeatMasker_out_fngrep/$GENOME.RM.uniq.txt
 
 ### count the number of each element
-cat RepeatMasker_out_fngrep/$GENOME.RM.uniq.txt | python /global/scratch/users/annen/KVKLab/Phase1/count_elems.py > RepeatMasker_out_fngrep/data_$GENOME.txt
+cat RepeatMasker_out_fngrep/$GENOME.RM.uniq.txt | python /global/scratch/users/annen/KVKLab/moryzae_tes/revisions/py_helpers/count_elems.py > RepeatMasker_out_fngrep/data_$GENOME.txt
 
 ### find the number of bp each element takes up
-cat RepeatMasker_out_fngrep/$GENOME.RM.uniq.txt | python /global/scratch/users/annen/KVKLab/Phase1/length_elems.py > RepeatMasker_out_fngrep/data_bp_$GENOME.txt
+cat RepeatMasker_out_fngrep/$GENOME.RM.uniq.txt | python /global/scratch/users/annen/KVKLab/moryzae_tes/revisions/py_helpers/length_elems.py > RepeatMasker_out_fngrep/data_bp_$GENOME.txt
 
 source deactivate
