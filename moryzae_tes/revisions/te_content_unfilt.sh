@@ -19,14 +19,29 @@ source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 #RepeatMasker -lib ../REPLIB_clust_noirf.fasta -dir RepeatMasker_out_rev -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
 
 ### format element name
-awk -v OFS='\t' '$1 ~ /^[0-9]+$/ && /\+/ { print $10 ":" $5 ":" $6 "-" $7 "(" $9 ")"; } 
-                 $1 ~ /^[0-9]+$/ && !/\+/ { print $10 ":" $5 ":" $6 "-" $7 "(" $9 ")"; }' RepeatMasker_out_rev/$GENOME.fasta.out > RepeatMasker_out_rev/$GENOME.fasta.names
+#awk -v OFS='\t' '$1 ~ /^[0-9]+$/ && /\+/ { print $10 ":" $5 ":" $6 "-" $7 "(" $9 ")"; } 
+#                 $1 ~ /^[0-9]+$/ && !/\+/ { print $10 ":" $5 ":" $6 "-" $7 "(" $9 ")"; }' RepeatMasker_out_rev/$GENOME.fasta.out > RepeatMasker_out_rev/$GENOME.fasta.names
 
 ### count the number of each element
-cat RepeatMasker_out_rev/$GENOME.fasta.names | python /global/scratch/users/annen/KVKLab/moryzae_tes/revisions/py_helpers/count_elems.py > RepeatMasker_out_rev/data_$GENOME.txt
+#cat RepeatMasker_out_rev/$GENOME.fasta.names | python /global/scratch/users/annen/KVKLab/moryzae_tes/revisions/py_helpers/count_elems.py > RepeatMasker_out_rev/data_$GENOME.txt
 
 ### find the number of bp each element takes up
-cat RepeatMasker_out_rev/$GENOME.fasta.names | python /global/scratch/users/annen/KVKLab/moryzae_tes/revisions/py_helpers/length_elems.py > RepeatMasker_out_rev/data_bp_$GENOME.txt
+#cat RepeatMasker_out_rev/$GENOME.fasta.names | python /global/scratch/users/annen/KVKLab/moryzae_tes/revisions/py_helpers/length_elems.py > RepeatMasker_out_rev/data_bp_$GENOME.txt
+
+
+mkdir -p RepeatMasker_out_sine
+### run repeatmasker for just SINE
+RepeatMasker -lib SINE.fasta -dir RepeatMasker_out_sine -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
+
+### format element name
+awk -v OFS='\t' '$1 ~ /^[0-9]+$/ && /\+/ { print $10 ":" $5 ":" $6 "-" $7 "(" $9 ")"; } 
+                 $1 ~ /^[0-9]+$/ && !/\+/ { print $10 ":" $5 ":" $6 "-" $7 "(" $9 ")"; }' RepeatMasker_out_sine/$GENOME.fasta.out > RepeatMasker_out_sine/$GENOME.fasta.names
+
+### count the number of each element
+cat RepeatMasker_out_sine/$GENOME.fasta.names | python /global/scratch/users/annen/KVKLab/moryzae_tes/revisions/py_helpers/count_elems.py > RepeatMasker_out_sine/data_$GENOME.txt
+
+### find the number of bp each element takes up
+cat RepeatMasker_out_sine/$GENOME.fasta.names | python /global/scratch/users/annen/KVKLab/moryzae_tes/revisions/py_helpers/length_elems.py > RepeatMasker_out_sine/data_bp_$GENOME.txt
 
 
 source deactivate
