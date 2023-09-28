@@ -25,6 +25,8 @@ awk -v OFS='\t' '$1 ~ /^[0-9]+$/ && /\+/ { print $5, $6, $7, $10, 0, $9 }
                  $1 ~ /^[0-9]+$/ && !/\+/ { print $5, $6, $7, $10, 0, "-" }' RepeatMasker_out_fngrep/$GENOME.fasta.out > RepeatMasker_out_fngrep/$GENOME.fasta.bed
 bedtools getfasta -fo RepeatMasker_out_fngrep/$GENOME.RM.fasta -name -s -fi hq_genomes/$GENOME.fasta -bed RepeatMasker_out_fngrep/$GENOME.fasta.bed
 
+sed -i 's/\:\:/\:/g' RepeatMasker_out_fngrep/$GENOME.RM.fasta
+
 ### scan RepeatMasker fasta file ($GENOME.RM.fasta) for CDD profile domains using RPS-BLAST
 rpstblastn -query RepeatMasker_out_fngrep/$GENOME.RM.fasta -db /global/scratch/users/annen/Rep_TE_Lib/CDD_lib/CDD_lib -out RepeatMasker_out_fngrep/$GENOME.RM.cdd.out -evalue 0.001 -outfmt 6
 
