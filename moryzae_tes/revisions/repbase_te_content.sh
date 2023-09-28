@@ -21,8 +21,8 @@ mkdir -p RepeatMasker_out_fngrep
 RepeatMasker -lib ../fngrep.fasta -dir RepeatMasker_out_fngrep -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
 
 ### create fasta file of the RepeatMasker output, where the name of each entry is >name_of_element:start-end (in the genome)
-awk -v OFS='\t' '$1 ~ /^[0-9]+$/ && /\+/ { print $5, $6, $7, $10 ":" $5 ":" $6 "-" $7, 0, $9 } 
-                 $1 ~ /^[0-9]+$/ && !/\+/ { print $5, $6, $7, $10 ":" $5 ":" $6 "-" $7, 0, "-" }' RepeatMasker_out_fngrep/$GENOME.fasta.out > RepeatMasker_out_fngrep/$GENOME.fasta.bed
+awk -v OFS='\t' '$1 ~ /^[0-9]+$/ && /\+/ { print $5, $6, $7, $10, 0, $9 } 
+                 $1 ~ /^[0-9]+$/ && !/\+/ { print $5, $6, $7, $10, 0, "-" }' RepeatMasker_out_fngrep/$GENOME.fasta.out > RepeatMasker_out_fngrep/$GENOME.fasta.bed
 bedtools getfasta -fo RepeatMasker_out_fngrep/$GENOME.RM.fasta -name -s -fi hq_genomes/$GENOME.fasta -bed RepeatMasker_out_fngrep/$GENOME.fasta.bed
 
 ### scan RepeatMasker fasta file ($GENOME.RM.fasta) for CDD profile domains using RPS-BLAST
