@@ -31,7 +31,7 @@ source activate /global/scratch/users/annen/anaconda3/envs/RepeatModeler
 
 mkdir -p RepeatMasker_out_sine
 ### run repeatmasker for just SINE
-RepeatMasker -lib SINE.fasta -dir RepeatMasker_out_sine -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
+RepeatMasker -lib MgSINE.fasta -dir RepeatMasker_out_sine -gff -cutoff 200 -no_is -nolow -pa 24 -gccalc hq_genomes/$GENOME.fasta
 
 ### format element name
 awk -v OFS='\t' '$1 ~ /^[0-9]+$/ && /\+/ { print $10 ":" $5 ":" $6 "-" $7 "(" $9 ")"; } 
